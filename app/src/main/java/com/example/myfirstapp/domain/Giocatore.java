@@ -37,59 +37,52 @@ public class Giocatore extends Descrivibile {
                      int mana,
                      int livello,
                      int puntiEsperienza,
-                     int puntiFerita,
-                     int ndadi,
-                     int puntistat,
-                     String eta,
-                     String iniziativa,
                      int modCompetenza,
                      int capacitaBorsa,
-                     int puntiFeritaMax,
+                     int puntiFerita,
+                     int nDadi,
                      int dado,
                      int classeArmatura,
+                     int puntiStat,
                      String nomeCampagna,
-                     StringBuffer noteAvvenura,
+                     String iniziativa,
+                     String eta,
+                     StringBuffer noteAvventura,
                      StringBuffer allineamento,
                      StringBuffer lingua,
                      Valuta portafoglio,
                      Classe classe,
                      Razza razza,
- /*       PuntiFerita puntiFeritaGiocatore,
-                     Background backgroundGiocatore,
-                     Competenza competenzaGiocatore,*/
                      List<Caratteristica> caratteristicaList,
                      List<Equipaggiamento> borsa,
                      List<Equipaggiamento> equipaggiato,
-                     List<Incantesimo> incantesimiClasse,
+                     List<Incantesimo> incantesimiGiocatore,
                      List<Abilita> abilitaList) {
         super(nome, descrizione);
         this.mana = mana;
         this.livello = livello;
         this.puntiEsperienza = puntiEsperienza;
-        this.puntiFerita = puntiFerita;
-        this.nDadi = ndadi;
-        this.puntiStat = puntistat;
-        this.eta = eta;
-        this.iniziativa = iniziativa;
         this.modCompetenza = modCompetenza;
         this.capacitaBorsa = capacitaBorsa;
-        this.puntiFeritaMax = puntiFeritaMax;
+        this.puntiFerita = puntiFerita;
+        this.setPuntiFeritaMax();
+        this.nDadi = nDadi;
         this.dado = dado;
         this.classeArmatura = classeArmatura;
+        this.puntiStat = puntiStat;
         this.nomeCampagna = nomeCampagna;
-        this.noteAvventura = noteAvvenura;
+        this.iniziativa = iniziativa;
+        this.eta = eta;
+        this.noteAvventura = noteAvventura;
         this.allineamento = allineamento;
         this.lingua = lingua;
         this.portafoglio = portafoglio;
         this.classe = classe;
         this.razza = razza;
-        /* this.puntiFeritaGiocatore = puntiFeritaGiocatore;
-        this.backgroundGiocatore = backgroundGiocatore;
-        this.competenzaGiocatore = competenzaGiocatore;*/
         this.caratteristicaList = caratteristicaList;
         this.borsa = borsa;
         this.equipaggiato = equipaggiato;
-        this.incantesimiGiocatore = incantesimiClasse;
+        this.incantesimiGiocatore = incantesimiGiocatore;
         this.abilitaList = abilitaList;
     }
 

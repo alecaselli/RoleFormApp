@@ -22,6 +22,7 @@ import com.example.myfirstapp.domain.Valuta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,8 +47,7 @@ public class DBManager {
         cv.put(TabellaIncantesimi.FIELD_DURATA,nuovo.getDurata());
 
         try{
-            db.insert(TabellaIncantesimi.TBL_NOME,null,cv);
-            return true;
+            return db.insert(TabellaIncantesimi.TBL_NOME,null,cv) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -62,8 +62,7 @@ public class DBManager {
         cv.put(CampiComuni.FIELD_DESC,nuovo.getDescrizione().toString());
 
         try{
-            db.insert(TabellaAbilita.TBL_NOME,null,cv);
-            return true;
+            return db.insert(TabellaAbilita.TBL_NOME,null,cv) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -127,8 +126,7 @@ public class DBManager {
         cv.put(CampiComuni.FIELD_DESC,nuovo.getDescrizione().toString());
 
         try{
-            db.insert(TabellaPrivilegi.TBL_NOME,null,cv);
-            return true;
+            return db.insert(TabellaPrivilegi.TBL_NOME,null,cv) > 0;
         }
         catch(SQLiteException sqle){
            return false;
@@ -179,8 +177,7 @@ public class DBManager {
         cv.put(TabellaEquipaggiamento.FIELD_TIPO,nuovo.getTipo());
 
         try{
-            db.insert(TabellaEquipaggiamento.TBL_NOME,null,cv);
-            return true;
+            return db.insert(TabellaEquipaggiamento.TBL_NOME,null,cv) > 0;
         }
         catch(SQLiteException sqle){
           return false;
@@ -195,8 +192,7 @@ public class DBManager {
 
 
         try{
-            db.insert(TabellaCaratteristica.TBL_NOME,null,cv);
-            return true;
+            return db.insert(TabellaCaratteristica.TBL_NOME,null,cv) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -254,7 +250,6 @@ public class DBManager {
         cv.put(TabellaGiocatore.FIELD_MODCOMPETENZA,nuovo.getModCompetenza());
         cv.put(TabellaGiocatore.FIELD_CAPACITABORSA,nuovo.getCapacitaBorsa());
         cv.put(TabellaGiocatore.FIELD_PUNTIFERITA,nuovo.getPuntiFerita());
-        cv.put(TabellaGiocatore.FIELD_PUNTIFERITAMAX,nuovo.getPuntiFeritaMax());
         cv.put(TabellaGiocatore.FIELD_CLASSEARMATURA,nuovo.getClasseArmatura());
         cv.put(TabellaGiocatore.FIELD_PUNTISTAT,nuovo.getPuntiStat());
         cv.put(CampiComuni.FIELD_NDADI,nuovo.getnDadi());
@@ -309,8 +304,7 @@ public class DBManager {
         cv.put(TabellaCarBase.FIELD_VALORE,nuovo.getValore());
 
         try{
-            db.insert(TabellaCarBase.TBL_NOME,null,cv);
-            return true;
+            return db.insert(TabellaCarBase.TBL_NOME,null,cv) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -330,8 +324,7 @@ public class DBManager {
         cv.put(TabellaCaratteristicaG.FIELD_VALOREBONUS,nuova.getValoreBonus());
 
         try{
-            db.insert(TabellaCaratteristicaG.TBL_NOME,null,cv);
-            return true;
+            return db.insert(TabellaCaratteristicaG.TBL_NOME,null,cv) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -345,8 +338,7 @@ public class DBManager {
         cv.put(TabellaNomeVal.FIELD_NOMEVAL, nome);
 
         try{
-            db.insert(TabellaNomeVal.TBL_NOME,null,cv);
-            return true;
+            return db.insert(TabellaNomeVal.TBL_NOME,null,cv) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -361,8 +353,7 @@ public class DBManager {
         cv.put(TabellaEquipaggiamento.FIELD_NOMEE,nomea);
 
         try{
-            db.insert(TabelleHA.TBL_HAGA,null,cv);
-            return true;
+            return db.insert(TabelleHA.TBL_HAGA,null,cv) > 0;
         }
         catch(SQLiteException sqle){
          return false;
@@ -375,11 +366,11 @@ public class DBManager {
         cv.put(TabellaGiocatore.FIELD_NOMECAMPAGNA,nomecamp);
         cv.put(TabellaGiocatore.FIELD_NOMEG,nomeg);
         cv.put(TabellaEquipaggiamento.FIELD_NOMEE,nomee);
-        cv.put(TabelleHA.FIELD_BORSA,borsa);
+        int flag = (borsa)? 1 : 0;
+        cv.put(TabelleHA.FIELD_BORSA,flag);
 
         try{
-            db.insert(TabelleHA.TBL_HAGE,null,cv);
-            return true;
+            return db.insert(TabelleHA.TBL_HAGE,null,cv) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -394,8 +385,7 @@ public class DBManager {
         cv.put(TabellaIncantesimi.FIELD_NOMEI,nomei);
 
         try{
-            db.insert(TabelleHA.TBL_HAGI,null,cv);
-            return true;
+            return db.insert(TabelleHA.TBL_HAGI,null,cv) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -409,8 +399,7 @@ public class DBManager {
         cv.put(TabellaEquipaggiamento.FIELD_NOMEE,nomee);
 
         try{
-            db.insert(TabelleHA.TBL_HACE,null,cv);
-            return true;
+            return db.insert(TabelleHA.TBL_HACE,null,cv) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -424,8 +413,7 @@ public class DBManager {
         cv.put(TabellaIncantesimi.FIELD_NOMEI,nomei);
 
         try{
-            db.insert(TabelleHA.TBL_HACI,null,cv);
-            return true;
+            return db.insert(TabelleHA.TBL_HACI,null,cv) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -439,8 +427,7 @@ public class DBManager {
         cv.put(TabellaPrivilegi.FIELD_NOMEP,nomep);
 
         try{
-            db.insert(TabelleHA.TBL_HACP,null,cv);
-            return true;
+            return db.insert(TabelleHA.TBL_HACP,null,cv) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -454,8 +441,7 @@ public class DBManager {
         cv.put(TabellaPrivilegi.FIELD_NOMEP,nomep);
 
         try{
-            db.insert(TabelleHA.TBL_HARP,null,cv);
-            return true;
+            return db.insert(TabelleHA.TBL_HARP,null,cv) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -471,6 +457,7 @@ public class DBManager {
 
         try {
             return db.delete(TabellaIncantesimi.TBL_NOME, whereClause, whereArgs) > 0;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -482,6 +469,7 @@ public class DBManager {
 
         try {
             return db.delete(TabellaAbilita.TBL_NOME, whereClause, whereArgs) > 0;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -492,14 +480,16 @@ public class DBManager {
         String[] whereArgs =  new String[]{eliminato.getNome()};
 
         try {
-            if(db.delete(TabellaValuta.TBL_NOME, whereClause, whereArgs) > 0)
-                for(String nome : eliminato.getNomelist()) {
-                    if(!this.eliminaNomeVal(eliminato.getNome(),nome)){
+            if(db.delete(TabellaValuta.TBL_NOME, whereClause, whereArgs) > 0) {
+                for (String nome : eliminato.getNomelist()) {
+                    if (!this.eliminaNomeVal(eliminato.getNome(), nome)) {
                         return false;
-                     }
+                    }
                 }
-            else return false;
-            return true;
+                return true;
+            }
+            return false;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -521,9 +511,10 @@ public class DBManager {
                         return false;
                     }
                 }
+                return true;
             }
-            else return false;
-            return true;
+            return false;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -535,6 +526,7 @@ public class DBManager {
 
         try {
             return db.delete(TabellaPrivilegi.TBL_NOME, whereClause, whereArgs) > 0;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -561,9 +553,10 @@ public class DBManager {
                         return false;
                     }
                 }
+                return true;
             }
-            else return false;
-            return true;
+            return false;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -575,6 +568,7 @@ public class DBManager {
 
         try {
             return db.delete(TabellaEquipaggiamento.TBL_NOME, whereClause, whereArgs) > 0;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -585,7 +579,10 @@ public class DBManager {
         String[] whereArgs = new String[]{eliminato.getNome()};
 
         try {
-            return db.delete(TabellaCaratteristica.TBL_NOME, whereClause, whereArgs) > 0;
+            if (db.delete(TabellaCaratteristica.TBL_NOME, whereClause, whereArgs) > 0)
+                return db.delete(TabellaCaratteristicaG.TBL_NOME, whereClause, whereArgs) > 0;
+            return false;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -599,6 +596,7 @@ public class DBManager {
             if (db.delete(TabellaArma.TBL_NOME, whereClause, whereArgs) > 0)
                 return this.eliminaEquipaggiamento(nomee);
             else return false;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -612,6 +610,7 @@ public class DBManager {
             if (db.delete(TabellaArmatura.TBL_NOME, whereClause, whereArgs) > 0)
                 return this.eliminaEquipaggiamento(nomee);
             else return false;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -644,9 +643,10 @@ public class DBManager {
                     if(!this.eliminaHaga(eliminato.getNomeCampagna(),eliminato.getNome(), ab.getNome()))
                         return false;
                 }
+                return true;
             }
-            else return false;
-            return true;
+            return false;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -658,6 +658,7 @@ public class DBManager {
 
         try {
             return db.delete(TabellaCarBase.TBL_NOME, whereClause, whereArgs) > 0;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -669,6 +670,7 @@ public class DBManager {
 
         try {
             return db.delete(TabellaCaratteristicaG.TBL_NOME, whereClause, whereArgs) > 0;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -680,6 +682,7 @@ public class DBManager {
 
         try {
             return db.delete(TabellaNomeVal.TBL_NOME, whereClause, whereArgs) > 0;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -691,6 +694,7 @@ public class DBManager {
 
         try {
             return db.delete(TabelleHA.TBL_HAGA, whereClause, whereArgs) > 0;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -702,6 +706,7 @@ public class DBManager {
 
         try {
             return db.delete(TabelleHA.TBL_HAGE, whereClause, whereArgs) > 0;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -713,6 +718,7 @@ public class DBManager {
 
         try {
             return db.delete(TabelleHA.TBL_HAGI, whereClause, whereArgs) > 0;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -724,6 +730,7 @@ public class DBManager {
 
         try {
             return db.delete(TabelleHA.TBL_HACE, whereClause, whereArgs) > 0;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -735,6 +742,7 @@ public class DBManager {
 
         try {
             return db.delete(TabelleHA.TBL_HACI, whereClause, whereArgs) > 0;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -746,6 +754,7 @@ public class DBManager {
 
         try {
             return db.delete(TabelleHA.TBL_HACP, whereClause, whereArgs) > 0;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -757,6 +766,7 @@ public class DBManager {
 
         try {
             return db.delete(TabelleHA.TBL_HARP, whereClause, whereArgs) > 0;
+
         } catch (SQLiteException sqle) {
             return false;
         }
@@ -777,8 +787,8 @@ public class DBManager {
         cv.put(TabellaIncantesimi.FIELD_DURATA,aggiornato.getDurata());
 
         try{
-            db.update(TabellaIncantesimi.TBL_NOME,cv,whereClause,whereArgs );
-            return true;
+            return  db.update(TabellaIncantesimi.TBL_NOME,cv,whereClause,whereArgs) > 0;
+
         }
         catch(SQLiteException sqle){
             return false;
@@ -794,8 +804,7 @@ public class DBManager {
         cv.put(CampiComuni.FIELD_DESC,aggiornato.getDescrizione().toString());
 
         try{
-            db.update(TabellaAbilita.TBL_NOME,cv,whereClause,whereArgs);
-            return true;
+            return db.update(TabellaAbilita.TBL_NOME,cv,whereClause,whereArgs) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -812,12 +821,14 @@ public class DBManager {
         cv.put(TabellaValuta.FIELD_RATIO,aggiornato.getRatio());
 
         try{
-            db.update(TabellaValuta.TBL_NOME,cv,whereClause,whereArgs);
-            for(String nome : aggiornato.getNomelist()){
-                if(!this.aggiornaNomeVal(aggiornato.getNome(),nome))
-                    return false;
+            if (db.update(TabellaValuta.TBL_NOME,cv,whereClause,whereArgs) > 0){
+                for(String nome : aggiornato.getNomelist()){
+                    if(!this.aggiornaNomeVal(aggiornato.getNome(),nome))
+                        return false;
+                }
+                return true;
             }
-            return true;
+            return false;
         }
         catch(SQLiteException sqle){
             return false;
@@ -835,16 +846,18 @@ public class DBManager {
         cv.put(CampiComuni.FIELD_LINGUA,aggiornato.getLingua().toString());
 
         try{
-            db.update(TabellaRazza.TBL_NOME,cv,whereClause,whereArgs);
-            for (Descrivibile nuovoP : aggiornato.getPrivilegiRazza()) {
-                if (!this.aggiornaHarp(aggiornato.getNome(), nuovoP.getNome()))
-                    return false;
+            if (db.update(TabellaRazza.TBL_NOME,cv,whereClause,whereArgs) > 0){
+                for (Descrivibile nuovoP : aggiornato.getPrivilegiRazza()) {
+                    if (!this.aggiornaHarp(aggiornato.getNome(), nuovoP.getNome()))
+                        return false;
+                }
+                for (CaratteristicaBase nuovaCB : aggiornato.getCaratteristicaBaseList()){
+                    if(!this.aggiornaCarBase(aggiornato.getNome(),nuovaCB))
+                        return false;
+                }
+                return true;
             }
-            for (CaratteristicaBase nuovaCB : aggiornato.getCaratteristicaBaseList()){
-                if(!this.aggiornaCarBase(aggiornato.getNome(),nuovaCB))
-                    return false;
-            }
-            return true;
+            return false;
         }
         catch(SQLiteException sqle){
             return false;
@@ -859,8 +872,8 @@ public class DBManager {
         cv.put(CampiComuni.FIELD_DESC,aggiornato.getDescrizione().toString());
 
         try{
-            db.update(TabellaPrivilegi.TBL_NOME,cv,whereClause,whereArgs);
-            return true;
+            return db.update(TabellaPrivilegi.TBL_NOME,cv,whereClause,whereArgs) > 0;
+
         }
         catch(SQLiteException sqle){
             return false;
@@ -879,20 +892,22 @@ public class DBManager {
         cv.put(CampiComuni.FIELD_COMPETENZA,aggiornato.getCompetenza().toString());
 
         try{
-            db.update(TabellaClasse.TBL_NOME,cv,whereClause,whereArgs);
-            for (Descrivibile nuovoP : aggiornato.getPrivilegiClasse()) {
-                if (!this.aggiornaHacp(aggiornato.getNome(), nuovoP.getNome()))
-                    return false;
+            if (db.update(TabellaClasse.TBL_NOME,cv,whereClause,whereArgs) > 0){
+                for (Descrivibile nuovoP : aggiornato.getPrivilegiClasse()) {
+                    if (!this.aggiornaHacp(aggiornato.getNome(), nuovoP.getNome()))
+                        return false;
+                }
+                for (Incantesimo nuovoi : aggiornato.getIncantesimiClasse()){
+                    if (!this.aggiornaHaci(aggiornato.getNome(), nuovoi.getNome()))
+                        return false;
+                }
+                for (Equipaggiamento nuovoe : aggiornato.getEquipaggiamentoList()){
+                    if(!this.aggiornaHace(aggiornato.getNome(),nuovoe.getNome()))
+                        return false;
+                }
+                return true;
             }
-            for (Incantesimo nuovoi : aggiornato.getIncantesimiClasse()){
-                if (!this.aggiornaHaci(aggiornato.getNome(), nuovoi.getNome()))
-                    return false;
-            }
-            for (Equipaggiamento nuovoe : aggiornato.getEquipaggiamentoList()){
-                if(!this.aggiornaHace(aggiornato.getNome(),nuovoe.getNome()))
-                    return false;
-            }
-            return true;
+            return false;
         }
         catch(SQLiteException sqle){
             return false;
@@ -911,8 +926,7 @@ public class DBManager {
         cv.put(TabellaEquipaggiamento.FIELD_TIPO,aggiornato.getTipo());
 
         try{
-            db.update(TabellaEquipaggiamento.TBL_NOME,cv,whereClause,whereArgs);
-            return true;
+            return db.update(TabellaEquipaggiamento.TBL_NOME,cv,whereClause,whereArgs) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -927,8 +941,7 @@ public class DBManager {
         cv.put(CampiComuni.FIELD_DESC,desc.toString());
 
         try{
-            db.update(TabellaCaratteristica.TBL_NOME,cv,whereClause,whereArgs);
-            return true;
+            return db.update(TabellaCaratteristica.TBL_NOME,cv,whereClause,whereArgs) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -944,8 +957,9 @@ public class DBManager {
         cv.put(TabellaArma.FIELD_PROPRIETA,aggiornato.getProprieta());
 
         try{
-            db.update(TabellaArma.TBL_NOME,cv,whereClause,whereArgs);
-            return this.aggiornaEquipaggiamento(aggiornato);
+            if (db.update(TabellaArma.TBL_NOME,cv,whereClause,whereArgs) > 0)
+                return this.aggiornaEquipaggiamento(aggiornato);
+            return false;
         }
         catch(SQLiteException sqle){
             return false;
@@ -964,8 +978,9 @@ public class DBManager {
         cv.put(TabellaArmatura.FIELD_FORZANECESSARIA,aggiornato.getForzaNecessaria());
 
         try{
-            db.insert(TabellaArmatura.TBL_NOME,null,cv);
-            return this.aggiornaEquipaggiamento(aggiornato);
+            if (db.insert(TabellaArmatura.TBL_NOME,null,cv) > 0)
+                return this.aggiornaEquipaggiamento(aggiornato);
+            return false;
         }
         catch(SQLiteException sqle){
             return false;
@@ -984,7 +999,6 @@ public class DBManager {
         cv.put(TabellaGiocatore.FIELD_MODCOMPETENZA,aggiornato.getModCompetenza());
         cv.put(TabellaGiocatore.FIELD_CAPACITABORSA,aggiornato.getCapacitaBorsa());
         cv.put(TabellaGiocatore.FIELD_PUNTIFERITA,aggiornato.getPuntiFerita());
-        cv.put(TabellaGiocatore.FIELD_PUNTIFERITAMAX,aggiornato.getPuntiFeritaMax());
         cv.put(TabellaGiocatore.FIELD_CLASSEARMATURA,aggiornato.getClasseArmatura());
         cv.put(TabellaGiocatore.FIELD_PUNTISTAT,aggiornato.getPuntiStat());
         cv.put(CampiComuni.FIELD_NDADI,aggiornato.getnDadi());
@@ -1001,28 +1015,30 @@ public class DBManager {
 
 
         try{
-            db.update(TabellaGiocatore.TBL_NOME,cv,whereClause,whereArgs);
-            for(Caratteristica nuovac : aggiornato.getCaratteristicaList()){
-                if(!this.aggiungiCaratteristicaG(aggiornato.getNomeCampagna(),aggiornato.getNome(), nuovac))
-                    return false;
+            if (db.update(TabellaGiocatore.TBL_NOME,cv,whereClause,whereArgs) > 0){
+                for(Caratteristica nuovac : aggiornato.getCaratteristicaList()){
+                    if (!this.aggiornaCaratteristicaG(aggiornato.getNomeCampagna(),aggiornato.getNome(), nuovac))
+                        return false;
+                }
+                for(Equipaggiamento nuovoe : aggiornato.getEquipaggiato()){
+                    if (!this.aggiornaHage(aggiornato.getNomeCampagna(),aggiornato.getNome(), nuovoe.getNome(),false))
+                        return false;
+                }
+                for(Equipaggiamento nuovoe : aggiornato.getBorsa()){
+                    if (!this.aggiornaHage(aggiornato.getNomeCampagna(),aggiornato.getNome(), nuovoe.getNome(),true))
+                        return false;
+                }
+                for(Incantesimo nuovoi : aggiornato.getIncantesimiGiocatore()){
+                    if (!this.aggiornaHagi(aggiornato.getNomeCampagna(),aggiornato.getNome(), nuovoi.getNome()))
+                        return false;
+                }
+                for (Abilita nuovaa : aggiornato.getAbilitaList()){
+                    if (!this.aggiornaHaga(aggiornato.getNomeCampagna(),aggiornato.getNome(), nuovaa.getNome()))
+                        return false;
+                }
+                return true;
             }
-            for(Equipaggiamento nuovoe : aggiornato.getEquipaggiato()){
-                if(!this.aggiornaHage(aggiornato.getNomeCampagna(),aggiornato.getNome(), nuovoe.getNome(),false))
-                    return false;
-            }
-            for(Equipaggiamento nuovoe : aggiornato.getBorsa()){
-                if(!this.aggiornaHage(aggiornato.getNomeCampagna(),aggiornato.getNome(), nuovoe.getNome(),true))
-                    return false;
-            }
-            for(Incantesimo nuovoi : aggiornato.getIncantesimiGiocatore()){
-                if(!this.aggiornaHagi(aggiornato.getNomeCampagna(),aggiornato.getNome(), nuovoi.getNome()))
-                    return false;
-            }
-            for (Abilita nuovaa : aggiornato.getAbilitaList()){
-                if(!this.aggiornaHaga(aggiornato.getNomeCampagna(),aggiornato.getNome(), nuovaa.getNome()))
-                    return false;
-            }
-            return true;
+            return false;
         }
         catch(SQLiteException sqle){
             return false;
@@ -1037,8 +1053,7 @@ public class DBManager {
         cv.put(TabellaCarBase.FIELD_VALORE,aggiornato.getValore());
 
         try{
-            db.update(TabellaCarBase.TBL_NOME,cv,whereClause,whereArgs);
-            return true;
+            return db.update(TabellaCarBase.TBL_NOME,cv,whereClause,whereArgs) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -1057,8 +1072,7 @@ public class DBManager {
         cv.put(TabellaCaratteristicaG.FIELD_VALOREBONUS,aggiornato.getValoreBonus());
 
         try{
-            db.update(TabellaCaratteristicaG.TBL_NOME,cv,whereClause,whereArgs);
-            return true;
+            return db.update(TabellaCaratteristicaG.TBL_NOME,cv,whereClause,whereArgs) > 0;
         }
         catch(SQLiteException sqle){
             return false;
@@ -1076,11 +1090,13 @@ public class DBManager {
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? " + " AND " + TabellaEquipaggiamento.FIELD_NOMEE + " = ? " ;
         String[] whereArgs = new String[]{nomecamp, nomeg, nomee};
 
-        cv.put(TabelleHA.FIELD_BORSA,borsa);
+        int flag = (borsa)? 1 : 0;
+        cv.put(TabelleHA.FIELD_BORSA,flag);
 
         try{
-            db.update(TabelleHA.TBL_HAGE,cv,whereClause,whereArgs);
-            return true;
+            if (db.update(TabelleHA.TBL_HAGE,cv,whereClause,whereArgs) > 0)
+                return true;
+            return this.aggiungiHage(nomecamp,nomeg,nomee,borsa);
         }
         catch(SQLiteException sqle){
             return false;
@@ -1103,6 +1119,21 @@ public class DBManager {
     }
 
     /* READ */
+    public Cursor leggiTabella (String table){
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+
+        try {
+            Cursor resultSet = db.query(table, null, null, null, null, null, null);
+            if (resultSet == null || resultSet.getCount() == 0){
+                return null;
+            }
+
+            return resultSet;
+        }
+        catch (SQLiteException sqle) {
+            return null;
+        }
+    }
     public Incantesimo leggiIncantesimo(String nomei){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaIncantesimi.FIELD_NOMEI + " = ? ";
@@ -1298,19 +1329,19 @@ public class DBManager {
         try {
             Cursor resultSet = db.query(TabellaPrivilegi.TBL_NOME, null, whereClause, whereArgs, null, null, null);
             if (resultSet == null || resultSet.getCount() == 0){
-                return null;
-            }
-            resultSet.moveToFirst();
-
-            StringBuffer descrizione = new StringBuffer();
-            descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
-
-            resultSet.close();
-            return new Descrivibile(nomep,descrizione);
-        }
-        catch (SQLiteException sqle) {
             return null;
         }
+        resultSet.moveToFirst();
+
+        StringBuffer descrizione = new StringBuffer();
+        descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+
+        resultSet.close();
+        return new Descrivibile(nomep,descrizione);
+    }
+        catch (SQLiteException sqle) {
+        return null;
+    }
     }
     public List<Descrivibile> leggiPrivilegi(@NotNull String... arg){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
@@ -1489,7 +1520,7 @@ public class DBManager {
             return null;
         }
     }
-    public List<Equipaggiamento> leggiEquipaggiamenti(@NotNull String... arg){
+    public List<Equipaggiamento> leggiEquipaggiamenti(boolean borsa, @NotNull String... arg){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String table;
         String whereClause;
@@ -1501,9 +1532,12 @@ public class DBManager {
                 whereArgs = new String[]{arg[0]};
                 break;
             case 2:
+                int b = 0;
+                if(borsa)
+                    b = 1;
                 table = TabelleHA.TBL_HAGE;
-                whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
-                whereArgs = new String[]{arg[0],arg[1]};
+                whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?" + " AND " + TabelleHA.FIELD_BORSA + "=?";
+                whereArgs = new String[]{arg[0],arg[1], Integer.toString(b)};
                 break;
             default:
                 return null;
@@ -1563,7 +1597,7 @@ public class DBManager {
             descrizione.append(resultSet.getString(resultSet.getColumnIndex(TabellaClasse.FIELD_DESCPRIVILEGI)));
             StringBuffer competenza = new StringBuffer();
             descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_COMPETENZA)));
-            List<Equipaggiamento> equipaggiamentoList = this.leggiEquipaggiamenti(nomecla);
+            List<Equipaggiamento> equipaggiamentoList = this.leggiEquipaggiamenti(true, nomecla);
             List<Descrivibile> privilegiClasse = this.leggiPrivilegi(nomecla,"classe");
             List<Incantesimo> incantesimiClasse = this.leggiIncantesimi(nomecla);
 
@@ -1574,36 +1608,111 @@ public class DBManager {
             return null;
         }
     }
+    public Caratteristica leggiCaratteristica(String nomecar){
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        String whereClause = TabellaCaratteristica.FIELD_NOMECAR + " = ? ";
+        String[] whereArgs = new String[]{nomecar};
 
-/*
-    }
-    public Cursor getAbilita(String nomea){
-        SQLiteDatabase db=dbhelper.getReadableDatabase();
-        String whereClause = TabellaAbilita.FIELD_NOMEA + " = ? ";
-        String[] whereArgs = new String[]{nomea};
 
-        try {
-            Cursor resultSet = db.query(TabellaAbilita.TBL_NOME, null, whereClause, whereArgs, null, null, null);
-            return resultSet;
+        try{
+            Cursor resultSet = db.query(TabellaCaratteristica.TBL_NOME, null, whereClause, whereArgs, null, null, null);
+            if (resultSet == null || resultSet.getCount() == 0){
+                return null;
+            }
+            resultSet.moveToFirst();
+
+            StringBuffer descrizione = new StringBuffer();
+            descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+
+            resultSet.close();
+            return new Caratteristica(nomecar,descrizione);
         }
         catch (SQLiteException sqle) {
             return null;
         }
     }
-    public Cursor getValuta(int idval,int ratio){
-        SQLiteDatabase db=dbhelper.getReadableDatabase();
-        String whereClause = TabellaValuta.FIELD_IDVAL + " = ? ";
-        String[] columns = new String[]{TabellaValuta.FIELD_RATIO};
-        String[] whereArgs = new String[]{Integer.toString(idval)};
+    public List<Caratteristica> leggiCaratteristicheG(String nomecamp, String nomeg){
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
+        String[] whereArgs = new String[]{nomecamp, nomeg};
 
         try {
-            Cursor resultSet = db.query(TabellaAbilita.TBL_NOME, columns, whereClause, whereArgs, null, null, null);
-            return resultSet;
+            Cursor resultSet = db.query(TabellaCaratteristicaG.TBL_NOME, null, whereClause, whereArgs, null, null, null);
+            if (resultSet == null || resultSet.getCount() == 0){
+                return null;
+            }
+            resultSet.moveToFirst();
+
+            List<Caratteristica> caratteristicaList = new ArrayList<Caratteristica>();
+            while (!resultSet.isAfterLast()) {
+                Caratteristica caratteristica = leggiCaratteristica(resultSet.getString(resultSet.getColumnIndex(TabellaCaratteristica.FIELD_NOMECAR)));
+                if (caratteristica != null){
+                    caratteristica.setTiroSalveza(resultSet.getInt(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_TIROSALVEZZA)) == 1);
+                    caratteristica.setValoreBase(resultSet.getInt(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_VALOREBASE)));
+                    caratteristica.setValoreLivello(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_VALORELIVELLO));
+                    caratteristica.setValoreEquipaggiamento(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_VALOREEQUIPAGGAMENTO));
+                    caratteristica.setValoreBonus(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_VALOREBONUS));
+                    caratteristica.setModificatore();
+                    caratteristicaList.add(caratteristica);
+                }
+
+                resultSet.moveToNext();
+            }
+
+            resultSet.close();
+            return caratteristicaList;
         }
         catch (SQLiteException sqle) {
             return null;
         }
     }
-*/
+    public Giocatore leggiGiocatore(String nomecamp, String nomeg){
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
+        String[] whereArgs = new String[]{nomecamp,nomeg};
 
+        try{
+            Cursor resultSet = db.query(TabellaGiocatore.TBL_NOME, null, whereClause, whereArgs, null, null, null);
+            if (resultSet == null || resultSet.getCount() == 0){
+                return null;
+            }
+            resultSet.moveToFirst();
+
+            StringBuffer descrizione = new StringBuffer();
+            descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+            int mana = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_MANA));
+            int livello = resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_LIVELLO));
+            int puntiEsperienza = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_PUNTIXP));
+            int modCompetenza = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_MODCOMPETENZA));
+            int capacitaBorsa = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_CAPACITABORSA));
+            int puntiFerita = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_PUNTIFERITA));
+            int classeArmatura = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_CLASSEARMATURA));
+            int puntiStat = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_PUNTISTAT));
+            int nDadi = resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_NDADI));
+            int dado = resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_DADO));
+            String iniziativa = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_INIZIATIVA));
+            String eta = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_ETA));
+            StringBuffer noteAvventura = new StringBuffer();
+            noteAvventura.append(resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_NOTEAVVENTURA)));
+            StringBuffer allineamento = new StringBuffer();
+            allineamento.append(resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_ALLINEAMENTO)));
+            StringBuffer lingua = new StringBuffer();
+            lingua.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_LINGUA)));
+            Valuta portafoglio = this.leggiValuta(resultSet.getString(resultSet.getColumnIndex(TabellaValuta.FIELD_NOMEV)));
+            portafoglio.setValore(resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_VALOREVAL)));
+            Classe classe = this.leggiClasse(resultSet.getString(resultSet.getColumnIndex(TabellaClasse.FIELD_NOMECLA)));
+            Razza razza = this.leggiRazza(resultSet.getString(resultSet.getColumnIndex(TabellaRazza.FIELD_NOMER)));
+            List<Caratteristica> caratteristicaList = this.leggiCaratteristicheG(nomecamp, nomeg);
+            List<Equipaggiamento> borsa = this.leggiEquipaggiamenti(true, nomecamp, nomeg);
+            List<Equipaggiamento> equipaggiato = this.leggiEquipaggiamenti(false, nomecamp, nomeg);
+            List<Incantesimo> incantesimiGiocatore = this.leggiIncantesimi(nomecamp, nomeg);
+            List<Abilita> abilitaList = this.leggiAbilita(nomecamp, nomeg);
+
+            resultSet.close();
+            return new Giocatore(nomeg, descrizione, mana, livello, puntiEsperienza, modCompetenza, capacitaBorsa, puntiFerita, nDadi, dado, classeArmatura, puntiStat, nomecamp, iniziativa, eta, noteAvventura, allineamento, lingua, portafoglio, classe, razza, caratteristicaList, borsa, equipaggiato, incantesimiGiocatore, abilitaList);
+        }
+        catch(SQLiteException sqle){
+            return null;
+        }
+    }
 }

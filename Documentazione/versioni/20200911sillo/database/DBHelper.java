@@ -120,7 +120,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 "\t\"modCompetenza\"\tINTEGER,\n" +
                 "\t\"capacitaBorsa\"\tINTEGER,\n" +
                 "\t\"puntiFerita\"\tINTEGER,\n" +
-                "\t\"puntiFeritaMax\"\tINTEGER,\n" +
                 "\t\"classeArmatura\"\tINTEGER,\n" +
                 "\t\"puntiStat\"\tINTEGER,\n" +
                 "\t\"nDadi\"\t\tINTEGER,\n" +

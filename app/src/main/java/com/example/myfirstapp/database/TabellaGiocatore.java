@@ -8,7 +8,6 @@ public class TabellaGiocatore {
     public static final String FIELD_MODCOMPETENZA = "modCompetenza";
     public static final String FIELD_CAPACITABORSA = "capacitaBorsa";
     public static final String FIELD_PUNTIFERITA = "puntiFerita";
-    public static final String FIELD_PUNTIFERITAMAX = "puntiFeritaMax";
     public static final String FIELD_CLASSEARMATURA = "classeArmatura";
     public static final String FIELD_PUNTISTAT = "puntiStat";
     public static final String FIELD_INIZIATIVA = "iniziativa";

@@ -1,16 +1,15 @@
 package com.example.myfirstapp.domain;
 
 public class Caratteristica extends Descrivibile {
-    private boolean tiroSalveza;
+    private boolean tiroSalveza = false;
     private int valoreBase = 0;
     private int valoreLivello = 0;
     private int valoreEquipaggiamento = 0;
     private int valoreBonus = 0;
     private int modificatore;
 
-    public Caratteristica(String nome, StringBuffer descrizione, boolean tiroSalveza) {
+    public Caratteristica(String nome, StringBuffer descrizione) {
         super(nome, descrizione);
-        this.tiroSalveza = tiroSalveza;
         this.setModificatore();
     }
 
