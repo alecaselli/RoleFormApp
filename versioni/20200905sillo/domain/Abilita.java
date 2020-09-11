@@ -1,4 +1,4 @@
-package com.example.roleapp.domain;
+package com.example.myfirstapp.domain;
 
 import java.util.List;
 

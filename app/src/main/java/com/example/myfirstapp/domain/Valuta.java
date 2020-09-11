@@ -1,11 +1,11 @@
-package com.example.roleapp.domain;
+package com.example.myfirstapp.domain;
 
 import androidx.annotation.NonNull;;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Valuta extends com.example.roleapp.domain.Descrivibile {
+public class Valuta extends Descrivibile {
     private int  ratio;
     private int valore;
     private List<String> nomelist;

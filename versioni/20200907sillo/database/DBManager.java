@@ -1,4 +1,4 @@
-package com.example.roleapp.database;
+package com.example.myfirstapp.database;
 
 import android.content.ContentValues;
 import android.content.Context;

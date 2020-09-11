@@ -1,4 +1,4 @@
-package com.example.roleapp.database;
+package com.example.myfirstapp.database;
 
 public class TabellaAbilita {
     public static final String FIELD_NOMEA = "nomea";

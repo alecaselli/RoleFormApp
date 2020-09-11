@@ -1,4 +1,4 @@
-package com.example.roleapp.database;
+package com.example.myfirstapp.database;
 
 public class TabellaArma {
     public static final String FIELD_DANNO = "danno";

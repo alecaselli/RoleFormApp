@@ -1,4 +1,4 @@
-package com.example.roleapp.domain;
+package le.roleapp.domain;
 
 import org.jetbrains.annotations.NotNull;
 

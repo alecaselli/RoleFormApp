@@ -1,4 +1,4 @@
-package com.example.roleapp.domain;
+package com.example.myfirstapp.domain;
 
 public class Competenza {
     private StringBuffer armatura;

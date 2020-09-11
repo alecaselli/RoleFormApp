@@ -5,7 +5,7 @@
 
 
 
-package com.example.roleapp.alternative;
+package com.example.myfirstapp.alternative;
 
 public class Competenza {
     private StringBuffer armatura;

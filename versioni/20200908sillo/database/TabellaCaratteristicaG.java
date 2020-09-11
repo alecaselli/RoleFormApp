@@ -1,4 +1,4 @@
-package com.example.roleapp.database;
+package com.example.myfirstapp.database;
 
 public class TabellaCaratteristicaG {
     public static final String FIELD_TIROSALVEZZA = "tiroSalvezza";

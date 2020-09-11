@@ -1,4 +1,4 @@
-package com.example.roleapp.database;
+package com.example.myfirstapp.database;
 
 public class TabellaGiocatore {
     public static final String FIELD_ID_G = "Id_G";

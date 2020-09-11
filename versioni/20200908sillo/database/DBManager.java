@@ -1,4 +1,4 @@
-package com.example.roleapp.database;
+package com.example.myfirstapp.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,16 +6,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 
-import com.example.roleapp.domain.*;
-import com.example.roleapp.domain.Arma;
-import com.example.roleapp.domain.Caratteristica;
-import com.example.roleapp.domain.CaratteristicaBase;
-import com.example.roleapp.domain.Classe;
-import com.example.roleapp.domain.Descrivibile;
-import com.example.roleapp.domain.Equipaggiamento;
-import com.example.roleapp.domain.Incantesimo;
-import com.example.roleapp.domain.Razza;
-import com.example.roleapp.domain.Valuta;
+import com.example.myfirstapp.domain.*;
+import com.example.myfirstapp.domain.Arma;
+import com.example.myfirstapp.domain.Caratteristica;
+import com.example.myfirstapp.domain.CaratteristicaBase;
+import com.example.myfirstapp.domain.Classe;
+import com.example.myfirstapp.domain.Descrivibile;
+import com.example.myfirstapp.domain.Equipaggiamento;
+import com.example.myfirstapp.domain.Incantesimo;
+import com.example.myfirstapp.domain.Razza;
+import com.example.myfirstapp.domain.Valuta;
 
 public class DBManager {
     private DBHelper dbhelper;

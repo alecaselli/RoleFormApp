@@ -1,4 +1,4 @@
-package com.example.roleapp.database;
+package com.example.myfirstapp.database;
 
 public class TabellaRazza {
     public static final String FIELD_NOMER = "nomer";

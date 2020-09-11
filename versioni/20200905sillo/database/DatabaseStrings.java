@@ -1,4 +1,4 @@
-package com.example.roleapp.database;
+package com.example.myfirstapp.database;
 
 public class DatabaseStrings {
     public static final String FIELD_NOMEI = "nomei";

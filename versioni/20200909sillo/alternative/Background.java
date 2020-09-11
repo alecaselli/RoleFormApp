@@ -1,7 +1,7 @@
-package com.example.roleapp.alternative;
+package com.example.myfirstapp.alternative;
 
-import com.example.roleapp.domain.Descrivibile;
-import com.example.roleapp.domain.Equipaggiamento;
+import com.example.myfirstapp.domain.Descrivibile;
+import com.example.myfirstapp.domain.Equipaggiamento;
 
 import java.util.List;
 
