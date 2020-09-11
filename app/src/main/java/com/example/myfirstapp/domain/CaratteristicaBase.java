@@ -1,6 +1,5 @@
 package com.example.myfirstapp.domain;
 
-
 public class CaratteristicaBase {
     private String nome;
     private int valore;

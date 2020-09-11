@@ -1,6 +1,5 @@
 package com.example.myfirstapp.domain;
 
-
 import java.util.List;
 
 public class Giocatore extends Descrivibile {

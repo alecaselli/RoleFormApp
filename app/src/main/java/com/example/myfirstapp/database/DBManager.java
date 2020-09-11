@@ -19,6 +19,7 @@ import com.example.myfirstapp.domain.Razza;
 import com.example.myfirstapp.domain.Valuta;
 
 
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.Array;
 import java.sql.Struct;
@@ -33,7 +34,7 @@ public class DBManager {
     }
 
     /* INSERT */
-    public boolean aggiungiIncantesimi(Incantesimo nuovo){
+    public boolean aggiungiIncantesimi(@NotNull Incantesimo nuovo){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -53,7 +54,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiAbilita(Abilita nuovo){
+    public boolean aggiungiAbilita(@NotNull Abilita nuovo){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -69,7 +70,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiValuta(Valuta nuovo){
+    public boolean aggiungiValuta(@NotNull Valuta nuovo){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -91,7 +92,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiRazza(Razza nuovo){
+    public boolean aggiungiRazza(@NotNull Razza nuovo){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -119,7 +120,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiPrivivlegi(Descrivibile nuovo){
+    public boolean aggiungiPrivivlegi(@NotNull Descrivibile nuovo){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -134,7 +135,7 @@ public class DBManager {
            return false;
         }
     }
-    public boolean aggiungiClasse(Classe nuovo){
+    public boolean aggiungiClasse(@NotNull Classe nuovo){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -167,7 +168,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiEquipaggiamento(Equipaggiamento nuovo){
+    public boolean aggiungiEquipaggiamento(@NotNull Equipaggiamento nuovo){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -186,7 +187,7 @@ public class DBManager {
           return false;
         }
     }
-    public boolean aggiungiCaratteristica(Caratteristica nuovo){
+    public boolean aggiungiCaratteristica(@NotNull Caratteristica nuovo){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -202,7 +203,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiArma(Arma nuovo){
+    public boolean aggiungiArma(@NotNull Arma nuovo){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -220,7 +221,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiArmatura(Armatura nuovo){
+    public boolean aggiungiArmatura(@NotNull Armatura nuovo){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -241,7 +242,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiGiocatore(Giocatore nuovo){
+    public boolean aggiungiGiocatore(@NotNull Giocatore nuovo){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -300,7 +301,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiCarBase(String nomer, CaratteristicaBase nuovo){
+    public boolean aggiungiCarBase(String nomer, @NotNull CaratteristicaBase nuovo){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -316,7 +317,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiCaratteristicaG(String nomecamp, String nomeg, Caratteristica nuova){
+    public boolean aggiungiCaratteristicaG(String nomecamp, String nomeg, @NotNull Caratteristica nuova){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -486,7 +487,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean eliminavaluta(Valuta eliminato) {
+    public boolean eliminavaluta(@NotNull Valuta eliminato) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         String whereClause = TabellaValuta.FIELD_NOMEV + "=?";
         String[] whereArgs =  new String[]{eliminato.getNome()};
@@ -504,7 +505,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean eliminaRazza(Razza eliminato) {
+    public boolean eliminaRazza(@NotNull Razza eliminato) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         String whereClause = TabellaRazza.FIELD_NOMER + "=?";
         String[] whereArgs = new String[]{eliminato.getNome()};
@@ -539,7 +540,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean eliminaClasse(Classe eliminato) {
+    public boolean eliminaClasse(@NotNull Classe eliminato) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         String whereClause = TabellaClasse.FIELD_NOMECLA + "=?";
         String[] whereArgs = new String[]{eliminato.getNome()};
@@ -579,7 +580,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean eliminaCaratteristica(Caratteristica eliminato) {
+    public boolean eliminaCaratteristica(@NotNull Caratteristica eliminato) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         String whereClause = TabellaCaratteristica.FIELD_NOMECAR + "=?";
         String[] whereArgs = new String[]{eliminato.getNome()};
@@ -616,7 +617,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean eliminaGiocatore(Giocatore eliminato) {
+    public boolean eliminaGiocatore(@NotNull Giocatore eliminato) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
         String[] whereArgs = new String[]{eliminato.getNomeCampagna(),eliminato.getNome()};
@@ -763,7 +764,7 @@ public class DBManager {
     }
 
     /* UPDATE */
-    public boolean aggiornaIncantesimo(Incantesimo aggiornato){
+    public boolean aggiornaIncantesimo(@NotNull Incantesimo aggiornato){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaIncantesimi.FIELD_NOMEI + " = ? ";
@@ -784,7 +785,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiornaAbilita(Abilita aggiornato){
+    public boolean aggiornaAbilita(@NotNull Abilita aggiornato){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaAbilita.FIELD_NOMEA + " = ? ";
@@ -801,7 +802,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiornaValuta(Valuta aggiornato){
+    public boolean aggiornaValuta(@NotNull Valuta aggiornato){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaValuta.FIELD_NOMEV + " = ? ";
@@ -823,7 +824,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiornaRazza(Razza aggiornato){
+    public boolean aggiornaRazza(@NotNull Razza aggiornato){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaRazza.FIELD_NOMER + " = ? ";
@@ -850,7 +851,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiornaPrivivlegi(Descrivibile aggiornato){
+    public boolean aggiornaPrivivlegi(@NotNull Descrivibile aggiornato){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaPrivilegi.FIELD_NOMEP + " = ? ";
@@ -866,7 +867,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiornaClasse(Classe aggiornato){
+    public boolean aggiornaClasse(@NotNull Classe aggiornato){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaClasse.FIELD_NOMECLA + " = ? ";
@@ -898,7 +899,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiornaEquipaggiamento(Equipaggiamento aggiornato){
+    public boolean aggiornaEquipaggiamento(@NotNull Equipaggiamento aggiornato){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaEquipaggiamento.FIELD_NOMEE + " = ? ";
@@ -918,7 +919,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiornaCaratteristica(String nomecar, StringBuffer desc){
+    public boolean aggiornaCaratteristica(String nomecar, @NotNull StringBuffer desc){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaCaratteristica.FIELD_NOMECAR + " = ? ";
@@ -934,7 +935,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiornaArma(Arma aggiornato){
+    public boolean aggiornaArma(@NotNull Arma aggiornato){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaEquipaggiamento.FIELD_NOMEE + " = ? ";
@@ -951,7 +952,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiornaArmatura(Armatura aggiornato){
+    public boolean aggiornaArmatura(@NotNull Armatura aggiornato){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaEquipaggiamento.FIELD_NOMEE + " = ? ";
@@ -971,7 +972,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiornaGiocatore(Giocatore aggiornato){
+    public boolean aggiornaGiocatore(@NotNull Giocatore aggiornato){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? ";
@@ -1028,7 +1029,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiornaCarBase(String nomer, CaratteristicaBase aggiornato){
+    public boolean aggiornaCarBase(String nomer, @NotNull CaratteristicaBase aggiornato){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaRazza.FIELD_NOMER + " = ? " + " AND " + TabellaCarBase.FIELD_NOMECB + " = ? " ;
@@ -1044,7 +1045,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiornaCaratteristicaG(String nomecamp, String nomeg, Caratteristica aggiornato){
+    public boolean aggiornaCaratteristicaG(String nomecamp, String nomeg, @NotNull Caratteristica aggiornato){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? " + " AND " + TabellaCaratteristica.FIELD_NOMECAR + " = ? " ;
@@ -1145,7 +1146,7 @@ public class DBManager {
             return null;
         }
     }*/
-    public List<Incantesimo> leggiIncantesimi(String... arg) {
+    public List<Incantesimo> leggiIncantesimi(@NotNull String... arg) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String table;
         String whereClause;

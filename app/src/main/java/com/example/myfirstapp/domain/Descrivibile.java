@@ -1,7 +1,6 @@
 package com.example.myfirstapp.domain;
 
 
-
 import java.util.List;
 
 public class Descrivibile { // i privilegi sono oggetti di descrivibile

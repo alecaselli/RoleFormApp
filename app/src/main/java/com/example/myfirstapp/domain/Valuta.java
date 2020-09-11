@@ -1,7 +1,5 @@
 package com.example.myfirstapp.domain;
 
-
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
