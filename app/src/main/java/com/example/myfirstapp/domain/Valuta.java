@@ -1,11 +1,11 @@
 package com.example.roleapp.domain;
 
-import org.jetbrains.annotations.NotNull;
+import androidx.annotation.NonNull;;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Valuta extends Descrivibile{
+public class Valuta extends com.example.roleapp.domain.Descrivibile {
     private int  ratio;
     private int valore;
     private List<String> nomelist;
@@ -56,7 +56,7 @@ public class Valuta extends Descrivibile{
     /* prendo una lista di monete contenenti ciascuno il numero di monete di quel tipo da aggiungere al portafoglio
        la lista parte dalla moneta più piccola; calcolo il valore della lista in termini di numero di monete di valore
        inferiore e sommo al portafoglio*/
-    public void aggiornaValore(@NotNull List<Integer> valorelist) {
+    public void aggiornaValore(@NonNull List<Integer> valorelist) {
         int rat = 1;
         for(Integer val : valorelist){
             this.valore += val*rat;
