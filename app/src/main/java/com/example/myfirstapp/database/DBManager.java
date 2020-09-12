@@ -6,23 +6,24 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 
+import androidx.annotation.NonNull;
 
-import com.example.myfirstapp.domain.*;
+import com.example.myfirstapp.domain.Abilita;
 import com.example.myfirstapp.domain.Arma;
+import com.example.myfirstapp.domain.Armatura;
 import com.example.myfirstapp.domain.Caratteristica;
 import com.example.myfirstapp.domain.CaratteristicaBase;
 import com.example.myfirstapp.domain.Classe;
 import com.example.myfirstapp.domain.Descrivibile;
 import com.example.myfirstapp.domain.Equipaggiamento;
+import com.example.myfirstapp.domain.Giocatore;
 import com.example.myfirstapp.domain.Incantesimo;
 import com.example.myfirstapp.domain.Razza;
 import com.example.myfirstapp.domain.Valuta;
 
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class DBManager {
     private DBHelper dbhelper;
 
     public DBManager(Context ctx) {
-        dbhelper=new DBHelper(ctx);
+        dbhelper = new DBHelper(ctx);
     }
 
     /* INSERT */
@@ -57,7 +58,8 @@ public class DBManager {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(CampiComuni.FIELD_COMPETENZA,nuovo.isCompetenza());
+        int flag = (nuovo.isCompetenza())? 1 : 0;
+        cv.put(CampiComuni.FIELD_COMPETENZA,flag);
         cv.put(TabellaAbilita.FIELD_NOMEA,nuovo.getNome());
         cv.put(CampiComuni.FIELD_DESC,nuovo.getDescrizione().toString());
 
@@ -82,9 +84,9 @@ public class DBManager {
                     if (!this.aggiungiNomeVal(nuovo.getNome(), nome))
                         return false;
                 }
+                return true;
             }
-            else return false;
-            return true;
+            return false;
         }
         catch(SQLiteException sqle){
             return false;
@@ -110,9 +112,9 @@ public class DBManager {
                     if(!this.aggiungiCarBase(nuovo.getNome(),nuovaCB))
                         return false;
                 }
+                return true;
             }
-            else return false;
-            return true;
+            return false;
         }
         catch(SQLiteException sqle){
             return false;
@@ -157,9 +159,9 @@ public class DBManager {
                     if(!this.aggiungiHace(nuovo.getNome(),nuovoe.getNome()))
                         return false;
                 }
+                return true;
             }
-            else return false;
-            return true;
+            return false;
         }
         catch(SQLiteException sqle){
             return false;
@@ -210,7 +212,7 @@ public class DBManager {
             if (db.insert(TabellaArma.TBL_NOME,null,cv) > 0){
                 return this.aggiungiEquipaggiamento(nuovo);
             }
-            else return false;
+            return false;
         }
         catch(SQLiteException sqle){
             return false;
@@ -220,12 +222,13 @@ public class DBManager {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(TabellaEquipaggiamento.FIELD_NOMEE,nuovo.getNome());
-        cv.put(TabellaArmatura.FIELD_NONFURTIVA,nuovo.isNonFurtiva());
-        cv.put(TabellaArmatura.FIELD_MODIFICATORECA,nuovo.getModificatoreCA());
-        cv.put(TabellaArmatura.FIELD_TEMPOINDOSSARE,nuovo.getTempoIndossare());
-        cv.put(TabellaArmatura.FIELD_TEMPOTOGLIERE,nuovo.getTempoTogliere());
-        cv.put(TabellaArmatura.FIELD_FORZANECESSARIA,nuovo.getForzaNecessaria());
+        int flag = (nuovo.isNonFurtiva())? 1 : 0;
+        cv.put(TabellaEquipaggiamento.FIELD_NOMEE, nuovo.getNome());
+        cv.put(TabellaArmatura.FIELD_NONFURTIVA, flag);
+        cv.put(TabellaArmatura.FIELD_MODIFICATORECA, nuovo.getModificatoreCA());
+        cv.put(TabellaArmatura.FIELD_TEMPOINDOSSARE, nuovo.getTempoIndossare());
+        cv.put(TabellaArmatura.FIELD_TEMPOTOGLIERE, nuovo.getTempoTogliere());
+        cv.put(TabellaArmatura.FIELD_FORZANECESSARIA, nuovo.getForzaNecessaria());
 
         try{
             if (db.insert(TabellaArmatura.TBL_NOME,null,cv) > 0){
@@ -287,9 +290,9 @@ public class DBManager {
                     if(!this.aggiungiHaga(nuovo.getNomeCampagna(),nuovo.getNome(), nuovaa.getNome()))
                         return false;
                 }
+                return true;
             }
-            else return false;
-            return true;
+            return false;
         }
         catch(SQLiteException sqle){
             return false;
@@ -310,14 +313,15 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiCaratteristicaG(String nomecamp, String nomeg, @NotNull Caratteristica nuova){
+    public boolean aggiungiCaratteristicaG(@NotNull String nomecamp, @NotNull String nomeg, @NotNull Caratteristica nuova){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
+        int flag = (nuova.isTiroSalveza())? 1 : 0;
         cv.put(TabellaGiocatore.FIELD_NOMECAMPAGNA,nomecamp);
         cv.put(TabellaGiocatore.FIELD_NOMEG,nomeg);
         cv.put(TabellaCaratteristica.FIELD_NOMECAR,nuova.getNome());
-        cv.put(TabellaCaratteristicaG.FIELD_TIROSALVEZZA,nuova.isTiroSalveza());
+        cv.put(TabellaCaratteristicaG.FIELD_TIROSALVEZZA,flag);
         cv.put(TabellaCaratteristicaG.FIELD_VALOREBASE,nuova.getValoreBase());
         cv.put(TabellaCaratteristicaG.FIELD_VALORELIVELLO,nuova.getValoreLivello());
         cv.put(TabellaCaratteristicaG.FIELD_VALOREEQUIPAGGAMENTO,nuova.getValoreEquipaggiamento());
@@ -330,7 +334,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiNomeVal(String nomev, String nome){
+    public boolean aggiungiNomeVal(@NotNull String nomev, @NotNull String nome){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -344,7 +348,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiHaga(String nomecamp, String nomeg, String nomea){
+    public boolean aggiungiHaga(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String nomea){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -359,7 +363,7 @@ public class DBManager {
          return false;
         }
     }
-    public boolean aggiungiHage(String nomecamp, String nomeg, String nomee, boolean borsa){
+    public boolean aggiungiHage(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String nomee, @NotNull boolean borsa){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -376,7 +380,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiHagi(String nomecamp, String nomeg, String nomei){
+    public boolean aggiungiHagi(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String nomei){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -391,7 +395,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiHace(String nomecla, String nomee){
+    public boolean aggiungiHace(@NotNull String nomecla, @NotNull String nomee){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -405,7 +409,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiHaci(String nomecla, String nomei){
+    public boolean aggiungiHaci(@NotNull String nomecla, @NotNull String nomei){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -419,7 +423,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiHacp(String nomecla, String nomep){
+    public boolean aggiungiHacp(@NotNull String nomecla, @NotNull String nomep){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -433,7 +437,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiungiHarp(String nomer, String nomep){
+    public boolean aggiungiHarp(@NotNull String nomer, @NotNull String nomep){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -449,145 +453,152 @@ public class DBManager {
     }
 
     /* DELETE */
-    public boolean eliminaIncantesimo(String nomei) {
+    public boolean eliminaTabella(@NonNull String tabella){
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+
+        try {
+            return db.delete(tabella, null, null) > 0;
+        }
+        catch (SQLiteException sqle) {
+            return false;
+        }
+    }
+    public boolean eliminaIncantesimo(@NotNull String nomei) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         String whereClause = TabellaIncantesimi.FIELD_NOMEI + "=?";
         String[] whereArgs =  new String[]{nomei};
 
 
         try {
-            return db.delete(TabellaIncantesimi.TBL_NOME, whereClause, whereArgs) > 0;
-
-        } catch (SQLiteException sqle) {
+            if (db.delete(TabellaIncantesimi.TBL_NOME, whereClause, whereArgs) > 0){
+                this.eliminaHagi(nomei);
+                this.eliminaHaci(nomei, "incantesimo");
+                return true;
+            }
+            return false;
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaAbilita(String nomea) {
+    public boolean eliminaAbilita(@NotNull String nomea) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         String whereClause = TabellaAbilita.FIELD_NOMEA + "=?";
         String[] whereArgs = new String[]{nomea};
 
         try {
-            return db.delete(TabellaAbilita.TBL_NOME, whereClause, whereArgs) > 0;
-
-        } catch (SQLiteException sqle) {
+            if (db.delete(TabellaAbilita.TBL_NOME, whereClause, whereArgs) > 0){
+                this.eliminaHaga(nomea);
+                return true;
+            }
+            return false;
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminavaluta(@NotNull Valuta eliminato) {
+    public boolean eliminavaluta(@NotNull String nomev) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         String whereClause = TabellaValuta.FIELD_NOMEV + "=?";
-        String[] whereArgs =  new String[]{eliminato.getNome()};
+        String[] whereArgs =  new String[]{nomev};
 
         try {
             if(db.delete(TabellaValuta.TBL_NOME, whereClause, whereArgs) > 0) {
-                for (String nome : eliminato.getNomelist()) {
-                    if (!this.eliminaNomeVal(eliminato.getNome(), nome)) {
-                        return false;
-                    }
-                }
+                this.eliminaNomeVal(nomev);
                 return true;
             }
             return false;
-
-        } catch (SQLiteException sqle) {
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaRazza(@NotNull Razza eliminato) {
+    public boolean eliminaRazza(@NotNull String nomer) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         String whereClause = TabellaRazza.FIELD_NOMER + "=?";
-        String[] whereArgs = new String[]{eliminato.getNome()};
+        String[] whereArgs = new String[]{nomer};
 
         try {
             if(db.delete(TabellaRazza.TBL_NOME, whereClause, whereArgs) > 0){
-                for(CaratteristicaBase carb : eliminato.getCaratteristicaBaseList()){
-                    if(!this.eliminaCarBase(eliminato.getNome(),carb.getNome())){
-                       return false;
-                    }
-                }
-                for (Descrivibile priv : eliminato.getPrivilegiRazza()){
-                    if(!this.eliminaHarp(eliminato.getNome(),priv.getNome())){
-                        return false;
-                    }
-                }
+                this.eliminaCarBase(nomer);
+                this.eliminaHarp(nomer, "razza");
                 return true;
             }
             return false;
-
-        } catch (SQLiteException sqle) {
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaPrivilegi(String nomep) {
+    public boolean eliminaPrivilegi(@NotNull String nomep) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         String whereClause = TabellaPrivilegi.FIELD_NOMEP + "=?";
         String[] whereArgs = new String[]{nomep};
 
         try {
-            return db.delete(TabellaPrivilegi.TBL_NOME, whereClause, whereArgs) > 0;
-
-        } catch (SQLiteException sqle) {
-            return false;
-        }
-    }
-    public boolean eliminaClasse(@NotNull Classe eliminato) {
-        SQLiteDatabase db = dbhelper.getWritableDatabase();
-        String whereClause = TabellaClasse.FIELD_NOMECLA + "=?";
-        String[] whereArgs = new String[]{eliminato.getNome()};
-
-        try {
-            if(db.delete(TabellaClasse.TBL_NOME, whereClause, whereArgs) > 0){
-                for (Equipaggiamento equi : eliminato.getEquipaggiamentoList()){
-                    if((!this.eliminaHace(eliminato.getNome(),equi.getNome()))){
-                        return false;
-                    }
-                }
-                for (Descrivibile priv : eliminato.getPrivilegiClasse()){
-                    if(!this.eliminaHacp(eliminato.getNome(),priv.getNome())){
-                        return false;
-                    }
-                }
-                for (Incantesimo inc : eliminato.getIncantesimiClasse()){
-                    if(!this.eliminaHaci(eliminato.getNome(),inc.getNome())){
-                        return false;
-                    }
-                }
+            if (db.delete(TabellaPrivilegi.TBL_NOME, whereClause, whereArgs) > 0){
+                this.eliminaHacp(nomep, "privilegio");
+                this.eliminaHarp(nomep, "privilegio");
                 return true;
             }
             return false;
-
-        } catch (SQLiteException sqle) {
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaEquipaggiamento(String nomee) {
+    public boolean eliminaClasse(@NotNull String nomecla) {
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        String whereClause = TabellaClasse.FIELD_NOMECLA + "=?";
+        String[] whereArgs = new String[]{nomecla};
+
+        try {
+            if(db.delete(TabellaClasse.TBL_NOME, whereClause, whereArgs) > 0){
+                this.eliminaHace(nomecla, "classe");
+                this.eliminaHaci(nomecla, "classe");
+                this.eliminaHacp(nomecla, "classe");
+                return true;
+            }
+            return false;
+        }
+        catch (SQLiteException sqle) {
+            return false;
+        }
+    }
+    public boolean eliminaEquipaggiamento(@NotNull String nomee) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         String whereClause = TabellaEquipaggiamento.FIELD_NOMEE + "=?";
         String[] whereArgs = new String[]{nomee};
 
         try {
-            return db.delete(TabellaEquipaggiamento.TBL_NOME, whereClause, whereArgs) > 0;
-
-        } catch (SQLiteException sqle) {
+            if (db.delete(TabellaEquipaggiamento.TBL_NOME, whereClause, whereArgs) > 0){
+                this.eliminaHage(nomee);
+                this.eliminaHace(nomee, "equipaggiamento");
+                return true;
+            }
+            return false;
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaCaratteristica(@NotNull Caratteristica eliminato) {
+    public boolean eliminaCaratteristica(@NotNull String nomecar) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         String whereClause = TabellaCaratteristica.FIELD_NOMECAR + "=?";
-        String[] whereArgs = new String[]{eliminato.getNome()};
+        String[] whereArgs = new String[]{nomecar};
 
         try {
-            if (db.delete(TabellaCaratteristica.TBL_NOME, whereClause, whereArgs) > 0)
-                return db.delete(TabellaCaratteristicaG.TBL_NOME, whereClause, whereArgs) > 0;
+            if (db.delete(TabellaCaratteristica.TBL_NOME, whereClause, whereArgs) > 0){
+                this.eliminaCaratteristicaG(nomecar);
+                return true;
+            }
             return false;
-
-        } catch (SQLiteException sqle) {
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaArma(String nomee) {
+    public boolean eliminaArma(@NotNull String nomee) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         String whereClause = TabellaEquipaggiamento.FIELD_NOMEE + "=?";
         String[] whereArgs = new String[]{nomee};
@@ -595,13 +606,13 @@ public class DBManager {
         try {
             if (db.delete(TabellaArma.TBL_NOME, whereClause, whereArgs) > 0)
                 return this.eliminaEquipaggiamento(nomee);
-            else return false;
-
-        } catch (SQLiteException sqle) {
+            return false;
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaArmatura(String nomee) {
+    public boolean eliminaArmatura(@NotNull String nomee) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         String whereClause = TabellaEquipaggiamento.FIELD_NOMEE + "=?";
         String[] whereArgs = new String[]{nomee};
@@ -610,164 +621,240 @@ public class DBManager {
             if (db.delete(TabellaArmatura.TBL_NOME, whereClause, whereArgs) > 0)
                 return this.eliminaEquipaggiamento(nomee);
             else return false;
-
-        } catch (SQLiteException sqle) {
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaGiocatore(@NotNull Giocatore eliminato) {
+    public boolean eliminaGiocatore(@NotNull String nomecamp, @NotNull String nomeg) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
-        String[] whereArgs = new String[]{eliminato.getNomeCampagna(),eliminato.getNome()};
+        String[] whereArgs = new String[]{nomecamp, nomeg};
 
         try {
             if (db.delete(TabellaGiocatore.TBL_NOME, whereClause, whereArgs) > 0){
-                for(Caratteristica car :eliminato.getCaratteristicaList()){
-                    if(!eliminaCaratteristicaG(eliminato.getNomeCampagna(),eliminato.getNome(),car.getNome())){
-                        return false;
-                    }
-                }
-                for(Equipaggiamento equi : eliminato.getEquipaggiato()){
-                    if(!this.eliminaHage(eliminato.getNomeCampagna(),eliminato.getNome(), equi.getNome()))
-                        return false;
-                }
-                for(Equipaggiamento equi : eliminato.getBorsa()){
-                    if(!this.eliminaHage(eliminato.getNomeCampagna(),eliminato.getNome(), equi.getNome()))
-                        return false;
-                }
-                for(Incantesimo inc : eliminato.getIncantesimiGiocatore()){
-                    if(!this.eliminaHagi(eliminato.getNomeCampagna(),eliminato.getNome(), inc.getNome()))
-                        return false;
-                }
-                for (Abilita ab : eliminato.getAbilitaList()){
-                    if(!this.eliminaHaga(eliminato.getNomeCampagna(),eliminato.getNome(), ab.getNome()))
-                        return false;
-                }
+                this.eliminaCaratteristicaG(nomecamp, nomeg);
+                this.eliminaHage(nomecamp, nomeg);
+                this.eliminaHagi(nomecamp, nomeg);
+                this.eliminaHaga(nomecamp, nomeg);
                 return true;
             }
             return false;
-
-        } catch (SQLiteException sqle) {
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaCarBase(String nomer, String nomecb) {
+    public boolean eliminaCarBase(@NotNull String nomer) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
-        String whereClause = TabellaRazza.FIELD_NOMER + "=?" + " AND " + TabellaCarBase.FIELD_NOMECB + "=?";
-        String[] whereArgs = new String[]{nomer,nomecb};
+        String whereClause = TabellaRazza.FIELD_NOMER + "=?";
+        String[] whereArgs = new String[]{nomer};
 
         try {
             return db.delete(TabellaCarBase.TBL_NOME, whereClause, whereArgs) > 0;
-
-        } catch (SQLiteException sqle) {
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaCaratteristicaG(String nomecamp, String nomeg, String nomecar) {
+    public boolean eliminaCaratteristicaG(@NotNull String... arg) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
-        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?" + " AND " + TabellaCaratteristica.FIELD_NOMECAR + "=?";
-        String[] whereArgs = new String[]{nomecamp,nomeg,nomecar};
+        String whereClause;
+        String[] whereArgs;
+        switch (arg.length){
+            case 1:
+                whereClause = TabellaCaratteristica.FIELD_NOMECAR + "=?";
+                whereArgs = new String[]{arg[0]};
+                break;
+            case 2:
+                whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
+                whereArgs = new String[]{arg[0], arg[1]};
+                break;
+            default:
+                return false;
+        }
 
         try {
             return db.delete(TabellaCaratteristicaG.TBL_NOME, whereClause, whereArgs) > 0;
 
-        } catch (SQLiteException sqle) {
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaNomeVal(String nomev, String nome) {
+    public boolean eliminaNomeVal(@NotNull String nomev) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
-        String whereClause = TabellaValuta.FIELD_NOMEV + "=?" + " AND " + TabellaNomeVal.FIELD_NOMEVAL + "=?";
-        String[] whereArgs = new String[]{nomev,nome};
+        String whereClause = TabellaValuta.FIELD_NOMEV + "=?";
+        String[] whereArgs = new String[]{nomev};
 
         try {
             return db.delete(TabellaNomeVal.TBL_NOME, whereClause, whereArgs) > 0;
-
-        } catch (SQLiteException sqle) {
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaHaga(String nomecamp, String nomeg, String nomea) {
+    public boolean eliminaHaga(@NotNull String... arg) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
-        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?" + " AND " + TabellaAbilita.FIELD_NOMEA + "=?";
-        String[] whereArgs = new String[]{nomecamp,nomeg,nomea};
+        String whereClause;
+        String[] whereArgs;
+        switch (arg.length){
+            case 1:
+                whereClause = TabellaAbilita.FIELD_NOMEA + "=?";
+                whereArgs = new String[]{arg[0]};
+                break;
+            case 2:
+                whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
+                whereArgs = new String[]{arg[0], arg[1]};
+                break;
+            default:
+                return false;
+        }
 
         try {
             return db.delete(TabelleHA.TBL_HAGA, whereClause, whereArgs) > 0;
-
-        } catch (SQLiteException sqle) {
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaHage(String nomecamp, String nomeg, String nomee) {
+    public boolean eliminaHage(@NotNull String... arg) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
-        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?" + " AND " + TabellaEquipaggiamento.FIELD_NOMEE + "=?";
-        String[] whereArgs = new String[]{nomecamp,nomeg,nomee};
+        String whereClause;
+        String[] whereArgs;
+        switch (arg.length){
+            case 1:
+                whereClause = TabellaEquipaggiamento.FIELD_NOMEE + "=?";
+                whereArgs = new String[]{arg[0]};
+                break;
+            case 2:
+                whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
+                whereArgs = new String[]{arg[0], arg[1]};
+                break;
+            case 3:
+                whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?" + " AND " + TabellaEquipaggiamento.FIELD_NOMEE + "=?";
+                whereArgs = new String[]{arg[0], arg[1], arg[2]};
+                break;
+            default:
+                return false;
+        }
 
         try {
             return db.delete(TabelleHA.TBL_HAGE, whereClause, whereArgs) > 0;
-
-        } catch (SQLiteException sqle) {
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaHagi(String nomecamp, String nomeg, String nomei) {
+    public boolean eliminaHagi(@NotNull String... arg) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
-        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?" + " AND " + TabellaIncantesimi.FIELD_NOMEI + "=?";
-        String[] whereArgs = new String[]{nomecamp,nomeg,nomei};
+        String whereClause;
+        String[] whereArgs;
+        switch (arg.length){
+            case 1:
+                whereClause = TabellaIncantesimi.FIELD_NOMEI + "=?";
+                whereArgs = new String[]{arg[0]};
+                break;
+            case 2:
+                whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
+                whereArgs = new String[]{arg[0]};
+                break;
+            default:
+                return false;
+        }
 
         try {
             return db.delete(TabelleHA.TBL_HAGI, whereClause, whereArgs) > 0;
-
-        } catch (SQLiteException sqle) {
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaHace(String nomecla, String nomee) {
+    public boolean eliminaHace(@NotNull String nome, @NotNull String mod) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
-        String whereClause = TabellaClasse.FIELD_NOMECLA + "=?" + " AND " + TabellaEquipaggiamento.FIELD_NOMEE + "=?";
-        String[] whereArgs = new String[]{nomecla,nomee};
+        String whereClause;
+        String[] whereArgs = new String[]{nome};
+        switch (mod){
+            case "classe":
+                whereClause = TabellaClasse.FIELD_NOMECLA + "=?";
+                break;
+            case "equipaggiamento":
+                whereClause = TabellaEquipaggiamento.FIELD_NOMEE + "=?";
+                break;
+            default:
+                return false;
+        }
 
         try {
             return db.delete(TabelleHA.TBL_HACE, whereClause, whereArgs) > 0;
-
-        } catch (SQLiteException sqle) {
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaHaci(String nomecla, String nomei) {
+    public boolean eliminaHaci(@NotNull String nome, @NotNull String mod) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
-        String whereClause = TabellaClasse.FIELD_NOMECLA + "=?" + " AND " + TabellaIncantesimi.FIELD_NOMEI + "=?";
-        String[] whereArgs = new String[]{nomecla,nomei};
+        String whereClause;
+        String[] whereArgs = new String[]{nome};
+        switch (mod){
+            case "classe":
+                whereClause = TabellaClasse.FIELD_NOMECLA + "=?";
+                break;
+            case "incantesimo":
+                whereClause = TabellaIncantesimi.FIELD_NOMEI + "=?";
+                break;
+            default:
+                return false;
+        }
 
         try {
             return db.delete(TabelleHA.TBL_HACI, whereClause, whereArgs) > 0;
-
-        } catch (SQLiteException sqle) {
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaHacp(String nomecla, String nomep) {
+    public boolean eliminaHacp(@NotNull String nome, @NotNull String mod) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
-        String whereClause = TabellaClasse.FIELD_NOMECLA + "=?" + " AND " + TabellaPrivilegi.FIELD_NOMEP + "=?";
-        String[] whereArgs = new String[]{nomecla,nomep};
+        String whereClause;
+        String[] whereArgs = new String[]{nome};
+        switch (mod){
+            case "classe":
+                whereClause = TabellaClasse.FIELD_NOMECLA + "=?";
+                break;
+            case "privilegio":
+                whereClause = TabellaPrivilegi.FIELD_NOMEP + "=?";
+                break;
+            default:
+                return false;
+        }
 
         try {
             return db.delete(TabelleHA.TBL_HACP, whereClause, whereArgs) > 0;
-
-        } catch (SQLiteException sqle) {
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
-    public boolean eliminaHarp(String nomer, String nomep) {
+    public boolean eliminaHarp(@NotNull String nome, @NotNull String mod) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
-        String whereClause = TabellaRazza.FIELD_NOMER + "=?" + " AND " + TabellaPrivilegi.FIELD_NOMEP + "=?";
-        String[] whereArgs = new String[]{nomer,nomep};
+        String whereClause;
+        String[] whereArgs = new String[]{nome};
+        switch (mod){
+            case "razza":
+                whereClause = TabellaRazza.FIELD_NOMER + "=?";
+                break;
+            case "privilegio":
+                whereClause = TabellaPrivilegi.FIELD_NOMEP + "=?";
+                break;
+            default:
+                return false;
+        }
 
         try {
             return db.delete(TabelleHA.TBL_HARP, whereClause, whereArgs) > 0;
-
-        } catch (SQLiteException sqle) {
+        }
+        catch (SQLiteException sqle) {
             return false;
         }
     }
@@ -800,7 +887,8 @@ public class DBManager {
         String whereClause = TabellaAbilita.FIELD_NOMEA + " = ? ";
         String[] whereArgs = new String[]{aggiornato.getNome()};
 
-        cv.put(CampiComuni.FIELD_COMPETENZA,aggiornato.isCompetenza());
+        int flag = (aggiornato.isCompetenza())? 1 : 0;
+        cv.put(CampiComuni.FIELD_COMPETENZA,flag);
         cv.put(CampiComuni.FIELD_DESC,aggiornato.getDescrizione().toString());
 
         try{
@@ -822,6 +910,8 @@ public class DBManager {
 
         try{
             if (db.update(TabellaValuta.TBL_NOME,cv,whereClause,whereArgs) > 0){
+
+                this.eliminaNomeVal(aggiornato.getNome());
                 for(String nome : aggiornato.getNomelist()){
                     if(!this.aggiornaNomeVal(aggiornato.getNome(),nome))
                         return false;
@@ -847,10 +937,13 @@ public class DBManager {
 
         try{
             if (db.update(TabellaRazza.TBL_NOME,cv,whereClause,whereArgs) > 0){
+
+                this.eliminaHarp(aggiornato.getNome(), "razza");
                 for (Descrivibile nuovoP : aggiornato.getPrivilegiRazza()) {
                     if (!this.aggiornaHarp(aggiornato.getNome(), nuovoP.getNome()))
                         return false;
                 }
+
                 for (CaratteristicaBase nuovaCB : aggiornato.getCaratteristicaBaseList()){
                     if(!this.aggiornaCarBase(aggiornato.getNome(),nuovaCB))
                         return false;
@@ -893,14 +986,20 @@ public class DBManager {
 
         try{
             if (db.update(TabellaClasse.TBL_NOME,cv,whereClause,whereArgs) > 0){
+
+                this.eliminaHacp(aggiornato.getNome(), "classe");
                 for (Descrivibile nuovoP : aggiornato.getPrivilegiClasse()) {
                     if (!this.aggiornaHacp(aggiornato.getNome(), nuovoP.getNome()))
                         return false;
                 }
+
+                this.eliminaHaci(aggiornato.getNome(), "classe");
                 for (Incantesimo nuovoi : aggiornato.getIncantesimiClasse()){
                     if (!this.aggiornaHaci(aggiornato.getNome(), nuovoi.getNome()))
                         return false;
                 }
+
+                this.eliminaHace(aggiornato.getNome(), "classe");
                 for (Equipaggiamento nuovoe : aggiornato.getEquipaggiamentoList()){
                     if(!this.aggiornaHace(aggiornato.getNome(),nuovoe.getNome()))
                         return false;
@@ -971,7 +1070,8 @@ public class DBManager {
         String whereClause = TabellaEquipaggiamento.FIELD_NOMEE + " = ? ";
         String[] whereArgs = new String[]{aggiornato.getNome()};
 
-        cv.put(TabellaArmatura.FIELD_NONFURTIVA,aggiornato.isNonFurtiva());
+        int flag = (aggiornato.isNonFurtiva())? 1 : 0;
+        cv.put(TabellaArmatura.FIELD_NONFURTIVA,flag);
         cv.put(TabellaArmatura.FIELD_MODIFICATORECA,aggiornato.getModificatoreCA());
         cv.put(TabellaArmatura.FIELD_TEMPOINDOSSARE,aggiornato.getTempoIndossare());
         cv.put(TabellaArmatura.FIELD_TEMPOTOGLIERE,aggiornato.getTempoTogliere());
@@ -1028,10 +1128,14 @@ public class DBManager {
                     if (!this.aggiornaHage(aggiornato.getNomeCampagna(),aggiornato.getNome(), nuovoe.getNome(),true))
                         return false;
                 }
+
+                this.eliminaHagi(aggiornato.getNomeCampagna(),aggiornato.getNome());
                 for(Incantesimo nuovoi : aggiornato.getIncantesimiGiocatore()){
                     if (!this.aggiornaHagi(aggiornato.getNomeCampagna(),aggiornato.getNome(), nuovoi.getNome()))
                         return false;
                 }
+
+                this.eliminaHaga(aggiornato.getNomeCampagna(),aggiornato.getNome());
                 for (Abilita nuovaa : aggiornato.getAbilitaList()){
                     if (!this.aggiornaHaga(aggiornato.getNomeCampagna(),aggiornato.getNome(), nuovaa.getNome()))
                         return false;
@@ -1044,7 +1148,7 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiornaCarBase(String nomer, @NotNull CaratteristicaBase aggiornato){
+    public boolean aggiornaCarBase(@NotNull String nomer, @NotNull CaratteristicaBase aggiornato){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaRazza.FIELD_NOMER + " = ? " + " AND " + TabellaCarBase.FIELD_NOMECB + " = ? " ;
@@ -1059,13 +1163,14 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiornaCaratteristicaG(String nomecamp, String nomeg, @NotNull Caratteristica aggiornato){
+    public boolean aggiornaCaratteristicaG(@NotNull String nomecamp, @NotNull String nomeg, @NotNull Caratteristica aggiornato){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? " + " AND " + TabellaCaratteristica.FIELD_NOMECAR + " = ? " ;
         String[] whereArgs = new String[]{nomecamp, nomeg, aggiornato.getNome()};
 
-        cv.put(TabellaCaratteristicaG.FIELD_TIROSALVEZZA,aggiornato.isTiroSalveza());
+        int flag = (aggiornato.isTiroSalveza())? 1 : 0;
+        cv.put(TabellaCaratteristicaG.FIELD_TIROSALVEZZA,flag);
         cv.put(TabellaCaratteristicaG.FIELD_VALOREBASE,aggiornato.getValoreBase());
         cv.put(TabellaCaratteristicaG.FIELD_VALORELIVELLO,aggiornato.getValoreLivello());
         cv.put(TabellaCaratteristicaG.FIELD_VALOREEQUIPAGGAMENTO,aggiornato.getValoreEquipaggiamento());
@@ -1078,13 +1183,13 @@ public class DBManager {
             return false;
         }
     }
-    public boolean aggiornaNomeVal(String nomev, String nome){
+    public boolean aggiornaNomeVal(@NotNull String nomev, @NotNull String nome){
         return aggiungiNomeVal(nomev, nome);
     }
-    public boolean aggiornaHaga(String nomecamp, String nomeg, String nomea){
+    public boolean aggiornaHaga(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String nomea){
         return aggiungiHaga(nomecamp, nomeg, nomea);
     }
-    public boolean aggiornaHage(String nomecamp, String nomeg, String nomee, boolean borsa){
+    public boolean aggiornaHage(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String nomee, @NotNull boolean borsa){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? " + " AND " + TabellaEquipaggiamento.FIELD_NOMEE + " = ? " ;
@@ -1094,32 +1199,30 @@ public class DBManager {
         cv.put(TabelleHA.FIELD_BORSA,flag);
 
         try{
-            if (db.update(TabelleHA.TBL_HAGE,cv,whereClause,whereArgs) > 0)
-                return true;
-            return this.aggiungiHage(nomecamp,nomeg,nomee,borsa);
+            return db.update(TabelleHA.TBL_HAGE,cv,whereClause,whereArgs) > 0;
         }
         catch(SQLiteException sqle){
             return false;
         }
     }
-    public boolean aggiornaHagi(String nomecamp, String nomeg, String nomei){
+    public boolean aggiornaHagi(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String nomei){
         return aggiungiHagi(nomecamp, nomeg, nomei);
     }
-    public boolean aggiornaHace(String nomecla, String nomee) {
+    public boolean aggiornaHace(@NotNull String nomecla, @NotNull String nomee) {
         return aggiungiHace(nomecla, nomee);
     }
-    public boolean aggiornaHaci(String nomecla, String nomei){
+    public boolean aggiornaHaci(@NotNull String nomecla, @NotNull String nomei){
         return aggiungiHaci(nomecla, nomei);
     }
-    public boolean aggiornaHacp(String nomecla, String nomep){
+    public boolean aggiornaHacp(@NotNull String nomecla, @NotNull String nomep){
         return aggiungiHacp(nomecla, nomep);
     }
-    public boolean aggiornaHarp(String nomer, String nomep){
+    public boolean aggiornaHarp(@NotNull String nomer, @NotNull String nomep){
         return aggiungiHarp(nomer, nomep);
     }
 
     /* READ */
-    public Cursor leggiTabella (String table){
+    public Cursor leggiTabella (@NotNull String table){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
 
         try {
@@ -1134,7 +1237,7 @@ public class DBManager {
             return null;
         }
     }
-    public Incantesimo leggiIncantesimo(String nomei){
+    public Incantesimo leggiIncantesimo(@NotNull String nomei){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaIncantesimi.FIELD_NOMEI + " = ? ";
         String[] whereArgs = new String[]{nomei};
@@ -1161,20 +1264,6 @@ public class DBManager {
             return null;
         }
     }
-    /*public List<Incantesimo> leggiIncantesimiGiocatore(String nomecamp, String nomeg) {
-        SQLiteDatabase db = dbhelper.getReadableDatabase();
-        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
-        String[] columns =  new String[]{TabellaIncantesimi.FIELD_NOMEI};
-        String[] whereArgs = new String[]{nomecamp, nomeg};
-
-        try {
-            Cursor resultSet = db.query(TabelleHA.TBL_HAGI, columns, whereClause, whereArgs, null, null, null);
-            return leggiIncantesimiList(resultSet);
-        }
-        catch (SQLiteException sqle) {
-            return null;
-        }
-    }*/
     public List<Incantesimo> leggiIncantesimi(@NotNull String... arg) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String table;
@@ -1218,7 +1307,7 @@ public class DBManager {
             return null;
         }
     }
-    public Abilita leggiAbilita(String nomea){
+    public Abilita leggiAbilita(@NotNull String nomea){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaAbilita.FIELD_NOMEA + " = ? ";
         String[] whereArgs = new String[]{nomea};
@@ -1241,7 +1330,7 @@ public class DBManager {
             return null;
         }
     }
-    public List<Abilita> leggiAbilita(String nomecamp, String nomeg){
+    public List<Abilita> leggiAbilita(@NotNull String nomecamp, @NotNull String nomeg){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
         String[] whereArgs = new String[]{nomecamp,nomeg};
@@ -1270,7 +1359,7 @@ public class DBManager {
         }
     }
     @Nullable
-    private List<String> leggiNomeVal(String nomev){
+    private List<String> leggiNomeVal(@NotNull String nomev){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaValuta.FIELD_NOMEV + " = ? ";
         String[] whereArgs = new String[]{nomev};
@@ -1297,7 +1386,7 @@ public class DBManager {
             return null;
         }
     }
-    public Valuta leggiValuta(String nomev){
+    public Valuta leggiValuta(@NotNull String nomev){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaValuta.FIELD_NOMEV + " = ? ";
         String[] whereArgs = new String[]{nomev};
@@ -1321,7 +1410,7 @@ public class DBManager {
             return null;
         }
     }
-    public Descrivibile leggiPrivilegio(String nomep){
+    public Descrivibile leggiPrivilegio(@NotNull String nomep){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaPrivilegi.FIELD_NOMEP + " = ? ";
         String[] whereArgs = new String[]{nomep};
@@ -1385,7 +1474,7 @@ public class DBManager {
             return null;
         }
     } //sia HACP che HARP
-    public List<CaratteristicaBase> leggiCarBase(String nomer){
+    public List<CaratteristicaBase> leggiCarBase(@NotNull String nomer){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaRazza.FIELD_NOMER + " = ? ";
         String[] whereArgs = new String[]{nomer};
@@ -1413,7 +1502,7 @@ public class DBManager {
             return null;
         }
     }
-    public Razza leggiRazza(String nomer){
+    public Razza leggiRazza(@NotNull String nomer){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaRazza.FIELD_NOMER + " = ? ";
         String[] whereArgs = new String[]{nomer};
@@ -1441,7 +1530,7 @@ public class DBManager {
             return null;
         }
     }
-    public Equipaggiamento leggiEquipaggiamento(String nomee){
+    public Equipaggiamento leggiEquipaggiamento(@NotNull String nomee){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaEquipaggiamento.FIELD_NOMEE + " = ? ";
         String[] whereArgs = new String[]{nomee};
@@ -1467,7 +1556,7 @@ public class DBManager {
             return null;
         }
     }
-    public Arma leggiArma(String nomee){
+    public Arma leggiArma(@NotNull String nomee){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaEquipaggiamento.FIELD_NOMEE + " = ? ";
         String[] whereArgs = new String[]{nomee};
@@ -1492,7 +1581,7 @@ public class DBManager {
             return null;
         }
     }
-    public Armatura leggiArmatura(String nomee){
+    public Armatura leggiArmatura(@NotNull String nomee){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaEquipaggiamento.FIELD_NOMEE + " = ? ";
         String[] whereArgs = new String[]{nomee};
@@ -1520,7 +1609,7 @@ public class DBManager {
             return null;
         }
     }
-    public List<Equipaggiamento> leggiEquipaggiamenti(boolean borsa, @NotNull String... arg){
+    public List<Equipaggiamento> leggiEquipaggiamenti(@NotNull boolean borsa, @NotNull String... arg){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String table;
         String whereClause;
@@ -1532,12 +1621,10 @@ public class DBManager {
                 whereArgs = new String[]{arg[0]};
                 break;
             case 2:
-                int b = 0;
-                if(borsa)
-                    b = 1;
+                int flag = (borsa)? 1 : 0;
                 table = TabelleHA.TBL_HAGE;
                 whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?" + " AND " + TabelleHA.FIELD_BORSA + "=?";
-                whereArgs = new String[]{arg[0],arg[1], Integer.toString(b)};
+                whereArgs = new String[]{arg[0],arg[1], Integer.toString(flag)};
                 break;
             default:
                 return null;
@@ -1553,7 +1640,6 @@ public class DBManager {
             List<Equipaggiamento> equipaggiamentoList = new ArrayList<Equipaggiamento>();
             while (!resultSet.isAfterLast()) {
                 Arma arma = this.leggiArma(resultSet.getString(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_NOMEE)));
-
                 if (arma != null)
                     equipaggiamentoList.add(arma);
                 else {
@@ -1577,7 +1663,7 @@ public class DBManager {
             return null;
         }
     }
-    public Classe leggiClasse(String nomecla){
+    public Classe leggiClasse(@NotNull String nomecla){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaClasse.FIELD_NOMECLA + " = ? ";
         String[] whereArgs = new String[]{nomecla};
@@ -1608,7 +1694,7 @@ public class DBManager {
             return null;
         }
     }
-    public Caratteristica leggiCaratteristica(String nomecar){
+    public Caratteristica leggiCaratteristica(@NotNull String nomecar){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaCaratteristica.FIELD_NOMECAR + " = ? ";
         String[] whereArgs = new String[]{nomecar};
@@ -1631,7 +1717,7 @@ public class DBManager {
             return null;
         }
     }
-    public List<Caratteristica> leggiCaratteristicheG(String nomecamp, String nomeg){
+    public List<Caratteristica> leggiCaratteristicheG(@NotNull String nomecamp, @NotNull String nomeg){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
         String[] whereArgs = new String[]{nomecamp, nomeg};
@@ -1666,7 +1752,7 @@ public class DBManager {
             return null;
         }
     }
-    public Giocatore leggiGiocatore(String nomecamp, String nomeg){
+    public Giocatore leggiGiocatore(@NotNull String nomecamp, @NotNull String nomeg){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
         String[] whereArgs = new String[]{nomecamp,nomeg};

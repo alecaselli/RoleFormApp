@@ -6,11 +6,10 @@ public class Caratteristica extends Descrivibile {
     private int valoreLivello = 0;
     private int valoreEquipaggiamento = 0;
     private int valoreBonus = 0;
-    private int modificatore;
+    private int modificatore = 0;
 
     public Caratteristica(String nome, StringBuffer descrizione) {
         super(nome, descrizione);
-        this.setModificatore();
     }
 
     public boolean isTiroSalveza() {
