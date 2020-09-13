@@ -8,7 +8,7 @@ import java.util.List;
 public class Valuta extends Descrivibile{
     private int  ratio;
     private int valore;
-    private List<String> nomelist;
+    private List<String> nomelist; //in ordine decrescente di valore
 
     public Valuta(String nome, StringBuffer descrizione, int ratio, int valore, List<String> nomelist) {
         super(nome, descrizione);
@@ -45,7 +45,7 @@ public class Valuta extends Descrivibile{
        urilizza una lista che parte dalla moneta di valore inferiore*/
     public List<Integer> valoreInMonete() {
         List<Integer> valorelist = new ArrayList<Integer>();
-        Integer val = valore;
+        int val = valore;
         for(String i : nomelist){
             valorelist.add(val % ratio);
             val /= ratio;
