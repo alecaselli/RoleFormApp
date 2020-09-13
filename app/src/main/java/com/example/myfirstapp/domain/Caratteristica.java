@@ -1,17 +1,15 @@
-package com.example.roleapp.domain;
+package com.example.myfirstapp.domain;
 
 public class Caratteristica extends Descrivibile {
-    private boolean tiroSalveza;
+    private boolean tiroSalveza = false;
     private int valoreBase = 0;
     private int valoreLivello = 0;
     private int valoreEquipaggiamento = 0;
     private int valoreBonus = 0;
-    private int modificatore;
+    private int modificatore = 0;
 
-    public Caratteristica(String nome, StringBuffer descrizione, boolean tiroSalveza) {
+    public Caratteristica(String nome, StringBuffer descrizione) {
         super(nome, descrizione);
-        this.tiroSalveza = tiroSalveza;
-        this.setModificatore();
     }
 
     public boolean isTiroSalveza() {
@@ -46,6 +44,14 @@ public class Caratteristica extends Descrivibile {
         this.valoreBonus = valoreBonus;
     }
 
+    public void levelUp(int puntiStstistica){
+        this.valoreLivello += puntiStstistica;
+    }
+
+    public void aggiornaBonus(int bonus){
+        this.valoreBonus += bonus;
+    } //con bonus negativo quando tolgo un item
+
     public int getModificatore() {
         return modificatore;
     }
@@ -62,12 +68,7 @@ public class Caratteristica extends Descrivibile {
         this.valoreEquipaggiamento = valoreEquipaggiamento;
     }
 
-    /* METODI NON BASE */
-
-    public void aggiornaValoreBase(int valore){
+    public void addValoreBase(int valore){
         this.valoreBase += valore;
-    }
-    public void aggiornaValoreLivello(int puntiSt){
-        this.valoreLivello += puntiSt;
     }
 }
