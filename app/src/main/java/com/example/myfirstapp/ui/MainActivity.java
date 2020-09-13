@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         exampleList.add(new ExampleItem(R.drawable.ic_baseline_image, "Campaign name", "Character name", "Level"));
         exampleList.add(new ExampleItem(R.drawable.ic_baseline_image, "Campaign name", "Character name", "Level"));
         exampleList.add(new ExampleItem(R.drawable.ic_baseline_image, "Campaign name", "Character name", "Level"));
-        exampleList.add(new ExampleItem(R.drawable.ic_baseline_image, "Campaign name", "Character name", "Level"));
 
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
