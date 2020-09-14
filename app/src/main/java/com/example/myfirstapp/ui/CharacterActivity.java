@@ -41,6 +41,9 @@ public class CharacterActivity extends AppCompatActivity {
         txt = (TextView) findViewById(R.id.character_name);
         txt.setText(giocatore.getNome());
 
+        txt = (TextView) findViewById(R.id.character_genre);
+        txt.setText(giocatore.getGenere());
+
         String liv = "livello " + giocatore.getLivello();
         txt = (TextView) findViewById(R.id.lv);
         txt.setText(liv);

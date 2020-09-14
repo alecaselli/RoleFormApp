@@ -17,7 +17,7 @@
         <activity android:name=".ui.CurrencyActivity" />
         <activity android:name=".ui.CreateNewCharacterActivity" />
         <activity android:name=".ui.CreditsActivity" />
-        <activity android:name=".ui.InfoActivity" />
+
         <activity android:name=".ui.NoteActivity" />
         <activity android:name=".ui.AddNewItem" />
         <activity android:name=".ui.AddNewSpell" />
@@ -32,6 +32,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.CharacterActivity" />
+        <activity android:name=".ui.InfoActivity" />
     </application>
 
 </manifest>

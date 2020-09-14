@@ -1,4 +1,4 @@
-package com.example.myfirstapp;
+package com.example.myfirstapp.utilities;
 
 public class ExampleItem {
     private int mImageResource;

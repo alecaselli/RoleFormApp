@@ -21,6 +21,7 @@ public class Giocatore extends Descrivibile {
     private String iniziativa;
     private String eta;
     private String altezza;
+    private String genere;
     private StringBuffer noteAvventura;
     private StringBuffer allineamento;
     private StringBuffer lingua;
@@ -51,7 +52,9 @@ public class Giocatore extends Descrivibile {
                      String nomeCampagna,
                      String iniziativa,
                      String eta,
-                     String altezza, StringBuffer noteAvventura,
+                     String altezza,
+                     String genere,
+                     StringBuffer noteAvventura,
                      StringBuffer allineamento,
                      StringBuffer lingua,
                      Valuta portafoglio,
@@ -70,6 +73,7 @@ public class Giocatore extends Descrivibile {
         this.capacitaBorsa = capacitaBorsa;
         this.puntiFerita = puntiFerita;
         this.altezza = altezza;
+        this.genere = genere;
         this.setPuntiFeritaMax();
         this.nDadi = nDadi;
         this.dado = dado;
@@ -210,6 +214,14 @@ public class Giocatore extends Descrivibile {
 
     public void setAltezza(String altezza) {
         this.altezza = altezza;
+    }
+
+    public String getGenere() {
+        return genere;
+    }
+
+    public void setGenere(String genere) {
+        this.genere = genere;
     }
 
     public StringBuffer getNoteAvventura() {

@@ -264,6 +264,7 @@ public class DBManager {
         cv.put(TabellaGiocatore.FIELD_INIZIATIVA, nuovo.getIniziativa());
         cv.put(TabellaGiocatore.FIELD_ETA, nuovo.getEta());
         cv.put(TabellaGiocatore.FIELD_ALTEZZA, nuovo.getAltezza());
+        cv.put(TabellaGiocatore.FIELD_GENERE, nuovo.getGenere());
         cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, nuovo.getNoteAvventura().toString());
         cv.put(TabellaGiocatore.FIELD_ALLINEAMENTO, nuovo.getAllineamento().toString());
         cv.put(CampiComuni.FIELD_LINGUA, nuovo.getLingua().toString());
@@ -1109,6 +1110,7 @@ public class DBManager {
         cv.put(TabellaGiocatore.FIELD_INIZIATIVA, aggiornato.getIniziativa());
         cv.put(TabellaGiocatore.FIELD_ETA, aggiornato.getEta());
         cv.put(TabellaGiocatore.FIELD_ALTEZZA, aggiornato.getAltezza());
+        cv.put(TabellaGiocatore.FIELD_GENERE, aggiornato.getGenere());
         cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, aggiornato.getNoteAvventura().toString());
         cv.put(TabellaGiocatore.FIELD_ALLINEAMENTO, aggiornato.getAllineamento().toString());
         cv.put(CampiComuni.FIELD_LINGUA, aggiornato.getLingua().toString());
@@ -1841,6 +1843,7 @@ public class DBManager {
             String iniziativa = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_INIZIATIVA));
             String eta = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_ETA));
             String altezza = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_ALTEZZA));
+            String genere = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_GENERE));
             StringBuffer noteAvventura = new StringBuffer();
             noteAvventura.append(resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_NOTEAVVENTURA)));
             StringBuffer allineamento = new StringBuffer();
@@ -1860,7 +1863,7 @@ public class DBManager {
             List<Abilita> abilitaList = this.leggiAbilita(nomecamp, nomeg);
 
             resultSet.close();
-            return new Giocatore(nomeg, descrizione, mana, livello, puntiEsperienza, modCompetenza, capacitaBorsa, puntiFerita, nDadi, dado, classeArmatura, puntiStat, nomecamp, iniziativa, eta, altezza, noteAvventura, allineamento, lingua, portafoglio, classe, razza, caratteristicaList, borsa, equipaggiato, incantesimiGiocatore, abilitaList);
+            return new Giocatore(nomeg, descrizione, mana, livello, puntiEsperienza, modCompetenza, capacitaBorsa, puntiFerita, nDadi, dado, classeArmatura, puntiStat, nomecamp, iniziativa, eta, altezza, genere, noteAvventura, allineamento, lingua, portafoglio, classe, razza, caratteristicaList, borsa, equipaggiato, incantesimiGiocatore, abilitaList);
         } catch (SQLiteException sqle) {
             return null;
         }

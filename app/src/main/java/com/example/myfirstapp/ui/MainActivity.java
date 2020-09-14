@@ -10,14 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myfirstapp.ExampleItem;
+import com.example.myfirstapp.utilities.ExampleItem;
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.R.string;
 import com.example.myfirstapp.adapter.ExampleAdapter;
 import com.example.myfirstapp.database.CampiComuni;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.database.TabellaGiocatore;
-import com.example.myfirstapp.ui.CharacterActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openInfo(View view) {
-
+        Intent intent = new Intent(this, InfoActivity.class);
+        startActivity(intent);
     }
 
     public void openEdit(View view) {

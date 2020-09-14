@@ -130,6 +130,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "\t\"iniziativa\"\tTEXT,\n" +
                 "\t\"eta\"\tTEXT,\n" +
                 "\t\"altezza\"\tTEXT,\n" +
+                "\t\"genere\"\tTEXT,\n" +
                 "\t\"noteAvventura\"\tTEXT,\n" +
                 "\t\"allineamento\"\tTEXT,\n" +
                 "\t\"lingua\"\tTEXT,\n" +
@@ -399,7 +400,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(q);
         q = "INSERT INTO \"carBase\" (\"nomer\",\"nomecb\",\"valore\") VALUES ('nano','forza',3);";
         db.execSQL(q);
-        q = "INSERT INTO \"giocatore\" (\"nomeCampagna\",\"nomeg\",\"desc\",\"mana\",\"livello\",\"puntiXP\",\"modCompetenza\",\"capacitaBorsa\",\"puntiFerita\",\"classeArmatura\",\"puntiStat\",\"nDadi\",\"dado\",\"iniziativa\",\"eta\",\"altezza\",\"noteAvventura\",\"allineamento\",\"lingua\",\"nomecla\",\"nomer\",\"nomev\",\"valoreVal\") VALUES ('campagna','ciro','un rozzo nano ',0,1,0,2,0,13,0,0,1,8,'0','130','90',NULL,'caotico neutrale',NULL,'gueriero','nano','moneta del regno di Ho',0);";
+        q = "INSERT INTO \"giocatore\" (\"nomeCampagna\",\"nomeg\",\"desc\",\"mana\",\"livello\",\"puntiXP\",\"modCompetenza\",\"capacitaBorsa\",\"puntiFerita\",\"classeArmatura\",\"puntiStat\",\"nDadi\",\"dado\",\"iniziativa\",\"eta\",\"altezza\",\"genere\",\"noteAvventura\",\"allineamento\",\"lingua\",\"nomecla\",\"nomer\",\"nomev\",\"valoreVal\") VALUES ('campagna','ciro','un rozzo nano ',0,1,0,2,0,13,0,0,1,8,'0','130','90','M',NULL,'caotico neutrale',NULL,'gueriero','nano','moneta del regno di Ho',0);";
         db.execSQL(q);
         q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','carisma',0,0,0,0,0);";
         db.execSQL(q);
