@@ -20,7 +20,6 @@ import com.example.myfirstapp.domain.Giocatore;
 import com.example.myfirstapp.domain.Incantesimo;
 import com.example.myfirstapp.domain.Razza;
 import com.example.myfirstapp.domain.Valuta;
-import com.example.myfirstapp.ui.MainActivity;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -1606,7 +1605,7 @@ public class DBManager {
             String tipo = resultSet.getString(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_TIPO));
             int costo = resultSet.getInt(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_COSTO));
             int peso = resultSet.getInt(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_PESO));
-            int capacita = resultSet.getInt(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_CAPACITA));
+            int capacita = resultSet.getInt(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_CAPACITA)) ;
 
             resultSet.close();
             return new Equipaggiamento(nomee, descrizione, tipo, costo, peso, capacita);
@@ -1668,7 +1667,7 @@ public class DBManager {
             return null;
         }
     }
-    public List<Equipaggiamento> leggiEquipaggiamenti(@NotNull boolean borsa, @NotNull String... arg){
+    public List<Equipaggiamento> leggiEquipaggiamenti(boolean borsa, @NotNull String... arg){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String table;
         String whereClause;
@@ -1698,7 +1697,8 @@ public class DBManager {
 
             List<Equipaggiamento> equipaggiamentoList = new ArrayList<Equipaggiamento>();
             while (!resultSet.isAfterLast()) {
-                Arma arma = this.leggiArma(resultSet.getString(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_NOMEE)));
+                String nome = resultSet.getString(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_NOMEE));
+                Arma arma = this.leggiArma(nome);
                 if (arma != null)
                     equipaggiamentoList.add(arma);
                 else {
@@ -1846,7 +1846,9 @@ public class DBManager {
             lingua.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_LINGUA)));
             Valuta portafoglio = this.leggiValuta(resultSet.getString(resultSet.getColumnIndex(TabellaValuta.FIELD_NOMEV)));
             portafoglio.setValore(resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_VALOREVAL)));
-            Classe classe = this.leggiClasse(resultSet.getString(resultSet.getColumnIndex(TabellaClasse.FIELD_NOMECLA)));
+            portafoglio.setValoreInMonete();
+            String nomecla = resultSet.getString(resultSet.getColumnIndex(TabellaClasse.FIELD_NOMECLA));
+            Classe classe = this.leggiClasse(nomecla);
             Razza razza = this.leggiRazza(resultSet.getString(resultSet.getColumnIndex(TabellaRazza.FIELD_NOMER)));
             List<Caratteristica> caratteristicaList = this.leggiCaratteristicheG(nomecamp, nomeg);
             List<Equipaggiamento> borsa = this.leggiEquipaggiamenti(true, nomecamp, nomeg);
