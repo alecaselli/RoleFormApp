@@ -2,6 +2,7 @@ package com.example.myfirstapp.domain;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Giocatore extends Descrivibile {
@@ -88,6 +89,7 @@ public class Giocatore extends Descrivibile {
         this.equipaggiato = equipaggiato;
         this.incantesimiGiocatore = incantesimiGiocatore;
         this.abilitaList = abilitaList;
+        this.inizializzazionePG();
     }
 
     public int getMana() {
@@ -336,9 +338,11 @@ public class Giocatore extends Descrivibile {
     }
 
     public Equipaggiamento getEquipaggiato(String tipo) {
-        for (Equipaggiamento equipaggiamento : equipaggiato) {
-            if (equipaggiamento.getTipo().equals(tipo))
-                return equipaggiamento;
+        if (equipaggiato != null){
+            for (Equipaggiamento equipaggiamento : equipaggiato) {
+                if (equipaggiamento.getTipo().equals(tipo))
+                    return equipaggiamento;
+            }
         }
         return null;
     }
@@ -362,6 +366,8 @@ public class Giocatore extends Descrivibile {
 
     /* serie di metodi per aggiungere/eliminare elementi da liste */
     public void aggiungiBorsa(List<Equipaggiamento> nuovo){
+        if(borsa == null)
+            borsa = new ArrayList<Equipaggiamento>();
         this.borsa.addAll(nuovo);
     }
 
@@ -371,7 +377,9 @@ public class Giocatore extends Descrivibile {
     }
 
     public void aggiungiEquipaggiato(List<Equipaggiamento> nuovo){
-            this.equipaggiato.addAll(nuovo);
+        if(equipaggiato == null)
+            equipaggiato = new ArrayList<Equipaggiamento>();
+        this.equipaggiato.addAll(nuovo);
     }
 
     public void eliminaEquipaggiato(@NotNull List<Equipaggiamento> togli){
