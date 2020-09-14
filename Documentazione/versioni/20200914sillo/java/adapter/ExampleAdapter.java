@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myfirstapp.ExampleItem;
+import com.example.myfirstapp.utilities.ExampleItem;
 import com.example.myfirstapp.R;
 
 import java.util.ArrayList;
@@ -22,29 +22,29 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         void onItemClick(View view);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
 
-    public static class ExampleViewHolder extends RecyclerView.ViewHolder{
+    public static class ExampleViewHolder extends RecyclerView.ViewHolder {
         public ImageView mImageView;
         public TextView mTextView1;
         public TextView mTextView2;
         public TextView mTextView3;
 
-        public ExampleViewHolder(View itemView, final OnItemClickListener listener){
-            super (itemView);
-            mImageView=itemView.findViewById(R.id.imageView);
-            mTextView1=itemView.findViewById(R.id.campaign_name);
-            mTextView2=itemView.findViewById(R.id.character_name);
-            mTextView3=itemView.findViewById(R.id.lv);
+        public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
+            super(itemView);
+            mImageView = itemView.findViewById(R.id.imageView);
+            mTextView1 = itemView.findViewById(R.id.campaign_name);
+            mTextView2 = itemView.findViewById(R.id.character_name);
+            mTextView3 = itemView.findViewById(R.id.lv);
 
-            itemView.setOnClickListener(new View.OnClickListener(){
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(listener!=null){
-                        int position=getAdapterPosition();
-                        if(position!= RecyclerView.NO_POSITION){
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
                             listener.onItemClick(v);
                         }
                     }
@@ -53,7 +53,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         }
     }
 
-    public ExampleAdapter(ArrayList<ExampleItem> exampleList){
+    public ExampleAdapter(ArrayList<ExampleItem> exampleList) {
         mExampleList = exampleList;
     }
 
@@ -61,14 +61,13 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     @Override
     public ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_item, parent, false);
-        ExampleViewHolder evh=new ExampleViewHolder(v, mListener);
-        return evh;
+        return new ExampleViewHolder(v, mListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
         ExampleItem currentItem = mExampleList.get(position);
-        if(currentItem != null){
+        if (currentItem != null) {
             holder.mImageView.setImageResource(currentItem.getmImageResource());
             holder.mTextView1.setText(currentItem.getText1());
             holder.mTextView2.setText(currentItem.getText2());

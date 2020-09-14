@@ -13,6 +13,7 @@ public class TabellaGiocatore {
     public static final String FIELD_INIZIATIVA = "iniziativa";
     public static final String FIELD_ETA = "eta";
     public static final String FIELD_ALTEZZA = "altezza";
+    public static final String FIELD_GENERE = "genere";
     public static final String FIELD_NOTEAVVENTURA = "noteAvventura";
     public static final String FIELD_ALLINEAMENTO = "allineamento";
     public static final String FIELD_VALOREVAL = "valoreVal";

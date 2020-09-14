@@ -44,29 +44,12 @@ public class Caratteristica extends Descrivibile {
         this.valoreBonus = valoreBonus;
     }
 
-    /* metodi non base */
-    public int getBonus(){
-        return valoreEquipaggiamento + valoreBonus;
-    }
-
-    public int getBase(){
-        return valoreBase + valoreLivello;
-    }
-
-    public void levelUp(int puntiStstistica){
-        this.valoreLivello += puntiStstistica;
-    }
-
-    public void aggiornaBonus(int bonus){
-        this.valoreBonus += bonus;
-    } //con bonus negativo quando tolgo un item
-
     public int getModificatore() {
         return modificatore;
     }
 
     public void setModificatore() {
-        this. modificatore = (int) ((valoreBase + valoreLivello + valoreBonus) - 10) / 2;
+        this.modificatore = (int) ((valoreBase + valoreLivello + valoreBonus) - 10) / 2;
     }
 
     public int getValoreEquipaggiamento() {
@@ -77,7 +60,24 @@ public class Caratteristica extends Descrivibile {
         this.valoreEquipaggiamento = valoreEquipaggiamento;
     }
 
-    public void addValoreBase(int valore){
+    /* metodi non base */
+    public int getBonus() {
+        return valoreEquipaggiamento + valoreBonus;
+    }
+
+    public int getBase() {
+        return valoreBase + valoreLivello;
+    }
+
+    public void levelUp(int puntiStstistica) {
+        this.valoreLivello += puntiStstistica;
+    }
+
+    public void aggiornaBonus(int bonus) {
+        this.valoreBonus += bonus;
+    } //con bonus negativo quando tolgo un item
+
+    public void addValoreBase(int valore) {
         this.valoreBase += valore;
     }
 }

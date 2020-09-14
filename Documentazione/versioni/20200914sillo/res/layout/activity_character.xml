@@ -72,7 +72,7 @@
                             android:textColor="@color/black"
                             android:textSize="22sp" />
 
-                        <!--<TextView
+                        <TextView
                             android:id="@+id/character_genre"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -81,16 +81,16 @@
                             android:layout_toEndOf="@id/character_name"
                             android:text="[Genre]"
                             android:textColor="@color/black"
-                            android:textSize="18sp" /> -->
+                            android:textSize="18sp" />
 
                         <TextView
-                            android:id="@+id/lv"
+                            android:id="@+id/level"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="8dp"
-                            android:text="Lv 10"
+                            android:text="@string/Lv10"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 
@@ -639,7 +639,7 @@
                             android:layout_centerHorizontal="true"
                             android:text="Equipaggiamento"
                             android:textColor="@color/black"
-                            android:textSize="20dp" />
+                            android:textSize="20sp" />
 
                     </RelativeLayout>
 

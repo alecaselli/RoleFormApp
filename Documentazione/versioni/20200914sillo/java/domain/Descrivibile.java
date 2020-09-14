@@ -28,7 +28,7 @@ public class Descrivibile { // i privilegi sono oggetti di descrivibile
         this.descrizione = descrizione;
     }
 
-    public void aggiungiDescrizione(String nuova){
+    public void aggiungiDescrizione(String nuova) {
         this.descrizione.append(nuova);
     }
 }

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myfirstapp.ExampleItem;
+import com.example.myfirstapp.utilities.ExampleItem;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.adapter.ExampleAdapter;
 import com.example.myfirstapp.database.CampiComuni;
@@ -26,10 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private ExampleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private ImageButton createNewCharacter;
-    private ImageButton editItems;
-    private ImageButton info;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,49 +33,56 @@ public class MainActivity extends AppCompatActivity {
 
         DBManager dbManager = new DBManager(this);
         dbManager.dropDB(this);
-        List<List<String>> datilist = dbManager.leggiDatiMenu(TabellaGiocatore.TBL_NOME, CampiComuni.FIELD_LIVELLO, TabellaGiocatore.FIELD_NOMECAMPAGNA,TabellaGiocatore.FIELD_NOMEG);
+        List<List<String>> datilist = dbManager.leggiDatiMenu(TabellaGiocatore.TBL_NOME, CampiComuni.FIELD_LIVELLO, TabellaGiocatore.FIELD_NOMECAMPAGNA, TabellaGiocatore.FIELD_NOMEG);
         ArrayList<ExampleItem> exampleList = new ArrayList<>();
 
-        if(datilist != null)
-            for(List<String> dati : datilist){
-                exampleList.add(new ExampleItem(R.drawable.ic_baseline_image, dati.get(0),dati.get(1),"level " + dati.get(2)));
+        if (datilist != null)
+            for (List<String> dati : datilist) {
+                exampleList.add(new ExampleItem(R.drawable.ic_baseline_image, dati.get(0), dati.get(1), "level " + dati.get(2)));
             }
 
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager=new LinearLayoutManager((this));
-        mAdapter=new ExampleAdapter(exampleList);
+        mLayoutManager = new LinearLayoutManager((this));
+        mAdapter = new ExampleAdapter(exampleList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener (new ExampleAdapter.OnItemClickListener() {
-                                                        @Override
-                                                        public void onItemClick(View view) {
-                                                        TextView nomecampagna = findViewById(R.id.campaign_name);
-                                                        TextView nomegiocatore = findViewById(R.id.character_name);
-                                                        String nomecamp = nomecampagna.getText().toString();
-                                                        String nomeg = nomegiocatore.getText().toString();
-                                                        openCharacterActivity(nomecamp, nomeg);
-                                                        }});
+
+        mAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view) {
+                TextView nomecampagna = findViewById(R.id.campaign_name);
+                TextView nomegiocatore = findViewById(R.id.character_name);
+                String nomecamp = nomecampagna.getText().toString();
+                String nomeg = nomegiocatore.getText().toString();
+                openCharacterActivity(nomecamp, nomeg);
+            }
+        });
     }
 
-    public void openCharacterActivity(String nomecamp, String nomeg){
+    public void openCharacterActivity(String nomecamp, String nomeg) {
 
         Intent intent = new Intent(this, CharacterActivity.class);
         intent.putExtra("nomecamp", nomecamp);
         intent.putExtra("nomeg", nomeg);
         startActivity(intent);
     }
-    public void openCreateNewCharacterActivity(View view){
-        Intent intent =new Intent (this, CreateNewCharacterActivity.class);
+
+    public void openCreateNewCharacter(View view) {
+        Intent intent = new Intent(this, CreateNewCharacterActivity.class);
         startActivity(intent);
     }
-    public void openInfo(View view){
 
+    public void openInfo(View view) {
+        Intent intent = new Intent(this, InfoActivity.class);
+        startActivity(intent);
     }
-    public void openEdit(View view){
 
+    public void openEdit(View view) {
+        Intent intent = new Intent(this, EditActivity.class);
+        startActivity(intent);
     }
 
 }

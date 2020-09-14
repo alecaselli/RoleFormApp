@@ -84,53 +84,53 @@ CREATE TABLE IF NOT EXISTS "caratteristicaG" (
 CREATE TABLE IF NOT EXISTS "nomeVal" (
 	"nomev"	TEXT,
 	"nome"	TEXT,
-	FOREIGN KEY("nomev") REFERENCES "valuta"("nomev") ON UPDATE CASCADE,
-	CONSTRAINT "PF_nomeval" PRIMARY KEY("nomev","nome")
+	CONSTRAINT "PF_nomeval" PRIMARY KEY("nomev","nome"),
+	FOREIGN KEY("nomev") REFERENCES "valuta"("nomev") ON UPDATE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "hage" (
 	"nomeCampagna"	TEXT,
 	"nomeg"	TEXT,
 	"nomee"	TEXT,
 	"borsa"	INTEGER,
+	PRIMARY KEY("nomee","nomeCampagna","nomeg"),
 	FOREIGN KEY("nomee") REFERENCES "equipaggiamento"("nomee") ON UPDATE CASCADE,
-	FOREIGN KEY("nomeCampagna","nomeg") REFERENCES "giocatore"("nomeCampagna","nomeg") ON UPDATE CASCADE,
-	PRIMARY KEY("nomee","nomeCampagna","nomeg")
+	FOREIGN KEY("nomeCampagna","nomeg") REFERENCES "giocatore"("nomeCampagna","nomeg") ON UPDATE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "hagi" (
 	"nomeCampagna"	TEXT,
 	"nomeg"	TEXT,
 	"nomei"	TEXT,
+	PRIMARY KEY("nomeCampagna","nomeg","nomei"),
 	FOREIGN KEY("nomeCampagna","nomeg") REFERENCES "giocatore"("nomeCampagna","nomeg") ON UPDATE CASCADE,
-	FOREIGN KEY("nomei") REFERENCES "incantesmi"("nomei") ON UPDATE CASCADE,
-	PRIMARY KEY("nomeCampagna","nomeg","nomei")
+	FOREIGN KEY("nomei") REFERENCES "incantesmi"("nomei") ON UPDATE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "hace" (
 	"nomecla"	TEXT,
 	"nomee"	TEXT,
+	PRIMARY KEY("nomee","nomecla"),
 	FOREIGN KEY("nomecla") REFERENCES "classe"("nomecla") ON UPDATE CASCADE,
-	FOREIGN KEY("nomee") REFERENCES "equipaggiamento"("nomee") ON UPDATE CASCADE,
-	PRIMARY KEY("nomee","nomecla")
+	FOREIGN KEY("nomee") REFERENCES "equipaggiamento"("nomee") ON UPDATE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "haci" (
 	"nomecla"	TEXT,
 	"nomei"	TEXT,
-	FOREIGN KEY("nomei") REFERENCES "incantesmi"("nomei") ON UPDATE CASCADE,
+	PRIMARY KEY("nomecla","nomei"),
 	FOREIGN KEY("nomecla") REFERENCES "classe"("nomecla") ON UPDATE CASCADE,
-	PRIMARY KEY("nomecla","nomei")
+	FOREIGN KEY("nomei") REFERENCES "incantesmi"("nomei") ON UPDATE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "hacp" (
 	"nomecla"	TEXT,
 	"nomep"	TEXT,
+	CONSTRAINT "PK_hacp" PRIMARY KEY("nomep","nomecla"),
 	CONSTRAINT "FK_classe" FOREIGN KEY("nomecla") REFERENCES "classe"("nomecla") ON UPDATE CASCADE,
-	CONSTRAINT "FK_privilegi" FOREIGN KEY("nomep") REFERENCES "privilegi"("nomep") ON UPDATE CASCADE,
-	CONSTRAINT "PK_hacp" PRIMARY KEY("nomep","nomecla")
+	CONSTRAINT "FK_privilegi" FOREIGN KEY("nomep") REFERENCES "privilegi"("nomep") ON UPDATE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "harp" (
 	"nomer"	INTEGER,
 	"nomep"	INTEGER,
-	FOREIGN KEY("nomep") REFERENCES "privilegi"("nomep") ON UPDATE CASCADE,
+	PRIMARY KEY("nomer","nomep"),
 	FOREIGN KEY("nomer") REFERENCES "razza"("nomer") ON UPDATE CASCADE,
-	PRIMARY KEY("nomer","nomep")
+	FOREIGN KEY("nomep") REFERENCES "privilegi"("nomep") ON UPDATE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "abilita" (
 	"nomea"	TEXT,
@@ -150,9 +150,9 @@ CREATE TABLE IF NOT EXISTS "carBase" (
 	"nomer"	TEXT,
 	"nomecb"	TEXT,
 	"valore"	INTEGER,
-	FOREIGN KEY("nomer") REFERENCES "razza"("nomer") ON UPDATE CASCADE,
+	PRIMARY KEY("nomer","nomecb"),
 	FOREIGN KEY("nomecb") REFERENCES "caratteristica"("nomecar") ON UPDATE CASCADE,
-	PRIMARY KEY("nomer","nomecb")
+	FOREIGN KEY("nomer") REFERENCES "razza"("nomer") ON UPDATE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "giocatore" (
 	"nomeCampagna"	TEXT,
@@ -171,6 +171,7 @@ CREATE TABLE IF NOT EXISTS "giocatore" (
 	"iniziativa"	TEXT,
 	"eta"	TEXT,
 	"altezza"	TEXT,
+	"genere"	TEXT,
 	"noteAvventura"	TEXT,
 	"allineamento"	TEXT,
 	"lingua"	TEXT,
@@ -178,10 +179,10 @@ CREATE TABLE IF NOT EXISTS "giocatore" (
 	"nomer"	TEXT NOT NULL,
 	"nomev"	TEXT NOT NULL,
 	"valoreVal"	INTEGER,
-	FOREIGN KEY("nomecla") REFERENCES "classe"("nomecla") ON UPDATE CASCADE,
-	FOREIGN KEY("nomer") REFERENCES "razza"("nomer") ON UPDATE CASCADE,
+	PRIMARY KEY("nomeCampagna","nomeg"),
 	FOREIGN KEY("nomev") REFERENCES "valuta"("nomev") ON UPDATE CASCADE,
-	PRIMARY KEY("nomeCampagna","nomeg")
+	FOREIGN KEY("nomer") REFERENCES "razza"("nomer") ON UPDATE CASCADE,
+	FOREIGN KEY("nomecla") REFERENCES "classe"("nomecla") ON UPDATE CASCADE
 );
 INSERT INTO "incantesmi" ("nomei","desc","livello","tempoInvocazione","raggioAzione","componenti","durata") VALUES ('palla di fuoco','spari una palla di fuoco',1,'istantaneo','5m','nessuno','istantaneo');
 INSERT INTO "incantesmi" ("nomei","desc","livello","tempoInvocazione","raggioAzione","componenti","durata") VALUES ('lanci di ghiaccio','spari una lancia di ghiaccio',2,'15sec','3m','ghiacciolo','istantaneo');
@@ -189,11 +190,11 @@ INSERT INTO "incantesmi" ("nomei","desc","livello","tempoInvocazione","raggioAzi
 INSERT INTO "incantesmi" ("nomei","desc","livello","tempoInvocazione","raggioAzione","componenti","durata") VALUES ('evocazione elementare','puoi evocare un pet elemntare 4/8, possiede un proprio turno e può attaccare 2 volte',5,'1min','2m','una lacrima di cervo',NULL);
 INSERT INTO "incantesmi" ("nomei","desc","livello","tempoInvocazione","raggioAzione","componenti","durata") VALUES ('freccia magica','spari 5 frecce di mana anzichè una normale, ogni freccia fa danno norale  -1',4,'istantaneo','15m','un crisallo di mana','istantaneo');
 INSERT INTO "valuta" ("nomev","desc","ratio") VALUES ('moneta del regno di Ho','la valuta di uso comune nel regno di ho, si suddivide in 5 tagli',10);
-INSERT INTO "razza" ("nomer","desc","taglia","velocita","lingua") VALUES ('nano','una delle razze più comuni nel continente, sei riconosciuto da utta la popolazione come menbro della tua razza e quindi non susciti salcopre nelle città.
-molti regnanti hanno una buona impressione della tua razza, non hai santaggi commerciali,
+INSERT INTO "razza" ("nomer","desc","taglia","velocita","lingua") VALUES ('nano','una delle razze più comuni nel continente, sei riconosciuto da utta la popolazione come menbro della tua razza e quindi non susciti salcopre nelle città.
+molti regnanti hanno una buona impressione della tua razza, non hai santaggi commerciali,
 nato fabbro sei dotato di una forza straordinaria e nonostante la tua statura bassa e tozza hai una buona manualità','piccola','9m','nanico, umano, runico nanico');
-INSERT INTO "razza" ("nomer","desc","taglia","velocita","lingua") VALUES ('elfo','una delle razze più comuni nel continente, sei riconosciuto da utta la popolazione come menbro della tua razza e quindi non susciti salcopre nelle città.
-molti regnanti hanno una buona impressione della tua razza, non hai santaggi commerciali.
+INSERT INTO "razza" ("nomer","desc","taglia","velocita","lingua") VALUES ('elfo','una delle razze più comuni nel continente, sei riconosciuto da utta la popolazione come menbro della tua razza e quindi non susciti salcopre nelle città.
+molti regnanti hanno una buona impressione della tua razza, non hai santaggi commerciali.
 neato direttamente da madre natura hai una grande affinità con essa, ciò ti dona un''alta longevità e una apparenza affascinante, la vita nei boschi ti ha donato grande destrezza e capacità di elusione','media','9m','elfico, umano, runico elfico');
 INSERT INTO "privilegi" ("nomep","desc") VALUES ('scurovisione','non hai impedimenti nei tiri osservazione al buio');
 INSERT INTO "privilegi" ("nomep","desc") VALUES ('durascorza','dimezzi i danni da impatto');
@@ -218,6 +219,12 @@ INSERT INTO "caratteristica" ("nomecar","desc") VALUES ('saggezza','iil tuo grad
 INSERT INTO "caratteristica" ("nomecar","desc") VALUES ('carisma','capacità nell''affascinare gli altri');
 INSERT INTO "arma" ("nomee","danno","proprieta") VALUES ('mazza','1xd4 + modificatore forza','leggera');
 INSERT INTO "armatura" ("nomee","nonFurtiva","modificatoreCa","tempoTogliere","tempoIndossare","forzaNecessaria") VALUES ('maglia in cuoio',0,2,'4sec','3sec',NULL);
+INSERT INTO "caratteristicaG" ("nomeCampagna","nomeg","nomecar","tiroSalvezza","valoreBase","valoreLivello","valoreEquipaggiamento","valoreBonus") VALUES ('campagna','ciro','carisma',0,0,0,0,0);
+INSERT INTO "caratteristicaG" ("nomeCampagna","nomeg","nomecar","tiroSalvezza","valoreBase","valoreLivello","valoreEquipaggiamento","valoreBonus") VALUES ('campagna','ciro','costituzione',0,0,0,0,0);
+INSERT INTO "caratteristicaG" ("nomeCampagna","nomeg","nomecar","tiroSalvezza","valoreBase","valoreLivello","valoreEquipaggiamento","valoreBonus") VALUES ('campagna','ciro','destrezza',0,0,0,0,0);
+INSERT INTO "caratteristicaG" ("nomeCampagna","nomeg","nomecar","tiroSalvezza","valoreBase","valoreLivello","valoreEquipaggiamento","valoreBonus") VALUES ('campagna','ciro','forza',0,0,0,0,0);
+INSERT INTO "caratteristicaG" ("nomeCampagna","nomeg","nomecar","tiroSalvezza","valoreBase","valoreLivello","valoreEquipaggiamento","valoreBonus") VALUES ('campagna','ciro','saggezza',0,0,0,0,0);
+INSERT INTO "caratteristicaG" ("nomeCampagna","nomeg","nomecar","tiroSalvezza","valoreBase","valoreLivello","valoreEquipaggiamento","valoreBonus") VALUES ('campagna','ciro','intelligenza',0,0,0,0,0);
 INSERT INTO "nomeVal" ("nomev","nome") VALUES ('moneta del regno di Ho','platino');
 INSERT INTO "nomeVal" ("nomev","nome") VALUES ('moneta del regno di Ho','oro');
 INSERT INTO "nomeVal" ("nomev","nome") VALUES ('moneta del regno di Ho','argento');
@@ -247,11 +254,5 @@ INSERT INTO "carBase" ("nomer","nomecb","valore") VALUES ('elfo','carisma',1);
 INSERT INTO "carBase" ("nomer","nomecb","valore") VALUES ('elfo','intelligenza',2);
 INSERT INTO "carBase" ("nomer","nomecb","valore") VALUES ('nano','costituzione',2);
 INSERT INTO "carBase" ("nomer","nomecb","valore") VALUES ('nano','forza',3);
-INSERT INTO "giocatore" ("nomeCampagna","nomeg","desc","mana","livello","puntiXP","modCompetenza","capacitaBorsa","puntiFerita","classeArmatura","puntiStat","nDadi","dado","iniziativa","eta","altezza","noteAvventura","allineamento","lingua","nomecla","nomer","nomev","valoreVal") VALUES ('campagna','ciro','un rozzo nano ',0,1,0,2,0,13,0,0,1,8,'0','130','90',NULL,'caotico neutrale',NULL,'gueriero','nano','moneta del regno di Ho',0);
-INSERT INTO "caratteristicaG" ("nomeCampagna","nomeg","nomecar","tiroSalvezza","valoreBase","valoreLivello","valoreEquipaggiamento","valoreBonus") VALUES ('campagna','ciro','carisma',0,0,0,0,0);
-INSERT INTO "caratteristicaG" ("nomeCampagna","nomeg","nomecar","tiroSalvezza","valoreBase","valoreLivello","valoreEquipaggiamento","valoreBonus") VALUES ('campagna','ciro','costituzione',0,0,0,0,0);
-INSERT INTO "caratteristicaG" ("nomeCampagna","nomeg","nomecar","tiroSalvezza","valoreBase","valoreLivello","valoreEquipaggiamento","valoreBonus") VALUES ('campagna','ciro','destrezza',0,0,0,0,0);
-INSERT INTO "caratteristicaG" ("nomeCampagna","nomeg","nomecar","tiroSalvezza","valoreBase","valoreLivello","valoreEquipaggiamento","valoreBonus") VALUES ('campagna','ciro','forza',0,0,0,0,0);
-INSERT INTO "caratteristicaG" ("nomeCampagna","nomeg","nomecar","tiroSalvezza","valoreBase","valoreLivello","valoreEquipaggiamento","valoreBonus") VALUES ('campagna','ciro','saggezza',0,0,0,0,0);
-INSERT INTO "caratteristicaG" ("nomeCampagna","nomeg","nomecar","tiroSalvezza","valoreBase","valoreLivello","valoreEquipaggiamento","valoreBonus") VALUES ('campagna','ciro','intelligenza',0,0,0,0,0);
+INSERT INTO "giocatore" ("nomeCampagna","nomeg","desc","mana","livello","puntiXP","modCompetenza","capacitaBorsa","puntiFerita","classeArmatura","puntiStat","nDadi","dado","iniziativa","eta","altezza","genere","noteAvventura","allineamento","lingua","nomecla","nomer","nomev","valoreVal") VALUES ('campagna','ciro','un rozzo nano ',0,1,0,2,0,13,0,0,1,8,'0','130','90','M',NULL,'caotico neutrale',NULL,'gueriero','nano','moneta del regno di Ho',0);
 COMMIT;
