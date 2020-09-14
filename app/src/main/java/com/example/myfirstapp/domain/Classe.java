@@ -8,7 +8,7 @@ public class Classe extends Descrivibile {
     private int dado;
     private StringBuffer descrizionePrivilegiPoteri; // in alternativa imagine con tab del manuale
     private StringBuffer competenza;
-  /*  private Competenza competenzaClasse;*/
+    /*  private Competenza competenzaClasse;*/
     private List<Equipaggiamento> equipaggiamentoList;
     private List<Descrivibile> privilegiClasse;
     private List<Incantesimo> incantesimiClasse;
@@ -16,7 +16,7 @@ public class Classe extends Descrivibile {
     public Classe(String nome,
                   StringBuffer descrizione,
                   StringBuffer descrizionePrivilegiPoteri,
-                  /*Competenza competenzaClasse,*/
+            /*Competenza competenzaClasse,*/
                   int nDadi, int dado, StringBuffer competenza, List<Equipaggiamento> equipaggiamentoList,
                   List<Descrivibile> privilegiClasse,
                   List<Incantesimo> incantesimiClasse) {

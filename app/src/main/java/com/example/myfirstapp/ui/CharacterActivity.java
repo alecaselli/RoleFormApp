@@ -105,19 +105,19 @@ public class CharacterActivity extends AppCompatActivity {
 
         Equipaggiamento equipaggiamento = giocatore.getEquipaggiato("armatura");
         String nome;
-        if(equipaggiamento != null) nome = equipaggiamento.getNome();
+        if (equipaggiamento != null) nome = equipaggiamento.getNome();
         else nome = "non equipaggiato";
         txt = (TextView) findViewById(R.id.armor_name);
         txt.setText(nome);
 
         equipaggiamento = giocatore.getEquipaggiato("scudo");
-        if(equipaggiamento != null) nome = equipaggiamento.getNome();
+        if (equipaggiamento != null) nome = equipaggiamento.getNome();
         else nome = "non equipaggiato";
         txt = (TextView) findViewById(R.id.shield_name);
         txt.setText(nome);
 
         equipaggiamento = giocatore.getEquipaggiato("arma");
-        if(equipaggiamento != null) nome = equipaggiamento.getNome();
+        if (equipaggiamento != null) nome = equipaggiamento.getNome();
         else nome = "non equipaggiato";
         txt = (TextView) findViewById(R.id.weapon_name);
         txt.setText(nome);

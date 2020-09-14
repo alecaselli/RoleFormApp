@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     public void openCharacterActivity(String nomecamp, String nomeg) {
 
         Intent intent = new Intent(this, CharacterActivity.class);

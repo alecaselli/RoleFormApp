@@ -2,7 +2,7 @@ package com.example.myfirstapp.domain;
 
 import java.util.*;
 
-public class Equipaggiamento extends Descrivibile{
+public class Equipaggiamento extends Descrivibile {
     private static final List<String> tipolist = new ArrayList<String>(Arrays.asList("arma da guerra a distanza",
             "arma da guerra da mischia",
             "arma semplice a distanza",

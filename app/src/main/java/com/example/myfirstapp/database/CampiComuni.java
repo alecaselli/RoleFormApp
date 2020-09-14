@@ -10,5 +10,4 @@ public class CampiComuni {
     public static final String FIELD_LIVELLO = "livello";
 
 
-
 }

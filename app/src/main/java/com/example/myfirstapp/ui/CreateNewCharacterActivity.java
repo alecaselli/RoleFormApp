@@ -15,5 +15,6 @@ public class CreateNewCharacterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_new_character);
 
         Spinner raceSpinner =findViewById(R.id.create_character_race);
+
     }
 }
