@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfirstapp.ExampleItem;
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.R.string;
 import com.example.myfirstapp.adapter.ExampleAdapter;
 import com.example.myfirstapp.database.CampiComuni;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.database.TabellaGiocatore;
+import com.example.myfirstapp.ui.CharacterActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
+
         mAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view) {
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public void openCharacterActivity(String nomecamp, String nomeg) {
 
