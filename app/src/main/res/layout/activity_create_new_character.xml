@@ -61,6 +61,7 @@
             android:layout_marginStart="14dp"
             android:ems="7"
             android:inputType="textCapSentences"
+            android:maxLength="25"
             android:text=""
             android:textSize="20sp" />
 
@@ -88,7 +89,8 @@
             android:layout_toEndOf="@id/nomedelpersonaggio"
             android:layout_marginStart="14dp"
             android:ems="7"
-            android:inputType="textCapWords"
+            android:inputType="textCapSentences"
+            android:maxLength="25"
             android:text=""
             android:textSize="20sp" />
 
@@ -118,6 +120,7 @@
             android:layout_marginStart="14dp"
             android:ems="2"
             android:inputType="numberDecimal"
+            android:maxLength="8"
             android:text=""
             android:textSize="20sp" />
 
@@ -140,6 +143,7 @@
             android:layout_marginStart="14dp"
             android:ems="3"
             android:inputType="numberDecimal"
+            android:maxLength="5"
             android:text=""
             android:textSize="20sp" />
 
