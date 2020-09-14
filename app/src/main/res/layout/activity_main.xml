@@ -87,7 +87,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:background="?android:selectableItemBackground"
-            android:onClick="openCreateNewCharacterActivity"
+            android:onClick="openCreateNewCharacter"
             android:src="@drawable/ic_add" />
 
         <ImageButton

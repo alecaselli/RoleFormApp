@@ -26,10 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private ExampleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private ImageButton createNewCharacter;
-    private ImageButton editItems;
-    private ImageButton info;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (datilist != null)
             for (List<String> dati : datilist) {
-                exampleList.add(new ExampleItem(R.drawable.ic_baseline_image, dati.get(0), dati.get(1), "level" + dati.get(2)));
+                exampleList.add(new ExampleItem(R.drawable.ic_baseline_image, dati.get(0), dati.get(1), "level " + dati.get(2)));
             }
 
         mRecyclerView = findViewById(R.id.recyclerView);
@@ -74,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openCreateNewCharacterActivity(View view) {
+    public void openCreateNewCharacter(View view) {
         Intent intent = new Intent(this, CreateNewCharacterActivity.class);
         startActivity(intent);
     }
@@ -85,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openEdit(View view) {
-
+        Intent intent = new Intent(this, EditActivity.class);
+        startActivity(intent);
     }
 
 }

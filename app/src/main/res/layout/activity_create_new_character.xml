@@ -60,7 +60,7 @@
             android:layout_toEndOf="@id/nomedellacampagna"
             android:layout_marginStart="14dp"
             android:ems="7"
-            android:inputType="textCapWords"
+            android:inputType="textCapSentences"
             android:text=""
             android:textSize="20sp" />
 
@@ -162,7 +162,7 @@
         <Spinner
             android:id="@+id/create_character_race"
             android:layout_width="wrap_content"
-            android:layout_height="42dp"
+            android:layout_height="wrap_content"
             android:layout_toEndOf="@id/razza"
             android:layout_marginStart="14dp" />
 
