@@ -28,10 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private ExampleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private ImageButton createNewCharacter;
-    private ImageButton editItems;
-    private ImageButton info;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,17 +72,19 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openCreateNewCharacterActivity(View view) {
+    public void openCreateNewCharacter(View view) {
         Intent intent = new Intent(this, CreateNewCharacterActivity.class);
         startActivity(intent);
     }
 
     public void openInfo(View view) {
-
+        Intent intent = new Intent(this, InfoActivity.class);
+        startActivity(intent);
     }
 
     public void openEdit(View view) {
-
+        Intent intent = new Intent(this, EditActivity.class);
+        startActivity(intent);
     }
 
 }

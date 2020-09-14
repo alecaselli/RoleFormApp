@@ -60,7 +60,7 @@
             android:layout_toEndOf="@id/nomedellacampagna"
             android:layout_marginStart="14dp"
             android:ems="7"
-            android:inputType="textCapWords"
+            android:inputType="textCapSentences"
             android:text=""
             android:textSize="20sp" />
 

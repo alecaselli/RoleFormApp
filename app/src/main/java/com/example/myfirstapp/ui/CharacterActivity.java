@@ -41,15 +41,17 @@ public class CharacterActivity extends AppCompatActivity {
         txt = (TextView) findViewById(R.id.character_name);
         txt.setText(giocatore.getNome());
 
-        String liv = "livello " + giocatore.getLivello();
-        txt = (TextView) findViewById(R.id.lv);
+        String liv = "Livello " + giocatore.getLivello();
+        txt = (TextView) findViewById(R.id.level);
         txt.setText(liv);
 
+        String alt = giocatore.getAltezza() + " cm";
         txt = (TextView) findViewById(R.id.character_height);
-        txt.setText(giocatore.getAltezza());
+        txt.setText(alt);
 
+        String eta = giocatore.getEta() + " anni";
         txt = (TextView) findViewById(R.id.character_age);
-        txt.setText(giocatore.getEta());
+        txt.setText(eta);
 
         txt = (TextView) findViewById(R.id.character_race);
         txt.setText(giocatore.getRazza().getNome());
@@ -100,25 +102,24 @@ public class CharacterActivity extends AppCompatActivity {
         txt.setText(String.valueOf(valoreint.get(1)));
         txt = (TextView) findViewById(R.id.character_gold);
         txt.setText(String.valueOf(valoreint.get(2)));
-        txt = (TextView) findViewById(R.id.character_platinum);
-        txt.setText(String.valueOf(valoreint.get(3)));
+
 
         Equipaggiamento equipaggiamento = giocatore.getEquipaggiato("armatura");
         String nome;
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
-        else nome = "non equipaggiato";
+        else nome = "Non equipaggiato";
         txt = (TextView) findViewById(R.id.armor_name);
         txt.setText(nome);
 
         equipaggiamento = giocatore.getEquipaggiato("scudo");
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
-        else nome = "non equipaggiato";
+        else nome = "Non equipaggiato";
         txt = (TextView) findViewById(R.id.shield_name);
         txt.setText(nome);
 
         equipaggiamento = giocatore.getEquipaggiato("arma");
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
-        else nome = "non equipaggiato";
+        else nome = "Non equipaggiato";
         txt = (TextView) findViewById(R.id.weapon_name);
         txt.setText(nome);
     }
