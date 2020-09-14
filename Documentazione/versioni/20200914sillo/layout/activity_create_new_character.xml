@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.CreateNewCharacterActivity"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginTop="20dp" >
+
+    <LinearLayout
+        android:id="@+id/presentation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/whitesmoke">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crea un nuovo personaggio"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="15dp"
+            android:text="definisci le tue caratteristiche preferite"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="italic" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/nomedellacampagna"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Nome della campagna:"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/create_campaign_name"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_toEndOf="@id/nomedellacampagna"
+            android:layout_marginStart="14dp"
+            android:ems="7"
+            android:inputType="textCapWords"
+            android:text=""
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="14dp">
+
+        <TextView
+            android:id="@+id/nomedelpersonaggio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Nome del personaggio:"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/create_character_name"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_toEndOf="@id/nomedelpersonaggio"
+            android:layout_marginStart="14dp"
+            android:ems="7"
+            android:inputType="textCapWords"
+            android:text=""
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="14dp">
+
+        <TextView
+            android:id="@+id/eta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="30dp"
+            android:text="Età:"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/create_character_age"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_toEndOf="@id/eta"
+            android:layout_marginStart="14dp"
+            android:ems="2"
+            android:inputType="numberDecimal"
+            android:text=""
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/altezza"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/create_character_age"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="2dp"
+            android:text="Altezza:"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/create_character_height"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_toEndOf="@id/altezza"
+            android:layout_marginStart="14dp"
+            android:ems="3"
+            android:inputType="numberDecimal"
+            android:text=""
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="14dp">
+
+        <TextView
+            android:id="@+id/razza"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome del personaggio:"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
+        <Spinner
+            android:id="@+id/create_character_race"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_toEndOf="@id/razza"
+            android:layout_marginStart="14dp" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>
