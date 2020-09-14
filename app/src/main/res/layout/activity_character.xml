@@ -72,7 +72,7 @@
                             android:textColor="@color/black"
                             android:textSize="22sp" />
 
-                        <TextView
+                        <!--<TextView
                             android:id="@+id/character_genre"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -81,10 +81,10 @@
                             android:layout_toEndOf="@id/character_name"
                             android:text="[Genre]"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="18sp" /> -->
 
                         <TextView
-                            android:id="@+id/Lv"
+                            android:id="@+id/lv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -458,10 +458,36 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/platino"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Platino:"
+                            android:textColor="@color/black"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:id="@+id/character_platinum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="12dp"
+                            android:text="2"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
                             android:id="@+id/oro"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Oro:"
+                            android:text="Argento:"
                             android:textColor="@color/black"
                             android:textSize="22sp" />
 
@@ -471,7 +497,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="12dp"
-                            android:text="2"
+                            android:text="5"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
 
@@ -510,15 +536,15 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/bronzo"
+                            android:id="@+id/Rame"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Bronzo:"
+                            android:text="Rame:"
                             android:textColor="@color/black"
                             android:textSize="22sp" />
 
                         <TextView
-                            android:id="@+id/character_bronze"
+                            android:id="@+id/character_copper"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -640,6 +666,7 @@
                                     android:src="@drawable/armor" />
 
                                 <TextView
+                                    android:id="@+id/armor_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerVertical="true"
@@ -663,6 +690,7 @@
                                     android:src="@drawable/shield" />
 
                                 <TextView
+                                    android:id="@+id/shield_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerVertical="true"
@@ -686,6 +714,7 @@
                                     android:src="@drawable/sword" />
 
                                 <TextView
+                                    android:id="@+id/weapon_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerVertical="true"

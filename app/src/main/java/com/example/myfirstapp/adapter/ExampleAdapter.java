@@ -19,7 +19,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(View view);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener){
@@ -35,9 +35,9 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         public ExampleViewHolder(View itemView, final OnItemClickListener listener){
             super (itemView);
             mImageView=itemView.findViewById(R.id.imageView);
-            mTextView1=itemView.findViewById(R.id.textView);
-            mTextView2=itemView.findViewById(R.id.textView2);
-            mTextView3=itemView.findViewById(R.id.textView3);
+            mTextView1=itemView.findViewById(R.id.campaign_name);
+            mTextView2=itemView.findViewById(R.id.character_name);
+            mTextView3=itemView.findViewById(R.id.lv);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -45,7 +45,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
                     if(listener!=null){
                         int position=getAdapterPosition();
                         if(position!= RecyclerView.NO_POSITION){
-                            listener.onItemClick(position);
+                            listener.onItemClick(v);
                         }
                     }
                 }
@@ -68,11 +68,12 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
         ExampleItem currentItem = mExampleList.get(position);
-
-        holder.mImageView.setImageResource(currentItem.getmImageResource());
-        holder.mTextView1.setText(currentItem.getText1());
-        holder.mTextView2.setText(currentItem.getText2());
-        holder.mTextView3.setText(currentItem.getText3());
+        if(currentItem != null){
+            holder.mImageView.setImageResource(currentItem.getmImageResource());
+            holder.mTextView1.setText(currentItem.getText1());
+            holder.mTextView2.setText(currentItem.getText2());
+            holder.mTextView3.setText(currentItem.getText3());
+        }
     }
 
     @Override

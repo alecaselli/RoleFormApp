@@ -20,6 +20,7 @@ import com.example.myfirstapp.domain.Giocatore;
 import com.example.myfirstapp.domain.Incantesimo;
 import com.example.myfirstapp.domain.Razza;
 import com.example.myfirstapp.domain.Valuta;
+import com.example.myfirstapp.ui.MainActivity;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,6 +33,11 @@ public class DBManager {
 
     public DBManager(Context ctx) {
         dbhelper = new DBHelper(ctx);
+    }
+
+    /* elimina db */
+    public void dropDB(Context ctx){
+        ctx.deleteDatabase(DBHelper.DBNAME);
     }
 
     /* INSERT */
@@ -259,6 +265,7 @@ public class DBManager {
         cv.put(CampiComuni.FIELD_DADO,nuovo.getDado());
         cv.put(TabellaGiocatore.FIELD_INIZIATIVA,nuovo.getIniziativa());
         cv.put(TabellaGiocatore.FIELD_ETA,nuovo.getEta());
+        cv.put(TabellaGiocatore.FIELD_ALTEZZA,nuovo.getAltezza());
         cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA,nuovo.getNoteAvventura().toString());
         cv.put(TabellaGiocatore.FIELD_ALLINEAMENTO,nuovo.getAllineamento().toString());
         cv.put(CampiComuni.FIELD_LINGUA,nuovo.getLingua().toString());
@@ -1056,8 +1063,8 @@ public class DBManager {
         cv.put(TabellaArma.FIELD_PROPRIETA,aggiornato.getProprieta());
 
         try{
-            if (db.update(TabellaArma.TBL_NOME,cv,whereClause,whereArgs) > 0)
-                return this.aggiornaEquipaggiamento(aggiornato);
+            if (this.aggiornaEquipaggiamento(aggiornato))
+                return db.update(TabellaArma.TBL_NOME,cv,whereClause,whereArgs) > 0;
             return false;
         }
         catch(SQLiteException sqle){
@@ -1078,8 +1085,8 @@ public class DBManager {
         cv.put(TabellaArmatura.FIELD_FORZANECESSARIA,aggiornato.getForzaNecessaria());
 
         try{
-            if (db.insert(TabellaArmatura.TBL_NOME,null,cv) > 0)
-                return this.aggiornaEquipaggiamento(aggiornato);
+            if (this.aggiornaEquipaggiamento(aggiornato))
+                return db.insert(TabellaArmatura.TBL_NOME,null,cv) > 0;
             return false;
         }
         catch(SQLiteException sqle){
@@ -1105,6 +1112,7 @@ public class DBManager {
         cv.put(CampiComuni.FIELD_DADO,aggiornato.getDado());
         cv.put(TabellaGiocatore.FIELD_INIZIATIVA,aggiornato.getIniziativa());
         cv.put(TabellaGiocatore.FIELD_ETA,aggiornato.getEta());
+        cv.put(TabellaGiocatore.FIELD_ALTEZZA,aggiornato.getAltezza());
         cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA,aggiornato.getNoteAvventura().toString());
         cv.put(TabellaGiocatore.FIELD_ALLINEAMENTO,aggiornato.getAllineamento().toString());
         cv.put(CampiComuni.FIELD_LINGUA,aggiornato.getLingua().toString());
@@ -1222,7 +1230,11 @@ public class DBManager {
     }
 
     /* READ */
-    public Cursor leggiTabella (@NotNull String table){
+    /* funzione che legge una qualsiasi tabella del db e restituisce una lista
+    che punta a tante liste quante le righe della tabella,
+    ciascuna di queste liste contiene i valori delle colonne selezionate,
+     devono essere string*/
+    public List<List<String>> leggiPK (@NotNull String table, @NotNull String... nomePK){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
 
         try {
@@ -1230,12 +1242,59 @@ public class DBManager {
             if (resultSet == null || resultSet.getCount() == 0){
                 return null;
             }
+            resultSet.moveToFirst();
 
-            return resultSet;
+            List<List<String>> list = new ArrayList<List<String>>();
+            while (!resultSet.isAfterLast()) {
+                List<String> PKs = new ArrayList<String>();
+                for(String PK : nomePK){
+                    String nome = resultSet.getString(resultSet.getColumnIndex(PK));
+                    PKs.add(nome);
+                }
+                list.add(PKs);
+
+                resultSet.moveToNext();
+            }
+
+            resultSet.close();
+            return list;
         }
         catch (SQLiteException sqle) {
             return null;
         }
+    }
+    public List<List<String>> leggiDatiMenu (@NotNull String table, @NotNull String numerico, @NotNull String... nomePK){
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+
+        try {
+            Cursor resultSet = db.query(TabellaGiocatore.TBL_NOME, null, null, null, null, null, null);
+            if (resultSet == null || resultSet.getCount() == 0){
+                return null;
+            }
+            resultSet.moveToFirst();
+
+            List<List<String>> list = new ArrayList<List<String>>();
+            while (!resultSet.isAfterLast()) {
+                List<String> PKs = new ArrayList<String>();
+                String nome;
+                for(String PK : nomePK){
+                    nome = resultSet.getString(resultSet.getColumnIndex(PK));
+                    PKs.add(nome);
+                }
+                nome = Integer.toString(resultSet.getInt(resultSet.getColumnIndex(numerico)));
+                PKs.add(nome);
+                list.add(PKs);
+
+                resultSet.moveToNext();
+            }
+
+            resultSet.close();
+            return list;
+        }
+        catch (SQLiteException sqle) {
+            return null;
+        }
+
     }
     public Incantesimo leggiIncantesimo(@NotNull String nomei){
         SQLiteDatabase db = dbhelper.getReadableDatabase();
@@ -1778,6 +1837,7 @@ public class DBManager {
             int dado = resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_DADO));
             String iniziativa = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_INIZIATIVA));
             String eta = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_ETA));
+            String altezza = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_ALTEZZA));
             StringBuffer noteAvventura = new StringBuffer();
             noteAvventura.append(resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_NOTEAVVENTURA)));
             StringBuffer allineamento = new StringBuffer();
@@ -1795,7 +1855,7 @@ public class DBManager {
             List<Abilita> abilitaList = this.leggiAbilita(nomecamp, nomeg);
 
             resultSet.close();
-            return new Giocatore(nomeg, descrizione, mana, livello, puntiEsperienza, modCompetenza, capacitaBorsa, puntiFerita, nDadi, dado, classeArmatura, puntiStat, nomecamp, iniziativa, eta, noteAvventura, allineamento, lingua, portafoglio, classe, razza, caratteristicaList, borsa, equipaggiato, incantesimiGiocatore, abilitaList);
+            return new Giocatore(nomeg, descrizione, mana, livello, puntiEsperienza, modCompetenza, capacitaBorsa, puntiFerita, nDadi, dado, classeArmatura, puntiStat, nomecamp, iniziativa, eta, altezza, noteAvventura, allineamento, lingua, portafoglio, classe, razza, caratteristicaList, borsa, equipaggiato, incantesimiGiocatore, abilitaList);
         }
         catch(SQLiteException sqle){
             return null;

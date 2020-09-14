@@ -44,6 +44,15 @@ public class Caratteristica extends Descrivibile {
         this.valoreBonus = valoreBonus;
     }
 
+    /* metodi non base */
+    public int getBonus(){
+        return valoreEquipaggiamento + valoreBonus;
+    }
+
+    public int getBase(){
+        return valoreBase + valoreLivello;
+    }
+
     public void levelUp(int puntiStstistica){
         this.valoreLivello += puntiStstistica;
     }

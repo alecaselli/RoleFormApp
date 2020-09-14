@@ -1,5 +1,7 @@
 package com.example.myfirstapp.domain;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class Giocatore extends Descrivibile {
@@ -17,6 +19,7 @@ public class Giocatore extends Descrivibile {
     private String nomeCampagna;
     private String iniziativa;
     private String eta;
+    private String altezza;
     private StringBuffer noteAvventura;
     private StringBuffer allineamento;
     private StringBuffer lingua;
@@ -47,7 +50,7 @@ public class Giocatore extends Descrivibile {
                      String nomeCampagna,
                      String iniziativa,
                      String eta,
-                     StringBuffer noteAvventura,
+                     String altezza, StringBuffer noteAvventura,
                      StringBuffer allineamento,
                      StringBuffer lingua,
                      Valuta portafoglio,
@@ -65,6 +68,7 @@ public class Giocatore extends Descrivibile {
         this.modCompetenza = modCompetenza;
         this.capacitaBorsa = capacitaBorsa;
         this.puntiFerita = puntiFerita;
+        this.altezza = altezza;
         this.setPuntiFeritaMax();
         this.nDadi = nDadi;
         this.dado = dado;
@@ -198,6 +202,14 @@ public class Giocatore extends Descrivibile {
         this.eta = eta;
     }
 
+    public String getAltezza() {
+        return altezza;
+    }
+
+    public void setAltezza(String altezza) {
+        this.altezza = altezza;
+    }
+
     public StringBuffer getNoteAvventura() {
         return noteAvventura;
     }
@@ -315,6 +327,22 @@ public class Giocatore extends Descrivibile {
 
     /* metodi non base*/
 
+    public Caratteristica getCaratteristica(String nomec){
+        for(Caratteristica caratteristica: this.getCaratteristicaList()){
+            if(caratteristica.getNome().equals(nomec))
+                return caratteristica;
+        }
+        return null;
+    }
+
+    public Equipaggiamento getEquipaggiato(String tipo) {
+        for (Equipaggiamento equipaggiamento : equipaggiato) {
+            if (equipaggiamento.getTipo().equals(tipo))
+                return equipaggiamento;
+        }
+        return null;
+    }
+
     public void aggiungiNoteAvventura(StringBuffer note){
         this.noteAvventura.append(note);
     }
@@ -337,7 +365,7 @@ public class Giocatore extends Descrivibile {
         this.borsa.addAll(nuovo);
     }
 
-    public void eliminaBorsa(List<Equipaggiamento> togli){
+    public void eliminaBorsa(@NotNull List<Equipaggiamento> togli){
         for(Equipaggiamento i : togli)
             this.borsa.remove(i);
     }
@@ -346,7 +374,7 @@ public class Giocatore extends Descrivibile {
             this.equipaggiato.addAll(nuovo);
     }
 
-    public void eliminaEquipaggiato(List<Equipaggiamento> togli){
+    public void eliminaEquipaggiato(@NotNull List<Equipaggiamento> togli){
         for(Equipaggiamento i : togli)
             this.equipaggiato.remove(i);
     }
@@ -355,7 +383,7 @@ public class Giocatore extends Descrivibile {
             this.incantesimiGiocatore.addAll(nuovo);
     }
 
-    public void eliminaIncantesimo(List<Incantesimo> togli){
+    public void eliminaIncantesimo(@NotNull List<Incantesimo> togli){
         for(Incantesimo i : togli)
             this.incantesimiGiocatore.remove(i);
     }

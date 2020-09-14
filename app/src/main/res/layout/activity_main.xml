@@ -76,6 +76,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="80dp"
             android:layout_toStartOf="@id/create"
+            android:onClick="openEdit"
             android:background="?android:selectableItemBackground"
             android:src="@drawable/ic_edit" />
 
@@ -85,6 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:onClick="openCreateNewCharacterActivity"
             android:background="?android:selectableItemBackground"
             android:src="@drawable/ic_add" />
 
@@ -95,6 +97,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="80dp"
             android:layout_toEndOf="@id/create"
+            android:onClick="openInfo"
             android:background="?android:selectableItemBackground"
             android:src="@drawable/ic_info" />
 
