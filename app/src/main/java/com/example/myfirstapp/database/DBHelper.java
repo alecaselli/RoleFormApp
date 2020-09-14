@@ -10,13 +10,14 @@ import androidx.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static  final String DBNAME = "DND";
-    public DBHelper(Context context){
-        super(context,DBNAME,null,1);
+    public static final String DBNAME = "DND";
+
+    public DBHelper(Context context) {
+        super(context, DBNAME, null, 1);
     }
 
     @Override
-    public void onCreate(@NonNull SQLiteDatabase db){
+    public void onCreate(@NonNull SQLiteDatabase db) {
         String q = "CREATE TABLE IF NOT EXISTS \"incantesmi\" (\n" +
                 "\t\"nomei\"\tTEXT,\n" +
                 "\t\"desc\"\tTEXT,\n" +
@@ -91,7 +92,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 ");";
         db.execSQL(q);
 
-        q ="CREATE TABLE IF NOT EXISTS \"arma\" (\n" +
+        q = "CREATE TABLE IF NOT EXISTS \"arma\" (\n" +
                 "\t\"nomee\"\tTEXT,\n" +
                 "\t\"danno\"\tTEXT,\n" +
                 "\t\"proprieta\"\tTEXT,\n" +
@@ -250,7 +251,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    private void primoInserimento(@NotNull SQLiteDatabase db){
+    private void primoInserimento(@NotNull SQLiteDatabase db) {
         /* incantesimi */
         String q = "INSERT INTO \"incantesmi\" (\"nomei\",\"desc\",\"livello\",\"tempoInvocazione\",\"raggioAzione\",\"componenti\",\"durata\") VALUES ('palla di fuoco','spari una palla di fuoco',1,'istantaneo','5m','nessuno','istantaneo');";
         db.execSQL(q);

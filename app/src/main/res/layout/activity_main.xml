@@ -56,7 +56,7 @@
         android:layout_below="@id/presentation"
         android:background="@color/whitesmoke"
         android:paddingHorizontal="12dp"
-        android:paddingTop="6dp" >
+        android:paddingTop="6dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -76,8 +76,8 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="80dp"
             android:layout_toStartOf="@id/create"
-            android:onClick="openEdit"
             android:background="?android:selectableItemBackground"
+            android:onClick="openEdit"
             android:src="@drawable/ic_edit" />
 
         <ImageButton
@@ -86,8 +86,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:onClick="openCreateNewCharacterActivity"
             android:background="?android:selectableItemBackground"
+            android:onClick="openCreateNewCharacterActivity"
             android:src="@drawable/ic_add" />
 
         <ImageButton
@@ -97,8 +97,8 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="80dp"
             android:layout_toEndOf="@id/create"
-            android:onClick="openInfo"
             android:background="?android:selectableItemBackground"
+            android:onClick="openInfo"
             android:src="@drawable/ic_info" />
 
     </RelativeLayout>

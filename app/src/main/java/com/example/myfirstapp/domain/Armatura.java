@@ -1,6 +1,6 @@
 package com.example.myfirstapp.domain;
 
-public class Armatura extends Equipaggiamento{
+public class Armatura extends Equipaggiamento {
     private boolean nonFurtiva;
     private int modificatoreCA;
     private String tempoTogliere;

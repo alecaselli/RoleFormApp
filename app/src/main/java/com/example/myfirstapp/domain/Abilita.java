@@ -2,7 +2,7 @@ package com.example.myfirstapp.domain;
 
 import java.util.List;
 
-public class Abilita extends Descrivibile{
+public class Abilita extends Descrivibile {
     private boolean competenza;
     /*private int livello = 0;*/
 

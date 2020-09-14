@@ -145,7 +145,7 @@ public class Giocatore extends Descrivibile {
     }
 
     public void setPuntiFeritaMax() {
-        this.puntiFeritaMax =  this.getnDadi() * this.getDado();
+        this.puntiFeritaMax = this.getnDadi() * this.getDado();
     }
 
     public int getnDadi() {
@@ -329,16 +329,16 @@ public class Giocatore extends Descrivibile {
 
     /* metodi non base*/
 
-    public Caratteristica getCaratteristica(String nomec){
-        for(Caratteristica caratteristica: this.getCaratteristicaList()){
-            if(caratteristica.getNome().equals(nomec))
+    public Caratteristica getCaratteristica(String nomec) {
+        for (Caratteristica caratteristica : this.getCaratteristicaList()) {
+            if (caratteristica.getNome().equals(nomec))
                 return caratteristica;
         }
         return null;
     }
 
     public Equipaggiamento getEquipaggiato(String tipo) {
-        if (equipaggiato != null){
+        if (equipaggiato != null) {
             for (Equipaggiamento equipaggiamento : equipaggiato) {
                 if (equipaggiamento.getTipo().equals(tipo))
                     return equipaggiamento;
@@ -347,61 +347,61 @@ public class Giocatore extends Descrivibile {
         return null;
     }
 
-    public void aggiungiNoteAvventura(StringBuffer note){
+    public void aggiungiNoteAvventura(StringBuffer note) {
         this.noteAvventura.append(note);
     }
 
-    public void aggiungiLingua(StringBuffer lingua){
+    public void aggiungiLingua(StringBuffer lingua) {
         this.lingua.append(lingua);
     }
 
     /* serie di metodi per aggiornare i valori di parametri numerici */
-    public void aggiornaMana(int val){
+    public void aggiornaMana(int val) {
         this.mana += val;
     }
 
-    public void aggiornaPuntiEsperienza(int val){
+    public void aggiornaPuntiEsperienza(int val) {
         this.puntiEsperienza += val;
     }
 
     /* serie di metodi per aggiungere/eliminare elementi da liste */
-    public void aggiungiBorsa(List<Equipaggiamento> nuovo){
-        if(borsa == null)
+    public void aggiungiBorsa(List<Equipaggiamento> nuovo) {
+        if (borsa == null)
             borsa = new ArrayList<Equipaggiamento>();
         this.borsa.addAll(nuovo);
     }
 
-    public void eliminaBorsa(@NotNull List<Equipaggiamento> togli){
-        for(Equipaggiamento i : togli)
+    public void eliminaBorsa(@NotNull List<Equipaggiamento> togli) {
+        for (Equipaggiamento i : togli)
             this.borsa.remove(i);
     }
 
-    public void aggiungiEquipaggiato(List<Equipaggiamento> nuovo){
-        if(equipaggiato == null)
+    public void aggiungiEquipaggiato(List<Equipaggiamento> nuovo) {
+        if (equipaggiato == null)
             equipaggiato = new ArrayList<Equipaggiamento>();
         this.equipaggiato.addAll(nuovo);
     }
 
-    public void eliminaEquipaggiato(@NotNull List<Equipaggiamento> togli){
-        for(Equipaggiamento i : togli)
+    public void eliminaEquipaggiato(@NotNull List<Equipaggiamento> togli) {
+        for (Equipaggiamento i : togli)
             this.equipaggiato.remove(i);
     }
 
-    public void aggiungiIncantesimo(List<Incantesimo> nuovo){
-            this.incantesimiGiocatore.addAll(nuovo);
+    public void aggiungiIncantesimo(List<Incantesimo> nuovo) {
+        this.incantesimiGiocatore.addAll(nuovo);
     }
 
-    public void eliminaIncantesimo(@NotNull List<Incantesimo> togli){
-        for(Incantesimo i : togli)
+    public void eliminaIncantesimo(@NotNull List<Incantesimo> togli) {
+        for (Incantesimo i : togli)
             this.incantesimiGiocatore.remove(i);
     }
 
     /* serie di metodi necessari alla creazione di un nuovo PG */
-    public void inizializzazionePG(){
+    public void inizializzazionePG() {
 
-        for(CaratteristicaBase elementoR : this.razza.getCaratteristicaBaseList()){
-            for(Caratteristica elementoC : this.caratteristicaList){
-                if(elementoC.getNome().compareToIgnoreCase(elementoR.getNome())==0)
+        for (CaratteristicaBase elementoR : this.razza.getCaratteristicaBaseList()) {
+            for (Caratteristica elementoC : this.caratteristicaList) {
+                if (elementoC.getNome().compareToIgnoreCase(elementoR.getNome()) == 0)
                     elementoC.addValoreBase(elementoR.getValore());
             }
         }
