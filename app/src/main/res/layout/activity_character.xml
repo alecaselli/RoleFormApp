@@ -92,7 +92,7 @@
                             android:layout_marginStart="166dp"
                             android:layout_marginEnd="8dp"
                             android:layout_toEndOf="@+id/character_name"
-                            android:text="@string/Lv10"
+                            android:text="Level 10"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 

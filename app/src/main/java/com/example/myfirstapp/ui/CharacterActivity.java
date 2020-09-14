@@ -45,7 +45,7 @@ public class CharacterActivity extends AppCompatActivity {
         txt.setText(giocatore.getGenere());
 
         String liv = "livello " + giocatore.getLivello();
-        txt = (TextView) findViewById(R.id.lv);
+        txt = (TextView) findViewById(R.id.level);
         txt.setText(liv);
 
         String alt = giocatore.getAltezza() + " cm";
