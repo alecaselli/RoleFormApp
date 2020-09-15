@@ -37,7 +37,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
             mImageView = itemView.findViewById(R.id.imageView);
             mTextView1 = itemView.findViewById(R.id.campaign_name);
             mTextView2 = itemView.findViewById(R.id.character_name);
-            mTextView3 = itemView.findViewById(R.id.lv);
+            mTextView3 = itemView.findViewById(R.id.level);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

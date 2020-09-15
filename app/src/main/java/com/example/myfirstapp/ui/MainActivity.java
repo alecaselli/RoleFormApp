@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (datilist != null)
             for (List<String> dati : datilist) {
-                exampleList.add(new ExampleItem(R.drawable.ic_baseline_image, dati.get(0), dati.get(1), "level " + dati.get(2)));
+                exampleList.add(new ExampleItem(R.drawable.ic_baseline_image, dati.get(0), dati.get(1), "livello" + " " + dati.get(2)));
             }
 
         mRecyclerView = findViewById(R.id.recyclerView);
