@@ -55,26 +55,6 @@
                     android:textColor="@color/black"
                     android:textSize="22sp" />
             </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/credits_second_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="6dp"
-                android:layout_marginVertical="4dp"
-                android:layout_below="@id/credits_first_card"
-                app:cardCornerRadius="15dp">
-
-                <TextView
-                    android:id="@+id/credits2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="15dp"
-                    android:layout_marginVertical="10dp"
-                    android:text="@string/crediti"
-                    android:textColor="@color/black"
-                    android:textSize="22sp" />
-            </androidx.cardview.widget.CardView>
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

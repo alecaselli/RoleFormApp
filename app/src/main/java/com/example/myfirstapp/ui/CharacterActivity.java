@@ -44,15 +44,15 @@ public class CharacterActivity extends AppCompatActivity {
         txt = (TextView) findViewById(R.id.character_genre);
         txt.setText(giocatore.getGenere());
 
-        String liv = "Livello " + giocatore.getLivello();
+        String liv = "livello" + " " + giocatore.getLivello();
         txt = (TextView) findViewById(R.id.level);
         txt.setText(liv);
 
-        String alt = giocatore.getAltezza() + " cm";
+        String alt = giocatore.getAltezza() + " " + "cm";
         txt = (TextView) findViewById(R.id.character_height);
         txt.setText(alt);
 
-        String eta = giocatore.getEta() + " anni";
+        String eta = giocatore.getEta() + " " + "anni";
         txt = (TextView) findViewById(R.id.character_age);
         txt.setText(eta);
 

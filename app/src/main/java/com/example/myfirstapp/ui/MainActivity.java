@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openEdit(View view) {
-        Intent intent = new Intent(this, EditActivity.class);
+        Intent intent = new Intent(this, CreditsActivity.class);
         startActivity(intent);
     }
 
