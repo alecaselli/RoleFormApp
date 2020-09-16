@@ -19,4 +19,36 @@
     <string name="livello">livello</string>
     <string name="cm">cm</string>
     <string name="anni">anni</string>
+    
+    <string-array name="races">
+
+        <item>Umano</item>
+        <item>Nano</item>
+        <item>Elfo</item>
+        <item>Mezzelfo</item>
+        <item>Mezzorco</item>
+        <item>Halfling</item>
+        <item>Dragonide</item>
+        <item>Tiefling</item>
+        <item>Gnomo</item>
+
+    </string-array>
+
+    <string-array name="classes">
+
+        <item>Barbaro</item>
+        <item>Bardo</item>
+        <item>Chierico</item>
+        <item>Druido</item>
+        <item>Guerriero</item>
+        <item>Ladro</item>
+        <item>Mago</item>
+        <item>Monaco</item>
+        <item>Paladino</item>
+        <item>Ranger</item>
+        <item>Stregone</item>
+        <item>Warlock</item>
+
+    </string-array>
+
 </resources>

@@ -3,6 +3,7 @@ package com.example.myfirstapp.domain;
 import java.util.List;
 
 public class Razza extends Descrivibile {
+    private String nome;
     private String taglia;
     private String velocita;
     private StringBuffer lingua;
@@ -17,12 +18,16 @@ public class Razza extends Descrivibile {
                  List<Descrivibile> privilegiRazza,
                  List<CaratteristicaBase> caratteristicaBaseList) {
         super(nome, descrizione);
+        this.nome = nome;
         this.taglia = taglia;
         this.velocita = velocita;
         this.lingua = linguaggio;
         this.privilegiRazza = privilegiRazza;
         this.caratteristicaBaseList = caratteristicaBaseList;
     }
+
+
+    public String getNome() {return nome; }
 
     public String getTaglia() {
         return taglia;
