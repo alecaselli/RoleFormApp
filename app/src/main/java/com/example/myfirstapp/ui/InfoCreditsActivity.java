@@ -45,6 +45,7 @@ public class InfoCreditsActivity extends AppCompatActivity {
 
         } catch (IOException e) {
             Log.e("CREDITS", "fsiled asset read", e);
+
         }
     }
 

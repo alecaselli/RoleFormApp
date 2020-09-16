@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         DBManager dbManager = new DBManager(this);
-        dbManager.dropDB(this);
+        /*dbManager.dropDB(this);*/
         List<List<String>> datilist = dbManager.leggiDatiMenu(TabellaGiocatore.TBL_NOME, CampiComuni.FIELD_LIVELLO, TabellaGiocatore.FIELD_NOMECAMPAGNA, TabellaGiocatore.FIELD_NOMEG);
         ArrayList<ExampleItem> exampleList = new ArrayList<>();
 
