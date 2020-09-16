@@ -22,6 +22,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ArrayList<ExampleItem> mExampleList;
+
     private RecyclerView mRecyclerView;
     private ExampleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -34,17 +36,17 @@ public class MainActivity extends AppCompatActivity {
         DBManager dbManager = new DBManager(this);
         dbManager.dropDB(this);
         List<List<String>> datilist = dbManager.leggiDatiMenu(TabellaGiocatore.TBL_NOME, CampiComuni.FIELD_LIVELLO, TabellaGiocatore.FIELD_NOMECAMPAGNA, TabellaGiocatore.FIELD_NOMEG);
-        ArrayList<ExampleItem> exampleList = new ArrayList<>();
+        mExampleList = new ArrayList<>();
 
         if (datilist != null)
             for (List<String> dati : datilist) {
-                exampleList.add(new ExampleItem(R.drawable.ic_baseline_image, dati.get(0), dati.get(1), "livello" + " " + dati.get(2)));
+                mExampleList.add(new ExampleItem(R.drawable.ic_baseline_image, dati.get(0), dati.get(1), "livello" + " " + dati.get(2)));
             }
 
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager((this));
-        mAdapter = new ExampleAdapter(exampleList);
+        mAdapter = new ExampleAdapter(mExampleList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
