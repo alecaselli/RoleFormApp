@@ -15,11 +15,12 @@
     <string name="level">Level</string>
     <string name="Lv10">Lv10</string>
     <string name="crediti">Crediti</string>
-    <string name="CREDITI">CREDITI</string>
+    <string name="INFOeCREDITI">INFO &amp; CREDITI</string>
     <string name="livello">livello</string>
     <string name="cm">cm</string>
     <string name="anni">anni</string>
-    
+    <string name="info">Info</string>
+
     <string-array name="races">
 
         <item>Umano</item>

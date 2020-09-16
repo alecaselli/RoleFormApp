@@ -98,7 +98,7 @@
             android:layout_marginStart="80dp"
             android:layout_toEndOf="@id/create"
             android:background="?android:selectableItemBackground"
-            android:onClick="openInfo"
+            android:onClick="openInfoCredits"
             android:src="@drawable/ic_info" />
 
     </RelativeLayout>

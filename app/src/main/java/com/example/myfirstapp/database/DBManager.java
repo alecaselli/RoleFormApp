@@ -34,6 +34,23 @@ public class DBManager {
         dbhelper = new DBHelper(ctx);
     }
 
+    @NotNull
+    public static List<List<String>> convertiLista(@NotNull List<List<String>> listainiziale) {
+        List<List<String>> listafinale = new ArrayList<List<String>>();
+        for (String elemento : listainiziale.get(0)) {
+            List<String> primostrato = new ArrayList<String>();
+            listafinale.add(primostrato);
+        }
+
+        for (List<String> primostrato : listainiziale) {
+            for (String elemento : primostrato) {
+                listafinale.get(primostrato.indexOf(elemento)).add(elemento);
+            }
+        }
+
+        return listafinale;
+    }
+
     /* elimina db */
     public void dropDB(Context ctx) {
         ctx.deleteDatabase(DBHelper.DBNAME);

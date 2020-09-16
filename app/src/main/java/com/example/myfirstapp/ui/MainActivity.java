@@ -3,7 +3,6 @@ package com.example.myfirstapp.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -77,13 +76,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openInfo(View view) {
-        Intent intent = new Intent(this, InfoActivity.class);
+    public void openInfoCredits(View view) {
+        Intent intent = new Intent(this, InfoCreditsActivity.class);
         startActivity(intent);
     }
 
     public void openEdit(View view) {
-        Intent intent = new Intent(this, CreditsActivity.class);
+        Intent intent = new Intent(this, EditActivity.class);
         startActivity(intent);
     }
 
