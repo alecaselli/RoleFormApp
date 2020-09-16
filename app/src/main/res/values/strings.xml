@@ -14,12 +14,14 @@
     <string name="campaign_name">Campaign name</string>
     <string name="level">Level</string>
     <string name="Lv10">Lv10</string>
-    <string name="crediti">Crediti</string>
-    <string name="INFOeCREDITI">INFO &amp; CREDITI</string>
     <string name="livello">livello</string>
     <string name="cm">cm</string>
     <string name="anni">anni</string>
     <string name="info">Info</string>
+    <string name="crediti">Crediti</string>
+    <string name="info_crediti">Info &amp; Crediti</string>
+    <string name="edit">Edit</string>
+    <string name="salva">Salva</string>
 
     <string-array name="races">
 
