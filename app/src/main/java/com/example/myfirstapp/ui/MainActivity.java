@@ -3,15 +3,14 @@ package com.example.myfirstapp.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myfirstapp.utilities.ExampleItem;
+import com.example.myfirstapp.utilities.CardGiocatore;
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.adapter.ExampleAdapter;
+import com.example.myfirstapp.adapter.CardGiocatoreAdapter;
 import com.example.myfirstapp.database.CampiComuni;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.database.TabellaGiocatore;
@@ -21,10 +20,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<ExampleItem> mExampleList;
+    private ArrayList<CardGiocatore> mCardGiocatoreList;
+
+    private DBManager dbManager = new DBManager(this);
 
     private RecyclerView mRecyclerView;
-    private ExampleAdapter mAdapter;
+    private CardGiocatoreAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
@@ -32,39 +33,44 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DBManager dbManager = new DBManager(this);
-        /*dbManager.dropDB(this);*/
+        dbManager.dropDB(this);
+        this.createListCardGiocaore();
+        this.buildRecyclerView();
+
+    }
+
+    public void createListCardGiocaore(){
+
         List<List<String>> datilist = dbManager.leggiDatiMenu(TabellaGiocatore.TBL_NOME, CampiComuni.FIELD_LIVELLO, TabellaGiocatore.FIELD_NOMECAMPAGNA, TabellaGiocatore.FIELD_NOMEG);
-        mExampleList = new ArrayList<>();
+        mCardGiocatoreList = new ArrayList<>();
 
         if (datilist != null)
             for (List<String> dati : datilist) {
-                mExampleList.add(new ExampleItem(R.drawable.ic_baseline_image, dati.get(0), dati.get(1), "livello" + " " + dati.get(2)));
+                mCardGiocatoreList.add(new CardGiocatore(R.drawable.ic_baseline_image, dati.get(0), dati.get(1), "livello" + " " + dati.get(2)));
             }
 
+    }
+
+    public void buildRecyclerView(){
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager((this));
-        mAdapter = new ExampleAdapter(mExampleList);
+        mAdapter = new CardGiocatoreAdapter(mCardGiocatoreList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-
-        mAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new CardGiocatoreAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view) {
-                TextView nomecampagna = findViewById(R.id.campaign_name);
-                TextView nomegiocatore = findViewById(R.id.character_name);
-                String nomecamp = nomecampagna.getText().toString();
-                String nomeg = nomegiocatore.getText().toString();
-                openCharacterActivity(nomecamp, nomeg);
+            public void onItemClick(int position) {
+                openCharacterActivity(position);
             }
         });
     }
 
-    public void openCharacterActivity(String nomecamp, String nomeg) {
-
+    public void openCharacterActivity(int position) {
+        String nomecamp = mCardGiocatoreList.get(position).getNomecampagna();
+        String nomeg = mCardGiocatoreList.get(position).getNomegiocatore();
         Intent intent = new Intent(this, CharacterActivity.class);
         intent.putExtra("nomecamp", nomecamp);
         intent.putExtra("nomeg", nomeg);

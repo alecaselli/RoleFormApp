@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -1685,6 +1686,7 @@ public class DBManager {
             resultSet.close();
             return new Armatura(equi.getNome(), equi.getDescrizione(), equi.getTipo(), equi.getCosto(), equi.getCapacita(), equi.getPeso(), nonFurtiva, modificatoreCA, tempoTogliere, tempoIndossare, forzaNecessaria);
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI_ARMATURA", "fallita lettura", sqle);
             return null;
         }
     }
@@ -1724,11 +1726,11 @@ public class DBManager {
                 if (arma != null)
                     equipaggiamentoList.add(arma);
                 else {
-                    Armatura armatura = this.leggiArmatura(resultSet.getString(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_NOMEE)));
+                    Armatura armatura = this.leggiArmatura(nome);
                     if (armatura != null)
                         equipaggiamentoList.add(armatura);
                     else {
-                        Equipaggiamento equi = this.leggiEquipaggiamento(resultSet.getString(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_NOMEE)));
+                        Equipaggiamento equi = this.leggiEquipaggiamento(nome);
                         if (equi != null)
                             equipaggiamentoList.add(equi);
                     }

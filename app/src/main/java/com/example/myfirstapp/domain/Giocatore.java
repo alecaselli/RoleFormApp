@@ -37,34 +37,38 @@ public class Giocatore extends Descrivibile {
     private List<Incantesimo> incantesimiGiocatore;
     private List<Abilita> abilitaList;
 
-    public Giocatore(String nome,
-                     StringBuffer descrizione,
-                     int mana,
-                     int livello,
-                     int puntiEsperienza,
-                     int modCompetenza,
-                     int capacitaBorsa,
-                     int puntiFerita,
-                     int nDadi,
-                     int dado,
-                     int classeArmatura,
-                     int puntiStat,
-                     String nomeCampagna,
-                     String iniziativa,
-                     String eta,
-                     String altezza,
-                     String genere,
-                     StringBuffer noteAvventura,
-                     StringBuffer allineamento,
-                     StringBuffer lingua,
-                     Valuta portafoglio,
-                     Classe classe,
-                     Razza razza,
-                     List<Caratteristica> caratteristicaList,
-                     List<Equipaggiamento> borsa,
-                     List<Equipaggiamento> equipaggiato,
-                     List<Incantesimo> incantesimiGiocatore,
-                     List<Abilita> abilitaList) {
+    public Giocatore(String nome, StringBuffer descrizione, int mana, int livello, int puntiEsperienza, int modCompetenza, int capacitaBorsa, int puntiFerita, int puntiFeritaMax, int nDadi, int dado, int classeArmatura, int puntiStat, String nomeCampagna, String iniziativa, String eta, String altezza, String genere, StringBuffer noteAvventura, StringBuffer allineamento, StringBuffer lingua, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Equipaggiamento> borsa, List<Equipaggiamento> equipaggiato, List<Incantesimo> incantesimiGiocatore, List<Abilita> abilitaList) {
+        super(nome, descrizione);
+        this.mana = mana;
+        this.livello = livello;
+        this.puntiEsperienza = puntiEsperienza;
+        this.modCompetenza = modCompetenza;
+        this.capacitaBorsa = capacitaBorsa;
+        this.puntiFerita = puntiFerita;
+        this.puntiFeritaMax = puntiFeritaMax;
+        this.nDadi = nDadi;
+        this.dado = dado;
+        this.classeArmatura = classeArmatura;
+        this.puntiStat = puntiStat;
+        this.nomeCampagna = nomeCampagna;
+        this.iniziativa = iniziativa;
+        this.eta = eta;
+        this.altezza = altezza;
+        this.genere = genere;
+        this.noteAvventura = noteAvventura;
+        this.allineamento = allineamento;
+        this.lingua = lingua;
+        this.portafoglio = portafoglio;
+        this.classe = classe;
+        this.razza = razza;
+        this.caratteristicaList = caratteristicaList;
+        this.borsa = borsa;
+        this.equipaggiato = equipaggiato;
+        this.incantesimiGiocatore = incantesimiGiocatore;
+        this.abilitaList = abilitaList;
+    }
+
+    public Giocatore(String nome, StringBuffer descrizione, int mana, int livello, int puntiEsperienza, int modCompetenza, int capacitaBorsa, int puntiFerita, int nDadi, int dado, int classeArmatura, int puntiStat, String nomeCampagna, String iniziativa, String eta, String altezza, String genere, StringBuffer noteAvventura, StringBuffer allineamento, StringBuffer lingua, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Equipaggiamento> borsa, List<Equipaggiamento> equipaggiato, List<Incantesimo> incantesimiGiocatore, List<Abilita> abilitaList) {
         super(nome, descrizione);
         this.mana = mana;
         this.livello = livello;
@@ -93,7 +97,7 @@ public class Giocatore extends Descrivibile {
         this.equipaggiato = equipaggiato;
         this.incantesimiGiocatore = incantesimiGiocatore;
         this.abilitaList = abilitaList;
-        this.inizializzazionePG();
+        /*this.inizializzazionePG();*/
     }
 
     public int getMana() {
