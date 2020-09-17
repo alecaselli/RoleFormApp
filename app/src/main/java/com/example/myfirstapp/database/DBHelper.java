@@ -414,7 +414,21 @@ public class DBHelper extends SQLiteOpenHelper {
         q = "INSERT INTO \"carBase\" (\"nomer\",\"nomecb\",\"valore\") VALUES ('nano','forza',3);";
         db.execSQL(q);
 
-
+        q = "INSERT INTO \"giocatore\" (\"nomeCampagna\",\"nomeg\",\"desc\",\"mana\",\"livello\",\"puntiXP\",\"modCompetenza\",\"capacitaBorsa\",\"puntiFerita\",\"classeArmatura\",\"puntiStat\",\"nDadi\",\"dado\",\"iniziativa\",\"eta\",\"altezza\",\"genere\",\"noteAvventura\",\"allineamento\",\"lingua\",\"nomecla\",\"nomer\",\"nomev\",\"valoreVal\") " +
+                "VALUES ('campagna','ciro','un rozzo nano ',0,1,0,2,0,13,0,0,1,8,'0','130','90','M',NULL,'caotico neutrale',NULL,'gueriero','nano','moneta del regno di Ho',0);";
+        db.execSQL(q);
+        q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','carisma',0,0,0,0,0);";
+        db.execSQL(q);
+        q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','costituzione',0,0,0,0,0);";
+        db.execSQL(q);
+        q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','destrezza',0,0,0,0,0);";
+        db.execSQL(q);
+        q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','forza',0,0,0,0,0);";
+        db.execSQL(q);
+        q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','saggezza',0,0,0,0,0);";
+        db.execSQL(q);
+        q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','intelligenza',0,0,0,0,0);";
+        db.execSQL(q);
 
         q = "INSERT INTO \"giocatore\" (\"nomeCampagna\",\"nomeg\",\"desc\",\"mana\",\"livello\",\"puntiXP\",\"modCompetenza\",\"capacitaBorsa\",\"puntiFerita\",\"classeArmatura\",\"puntiStat\",\"nDadi\",\"dado\",\"iniziativa\",\"eta\",\"altezza\",\"genere\",\"noteAvventura\",\"allineamento\",\"lingua\",\"nomecla\",\"nomer\",\"nomev\",\"valoreVal\") " +
                 "VALUES ('Arcadia','Fieryor','drago elettrico',0,12,0,2,0,70,0,0,1,8,'0','27','192','M',NULL,'caotico neutrale',NULL,'ranger','elfo','moneta del regno di Ho',0);";
@@ -433,21 +447,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(q);
 
 
-        q = "INSERT INTO \"giocatore\" (\"nomeCampagna\",\"nomeg\",\"desc\",\"mana\",\"livello\",\"puntiXP\",\"modCompetenza\",\"capacitaBorsa\",\"puntiFerita\",\"classeArmatura\",\"puntiStat\",\"nDadi\",\"dado\",\"iniziativa\",\"eta\",\"altezza\",\"genere\",\"noteAvventura\",\"allineamento\",\"lingua\",\"nomecla\",\"nomer\",\"nomev\",\"valoreVal\") " +
-                "VALUES ('campagna','ciro','un rozzo nano ',0,1,0,2,0,13,0,0,1,8,'0','130','90','M',NULL,'caotico neutrale',NULL,'gueriero','nano','moneta del regno di Ho',0);";
-        db.execSQL(q);
-        q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','carisma',0,0,0,0,0);";
-        db.execSQL(q);
-        q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','costituzione',0,0,0,0,0);";
-        db.execSQL(q);
-        q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','destrezza',0,0,0,0,0);";
-        db.execSQL(q);
-        q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','forza',0,0,0,0,0);";
-        db.execSQL(q);
-        q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','saggezza',0,0,0,0,0);";
-        db.execSQL(q);
-        q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','intelligenza',0,0,0,0,0);";
-        db.execSQL(q);
+
     }
 }
 
