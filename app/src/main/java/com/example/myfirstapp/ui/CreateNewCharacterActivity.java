@@ -32,9 +32,9 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
         List<List<String>> doubleRaceList = db.leggiPK(TabellaRazza.TBL_NOME, TabellaRazza.FIELD_NOMER);
         doubleRaceList = DBManager.convertiLista(doubleRaceList);
         List<String> raceList = doubleRaceList.get(0);
-        ArrayAdapter<String> raceSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> raceSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_item);
         raceSpinnerAdapter.addAll(raceList);
-        raceSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        raceSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_custom_item);
         Spinner raceSpinner = findViewById(R.id.create_character_race);
         raceSpinner.setAdapter(raceSpinnerAdapter);
         raceSpinner.setOnItemSelectedListener(this);
@@ -42,9 +42,9 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
         List<List<String>> doubleClassList = db.leggiPK(TabellaClasse.TBL_NOME, TabellaClasse.FIELD_NOMECLA);
         doubleClassList = DBManager.convertiLista(doubleClassList);
         List<String> classList = doubleClassList.get(0);
-        ArrayAdapter<String> classSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> classSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_item);
         classSpinnerAdapter.addAll(classList);
-        classSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        classSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_custom_item);
         Spinner classSpinner = findViewById(R.id.create_character_class);
         classSpinner.setAdapter(classSpinnerAdapter);
         classSpinner.setOnItemSelectedListener(this);
@@ -68,7 +68,6 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
     @Override
