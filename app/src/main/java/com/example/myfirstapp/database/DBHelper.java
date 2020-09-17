@@ -430,7 +430,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(q);
         q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('Arcadia','Fieryor','intelligenza',0,0,0,0,0);";
         db.execSQL(q);
-
+        
     }
 }
 
