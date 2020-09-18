@@ -1274,8 +1274,8 @@ public class DBManager {
 
         try {
             return (db.update(TabellaGiocatore.TBL_NOME, cv, whereClause, whereArgs) > 0);
-        }catch (SQLiteException sqle){
-            Log.e("AGGIORNA NOTE VARIE","aggiornamento fallito", sqle);
+        } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA NOTE VARIE", "aggiornamento fallito", sqle);
             return false;
         }
 

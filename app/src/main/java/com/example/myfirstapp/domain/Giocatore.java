@@ -35,31 +35,14 @@ public class Giocatore extends Descrivibile {
 
     public Giocatore(String nome, StringBuffer descrizione, String nomeCampagna, String eta, String altezza, String genere, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Abilita> abilitaList) {
         super(nome, descrizione);
-        this.mana = 0;
-        this.livello = 1;
-        this.puntiEsperienza = 0;
-        this.modCompetenza = 2;
-        this.capacitaBorsa = 0;
-        this.inizPuntiFeritaMax();
-        this.setPuntiFerita(this.puntiFeritaMax);
         this.classe = classe;
-        this.nDadi = this.classe.getnDadi();
-        this.dado = this.classe.getDado();
-        this.classeArmatura = 0;
-        this.puntiStat = 0;
         this.nomeCampagna = nomeCampagna;
-        this.iniziativa = "0";
         this.eta = eta;
         this.altezza = altezza;
         this.genere = genere;
-        this.noteAvventura = new StringBuffer();
         this.razza = razza;
-        this.lingua = this.razza.getLingua();
         this.portafoglio = portafoglio;
         this.caratteristicaList = caratteristicaList;
-        this.borsa = this.classe.getEquipaggiamentoList();
-        this.equipaggiato = null;
-        this.incantesimiGiocatore = this.classe.getIncantesimiClasse();
         this.abilitaList = abilitaList;
         this.inizializzazionePG();
     }
@@ -340,6 +323,15 @@ public class Giocatore extends Descrivibile {
         this.puntiEsperienza += val;
     }
 
+    public void aggiornaClasseArmatura(int val) {
+        this.classeArmatura += val;
+    }
+
+    public void aggiornaClasseArmatura() {
+        Armatura armatura = (Armatura) this.getEquipaggiato("armatura");
+        this.aggiornaClasseArmatura(armatura.getModificatoreCA());
+    }
+
     /* serie di metodi per aggiungere/eliminare elementi da liste */
     public void aggiungiBorsa(List<Equipaggiamento> nuovo) {
         if (borsa == null)
@@ -376,56 +368,29 @@ public class Giocatore extends Descrivibile {
 
     public void inizializzazionePG() {
 
+
         for (CaratteristicaBase elementoR : this.razza.getCaratteristicaBaseList()) {
             for (Caratteristica elementoC : this.caratteristicaList) {
                 if (elementoC.getNome().compareToIgnoreCase(elementoR.getNome()) == 0)
                     elementoC.addValoreBase(elementoR.getValore());
             }
         }
-
+        this.classeArmatura = this.puntiStat = this.mana = this.puntiEsperienza = this.capacitaBorsa = 0;
+        this.noteAvventura = new StringBuffer();
+        this.setModCompetenza(2);
+        this.setLivello(1);
+        this.setIniziativa("0");
+        this.setIncantesimiGiocatore(this.classe.getIncantesimiClasse());
         this.aggiungiLingua(this.razza.getLingua());
-
         this.setnDadi(this.classe.getnDadi());
         this.setDado(this.classe.getDado());
         this.inizPuntiFeritaMax();
         this.setPuntiFerita(this.puntiFeritaMax);
-        /*this.puntiFeritaGiocatore = new PuntiFerita(this.classe.getnDadi(), this.classe.getDado());
-
-        this.competenzaGiocatore = new Competenza(this.classe.getCompetenzaClasse().getArmatura(),
-                                                    this.classe.getCompetenzaClasse().getArma(),
-                                                    this.classe.getCompetenzaClasse().getAttrezzo(),
-                                                    this.classe.getCompetenzaClasse().getTiroSalvezza(),
-                                                    this.classe.getCompetenzaClasse().getAbilita());*/
-
+        this.equipaggiato = new ArrayList<Equipaggiamento>() {
+        };
         this.aggiungiBorsa(this.classe.getEquipaggiamentoList());
-
         this.aggiungiDescrizione(this.classe.getDescrizionePrivilegiPoteri().toString());
         this.aggiungiDescrizione(this.classe.getCompetenza().toString());
-
-        this.setModCompetenza(2);
     }
 
-
-    /* calcola il valoreBase di tutte le statistiche usando razza e classe
-    public void caratteristicaBase(){
-        for(int i = 0; i < caratteristicaList.size(); ++i){
-            this.caratteristicaList.get(i).addValoreBase(razza.getStatisticaBaseList().get(i).getValore() + classe.getStatisticaBaseList().get(i).getValore());
-        }
-    }
-
-
-
-      for(StatisticheBase stat1: razza.getStatisticheBaseList()){
-            if(this.compareStatistiche(stat1) == 0){
-                this.valoreBase += stat1.getValore();
-            }
-        }
-        for(StatisticheBase stat1: classe.getStatisticheBaseList()){
-            if(this.compareStatistiche(stat1) == 0){
-                this.valoreBase += stat1.getValore();
-            }
-        }
-        private int compareStatistiche(StatisticheBase stat2){
-        return this.nome.compareToIgnoreCase(stat2.getNome());
-    }*/
 }

@@ -139,7 +139,7 @@ public class CharacterActivity extends AppCompatActivity {
 
     public void openNote(View view) {
         Intent intent = new Intent(this, NoteActivity.class);
-        intent.putExtra("filename", giocatore.getNoteAvventura());
+        intent.putExtra("filename", giocatore.getNoteAvventura().toString());
         startActivity(intent);
     }
 }

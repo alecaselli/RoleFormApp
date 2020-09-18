@@ -3,7 +3,7 @@ package com.example.myfirstapp.domain;
 import java.util.*;
 
 public class Equipaggiamento extends Descrivibile {
-    private static final String[] subtipobase = new String[]{"arma da guerra a distanza",
+    private static final List<String> subtipobase = new ArrayList<String>(Arrays.asList("arma da guerra a distanza",
             "arma da guerra da mischia",
             "arma semplice a distanza",
             "arma semplice da mischia",
@@ -12,8 +12,8 @@ public class Equipaggiamento extends Descrivibile {
             "armatura pesante",
             "attrezzo",
             "equipaggiamento da avventura",
-            "scudo"};
-    private static final String[] tipobase = new String[]{"arma","armatura","scudo"};
+            "scudo"));
+    private static final List<String> tipobase = new ArrayList<String>(Arrays.asList("arma","armatura","scudo"));
     private int costo;
     private int peso;
     private int capacita;
@@ -69,11 +69,11 @@ public class Equipaggiamento extends Descrivibile {
         this.subtipo = subtipo;
     }
 
-    public static String[] getSubtipobase() {
+    public static List<String> getSubtipobase() {
         return subtipobase;
     }
 
-    public static String[] getTipobase() {
+    public static List<String> getTipobase() {
         return tipobase;
     }
 }
