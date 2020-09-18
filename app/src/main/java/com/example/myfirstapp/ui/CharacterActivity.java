@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.myfirstapp.R.string;
@@ -125,5 +126,10 @@ public class CharacterActivity extends AppCompatActivity {
         else nome = "Non equipaggiato";
         txt = (TextView) findViewById(R.id.weapon_name);
         txt.setText(nome);
+    }
+
+    public void openNote(View view) {
+        Intent intent = new Intent(this, NoteActivity.class);
+        startActivity(intent);
     }
 }

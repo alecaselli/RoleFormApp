@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -30,7 +29,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/activity_character_header"
-        android:background="@color/whitesmoke">
+        android:layout_above="@id/character_navbar"
+        android:scrollbars="none"
+        android:background="@color/whitesmoke"
+        android:paddingHorizontal="12dp">
 
 
         <RelativeLayout
@@ -46,11 +48,10 @@
             </RelativeLayout>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/character_info"
+                android:id="@+id/character_character"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="6dp"
-                android:layout_marginVertical="4dp"
+                android:layout_marginVertical="6dp"
                 app:cardCornerRadius="15dp">
 
                 <LinearLayout
@@ -193,9 +194,9 @@
                 android:id="@+id/character_stats"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/character_info"
-                android:layout_marginHorizontal="6dp"
-                android:layout_marginVertical="4dp"
+                android:layout_below="@id/character_character"
+                android:layout_marginVertical="6dp"
+                android:layout_marginRight="6dp"
                 android:layout_toStartOf="@id/activity_center"
                 app:cardCornerRadius="15dp">
 
@@ -440,9 +441,9 @@
                 android:id="@+id/character_currency"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/character_info"
-                android:layout_marginHorizontal="6dp"
-                android:layout_marginVertical="4dp"
+                android:layout_below="@id/character_character"
+                android:layout_marginVertical="6dp"
+                android:layout_marginLeft="6dp"
                 android:layout_toEndOf="@id/activity_center"
                 app:cardCornerRadius="15dp">
 
@@ -564,8 +565,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/character_currency"
-                android:layout_marginHorizontal="6dp"
-                android:layout_marginVertical="4dp"
+                android:layout_marginVertical="6dp"
+                android:layout_marginLeft="6dp"
                 android:layout_toEndOf="@id/activity_center"
                 app:cardCornerRadius="15dp">
 
@@ -578,7 +579,7 @@
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="40.5dp"
+                        android:layout_height="38.5dp"
                         app:cardBackgroundColor="@color/lightgrey"
                         app:cardCornerRadius="15dp">
 
@@ -593,7 +594,7 @@
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="40.5dp"
+                        android:layout_height="38.5dp"
                         android:layout_marginTop="10dp"
                         app:cardBackgroundColor="@color/lightgrey"
                         app:cardCornerRadius="15dp">
@@ -616,8 +617,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/character_stats"
-                android:layout_marginHorizontal="6dp"
-                android:layout_marginVertical="4dp"
+                android:layout_marginVertical="6dp"
                 app:cardCornerRadius="15dp">
 
 
@@ -758,5 +758,45 @@
         </RelativeLayout>
 
     </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/character_navbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="4dp"
+        android:background="@color/whitesmoke">
+
+        <ImageButton
+            android:id="@+id/character_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="80dp"
+            android:layout_toStartOf="@id/character_add"
+            android:background="?android:selectableItemBackground"
+            android:onClick="openNote"
+            android:src="@drawable/ic_edit" />
+
+        <ImageButton
+            android:id="@+id/character_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="?android:selectableItemBackground"
+            android:src="@drawable/ic_add" />
+
+        <ImageButton
+            android:id="@+id/character_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="80dp"
+            android:layout_toEndOf="@id/character_add"
+            android:background="?android:selectableItemBackground"
+            android:src="@drawable/ic_info" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

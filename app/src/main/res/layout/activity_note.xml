@@ -1,90 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whitesmoke"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".ui.NoteActivity">
 
 
     <RelativeLayout
-        android:id="@+id/edit_header_relativelayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
 
         <TextView
             android:id="@+id/edit_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="25dp"
             android:layout_marginStart="15dp"
-            android:text="@string/edit"
+            android:text="Notes"
             android:textColor="@color/black"
             android:textSize="32sp"
             android:textStyle="bold|italic" />
     </RelativeLayout>
 
     <ScrollView
-        android:id="@+id/edit_scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/edit_header_relativelayout">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/edit_relativelayout"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/edit_first_card"
+                android:id="@+id/note_alignment_cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="6dp"
-                android:layout_marginVertical="4dp"
+                android:layout_marginVertical="6dp"
                 app:cardCornerRadius="15dp">
 
-                <EditText
-                    android:id="@+id/edit"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="15dp"
-                    android:layout_marginVertical="10dp"
-                    android:textAlignment="textStart"
-                    android:inputType="textCapSentences"
-                    android:text="@string/edit"
-                    android:textColor="@color/black"
-                    android:textSize="22sp"
-                    android:onClick="aggiornaTestoNote"/>
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="12dp">
+
+                    <RelativeLayout
+                        android:id="@+id/allineamento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Allineamento"
+                            android:layout_centerVertical="true"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                        <Button
+                            android:id="@+id/note_alignment_expandButton"
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_alignParentEnd="true"
+                            android:background="@drawable/ic_arrow_up" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/note_alignment_expandableView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/allineamento"
+                        android:visibility="visible">
+
+                        <EditText
+                            android:id="@+id/note_alignment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:background="@android:color/transparent"
+                            android:hint="Scrivi per aggiungere"
+                            android:inputType="textCapSentences|textMultiLine"
+                            android:scrollHorizontally="false"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:id="@+id/note_background_cardView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/edit_first_card"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/gradient"
-                app:cardCornerRadius="15dp" >
+                android:layout_marginVertical="6dp"
+                app:cardCornerRadius="15dp">
 
-                <Button
-                    android:id="@+id/save_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="aggiornaTestoNote"
-                    android:background="?android:selectableItemBackground"
-                    android:text="@string/salva"
-                    android:fontFamily="sans-serif"
-                    android:textStyle="bold"
-                    android:textSize="20sp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="12dp">
+
+                    <RelativeLayout
+                        android:id="@+id/background"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Background"
+                            android:layout_centerVertical="true"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                        <Button
+                            android:id="@+id/note_background_expandButton"
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_alignParentEnd="true"
+                            android:background="@drawable/ic_arrow_up" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/note_background_expandableView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/background"
+                        android:visibility="visible">
+
+                        <EditText
+                            android:id="@+id/note_background"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:background="@android:color/transparent"
+                            android:hint="Scrivi per aggiungere"
+                            android:inputType="textCapSentences|textMultiLine"
+                            android:scrollHorizontally="false"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
 
             </androidx.cardview.widget.CardView>
-        </RelativeLayout>
+
+        </LinearLayout>
     </ScrollView>
 
 
-
-</RelativeLayout>
+</LinearLayout>
 
 
 

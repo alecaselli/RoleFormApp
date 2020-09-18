@@ -34,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dbManager.dropDB(this);
-        this.createListCardGiocaore();
+        this.createListCardGiocatore();
         this.buildRecyclerView();
 
     }
 
-    public void createListCardGiocaore(){
+    public void createListCardGiocatore(){
 
         List<List<String>> datilist = dbManager.leggiDatiMenu(TabellaGiocatore.TBL_NOME, CampiComuni.FIELD_LIVELLO, TabellaGiocatore.FIELD_NOMECAMPAGNA, TabellaGiocatore.FIELD_NOMEG);
         mCardGiocatoreList = new ArrayList<>();
