@@ -53,7 +53,7 @@ public class DBManager {
     }
 
     /* elimina db */
-    public void dropDB(Context ctx) {
+    public void dropDB(@NotNull Context ctx) {
         ctx.deleteDatabase(DBHelper.DBNAME);
     }
 
@@ -81,8 +81,6 @@ public class DBManager {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        int flag = (nuovo.isCompetenza()) ? 1 : 0;
-        cv.put(CampiComuni.FIELD_COMPETENZA, flag);
         cv.put(TabellaAbilita.FIELD_NOMEA, nuovo.getNome());
         cv.put(CampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
 
@@ -285,7 +283,6 @@ public class DBManager {
         cv.put(TabellaGiocatore.FIELD_ALTEZZA, nuovo.getAltezza());
         cv.put(TabellaGiocatore.FIELD_GENERE, nuovo.getGenere());
         cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, nuovo.getNoteAvventura().toString());
-        cv.put(TabellaGiocatore.FIELD_ALLINEAMENTO, nuovo.getAllineamento().toString());
         cv.put(CampiComuni.FIELD_LINGUA, nuovo.getLingua().toString());
         cv.put(TabellaClasse.FIELD_NOMECLA, nuovo.getClasse().getNome());
         cv.put(TabellaRazza.FIELD_NOMER, nuovo.getRazza().getNome());
@@ -312,7 +309,7 @@ public class DBManager {
                         return false;
                 }
                 for (Abilita nuovaa : nuovo.getAbilitaList()) {
-                    if (!this.aggiungiHaga(nuovo.getNomeCampagna(), nuovo.getNome(), nuovaa.getNome()))
+                    if (!this.aggiungiHaga(nuovo.getNomeCampagna(), nuovo.getNome(), nuovaa.getNome(), nuovaa.isCompetenza()))
                         return false;
                 }
                 return true;
@@ -373,10 +370,12 @@ public class DBManager {
         }
     }
 
-    public boolean aggiungiHaga(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String nomea) {
+    public boolean aggiungiHaga(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String nomea, @NonNull boolean competenza) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
+        int flag = (competenza) ? 1 : 0;
+        cv.put(CampiComuni.FIELD_COMPETENZA, flag);
         cv.put(TabellaGiocatore.FIELD_NOMECAMPAGNA, nomecamp);
         cv.put(TabellaGiocatore.FIELD_NOMEG, nomeg);
         cv.put(TabellaEquipaggiamento.FIELD_NOMEE, nomea);
@@ -910,8 +909,6 @@ public class DBManager {
         String whereClause = TabellaAbilita.FIELD_NOMEA + " = ? ";
         String[] whereArgs = new String[]{aggiornato.getNome()};
 
-        int flag = (aggiornato.isCompetenza()) ? 1 : 0;
-        cv.put(CampiComuni.FIELD_COMPETENZA, flag);
         cv.put(CampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
 
         try {
@@ -1132,7 +1129,6 @@ public class DBManager {
         cv.put(TabellaGiocatore.FIELD_ALTEZZA, aggiornato.getAltezza());
         cv.put(TabellaGiocatore.FIELD_GENERE, aggiornato.getGenere());
         cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, aggiornato.getNoteAvventura().toString());
-        cv.put(TabellaGiocatore.FIELD_ALLINEAMENTO, aggiornato.getAllineamento().toString());
         cv.put(CampiComuni.FIELD_LINGUA, aggiornato.getLingua().toString());
         cv.put(TabellaClasse.FIELD_NOMECLA, aggiornato.getClasse().getNome());
         cv.put(TabellaRazza.FIELD_NOMER, aggiornato.getRazza().getNome());
@@ -1163,7 +1159,7 @@ public class DBManager {
 
                 this.eliminaHaga(aggiornato.getNomeCampagna(), aggiornato.getNome());
                 for (Abilita nuovaa : aggiornato.getAbilitaList()) {
-                    if (!this.aggiornaHaga(aggiornato.getNomeCampagna(), aggiornato.getNome(), nuovaa.getNome()))
+                    if (!this.aggiornaHaga(aggiornato.getNomeCampagna(), aggiornato.getNome(), nuovaa.getNome(), nuovaa.isCompetenza()))
                         return false;
                 }
                 return true;
@@ -1213,8 +1209,21 @@ public class DBManager {
         return aggiungiNomeVal(nomev, nome);
     }
 
-    public boolean aggiornaHaga(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String nomea) {
-        return aggiungiHaga(nomecamp, nomeg, nomea);
+    public boolean aggiornaHaga(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String nomea, @NonNull boolean competenza) {
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? " + " AND " + TabellaAbilita.FIELD_NOMEA + " = ? ";
+        String[] whereArgs = new String[]{nomecamp, nomeg, nomea};
+
+        int flag = (competenza) ? 1 : 0;
+        cv.put(CampiComuni.FIELD_COMPETENZA, flag);
+
+        try {
+            return db.update(TabelleHA.TBL_HAGA, cv, whereClause, whereArgs) > 0;
+        } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA HAGA", "aggiornamento fallito", sqle);
+            return false;
+        }
     }
 
     public boolean aggiornaHage(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String nomee, @NotNull boolean borsa) {
@@ -1229,6 +1238,7 @@ public class DBManager {
         try {
             return db.update(TabelleHA.TBL_HAGE, cv, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA HAGE", "aggiornamento fallito", sqle);
             return false;
         }
     }
@@ -1251,6 +1261,25 @@ public class DBManager {
 
     public boolean aggiornaHarp(@NotNull String nomer, @NotNull String nomep) {
         return aggiungiHarp(nomer, nomep);
+    }
+
+    public boolean aggiornaNoteVarie(@NotNull String nomecamp, @NotNull String nomeg, @NotNull StringBuffer desc, @NotNull StringBuffer note) {
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? ";
+        String[] whereArgs = new String[]{nomecamp, nomeg};
+
+        cv.put(CampiComuni.FIELD_DESC, desc.toString());
+        cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, note.toString());
+
+        try {
+            return (db.update(TabellaGiocatore.TBL_NOME, cv, whereClause, whereArgs) > 0);
+        }catch (SQLiteException sqle){
+            Log.e("AGGIORNA NOTE VARIE","aggiornamento fallito", sqle);
+            return false;
+        }
+
+
     }
 
     /* READ */
@@ -1402,12 +1431,11 @@ public class DBManager {
             }
             resultSet.moveToFirst();
 
-            boolean competenza = resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_COMPETENZA)) == 1;
             StringBuffer descrizione = new StringBuffer();
             descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
 
             resultSet.close();
-            return new Abilita(nomea, descrizione, competenza);
+            return new Abilita(nomea, descrizione);
         } catch (SQLiteException sqle) {
             return null;
         }
@@ -1428,15 +1456,18 @@ public class DBManager {
             List<Abilita> abilitaList = new ArrayList<Abilita>();
             while (!resultSet.isAfterLast()) {
                 Abilita abilita = leggiAbilita(resultSet.getString(resultSet.getColumnIndex(TabellaAbilita.FIELD_NOMEA)));
-                if (abilita != null)
+                if (abilita != null) {
+                    boolean comp = (resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_COMPETENZA)) == 1);
+                    abilita.setCompetenza(comp);
                     abilitaList.add(abilita);
-
+                }
                 resultSet.moveToNext();
             }
 
             resultSet.close();
             return abilitaList;
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI ABILITA LIST", "fallita lettura", sqle);
             return null;
         }
     }
@@ -1775,7 +1806,9 @@ public class DBManager {
 
             resultSet.close();
             return new Classe(nomecla, descrizione, descrizionePrivilegiPoteri, nDadi, dado, competenza, equipaggiamentoList, privilegiClasse, incantesimiClasse);
+
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI CLASSE", "fallita lettura", sqle);
             return null;
         }
     }
@@ -1798,7 +1831,9 @@ public class DBManager {
 
             resultSet.close();
             return new Caratteristica(nomecar, descrizione);
+
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI CAR", "fallita lettura", sqle);
             return null;
         }
     }
@@ -1833,7 +1868,9 @@ public class DBManager {
 
             resultSet.close();
             return caratteristicaList;
+
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI CARG", "fallita lettura", sqle);
             return null;
         }
     }
@@ -1866,9 +1903,8 @@ public class DBManager {
             String eta = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_ETA));
             String altezza = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_ALTEZZA));
             String genere = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_GENERE));
-            String noteAvventura = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_NOTEAVVENTURA));
-            StringBuffer allineamento = new StringBuffer();
-            allineamento.append(resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_ALLINEAMENTO)));
+            StringBuffer noteAvventura = new StringBuffer();
+            noteAvventura.append(resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_NOTEAVVENTURA)));
             StringBuffer lingua = new StringBuffer();
             lingua.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_LINGUA)));
             Valuta portafoglio = this.leggiValuta(resultSet.getString(resultSet.getColumnIndex(TabellaValuta.FIELD_NOMEV)));
@@ -1884,8 +1920,38 @@ public class DBManager {
             List<Abilita> abilitaList = this.leggiAbilita(nomecamp, nomeg);
 
             resultSet.close();
-            return new Giocatore(nomeg, descrizione, mana, livello, puntiEsperienza, modCompetenza, capacitaBorsa, puntiFerita, nDadi, dado, classeArmatura, puntiStat, nomecamp, iniziativa, eta, altezza, genere, noteAvventura, allineamento, lingua, portafoglio, classe, razza, caratteristicaList, borsa, equipaggiato, incantesimiGiocatore, abilitaList);
+            return new Giocatore(nomeg, descrizione, mana, livello, puntiEsperienza, modCompetenza, capacitaBorsa, puntiFerita, nDadi, dado, classeArmatura, puntiStat, nomecamp, iniziativa, eta, altezza, genere, noteAvventura, lingua, portafoglio, classe, razza, caratteristicaList, borsa, equipaggiato, incantesimiGiocatore, abilitaList);
+
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI GIOCATORE", "fallita lettura", sqle);
+            return null;
+        }
+    }
+
+    public List<StringBuffer> leggiNotevarie(@NotNull String nomecamp, @NotNull String nomeg) {
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
+        String[] whereArgs = new String[]{nomecamp, nomeg};
+
+        try {
+            Cursor resultSet = db.query(TabellaGiocatore.TBL_NOME, null, whereClause, whereArgs, null, null, null);
+            if (resultSet == null || resultSet.getCount() == 0) {
+                return null;
+            }
+            resultSet.moveToFirst();
+
+            List<StringBuffer> notelist = new ArrayList<StringBuffer>();
+            StringBuffer note = new StringBuffer();
+            note.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+            notelist.add(note);
+            note.append(resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_NOTEAVVENTURA)));
+            notelist.add(note);
+
+            resultSet.close();
+            return notelist;
+
+        } catch (SQLiteException sqle) {
+            Log.e("LEGGI NOTE VARIE", "fallita lettura", sqle);
             return null;
         }
     }
