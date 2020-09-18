@@ -7,18 +7,8 @@ public class Armatura extends Equipaggiamento {
     private String tempoIndossare;
     private String forzaNecessaria;
 
-    public Armatura(String nome,
-                    StringBuffer descrizione,
-                    String tipo,
-                    int costo,
-                    int peso,
-                    int capacita,
-                    boolean nonFurtiva,
-                    int modificatoreCA,
-                    String tempoTogliere,
-                    String tempoIndossare,
-                    String forzaNecessaria) {
-        super(nome, descrizione, tipo, costo, peso, capacita);
+    public Armatura(String nome, StringBuffer descrizione, String tipo, int costo, int peso, int capacita, boolean nonFurtiva, int modificatoreCA, String tempoTogliere, String tempoIndossare, String forzaNecessaria, String subtipo) {
+        super(nome, descrizione, tipo, costo, peso, capacita, subtipo);
         this.nonFurtiva = nonFurtiva;
         this.modificatoreCA = modificatoreCA;
         this.tempoTogliere = tempoTogliere;

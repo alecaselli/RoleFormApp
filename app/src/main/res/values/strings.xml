@@ -22,6 +22,11 @@
     <string name="info_crediti">Info &amp; Crediti</string>
     <string name="edit">Edit</string>
     <string name="salva">Salva</string>
+    <string name="notes">Notes</string>
+    <string name="allineamento">Allineamento</string>
+    <string name="scrivi_per_aggiungere">Scrivi per aggiungere</string>
+    <string name="background">Background</string>
+    <string name="crea">Crea</string>
 
     <string-array name="races">
 

@@ -81,6 +81,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "\t\"peso\"\tINTEGER,\n" +
                 "\t\"capacita\"\tINTEGER,\n" +
                 "\t\"tipo\"\tTEXT,\n" +
+                "\t\"subtipo\"\tTEXT,\n" +
                 "\tPRIMARY KEY(\"nomee\")\n" +
                 ");";
         db.execSQL(q);
@@ -415,7 +416,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(q);
 
         q = "INSERT INTO \"giocatore\" (\"nomeCampagna\",\"nomeg\",\"desc\",\"mana\",\"livello\",\"puntiXP\",\"modCompetenza\",\"capacitaBorsa\",\"puntiFerita\",\"classeArmatura\",\"puntiStat\",\"nDadi\",\"dado\",\"iniziativa\",\"eta\",\"altezza\",\"genere\",\"noteAvventura\",\"allineamento\",\"lingua\",\"nomecla\",\"nomer\",\"nomev\",\"valoreVal\") " +
-                "VALUES ('campagna','ciro','un rozzo nano ',0,1,0,2,0,13,0,0,1,8,'0','130','90','M',NULL,'caotico neutrale',NULL,'gueriero','nano','moneta del regno di Ho',0);";
+                "VALUES ('campagna','ciro','un rozzo nano ',0,1,0,2,0,13,0,0,1,8,'0','130','90','M','campagna_ciro.txt','caotico neutrale',NULL,'gueriero','nano','moneta del regno di Ho',0);";
         db.execSQL(q);
         q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','carisma',0,0,0,0,0);";
         db.execSQL(q);
@@ -431,7 +432,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(q);
 
         q = "INSERT INTO \"giocatore\" (\"nomeCampagna\",\"nomeg\",\"desc\",\"mana\",\"livello\",\"puntiXP\",\"modCompetenza\",\"capacitaBorsa\",\"puntiFerita\",\"classeArmatura\",\"puntiStat\",\"nDadi\",\"dado\",\"iniziativa\",\"eta\",\"altezza\",\"genere\",\"noteAvventura\",\"allineamento\",\"lingua\",\"nomecla\",\"nomer\",\"nomev\",\"valoreVal\") " +
-                "VALUES ('Arcadia','Fieryor','drago elettrico',0,12,0,2,0,70,0,0,1,8,'0','27','192','M',NULL,'caotico neutrale',NULL,'ranger','elfo','moneta del regno di Ho',0);";
+                "VALUES ('Arcadia','Fieryor','drago elettrico',0,12,0,2,0,70,0,0,1,8,'0','27','192','M','Arcadia_Fieryor.txt','caotico neutrale',NULL,'ranger','elfo','moneta del regno di Ho',0);";
         db.execSQL(q);
         q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('Arcadia','Fieryor','carisma',0,0,0,0,0);";
         db.execSQL(q);

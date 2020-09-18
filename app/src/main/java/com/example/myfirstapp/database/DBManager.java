@@ -200,6 +200,7 @@ public class DBManager {
         cv.put(TabellaEquipaggiamento.FIELD_PESO, nuovo.getPeso());
         cv.put(TabellaEquipaggiamento.FIELD_CAPACITA, nuovo.getCapacita());
         cv.put(TabellaEquipaggiamento.FIELD_TIPO, nuovo.getTipo());
+        cv.put(TabellaEquipaggiamento.FIELD_SUBTIPO, nuovo.getSubtipo());
 
         try {
             return db.insert(TabellaEquipaggiamento.TBL_NOME, null, cv) > 0;
@@ -1045,6 +1046,7 @@ public class DBManager {
         cv.put(TabellaEquipaggiamento.FIELD_PESO, aggiornato.getPeso());
         cv.put(TabellaEquipaggiamento.FIELD_CAPACITA, aggiornato.getCapacita());
         cv.put(TabellaEquipaggiamento.FIELD_TIPO, aggiornato.getTipo());
+        cv.put(TabellaEquipaggiamento.FIELD_SUBTIPO, aggiornato.getSubtipo());
 
         try {
             return db.update(TabellaEquipaggiamento.TBL_NOME, cv, whereClause, whereArgs) > 0;
@@ -1625,13 +1627,14 @@ public class DBManager {
 
             StringBuffer descrizione = new StringBuffer();
             descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+            String subtipo = resultSet.getString(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_SUBTIPO));
             String tipo = resultSet.getString(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_TIPO));
             int costo = resultSet.getInt(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_COSTO));
             int peso = resultSet.getInt(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_PESO));
             int capacita = resultSet.getInt(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_CAPACITA));
 
             resultSet.close();
-            return new Equipaggiamento(nomee, descrizione, tipo, costo, peso, capacita);
+            return new Equipaggiamento(nomee, descrizione, tipo, costo, peso, capacita, subtipo);
         } catch (SQLiteException sqle) {
             return null;
         }
@@ -1656,7 +1659,7 @@ public class DBManager {
                 return null;
 
             resultSet.close();
-            return new Arma(equi.getNome(), equi.getDescrizione(), equi.getTipo(), equi.getCosto(), equi.getCapacita(), equi.getPeso(), danno, proprieta);
+            return new Arma(equi.getNome(), equi.getDescrizione(), equi.getTipo(), equi.getCosto(), equi.getCapacita(), equi.getPeso(), danno, proprieta, equi.getSubtipo());
         } catch (SQLiteException sqle) {
             return null;
         }
@@ -1684,7 +1687,7 @@ public class DBManager {
                 return null;
 
             resultSet.close();
-            return new Armatura(equi.getNome(), equi.getDescrizione(), equi.getTipo(), equi.getCosto(), equi.getCapacita(), equi.getPeso(), nonFurtiva, modificatoreCA, tempoTogliere, tempoIndossare, forzaNecessaria);
+            return new Armatura(equi.getNome(), equi.getDescrizione(), equi.getTipo(), equi.getCosto(), equi.getCapacita(), equi.getPeso(), nonFurtiva, modificatoreCA, tempoTogliere, tempoIndossare, forzaNecessaria, equi.getSubtipo());
         } catch (SQLiteException sqle) {
             Log.e("LEGGI_ARMATURA", "fallita lettura", sqle);
             return null;
@@ -1863,8 +1866,7 @@ public class DBManager {
             String eta = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_ETA));
             String altezza = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_ALTEZZA));
             String genere = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_GENERE));
-            StringBuffer noteAvventura = new StringBuffer();
-            noteAvventura.append(resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_NOTEAVVENTURA)));
+            String noteAvventura = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_NOTEAVVENTURA));
             StringBuffer allineamento = new StringBuffer();
             allineamento.append(resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_ALLINEAMENTO)));
             StringBuffer lingua = new StringBuffer();

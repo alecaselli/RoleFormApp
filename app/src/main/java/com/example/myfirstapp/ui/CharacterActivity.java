@@ -21,22 +21,31 @@ import java.util.List;
 
 public class CharacterActivity extends AppCompatActivity {
 
+    private Giocatore giocatore;
+    private TextView txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character);
 
+        this.estraiGiocatore();
+        this.setView();
+    }
+
+    public void estraiGiocatore() {
         Intent intent = getIntent();
         String nomecamp = intent.getStringExtra("nomecamp");
         String nomeg = intent.getStringExtra("nomeg");
-        /*adapter = new GiocatoreAdapter(this, this.leggiGiocatore(nomecamp, nomeg));*/
         DBManager db = new DBManager(this);
         assert nomeg != null;
         assert nomecamp != null;
-        Giocatore giocatore = db.leggiGiocatore(nomecamp, nomeg);
+        giocatore = db.leggiGiocatore(nomecamp, nomeg);
+    }
 
-        TextView txt = (TextView) findViewById(R.id.campaign_name);
+    public void setView(){
+
+        txt = (TextView) findViewById(R.id.campaign_name);
         txt.setText(giocatore.getNomeCampagna());
 
         txt = (TextView) findViewById(R.id.character_name);
@@ -130,6 +139,7 @@ public class CharacterActivity extends AppCompatActivity {
 
     public void openNote(View view) {
         Intent intent = new Intent(this, NoteActivity.class);
+        intent.putExtra("filename", giocatore.getNoteAvventura());
         startActivity(intent);
     }
 }

@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:text="Notes"
+            android:text="@string/notes"
             android:textColor="@color/black"
             android:textSize="32sp"
             android:textStyle="bold|italic" />
@@ -32,7 +32,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -56,18 +56,18 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Allineamento"
                             android:layout_centerVertical="true"
+                            android:text="@string/allineamento"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 
                         <Button
                             android:id="@+id/note_alignment_expandButton"
-                            android:onClick="expandAlignmentCard"
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_alignParentEnd="true"
-                            android:background="@drawable/ic_arrow_up" />
+                            android:background="@drawable/ic_arrow_up"
+                            android:onClick="expandAlignmentCard" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -83,7 +83,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:background="@android:color/transparent"
-                            android:hint="Scrivi per aggiungere"
+                            android:hint="@string/scrivi_per_aggiungere"
                             android:inputType="textCapSentences|textMultiLine"
                             android:scrollHorizontally="false"
                             android:textAlignment="textStart"
@@ -118,18 +118,18 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Background"
                             android:layout_centerVertical="true"
+                            android:text="@string/background"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 
                         <Button
                             android:id="@+id/note_background_expandButton"
-                            android:onClick="expandBackgroundCard"
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_alignParentEnd="true"
-                            android:background="@drawable/ic_arrow_up" />
+                            android:background="@drawable/ic_arrow_up"
+                            android:onClick="expandBackgroundCard" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -145,19 +145,35 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:background="@android:color/transparent"
-                            android:hint="Scrivi per aggiungere"
+                            android:hint="@string/scrivi_per_aggiungere"
                             android:inputType="textCapSentences|textMultiLine"
                             android:scrollHorizontally="false"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
-
                     </RelativeLayout>
-
                 </RelativeLayout>
+            </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="6dp"
+                app:cardCornerRadius="15dp">
+
+                <Button
+                    android:id="@+id/create_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:selectableItemBackground"
+                    android:fontFamily="sans-serif"
+                    android:onClick="save"
+                    android:text="@string/salva"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </androidx.cardview.widget.CardView>
+
 
         </LinearLayout>
     </ScrollView>

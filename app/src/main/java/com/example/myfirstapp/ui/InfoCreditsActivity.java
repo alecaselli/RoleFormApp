@@ -15,6 +15,8 @@ import java.nio.charset.StandardCharsets;
 
 public class InfoCreditsActivity extends AppCompatActivity {
 
+    private TextView txt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,18 +27,16 @@ public class InfoCreditsActivity extends AppCompatActivity {
             String line;
             StringBuilder info_credit = new StringBuilder();
             while (((line = reader.readLine()) != null) && (line.compareTo("----") != 0)) {
-                info_credit.append(line);
-                info_credit.append("\n");
+                info_credit.append(line).append("\n");
             }
             info_credit.deleteCharAt(info_credit.lastIndexOf("\n"));
 
-            TextView txt = (TextView) findViewById(R.id.info);
+            txt = (TextView) findViewById(R.id.info);
             txt.setText(info_credit);
 
             info_credit = new StringBuilder();
             while (((line = reader.readLine()) != null)) {
-                info_credit.append(line);
-                info_credit.append("\n");
+                info_credit.append(line).append("\n");
             }
             info_credit.deleteCharAt(info_credit.lastIndexOf("\n"));
 

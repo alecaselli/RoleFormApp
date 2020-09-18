@@ -3,7 +3,7 @@ package com.example.myfirstapp.domain;
 import java.util.*;
 
 public class Equipaggiamento extends Descrivibile {
-    private static final List<String> tipolist = new ArrayList<String>(Arrays.asList("arma da guerra a distanza",
+    private static final String[] subtipobase = new String[]{"arma da guerra a distanza",
             "arma da guerra da mischia",
             "arma semplice a distanza",
             "arma semplice da mischia",
@@ -12,18 +12,21 @@ public class Equipaggiamento extends Descrivibile {
             "armatura pesante",
             "attrezzo",
             "equipaggiamento da avventura",
-            "scudo"));
+            "scudo"};
+    private static final String[] tipobase = new String[]{"arma","armatura","scudo"};
     private int costo;
     private int peso;
     private int capacita;
     private String tipo;
+    private String subtipo;
 
-    public Equipaggiamento(String nome, StringBuffer descrizione, String tipo, int costo, int peso, int capacita) {
+    public Equipaggiamento(String nome, StringBuffer descrizione, String tipo, int costo, int peso, int capacita, String subtipo) {
         super(nome, descrizione);
         this.tipo = tipo;
         this.costo = costo;
         this.peso = peso;
         this.capacita = capacita;
+        this.subtipo = subtipo;
     }
 
     public int getCosto() {
@@ -58,7 +61,19 @@ public class Equipaggiamento extends Descrivibile {
         this.tipo = tipo;
     }
 
-    public static List<String> getTipolist() {
-        return tipolist;
+    public String getSubtipo() {
+        return subtipo;
+    }
+
+    public void setSubtipo(String subtipo) {
+        this.subtipo = subtipo;
+    }
+
+    public static String[] getSubtipobase() {
+        return subtipobase;
+    }
+
+    public static String[] getTipobase() {
+        return tipobase;
     }
 }

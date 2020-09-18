@@ -325,25 +325,25 @@
     </LinearLayout>
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="80dp"
-        app:cardCornerRadius="15dp">
-
-        <Button
-            android:id="@+id/create_button"
+        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?android:selectableItemBackground"
-            android:fontFamily="sans-serif"
-            android:onClick="createNewCharacter"
-            android:text="Crea"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="80dp"
+            app:cardCornerRadius="15dp">
 
-    </androidx.cardview.widget.CardView>
+            <Button
+                android:id="@+id/create_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:fontFamily="sans-serif"
+                android:onClick="createNewCharacter"
+                android:text="@string/crea"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
