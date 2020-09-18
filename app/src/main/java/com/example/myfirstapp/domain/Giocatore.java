@@ -22,22 +22,49 @@ public class Giocatore extends Descrivibile {
     private String eta;
     private String altezza;
     private String genere;
-    private String noteAvventura;
-    private StringBuffer allineamento;
+    private StringBuffer noteAvventura;
     private StringBuffer lingua;
     private Valuta portafoglio;
     private Classe classe;
     private Razza razza;
-    /*private PuntiFerita puntiFeritaGiocatore;
-    private Background backgroundGiocatore;
-    private Competenza competenzaGiocatore;*/
     private List<Caratteristica> caratteristicaList;
     private List<Equipaggiamento> borsa;
     private List<Equipaggiamento> equipaggiato;
     private List<Incantesimo> incantesimiGiocatore;
     private List<Abilita> abilitaList;
 
-    public Giocatore(String nome, StringBuffer descrizione, int mana, int livello, int puntiEsperienza, int modCompetenza, int capacitaBorsa, int puntiFerita, int nDadi, int dado, int classeArmatura, int puntiStat, String nomeCampagna, String iniziativa, String eta, String altezza, String genere, String noteAvventura, StringBuffer allineamento, StringBuffer lingua, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Equipaggiamento> borsa, List<Equipaggiamento> equipaggiato, List<Incantesimo> incantesimiGiocatore, List<Abilita> abilitaList) {
+    public Giocatore(String nome, StringBuffer descrizione, String nomeCampagna, String eta, String altezza, String genere, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Abilita> abilitaList) {
+        super(nome, descrizione);
+        this.mana = 0;
+        this.livello = 1;
+        this.puntiEsperienza = 0;
+        this.modCompetenza = 2;
+        this.capacitaBorsa = 0;
+        this.inizPuntiFeritaMax();
+        this.setPuntiFerita(this.puntiFeritaMax);
+        this.classe = classe;
+        this.nDadi = this.classe.getnDadi();
+        this.dado = this.classe.getDado();
+        this.classeArmatura = 0;
+        this.puntiStat = 0;
+        this.nomeCampagna = nomeCampagna;
+        this.iniziativa = "0";
+        this.eta = eta;
+        this.altezza = altezza;
+        this.genere = genere;
+        this.noteAvventura = new StringBuffer();
+        this.razza = razza;
+        this.lingua = this.razza.getLingua();
+        this.portafoglio = portafoglio;
+        this.caratteristicaList = caratteristicaList;
+        this.borsa = this.classe.getEquipaggiamentoList();
+        this.equipaggiato = null;
+        this.incantesimiGiocatore = this.classe.getIncantesimiClasse();
+        this.abilitaList = abilitaList;
+        this.inizializzazionePG();
+    }
+
+    public Giocatore(String nome, StringBuffer descrizione, int mana, int livello, int puntiEsperienza, int modCompetenza, int capacitaBorsa, int puntiFerita, int nDadi, int dado, int classeArmatura, int puntiStat, String nomeCampagna, String iniziativa, String eta, String altezza, String genere, StringBuffer noteAvventura, StringBuffer lingua, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Equipaggiamento> borsa, List<Equipaggiamento> equipaggiato, List<Incantesimo> incantesimiGiocatore, List<Abilita> abilitaList) {
         super(nome, descrizione);
         this.mana = mana;
         this.livello = livello;
@@ -45,7 +72,7 @@ public class Giocatore extends Descrivibile {
         this.modCompetenza = modCompetenza;
         this.capacitaBorsa = capacitaBorsa;
         this.puntiFerita = puntiFerita;
-        this.setPuntiFeritaMax();
+        this.inizPuntiFeritaMax();
         this.nDadi = nDadi;
         this.dado = dado;
         this.classeArmatura = classeArmatura;
@@ -56,7 +83,6 @@ public class Giocatore extends Descrivibile {
         this.altezza = altezza;
         this.genere = genere;
         this.noteAvventura = noteAvventura;
-        this.allineamento = allineamento;
         this.lingua = lingua;
         this.portafoglio = portafoglio;
         this.classe = classe;
@@ -66,38 +92,6 @@ public class Giocatore extends Descrivibile {
         this.equipaggiato = equipaggiato;
         this.incantesimiGiocatore = incantesimiGiocatore;
         this.abilitaList = abilitaList;
-    }
-
-    public Giocatore(String nome, StringBuffer descrizione, int mana, int livello, int puntiEsperienza, int modCompetenza, int capacitaBorsa, int puntiFerita, int nDadi, int dado, int classeArmatura, int puntiStat, String nomeCampagna, String iniziativa, String eta, String altezza, String genere, StringBuffer allineamento, StringBuffer lingua, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Equipaggiamento> borsa, List<Equipaggiamento> equipaggiato, List<Incantesimo> incantesimiGiocatore, List<Abilita> abilitaList) {
-        super(nome, descrizione);
-        this.mana = mana;
-        this.livello = livello;
-        this.puntiEsperienza = puntiEsperienza;
-        this.modCompetenza = modCompetenza;
-        this.capacitaBorsa = capacitaBorsa;
-        this.puntiFerita = puntiFerita;
-        this.altezza = altezza;
-        this.setPuntiFeritaMax();
-        this.genere = genere;
-        this.noteAvventura = nomeCampagna + "_" + nome + ".txt";
-        this.nDadi = nDadi;
-        this.dado = dado;
-        this.classeArmatura = classeArmatura;
-        this.puntiStat = puntiStat;
-        this.nomeCampagna = nomeCampagna;
-        this.iniziativa = iniziativa;
-        this.eta = eta;
-        this.allineamento = allineamento;
-        this.lingua = lingua;
-        this.portafoglio = portafoglio;
-        this.classe = classe;
-        this.razza = razza;
-        this.caratteristicaList = caratteristicaList;
-        this.borsa = borsa;
-        this.equipaggiato = equipaggiato;
-        this.incantesimiGiocatore = incantesimiGiocatore;
-        this.abilitaList = abilitaList;
-        this.inizializzazionePG();
     }
 
     public int getMana() {
@@ -152,8 +146,8 @@ public class Giocatore extends Descrivibile {
         return puntiFeritaMax;
     }
 
-    public void setPuntiFeritaMax() {
-        this.puntiFeritaMax = this.getnDadi() * this.getDado();
+    public void setPuntiFeritaMax(int puntiFeritaMax) {
+        this.puntiFeritaMax = puntiFeritaMax;
     }
 
     public int getnDadi() {
@@ -228,20 +222,12 @@ public class Giocatore extends Descrivibile {
         this.genere = genere;
     }
 
-    public String getNoteAvventura() {
+    public StringBuffer getNoteAvventura() {
         return noteAvventura;
     }
 
-    public void setNoteAvventura(String noteAvventura) {
+    public void setNoteAvventura(StringBuffer noteAvventura) {
         this.noteAvventura = noteAvventura;
-    }
-
-    public StringBuffer getAllineamento() {
-        return allineamento;
-    }
-
-    public void setAllineamento(StringBuffer allineamento) {
-        this.allineamento = allineamento;
     }
 
     public StringBuffer getLingua() {
@@ -275,33 +261,6 @@ public class Giocatore extends Descrivibile {
     public void setRazza(Razza razza) {
         this.razza = razza;
     }
-
-
-
-/*
-    public PuntiFerita getPuntiFeritaGiocatore() {
-        return puntiFeritaGiocatore;
-    }
-
-    public void setPuntiFeritaGiocatore(PuntiFerita puntiFeritaGiocatore) {
-        this.puntiFeritaGiocatore = puntiFeritaGiocatore;
-    }
-
-    public Background getBackgroundGiocatore() {
-        return backgroundGiocatore;
-    }
-
-    public void setBackgroundGiocatore(Background backgroundGiocatore) {
-        this.backgroundGiocatore = backgroundGiocatore;
-    }
-
-    public Competenza getCompetenzaGiocatore() {
-        return competenzaGiocatore;
-    }
-
-    public void setCompetenzaGiocatore(Competenza competenzaGiocatore) {
-        this.competenzaGiocatore = competenzaGiocatore;
-    }*/
 
     public List<Caratteristica> getCaratteristicaList() {
         return caratteristicaList;
@@ -343,7 +302,11 @@ public class Giocatore extends Descrivibile {
         this.abilitaList = abilitaList;
     }
 
+
     /* metodi non base*/
+    public void inizPuntiFeritaMax() {
+        this.puntiFeritaMax = this.getnDadi() * this.getDado();
+    }
 
     public Caratteristica getCaratteristica(String nomec) {
         for (Caratteristica caratteristica : this.getCaratteristicaList()) {
@@ -410,6 +373,7 @@ public class Giocatore extends Descrivibile {
     }
 
     /* serie di metodi necessari alla creazione di un nuovo PG */
+
     public void inizializzazionePG() {
 
         for (CaratteristicaBase elementoR : this.razza.getCaratteristicaBaseList()) {
@@ -423,7 +387,7 @@ public class Giocatore extends Descrivibile {
 
         this.setnDadi(this.classe.getnDadi());
         this.setDado(this.classe.getDado());
-        this.setPuntiFeritaMax();
+        this.inizPuntiFeritaMax();
         this.setPuntiFerita(this.puntiFeritaMax);
         /*this.puntiFeritaGiocatore = new PuntiFerita(this.classe.getnDadi(), this.classe.getDado());
 
@@ -464,5 +428,4 @@ public class Giocatore extends Descrivibile {
         private int compareStatistiche(StatisticheBase stat2){
         return this.nome.compareToIgnoreCase(stat2.getNome());
     }*/
-
 }
