@@ -25,12 +25,24 @@ import java.io.InputStreamReader;
 
 public class NoteActivity extends AppCompatActivity {
 
-    private RelativeLayout expandableView;
-    private Button expandButton;
-    private CardView cardView;
-    private EditText allineamentoeditText;
-    private EditText backgroundeditText;
+    private EditText idealiEditText;
+    private EditText descrizioneEditText;
+    private EditText sinossiEditText;
+
     private String filename;
+
+    private Button idealsButton;
+    private Button descriptionButton;
+    private Button synopsisButton;
+
+    private RelativeLayout idealsView;
+    private RelativeLayout descriptionlView;
+    private RelativeLayout synopsisView;
+
+    private CardView idealsCardView;
+    private CardView descriptionCardView;
+    private CardView synopsisCardView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,75 +52,73 @@ public class NoteActivity extends AppCompatActivity {
         Intent intent = getIntent();
         filename = intent.getStringExtra("filename");
 
-        allineamentoeditText = findViewById(R.id.note_alignment);
-        backgroundeditText = findViewById(R.id.note_background);
+        idealiEditText = findViewById(R.id.note_ideals);
+        descrizioneEditText = findViewById(R.id.note_description);
+        sinossiEditText = findViewById(R.id.note_synopsis);
 
         this.create();
         this.load();
 
-/*
-        expandableView = findViewById(R.id.note_alignment_expandableView);
-        expandButton = findViewById(R.id.note_alignment_expandButton);
-        cardView = findViewById(R.id.note_alignment_cardView);
+        idealsButton = findViewById(R.id.note_ideals_expandButton);
+        idealsView=findViewById(R.id.note_ideals_expandableView);
+        idealsCardView=findViewById(R.id.note_ideals_cardView);
 
-        expandButton.setOnClickListener(new View.OnClickListener() {
+        idealsButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                if (expandableView.getVisibility()==View.GONE){
-                    TransitionManager.beginDelayedTransition((ViewGroup) cardView.getParent().getParent(), new AutoTransition());
-                    expandableView.setVisibility(View.VISIBLE);
-                    expandButton.setBackgroundResource(R.drawable.ic_arrow_up);
+                if (idealsView.getVisibility()==View.GONE){
+                    TransitionManager.beginDelayedTransition((ViewGroup) idealsCardView.getParent().getParent(), new AutoTransition());
+                    idealsView.setVisibility(View.VISIBLE);
+                    idealsButton.setBackgroundResource(R.drawable.ic_arrow_up);
                 } else {
-                    TransitionManager.beginDelayedTransition((ViewGroup) cardView.getParent().getParent(), new AutoTransition());
-                    expandableView.setVisibility(View.GONE);
-                    expandButton.setBackgroundResource(R.drawable.ic_arrow_down);
-                }
-            }
-        }); */
-
-    }
-
-
-    public void expandAlignmentCard(View view) {
-        expandableView = findViewById(R.id.note_alignment_expandableView);
-        expandButton = findViewById(R.id.note_alignment_expandButton);
-        cardView = findViewById(R.id.note_alignment_cardView);
-
-        expandButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (expandableView.getVisibility() == View.GONE) {
-                    TransitionManager.beginDelayedTransition((ViewGroup) cardView.getParent().getParent(), new AutoTransition());
-                    expandableView.setVisibility(View.VISIBLE);
-                    expandButton.setBackgroundResource(R.drawable.ic_arrow_up);
-                } else {
-                    TransitionManager.beginDelayedTransition((ViewGroup) cardView.getParent().getParent(), new AutoTransition());
-                    expandableView.setVisibility(View.GONE);
-                    expandButton.setBackgroundResource(R.drawable.ic_arrow_down);
+                    TransitionManager.beginDelayedTransition((ViewGroup) idealsCardView.getParent().getParent(), new AutoTransition());
+                    idealsView.setVisibility(View.GONE);
+                    idealsButton.setBackgroundResource(R.drawable.ic_arrow_down);
                 }
             }
         });
-    }
 
-    public void expandBackgroundCard(View view) {
-        expandableView = findViewById(R.id.note_background_expandableView);
-        expandButton = findViewById(R.id.note_background_expandButton);
-        cardView = findViewById(R.id.note_background_cardView);
+        descriptionButton = findViewById(R.id.note_description_expandButton);
+        descriptionlView=findViewById(R.id.note_description_expandableView);
+        descriptionCardView=findViewById(R.id.note_description_cardView);
 
-        expandButton.setOnClickListener(new View.OnClickListener() {
+        descriptionButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                if (expandableView.getVisibility() == View.GONE) {
-                    TransitionManager.beginDelayedTransition((ViewGroup) cardView.getParent().getParent(), new AutoTransition());
-                    expandableView.setVisibility(View.VISIBLE);
-                    expandButton.setBackgroundResource(R.drawable.ic_arrow_up);
+                if (descriptionlView.getVisibility()==View.GONE){
+                    TransitionManager.beginDelayedTransition((ViewGroup) descriptionCardView.getParent().getParent(), new AutoTransition());
+                    descriptionlView.setVisibility(View.VISIBLE);
+                    descriptionButton.setBackgroundResource(R.drawable.ic_arrow_up);
                 } else {
-                    TransitionManager.beginDelayedTransition((ViewGroup) cardView.getParent().getParent(), new AutoTransition());
-                    expandableView.setVisibility(View.GONE);
-                    expandButton.setBackgroundResource(R.drawable.ic_arrow_down);
+                    TransitionManager.beginDelayedTransition((ViewGroup) descriptionCardView.getParent().getParent(), new AutoTransition());
+                    descriptionlView.setVisibility(View.GONE);
+                    descriptionButton.setBackgroundResource(R.drawable.ic_arrow_down);
                 }
             }
         });
+
+        synopsisButton = findViewById(R.id.note_synopsis_expandButton);
+        synopsisView=findViewById(R.id.note_synopsis_expandableView);
+        synopsisCardView=findViewById(R.id.note_synopsis_cardView);
+
+        synopsisButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (synopsisView.getVisibility()==View.GONE){
+                    TransitionManager.beginDelayedTransition((ViewGroup) synopsisCardView.getParent().getParent(), new AutoTransition());
+                    synopsisView.setVisibility(View.VISIBLE);
+                    synopsisButton.setBackgroundResource(R.drawable.ic_arrow_up);
+                } else {
+                    TransitionManager.beginDelayedTransition((ViewGroup) synopsisCardView.getParent().getParent(), new AutoTransition());
+                    synopsisView.setVisibility(View.GONE);
+                    synopsisButton.setBackgroundResource(R.drawable.ic_arrow_down);
+                }
+            }
+        });
+
     }
 
     public void create(){
@@ -154,13 +164,19 @@ public class NoteActivity extends AppCompatActivity {
             while ((line = reader.readLine()) != null && (line.compareTo("----") != 0)) {
                 builder.append(line).append("\n");
             }
-            allineamentoeditText.setText(builder.toString());
+            idealiEditText.setText(builder.toString());
 
             builder = new StringBuilder();
             while ((line = reader.readLine()) != null && (line.compareTo("----") != 0)) {
                 builder.append(line).append("\n");
             }
-            backgroundeditText.setText(builder.toString());
+            descrizioneEditText.setText(builder.toString());
+
+            builder = new StringBuilder();
+            while ((line = reader.readLine()) != null && (line.compareTo("----") != 0)) {
+                builder.append(line).append("\n");
+            }
+            sinossiEditText.setText(builder.toString());
 
         } catch (FileNotFoundException e) {
             FileOutputStream fos = null;
@@ -192,16 +208,21 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     public void save(View view) {
-        String allineameto = allineamentoeditText.getText().toString();
-        String background = backgroundeditText.getText().toString();
+        String ideali = idealiEditText.getText().toString();
+        String descrizione = descrizioneEditText.getText().toString();
+        String sinossi = sinossiEditText.getText().toString();
         FileOutputStream fos = null;
         try {
             fos = openFileOutput(filename, MODE_PRIVATE);
-            fos.write(allineameto.getBytes());
+            fos.write(ideali.getBytes());
             fos.write("\n".getBytes());
             fos.write("----".getBytes());
             fos.write("\n".getBytes());
-            fos.write(background.getBytes());
+            fos.write(descrizione.getBytes());
+            fos.write("\n".getBytes());
+            fos.write("----".getBytes());
+            fos.write("\n".getBytes());
+            fos.write(sinossi.getBytes());
 
             Toast.makeText(this, "Note salvate", Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
