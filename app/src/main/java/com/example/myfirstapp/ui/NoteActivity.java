@@ -3,6 +3,7 @@ package com.example.myfirstapp.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
@@ -33,6 +34,30 @@ public class NoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 
+/*
+        expandableView = findViewById(R.id.note_alignment_expandableView);
+        expandButton = findViewById(R.id.note_alignment_expandButton);
+        cardView = findViewById(R.id.note_alignment_cardView);
+
+        expandButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (expandableView.getVisibility()==View.GONE){
+                    TransitionManager.beginDelayedTransition((ViewGroup) cardView.getParent().getParent(), new AutoTransition());
+                    expandableView.setVisibility(View.VISIBLE);
+                    expandButton.setBackgroundResource(R.drawable.ic_arrow_up);
+                } else {
+                    TransitionManager.beginDelayedTransition((ViewGroup) cardView.getParent().getParent(), new AutoTransition());
+                    expandableView.setVisibility(View.GONE);
+                    expandButton.setBackgroundResource(R.drawable.ic_arrow_down);
+                }
+            }
+        }); */
+
+    }
+
+
+    public void expandAlignmentCard(View view) {
         expandableView = findViewById(R.id.note_alignment_expandableView);
         expandButton = findViewById(R.id.note_alignment_expandButton);
         cardView = findViewById(R.id.note_alignment_cardView);
@@ -51,9 +76,27 @@ public class NoteActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
+    public void expandBackgroundCard(View view) {
+        expandableView = findViewById(R.id.note_background_expandableView);
+        expandButton = findViewById(R.id.note_background_expandButton);
+        cardView = findViewById(R.id.note_background_cardView);
 
+        expandButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (expandableView.getVisibility()==View.GONE){
+                    TransitionManager.beginDelayedTransition((ViewGroup) cardView.getParent().getParent(), new AutoTransition());
+                    expandableView.setVisibility(View.VISIBLE);
+                    expandButton.setBackgroundResource(R.drawable.ic_arrow_up);
+                } else {
+                    TransitionManager.beginDelayedTransition((ViewGroup) cardView.getParent().getParent(), new AutoTransition());
+                    expandableView.setVisibility(View.GONE);
+                    expandButton.setBackgroundResource(R.drawable.ic_arrow_down);
+                }
+            }
+        });
+    }
 
 }

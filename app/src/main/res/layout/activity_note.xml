@@ -63,6 +63,7 @@
 
                         <Button
                             android:id="@+id/note_alignment_expandButton"
+                            android:onClick="expandAlignmentCard"
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_alignParentEnd="true"
@@ -124,6 +125,7 @@
 
                         <Button
                             android:id="@+id/note_background_expandButton"
+                            android:onClick="expandBackgroundCard"
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_alignParentEnd="true"
