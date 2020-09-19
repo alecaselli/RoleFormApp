@@ -145,4 +145,5 @@
     <color name="lightbluegray">#546e7e</color>
     <color name="darkbluegray">#374741</color>
     <color name="darkerbluegray">#263238</color>
+    <color name="black_overlay">#66000000</color>
 </resources>

@@ -7,7 +7,7 @@
     android:background="@color/whitesmoke"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".ui.NoteActivity">
+    tools:context=".ui.CharacterNoteActivity">
 
 
     <RelativeLayout

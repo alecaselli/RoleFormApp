@@ -1,6 +1,5 @@
 package com.example.myfirstapp.ui;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,14 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.myfirstapp.R.string;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.domain.Caratteristica;
 import com.example.myfirstapp.domain.Equipaggiamento;
 import com.example.myfirstapp.domain.Giocatore;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -137,9 +133,34 @@ public class CharacterActivity extends AppCompatActivity {
         txt.setText(nome);
     }
 
-    public void openNote(View view) {
-        Intent intent = new Intent(this, NoteActivity.class);
+    public void openCharacterNote(View view) {
+        Intent intent = new Intent(this, CharacterNoteActivity.class);
         intent.putExtra("filename", giocatore.getNoteAvventura().toString());
+        startActivity(intent);
+    }
+
+    public void openCharacterCharacter(View view) {
+        Intent intent = new Intent(this, CharacterCharacterActivity.class);
+        startActivity(intent);
+    }
+
+    public void openCharacterSkills(View view) {
+        Intent intent = new Intent(this, CharacterSkillsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openCharacterSpells(View view) {
+        Intent intent = new Intent(this, CharacterSpellsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openCharacterStats(View view) {
+        Intent intent = new Intent(this, CharacterStatsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openCharacterBag(View view) {
+        Intent intent = new Intent(this, CharacterBagActivity.class);
         startActivity(intent);
     }
 }

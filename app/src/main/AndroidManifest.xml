@@ -9,17 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.EditActivity"></activity>
-        <activity android:name=".ui.BagActivity" />
+        <activity android:name=".ui.CharacterSkillsActivity"></activity>
+        <activity android:name=".ui.CharacterSpellsActivity" />
+        <activity android:name=".ui.CharacterCharacterActivity" />
+        <activity android:name=".ui.EditActivity" />
+        <activity android:name=".ui.CharacterBagActivity" />
         <activity android:name=".ui.CreateNewItem" />
         <activity android:name=".ui.CreateNewSpell" />
         <activity android:name=".ui.EquipActivity" />
-        <activity android:name=".ui.StatsActivity" />
+        <activity android:name=".ui.CharacterStatsActivity" />
         <activity android:name=".ui.CurrencyActivity" />
         <activity android:name=".ui.CreateNewCharacterActivity" />
         <activity android:name=".ui.InfoCreditsActivity" />
-
-        <activity android:name=".ui.NoteActivity" />
+        <activity android:name=".ui.CharacterNoteActivity" />
         <activity android:name=".ui.AddNewItem" />
         <activity android:name=".ui.AddNewSpell" />
         <activity

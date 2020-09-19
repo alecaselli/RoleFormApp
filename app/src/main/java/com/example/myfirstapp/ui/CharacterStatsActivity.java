@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.myfirstapp.R;
 
-public class CurrencyActivity extends AppCompatActivity {
+public class CharacterStatsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_currency);
+        setContentView(R.layout.activity_character_stats);
     }
 }

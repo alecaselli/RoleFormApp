@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.myfirstapp.R;
 
-public class EquipActivity extends AppCompatActivity {
+public class CharacterSpellsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_equip);
+        setContentView(R.layout.activity_character_spells);
     }
 }

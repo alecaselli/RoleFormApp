@@ -23,7 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class NoteActivity extends AppCompatActivity {
+public class CharacterNoteActivity extends AppCompatActivity {
 
     private EditText idealiEditText;
     private EditText descrizioneEditText;
@@ -47,7 +47,7 @@ public class NoteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_note);
+        setContentView(R.layout.activity_character_note);
 
         Intent intent = getIntent();
         filename = intent.getStringExtra("filename");

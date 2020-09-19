@@ -50,12 +50,13 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/character_character"
+                android:onClick="openCharacterCharacter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="6dp"
                 app:cardCornerRadius="15dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
@@ -63,6 +64,7 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/nome_personaggio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -86,22 +88,80 @@
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="3dp"
+                        android:orientation="vertical" >
+
                         <TextView
                             android:id="@+id/level"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
                             android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginEnd="8dp"
+                            android:layout_marginHorizontal="8dp"
                             android:text="Livello 10"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 
-                    </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp">
+
+                            <ImageView
+                                android:id="@+id/mana"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/staff" />
+
+                            <TextView
+                                android:id="@+id/character_mana"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="12dp"
+                                android:layout_toEndOf="@id/mana"
+                                android:text="80/80"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp">
+
+                            <ImageView
+                                android:id="@+id/vita"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/heart" />
+
+                            <TextView
+                                android:id="@+id/character_life"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="12dp"
+                                android:layout_toEndOf="@id/vita"
+                                android:text="80/80"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
 
                     <RelativeLayout
+                        android:id="@+id/altezza_personaggio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/nome_personaggio"
                         android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
@@ -126,8 +186,10 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/eta_personaggio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/altezza_personaggio"
                         android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
@@ -153,7 +215,8 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/eta_personaggio">
 
                         <TextView
                             android:id="@+id/character_race"
@@ -187,12 +250,13 @@
                             android:textSize="18dp" />
                     </RelativeLayout>
 
-                </LinearLayout>
+                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/character_stats"
+                android:onClick="openCharacterStats"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/character_character"
@@ -541,7 +605,7 @@
                             android:id="@+id/Rame"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Rame:"
+                            android:text="Bronzo:"
                             android:textColor="@color/black"
                             android:textSize="22sp" />
 
@@ -585,6 +649,7 @@
                         app:cardCornerRadius="15dp">
 
                         <Button
+                            android:onClick="openCharacterSpells"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="?android:selectableItemBackground"
@@ -601,11 +666,11 @@
                         app:cardCornerRadius="15dp">
 
                         <Button
+                            android:onClick="openCharacterSkills"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:background="?android:selectableItemBackground"
                             android:text="Abilità" />
-
 
                     </androidx.cardview.widget.CardView>
 
@@ -743,6 +808,7 @@
 
                             <Button
                                 android:id="@+id/character_bag"
+                                android:onClick="openCharacterBag"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_centerHorizontal="true"
@@ -770,13 +836,13 @@
 
         <ImageButton
             android:id="@+id/character_note"
+            android:onClick="openCharacterNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginEnd="80dp"
             android:layout_toStartOf="@id/character_add"
             android:background="?android:selectableItemBackground"
-            android:onClick="openNote"
             android:src="@drawable/ic_edit" />
 
         <ImageButton

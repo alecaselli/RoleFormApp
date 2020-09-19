@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.myfirstapp.R;
 
-public class BagActivity extends AppCompatActivity {
+public class CharacterBagActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bag);
+        setContentView(R.layout.activity_character_bag);
     }
 }
