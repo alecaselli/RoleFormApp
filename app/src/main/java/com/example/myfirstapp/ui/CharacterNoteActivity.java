@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.database.DBManager;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -22,14 +24,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class CharacterNoteActivity extends AppCompatActivity {
 
     private EditText idealiEditText;
     private EditText descrizioneEditText;
     private EditText sinossiEditText;
-
-    private String filename;
 
     private Button idealsButton;
     private Button descriptionButton;
@@ -43,22 +44,24 @@ public class CharacterNoteActivity extends AppCompatActivity {
     private CardView descriptionCardView;
     private CardView synopsisCardView;
 
+    private DBManager db;
+    private String nomecamp;
+    private String nomeg;
+    private List<StringBuffer> notelist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_note);
 
-        Intent intent = getIntent();
-        filename = intent.getStringExtra("filename");
 
         idealiEditText = findViewById(R.id.note_ideals);
         descrizioneEditText = findViewById(R.id.note_description);
         sinossiEditText = findViewById(R.id.note_synopsis);
-
-        this.create();
-        this.load();
-
+/*
+        this.estraiNote();
+        this.setView();
+*/
         idealsButton = findViewById(R.id.note_ideals_expandButton);
         idealsView=findViewById(R.id.note_ideals_expandableView);
         idealsCardView=findViewById(R.id.note_ideals_cardView);
@@ -121,122 +124,34 @@ public class CharacterNoteActivity extends AppCompatActivity {
 
     }
 
-    public void create(){
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(filename);
-        } catch (FileNotFoundException e) {
-            FileOutputStream fos = null;
-            try {
-                fos = openFileOutput(filename, MODE_PRIVATE);
-            } catch (FileNotFoundException e2) {
-                e2.printStackTrace();
-            } finally {
-                if (fos != null) {
-                    try {
-                        fos.close();
-                    } catch (IOException e2) {
-                        e2.printStackTrace();
-                    }
-                }
-            }
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    public void estraiNote(){
+        Intent intent = getIntent();
+        nomecamp = intent.getStringExtra("nomecamp");
+        nomeg = intent.getStringExtra("nomeg");
+        db = new DBManager(this);
+        assert nomeg != null;
+        assert nomecamp != null;
+        notelist = db.leggiNotevarie(nomecamp,nomeg);
     }
 
-    public void load() {
-        FileInputStream fis = null;
+    public void setView(){
 
-        try {
-            fis = openFileInput(filename);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
-            StringBuilder builder = new StringBuilder();
-            String line;
+        descrizioneEditText = (EditText) findViewById(R.id.note_description);
+        descrizioneEditText.setText(notelist.get(0));
 
-            while ((line = reader.readLine()) != null && (line.compareTo("----") != 0)) {
-                builder.append(line).append("\n");
-            }
-            idealiEditText.setText(builder.toString());
-
-            builder = new StringBuilder();
-            while ((line = reader.readLine()) != null && (line.compareTo("----") != 0)) {
-                builder.append(line).append("\n");
-            }
-            descrizioneEditText.setText(builder.toString());
-
-            builder = new StringBuilder();
-            while ((line = reader.readLine()) != null && (line.compareTo("----") != 0)) {
-                builder.append(line).append("\n");
-            }
-            sinossiEditText.setText(builder.toString());
-
-        } catch (FileNotFoundException e) {
-            FileOutputStream fos = null;
-            try {
-                fos = openFileOutput(filename, MODE_PRIVATE);
-            } catch (FileNotFoundException e2) {
-                e2.printStackTrace();
-            } finally {
-                if (fos != null) {
-                    try {
-                        fos.close();
-                    } catch (IOException e2) {
-                        e2.printStackTrace();
-                    }
-                }
-            }
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        idealiEditText = (EditText) findViewById(R.id.note_ideals);
+        idealiEditText.setText(notelist.get(1));
     }
 
     public void save(View view) {
-        String ideali = idealiEditText.getText().toString();
-        String descrizione = descrizioneEditText.getText().toString();
+        db = new DBManager(this);
+        StringBuffer ideali = new StringBuffer();
+        ideali.append(idealiEditText.getText().toString());
+        StringBuffer descrizione = new StringBuffer();
+        descrizione.append(descrizioneEditText.getText().toString());
         String sinossi = sinossiEditText.getText().toString();
-        FileOutputStream fos = null;
-        try {
-            fos = openFileOutput(filename, MODE_PRIVATE);
-            fos.write(ideali.getBytes());
-            fos.write("\n".getBytes());
-            fos.write("----".getBytes());
-            fos.write("\n".getBytes());
-            fos.write(descrizione.getBytes());
-            fos.write("\n".getBytes());
-            fos.write("----".getBytes());
-            fos.write("\n".getBytes());
-            fos.write(sinossi.getBytes());
 
-            Toast.makeText(this, "Note salvate", Toast.LENGTH_SHORT).show();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        db.aggiornaNoteVarie(nomecamp,nomeg,descrizione,ideali);
+
     }
 }

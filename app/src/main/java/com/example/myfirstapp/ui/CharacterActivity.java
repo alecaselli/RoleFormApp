@@ -135,7 +135,8 @@ public class CharacterActivity extends AppCompatActivity {
 
     public void openCharacterNote(View view) {
         Intent intent = new Intent(this, CharacterNoteActivity.class);
-        intent.putExtra("filename", giocatore.getNoteAvventura().toString());
+        intent.putExtra("nomecamp", giocatore.getNomeCampagna());
+        intent.putExtra("nomeg", giocatore.getNome());
         startActivity(intent);
     }
 
