@@ -73,6 +73,7 @@ public class DBManager {
         try {
             return db.insert(TabellaIncantesimi.TBL_NOME, null, cv) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI INCANTESIMI", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -87,6 +88,7 @@ public class DBManager {
         try {
             return db.insert(TabellaAbilita.TBL_NOME, null, cv) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI ABILITA", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -102,13 +104,14 @@ public class DBManager {
         try {
             if (db.insert(TabellaValuta.TBL_NOME, null, cv) > 0) {
                 for (String nome : nuovo.getNomelist()) {
-                    if (!this.aggiungiNomeVal(nuovo.getNome(), nome))
-                        return false;
+                    if (!this.aggiungiNomeVal(nuovo.getNome(), nome)) ;
+                    return false;
                 }
                 return true;
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI VALUTA", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -137,6 +140,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI RAZZA", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -151,6 +155,7 @@ public class DBManager {
         try {
             return db.insert(TabellaPrivilegi.TBL_NOME, null, cv) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI PRIVILEGI", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -184,6 +189,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI CLASSE", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -203,6 +209,7 @@ public class DBManager {
         try {
             return db.insert(TabellaEquipaggiamento.TBL_NOME, null, cv) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI EQUI", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -218,6 +225,7 @@ public class DBManager {
         try {
             return db.insert(TabellaCaratteristica.TBL_NOME, null, cv) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI CAR", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -236,6 +244,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI ARMA", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -257,6 +266,7 @@ public class DBManager {
                 return this.aggiungiEquipaggiamento(nuovo);
             } else return false;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI ARMATURA", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -318,6 +328,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI GIOCAT", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -333,6 +344,7 @@ public class DBManager {
         try {
             return db.insert(TabellaCarBase.TBL_NOME, null, cv) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI CARB", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -354,6 +366,7 @@ public class DBManager {
         try {
             return db.insert(TabellaCaratteristicaG.TBL_NOME, null, cv) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI CARG", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -368,6 +381,7 @@ public class DBManager {
         try {
             return db.insert(TabellaNomeVal.TBL_NOME, null, cv) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI NOMEVAL", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -385,6 +399,7 @@ public class DBManager {
         try {
             return db.insert(TabelleHA.TBL_HAGA, null, cv) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI HAGA", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -402,6 +417,7 @@ public class DBManager {
         try {
             return db.insert(TabelleHA.TBL_HAGE, null, cv) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI HAGE", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -417,6 +433,7 @@ public class DBManager {
         try {
             return db.insert(TabelleHA.TBL_HAGI, null, cv) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI HAGI", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -431,6 +448,7 @@ public class DBManager {
         try {
             return db.insert(TabelleHA.TBL_HACE, null, cv) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI HACE", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -445,6 +463,7 @@ public class DBManager {
         try {
             return db.insert(TabelleHA.TBL_HACI, null, cv) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI HACI", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -459,6 +478,7 @@ public class DBManager {
         try {
             return db.insert(TabelleHA.TBL_HACP, null, cv) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI HACP", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -473,6 +493,7 @@ public class DBManager {
         try {
             return db.insert(TabelleHA.TBL_HARP, null, cv) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI HARP", "aggiunta fallita", sqle);
             return false;
         }
     }
@@ -484,6 +505,7 @@ public class DBManager {
         try {
             return db.delete(tabella, null, null) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA TAB", "elimina fallita", sqle);
             return false;
         }
     }
@@ -502,6 +524,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA INC", "elimina fallita", sqle);
             return false;
         }
     }
@@ -518,6 +541,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA ABILITA", "elimina fallita", sqle);
             return false;
         }
     }
@@ -534,6 +558,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA VALUTA", "elimina fallita", sqle);
             return false;
         }
     }
@@ -551,6 +576,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA RAZZA", "elimina fallita", sqle);
             return false;
         }
     }
@@ -568,6 +594,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA PRIVI", "elimina fallita", sqle);
             return false;
         }
     }
@@ -586,6 +613,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA CLASSA", "elimina fallita", sqle);
             return false;
         }
     }
@@ -603,6 +631,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA EQUI", "elimina fallita", sqle);
             return false;
         }
     }
@@ -619,6 +648,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA CAR", "elimina fallita", sqle);
             return false;
         }
     }
@@ -633,6 +663,7 @@ public class DBManager {
                 return this.eliminaEquipaggiamento(nomee);
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA ARMA", "elimina fallita", sqle);
             return false;
         }
     }
@@ -647,6 +678,7 @@ public class DBManager {
                 return this.eliminaEquipaggiamento(nomee);
             else return false;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA ARMATURA", "elimina fallita", sqle);
             return false;
         }
     }
@@ -666,6 +698,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA GIOC", "elimina fallita", sqle);
             return false;
         }
     }
@@ -678,6 +711,7 @@ public class DBManager {
         try {
             return db.delete(TabellaCarBase.TBL_NOME, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA CARB", "elimina fallita", sqle);
             return false;
         }
     }
@@ -703,6 +737,7 @@ public class DBManager {
             return db.delete(TabellaCaratteristicaG.TBL_NOME, whereClause, whereArgs) > 0;
 
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA CARG", "elimina fallita", sqle);
             return false;
         }
     }
@@ -715,6 +750,7 @@ public class DBManager {
         try {
             return db.delete(TabellaNomeVal.TBL_NOME, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA NOMEVAL", "elimina fallita", sqle);
             return false;
         }
     }
@@ -739,6 +775,7 @@ public class DBManager {
         try {
             return db.delete(TabelleHA.TBL_HAGA, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA HAGA", "elimina fallita", sqle);
             return false;
         }
     }
@@ -767,6 +804,7 @@ public class DBManager {
         try {
             return db.delete(TabelleHA.TBL_HAGE, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA HAGE", "elimina fallita", sqle);
             return false;
         }
     }
@@ -791,6 +829,7 @@ public class DBManager {
         try {
             return db.delete(TabelleHA.TBL_HAGI, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA HAGI", "elimina fallita", sqle);
             return false;
         }
     }
@@ -813,6 +852,7 @@ public class DBManager {
         try {
             return db.delete(TabelleHA.TBL_HACE, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA HACE", "elimina fallita", sqle);
             return false;
         }
     }
@@ -835,6 +875,7 @@ public class DBManager {
         try {
             return db.delete(TabelleHA.TBL_HACI, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA HACI", "elimina fallita", sqle);
             return false;
         }
     }
@@ -857,6 +898,7 @@ public class DBManager {
         try {
             return db.delete(TabelleHA.TBL_HACP, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA HACP", "elimina fallita", sqle);
             return false;
         }
     }
@@ -879,6 +921,7 @@ public class DBManager {
         try {
             return db.delete(TabelleHA.TBL_HARP, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("ELIMINA HARP", "elimina fallita", sqle);
             return false;
         }
     }
@@ -901,6 +944,7 @@ public class DBManager {
             return db.update(TabellaIncantesimi.TBL_NOME, cv, whereClause, whereArgs) > 0;
 
         } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA INC", "aggiorna fallita", sqle);
             return false;
         }
     }
@@ -916,6 +960,7 @@ public class DBManager {
         try {
             return db.update(TabellaAbilita.TBL_NOME, cv, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA ABILITA", "aggiorna fallita", sqle);
             return false;
         }
     }
@@ -942,6 +987,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA VALUTA", "aggiorna fallita", sqle);
             return false;
         }
     }
@@ -974,6 +1020,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA RAZZA", "aggiorna fallita", sqle);
             return false;
         }
     }
@@ -990,6 +1037,7 @@ public class DBManager {
             return db.update(TabellaPrivilegi.TBL_NOME, cv, whereClause, whereArgs) > 0;
 
         } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA PRIVI", "aggiorna fallita", sqle);
             return false;
         }
     }
@@ -1030,6 +1078,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA CLASSE", "aggiorna fallita", sqle);
             return false;
         }
     }
@@ -1050,6 +1099,7 @@ public class DBManager {
         try {
             return db.update(TabellaEquipaggiamento.TBL_NOME, cv, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA EQUI", "aggiorna fallita", sqle);
             return false;
         }
     }
@@ -1065,6 +1115,7 @@ public class DBManager {
         try {
             return db.update(TabellaCaratteristica.TBL_NOME, cv, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA CAR", "aggiorna fallita", sqle);
             return false;
         }
     }
@@ -1083,6 +1134,7 @@ public class DBManager {
                 return db.update(TabellaArma.TBL_NOME, cv, whereClause, whereArgs) > 0;
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA ARMA", "aggiorna fallita", sqle);
             return false;
         }
     }
@@ -1105,6 +1157,7 @@ public class DBManager {
                 return db.insert(TabellaArmatura.TBL_NOME, null, cv) > 0;
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA ARMATURA", "aggiorna fallita", sqle);
             return false;
         }
     }
@@ -1170,6 +1223,7 @@ public class DBManager {
             }
             return false;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA GIOC", "aggiorna fallita", sqle);
             return false;
         }
     }
@@ -1185,6 +1239,7 @@ public class DBManager {
         try {
             return db.update(TabellaCarBase.TBL_NOME, cv, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA CARB", "aggiorna fallita", sqle);
             return false;
         }
     }
@@ -1205,6 +1260,7 @@ public class DBManager {
         try {
             return db.update(TabellaCaratteristicaG.TBL_NOME, cv, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA CARG", "aggiorna fallita", sqle);
             return false;
         }
     }
@@ -1318,6 +1374,7 @@ public class DBManager {
             resultSet.close();
             return list;
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI PK", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1350,6 +1407,7 @@ public class DBManager {
             resultSet.close();
             return list;
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI DATIMENU", "leggi fallita", sqle);
             return null;
         }
 
@@ -1378,6 +1436,7 @@ public class DBManager {
             resultSet.close();
             return new Incantesimo(nomei, descrizione, tempoInvocazione, raggioAzione, componenti, durata, livello);
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI INC", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1421,6 +1480,7 @@ public class DBManager {
             resultSet.close();
             return incantesimi;
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI INCLIST", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1443,6 +1503,7 @@ public class DBManager {
             resultSet.close();
             return new Abilita(nomea, descrizione);
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI ABILITA", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1473,7 +1534,7 @@ public class DBManager {
             resultSet.close();
             return abilitaList;
         } catch (SQLiteException sqle) {
-            Log.e("LEGGI ABILITA LIST", "fallita lettura", sqle);
+            Log.e("LEGGI ABILITALIST", "fallita lettura", sqle);
             return null;
         }
     }
@@ -1502,6 +1563,7 @@ public class DBManager {
             resultSet.close();
             return nomi;
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI NOMEVAL", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1526,6 +1588,7 @@ public class DBManager {
             resultSet.close();
             return new Valuta(nomev, descrizione, ratio, 0, this.leggiNomeVal(nomev));
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI VALUTA", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1548,6 +1611,7 @@ public class DBManager {
             resultSet.close();
             return new Descrivibile(nomep, descrizione);
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI PRIVI", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1590,6 +1654,7 @@ public class DBManager {
             resultSet.close();
             return privilegi;
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI PRIVILIST", "leggi fallita", sqle);
             return null;
         }
     } //sia HACP che HARP
@@ -1618,6 +1683,7 @@ public class DBManager {
             resultSet.close();
             return carBaselist;
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI CARB", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1646,6 +1712,7 @@ public class DBManager {
             resultSet.close();
             return new Razza(nomer, descrizione, taglia, velocita, lingua, privilegiRazza, caratteristicaBaseList);
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI RAZZA", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1673,6 +1740,7 @@ public class DBManager {
             resultSet.close();
             return new Equipaggiamento(nomee, descrizione, tipo, costo, peso, capacita, subtipo);
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI EQUI", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1698,6 +1766,7 @@ public class DBManager {
             resultSet.close();
             return new Arma(equi.getNome(), equi.getDescrizione(), equi.getTipo(), equi.getCosto(), equi.getCapacita(), equi.getPeso(), danno, proprieta, equi.getSubtipo());
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI ARMA", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1726,7 +1795,7 @@ public class DBManager {
             resultSet.close();
             return new Armatura(equi.getNome(), equi.getDescrizione(), equi.getTipo(), equi.getCosto(), equi.getCapacita(), equi.getPeso(), nonFurtiva, modificatoreCA, tempoTogliere, tempoIndossare, forzaNecessaria, equi.getSubtipo());
         } catch (SQLiteException sqle) {
-            Log.e("LEGGI_ARMATURA", "fallita lettura", sqle);
+            Log.e("LEGGI ARMATURA", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1782,6 +1851,7 @@ public class DBManager {
             resultSet.close();
             return equipaggiamentoList;
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI EQUILIST", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1814,7 +1884,7 @@ public class DBManager {
             return new Classe(nomecla, descrizione, descrizionePrivilegiPoteri, nDadi, dado, competenza, equipaggiamentoList, privilegiClasse, incantesimiClasse);
 
         } catch (SQLiteException sqle) {
-            Log.e("LEGGI CLASSE", "fallita lettura", sqle);
+            Log.e("LEGGI CLASSE", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1839,7 +1909,7 @@ public class DBManager {
             return new Caratteristica(nomecar, descrizione);
 
         } catch (SQLiteException sqle) {
-            Log.e("LEGGI CAR", "fallita lettura", sqle);
+            Log.e("LEGGI CAR", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1876,7 +1946,7 @@ public class DBManager {
             return caratteristicaList;
 
         } catch (SQLiteException sqle) {
-            Log.e("LEGGI CARG", "fallita lettura", sqle);
+            Log.e("LEGGI CARG", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1930,7 +2000,7 @@ public class DBManager {
             return new Giocatore(nomeg, descrizione, mana, livello, puntiEsperienza, modCompetenza, capacitaBorsa, puntiFerita, nDadi, dado, classeArmatura, puntiStat, nomecamp, iniziativa, eta, altezza, genere, noteAvventura, ideali, sinossi, lingua, portafoglio, classe, razza, caratteristicaList, borsa, equipaggiato, incantesimiGiocatore, abilitaList);
 
         } catch (SQLiteException sqle) {
-            Log.e("LEGGI GIOCATORE", "fallita lettura", sqle);
+            Log.e("LEGGI GIOCATORE", "leggi fallita", sqle);
             return null;
         }
     }
@@ -1961,7 +2031,7 @@ public class DBManager {
             return notelist;
 
         } catch (SQLiteException sqle) {
-            Log.e("LEGGI NOTE VARIE", "fallita lettura", sqle);
+            Log.e("LEGGI NOTE VARIE", "leggi fallita", sqle);
             return null;
         }
     }
