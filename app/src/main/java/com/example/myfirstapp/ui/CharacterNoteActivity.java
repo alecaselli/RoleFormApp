@@ -28,20 +28,24 @@ public class CharacterNoteActivity extends AppCompatActivity {
     private EditText idealiEditText;
     private EditText descrizioneEditText;
     private EditText sinossiEditText;
+    private EditText generaliEditText;
 
     private String filename;
 
     private Button idealsButton;
     private Button descriptionButton;
     private Button synopsisButton;
+    private Button generalButton;
 
     private RelativeLayout idealsView;
     private RelativeLayout descriptionlView;
     private RelativeLayout synopsisView;
+    private RelativeLayout generalView;
 
     private CardView idealsCardView;
     private CardView descriptionCardView;
     private CardView synopsisCardView;
+    private CardView generalCardView;
 
 
     @Override
@@ -55,6 +59,7 @@ public class CharacterNoteActivity extends AppCompatActivity {
         idealiEditText = findViewById(R.id.note_ideals);
         descrizioneEditText = findViewById(R.id.note_description);
         sinossiEditText = findViewById(R.id.note_synopsis);
+        generaliEditText = findViewById(R.id.note_general);
 
         this.create();
         this.load();
@@ -119,6 +124,26 @@ public class CharacterNoteActivity extends AppCompatActivity {
             }
         });
 
+        generalButton = findViewById(R.id.note_general_expandButton);
+        generalView=findViewById(R.id.note_general_expandableView);
+        generalCardView=findViewById(R.id.note_general_cardView);
+
+        generalButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (generalView.getVisibility()==View.GONE){
+                    TransitionManager.beginDelayedTransition((ViewGroup) generalCardView.getParent().getParent(), new AutoTransition());
+                    generalView.setVisibility(View.VISIBLE);
+                    generalButton.setBackgroundResource(R.drawable.ic_arrow_up);
+                } else {
+                    TransitionManager.beginDelayedTransition((ViewGroup) generalCardView.getParent().getParent(), new AutoTransition());
+                    generalView.setVisibility(View.GONE);
+                    generalButton.setBackgroundResource(R.drawable.ic_arrow_down);
+                }
+            }
+        });
+
     }
 
     public void create(){
@@ -178,6 +203,12 @@ public class CharacterNoteActivity extends AppCompatActivity {
             }
             sinossiEditText.setText(builder.toString());
 
+            builder = new StringBuilder();
+            while ((line = reader.readLine()) != null && (line.compareTo("----") != 0)) {
+                builder.append(line).append("\n");
+            }
+            generaliEditText.setText(builder.toString());
+
         } catch (FileNotFoundException e) {
             FileOutputStream fos = null;
             try {
@@ -211,6 +242,7 @@ public class CharacterNoteActivity extends AppCompatActivity {
         String ideali = idealiEditText.getText().toString();
         String descrizione = descrizioneEditText.getText().toString();
         String sinossi = sinossiEditText.getText().toString();
+        String generali = generaliEditText.getText().toString();
         FileOutputStream fos = null;
         try {
             fos = openFileOutput(filename, MODE_PRIVATE);
@@ -223,6 +255,10 @@ public class CharacterNoteActivity extends AppCompatActivity {
             fos.write("----".getBytes());
             fos.write("\n".getBytes());
             fos.write(sinossi.getBytes());
+            fos.write("\n".getBytes());
+            fos.write("----".getBytes());
+            fos.write("\n".getBytes());
+            fos.write(generali.getBytes());
 
             Toast.makeText(this, "Note salvate", Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
