@@ -132,6 +132,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "\t\"altezza\"\tTEXT,\n" +
                 "\t\"genere\"\tTEXT,\n" +
                 "\t\"noteAvventura\"\tTEXT,\n" +
+                "\t\"ideali\"\tTEXT,\n" +
+                "\t\"sinossi\"\tTEXT,\n" +
                 "\t\"lingua\"\tTEXT,\n" +
                 "\t\"nomecla\"\tTEXT NOT NULL,\n" +
                 "\t\"nomer\"\tTEXT NOT NULL,\n" +

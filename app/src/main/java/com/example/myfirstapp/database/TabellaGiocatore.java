@@ -15,6 +15,8 @@ public class TabellaGiocatore {
     public static final String FIELD_ALTEZZA = "altezza";
     public static final String FIELD_GENERE = "genere";
     public static final String FIELD_NOTEAVVENTURA = "noteAvventura";
+    public static final String FIELD_IDEALI = "ideali";
+    public static final String FIELD_SINOSSI = "sinossi";
     public static final String FIELD_VALOREVAL = "valoreVal";
     public static final String TBL_NOME = "giocatore";
 }

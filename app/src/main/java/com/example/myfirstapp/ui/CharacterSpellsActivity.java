@@ -45,7 +45,7 @@ public class CharacterSpellsActivity extends AppCompatActivity {
 
         if (datilist != null)
             for (List<String> dati : datilist) {
-                mCardIncantesimoList.add(new CardIncantesimo(dati.get(0));
+                mCardIncantesimoList.add(new CardIncantesimo(dati.get(0)));
             }
 
     }
@@ -54,7 +54,7 @@ public class CharacterSpellsActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.spells_level_one_recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager((this));
-        mAdapter = new CardGiocatoreAdapter(mCardIncantesimoList);
+        mAdapter = new CardIncantesimoAdapter(mCardIncantesimoList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);

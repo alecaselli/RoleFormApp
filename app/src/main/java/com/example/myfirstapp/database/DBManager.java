@@ -282,7 +282,9 @@ public class DBManager {
         cv.put(TabellaGiocatore.FIELD_ETA, nuovo.getEta());
         cv.put(TabellaGiocatore.FIELD_ALTEZZA, nuovo.getAltezza());
         cv.put(TabellaGiocatore.FIELD_GENERE, nuovo.getGenere());
-        cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, nuovo.getNoteAvventura().toString());
+        cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, nuovo.getNoteAvventura());
+        cv.put(TabellaGiocatore.FIELD_IDEALI, nuovo.getIdeali());
+        cv.put(TabellaGiocatore.FIELD_SINOSSI, nuovo.getSinossi());
         cv.put(CampiComuni.FIELD_LINGUA, nuovo.getLingua().toString());
         cv.put(TabellaClasse.FIELD_NOMECLA, nuovo.getClasse().getNome());
         cv.put(TabellaRazza.FIELD_NOMER, nuovo.getRazza().getNome());
@@ -1128,7 +1130,9 @@ public class DBManager {
         cv.put(TabellaGiocatore.FIELD_ETA, aggiornato.getEta());
         cv.put(TabellaGiocatore.FIELD_ALTEZZA, aggiornato.getAltezza());
         cv.put(TabellaGiocatore.FIELD_GENERE, aggiornato.getGenere());
-        cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, aggiornato.getNoteAvventura().toString());
+        cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, aggiornato.getNoteAvventura());
+        cv.put(TabellaGiocatore.FIELD_IDEALI, aggiornato.getIdeali());
+        cv.put(TabellaGiocatore.FIELD_SINOSSI, aggiornato.getSinossi());
         cv.put(CampiComuni.FIELD_LINGUA, aggiornato.getLingua().toString());
         cv.put(TabellaClasse.FIELD_NOMECLA, aggiornato.getClasse().getNome());
         cv.put(TabellaRazza.FIELD_NOMER, aggiornato.getRazza().getNome());
@@ -1263,20 +1267,22 @@ public class DBManager {
         return aggiungiHarp(nomer, nomep);
     }
 
-    public boolean aggiornaNoteVarie(@NotNull String nomecamp, @NotNull String nomeg, @NotNull StringBuffer desc, @NotNull StringBuffer note) {
+    public void aggiornaNoteVarie(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String ideali, @NotNull String desc, @NotNull String sinossi, @NotNull String generali) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? ";
         String[] whereArgs = new String[]{nomecamp, nomeg};
 
-        cv.put(CampiComuni.FIELD_DESC, desc.toString());
-        cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, note.toString());
+        cv.put(CampiComuni.FIELD_DESC, desc);
+        cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, generali);
+        cv.put(TabellaGiocatore.FIELD_IDEALI, ideali);
+        cv.put(TabellaGiocatore.FIELD_SINOSSI, sinossi);
+
 
         try {
-            return (db.update(TabellaGiocatore.TBL_NOME, cv, whereClause, whereArgs) > 0);
+            db.update(TabellaGiocatore.TBL_NOME, cv, whereClause, whereArgs);
         } catch (SQLiteException sqle) {
             Log.e("AGGIORNA NOTE VARIE", "aggiornamento fallito", sqle);
-            return false;
         }
 
 
@@ -1903,8 +1909,9 @@ public class DBManager {
             String eta = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_ETA));
             String altezza = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_ALTEZZA));
             String genere = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_GENERE));
-            StringBuffer noteAvventura = new StringBuffer();
-            noteAvventura.append(resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_NOTEAVVENTURA)));
+            String noteAvventura = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_NOTEAVVENTURA));
+            String ideali = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_IDEALI));
+            String sinossi = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_SINOSSI));
             StringBuffer lingua = new StringBuffer();
             lingua.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_LINGUA)));
             Valuta portafoglio = this.leggiValuta(resultSet.getString(resultSet.getColumnIndex(TabellaValuta.FIELD_NOMEV)));
@@ -1920,7 +1927,7 @@ public class DBManager {
             List<Abilita> abilitaList = this.leggiAbilita(nomecamp, nomeg);
 
             resultSet.close();
-            return new Giocatore(nomeg, descrizione, mana, livello, puntiEsperienza, modCompetenza, capacitaBorsa, puntiFerita, nDadi, dado, classeArmatura, puntiStat, nomecamp, iniziativa, eta, altezza, genere, noteAvventura, lingua, portafoglio, classe, razza, caratteristicaList, borsa, equipaggiato, incantesimiGiocatore, abilitaList);
+            return new Giocatore(nomeg, descrizione, mana, livello, puntiEsperienza, modCompetenza, capacitaBorsa, puntiFerita, nDadi, dado, classeArmatura, puntiStat, nomecamp, iniziativa, eta, altezza, genere, noteAvventura, ideali, sinossi, lingua, portafoglio, classe, razza, caratteristicaList, borsa, equipaggiato, incantesimiGiocatore, abilitaList);
 
         } catch (SQLiteException sqle) {
             Log.e("LEGGI GIOCATORE", "fallita lettura", sqle);
@@ -1928,7 +1935,7 @@ public class DBManager {
         }
     }
 
-    public List<StringBuffer> leggiNotevarie(@NotNull String nomecamp, @NotNull String nomeg) {
+    public List<String> leggiNotevarie(@NotNull String nomecamp, @NotNull String nomeg) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
         String[] whereArgs = new String[]{nomecamp, nomeg};
@@ -1940,11 +1947,14 @@ public class DBManager {
             }
             resultSet.moveToFirst();
 
-            List<StringBuffer> notelist = new ArrayList<StringBuffer>();
-            StringBuffer note = new StringBuffer();
-            note.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+            List<String> notelist = new ArrayList<String>();
+            String note = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_IDEALI));
             notelist.add(note);
-            note.append(resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_NOTEAVVENTURA)));
+            note = resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC));
+            notelist.add(note);
+            note = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_SINOSSI));
+            notelist.add(note);
+            note = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_NOTEAVVENTURA));
             notelist.add(note);
 
             resultSet.close();
