@@ -22,7 +22,7 @@ public class CharacterSpellsActivity extends AppCompatActivity {
 
     private ArrayList<CardIncantesimo> mCardIncantesimoList;
 
-    private DBManager dbManager = new DBManager(this);
+    private DBManager dbManager;
 
     private RecyclerView mRecyclerView;
     private CardIncantesimoAdapter mAdapter;
@@ -33,12 +33,13 @@ public class CharacterSpellsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_spells);
 
-        dbManager.dropDB(this);
+        dbManager = new DBManager(this);
+        /*dbManager.dropDB(this);*/
         this.createListCardIncantesimo();
         this.buildRecyclerView();
     }
 
-    public void createListCardIncantesimo(){
+    public void createListCardIncantesimo() {
 
         List<List<String>> datilist = dbManager.leggiDatiMenu(TabellaGiocatore.TBL_NOME, CampiComuni.FIELD_LIVELLO, TabellaGiocatore.FIELD_NOMECAMPAGNA, TabellaGiocatore.FIELD_NOMEG);
         mCardIncantesimoList = new ArrayList<>();
@@ -50,7 +51,7 @@ public class CharacterSpellsActivity extends AppCompatActivity {
 
     }
 
-    public void buildRecyclerView(){
+    public void buildRecyclerView() {
         mRecyclerView = findViewById(R.id.spells_level_one_recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager((this));

@@ -61,9 +61,9 @@ public class Giocatore extends Descrivibile {
         this.puntiFerita = puntiFerita;
         this.ideali = ideali;
         this.sinossi = sinossi;
-        this.inizPuntiFeritaMax();
         this.nDadi = nDadi;
         this.dado = dado;
+        this.inizPuntiFeritaMax();
         this.classeArmatura = classeArmatura;
         this.puntiStat = puntiStat;
         this.nomeCampagna = nomeCampagna;
