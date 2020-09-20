@@ -31,18 +31,22 @@ public class CharacterNoteActivity extends AppCompatActivity {
     private EditText idealiEditText;
     private EditText descrizioneEditText;
     private EditText sinossiEditText;
+    private EditText generaliEditText;
 
     private Button idealsButton;
     private Button descriptionButton;
     private Button synopsisButton;
+    private Button generalButton;
 
     private RelativeLayout idealsView;
     private RelativeLayout descriptionlView;
     private RelativeLayout synopsisView;
+    private RelativeLayout generalView;
 
     private CardView idealsCardView;
     private CardView descriptionCardView;
     private CardView synopsisCardView;
+    private CardView generalCardView;
 
     private DBManager db;
     private String nomecamp;
@@ -58,10 +62,18 @@ public class CharacterNoteActivity extends AppCompatActivity {
         idealiEditText = findViewById(R.id.note_ideals);
         descrizioneEditText = findViewById(R.id.note_description);
         sinossiEditText = findViewById(R.id.note_synopsis);
+
 /*
         this.estraiNote();
         this.setView();
 */
+
+        generaliEditText = findViewById(R.id.note_general);
+
+        this.create();
+        this.load();
+
+
         idealsButton = findViewById(R.id.note_ideals_expandButton);
         idealsView=findViewById(R.id.note_ideals_expandableView);
         idealsCardView=findViewById(R.id.note_ideals_cardView);
@@ -122,6 +134,26 @@ public class CharacterNoteActivity extends AppCompatActivity {
             }
         });
 
+        generalButton = findViewById(R.id.note_general_expandButton);
+        generalView=findViewById(R.id.note_general_expandableView);
+        generalCardView=findViewById(R.id.note_general_cardView);
+
+        generalButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (generalView.getVisibility()==View.GONE){
+                    TransitionManager.beginDelayedTransition((ViewGroup) generalCardView.getParent().getParent(), new AutoTransition());
+                    generalView.setVisibility(View.VISIBLE);
+                    generalButton.setBackgroundResource(R.drawable.ic_arrow_up);
+                } else {
+                    TransitionManager.beginDelayedTransition((ViewGroup) generalCardView.getParent().getParent(), new AutoTransition());
+                    generalView.setVisibility(View.GONE);
+                    generalButton.setBackgroundResource(R.drawable.ic_arrow_down);
+                }
+            }
+        });
+
     }
 
     public void estraiNote(){
@@ -141,6 +173,46 @@ public class CharacterNoteActivity extends AppCompatActivity {
 
         idealiEditText = (EditText) findViewById(R.id.note_ideals);
         idealiEditText.setText(notelist.get(1));
+
+            builder = new StringBuilder();
+            while ((line = reader.readLine()) != null && (line.compareTo("----") != 0)) {
+                builder.append(line).append("\n");
+            }
+            sinossiEditText.setText(builder.toString());
+
+            builder = new StringBuilder();
+            while ((line = reader.readLine()) != null && (line.compareTo("----") != 0)) {
+                builder.append(line).append("\n");
+            }
+            generaliEditText.setText(builder.toString());
+
+        } catch (FileNotFoundException e) {
+            FileOutputStream fos = null;
+            try {
+                fos = openFileOutput(filename, MODE_PRIVATE);
+            } catch (FileNotFoundException e2) {
+                e2.printStackTrace();
+            } finally {
+                if (fos != null) {
+                    try {
+                        fos.close();
+                    } catch (IOException e2) {
+                        e2.printStackTrace();
+                    }
+                }
+            }
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public void save(View view) {
@@ -153,5 +225,37 @@ public class CharacterNoteActivity extends AppCompatActivity {
 
         db.aggiornaNoteVarie(nomecamp,nomeg,descrizione,ideali);
 
+        String generali = generaliEditText.getText().toString();
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(filename, MODE_PRIVATE);
+            fos.write(ideali.getBytes());
+            fos.write("\n".getBytes());
+            fos.write("----".getBytes());
+            fos.write("\n".getBytes());
+            fos.write(descrizione.getBytes());
+            fos.write("\n".getBytes());
+            fos.write("----".getBytes());
+            fos.write("\n".getBytes());
+            fos.write(sinossi.getBytes());
+            fos.write("\n".getBytes());
+            fos.write("----".getBytes());
+            fos.write("\n".getBytes());
+            fos.write(generali.getBytes());
+
+            Toast.makeText(this, "Note salvate", Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

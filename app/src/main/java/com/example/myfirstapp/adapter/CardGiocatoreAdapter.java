@@ -60,7 +60,7 @@ public class CardGiocatoreAdapter extends RecyclerView.Adapter<CardGiocatoreAdap
     @NonNull
     @Override
     public CardGiocatoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_character_item, parent, false);
         return new CardGiocatoreViewHolder(v, mListener);
     }
 
