@@ -3,7 +3,6 @@ package com.example.myfirstapp.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<CardGiocatore> mCardGiocatoreList;
 
-    private DBManager dbManager = new DBManager(this);
+    private DBManager dbManager;
 
     private RecyclerView mRecyclerView;
     private CardGiocatoreAdapter mAdapter;
@@ -35,13 +34,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        dbManager = new DBManager(this);
         dbManager.dropDB(this);
         this.createListCardGiocatore();
-        this.buildRecyclerView();
+        this.setRecyclerView();
 
     }
 
-    public void createListCardGiocatore(){
+    public void createListCardGiocatore() {
 
         List<List<String>> datilist = dbManager.leggiDatiMenu(TabellaGiocatore.TBL_NOME, CampiComuni.FIELD_LIVELLO, TabellaGiocatore.FIELD_NOMECAMPAGNA, TabellaGiocatore.FIELD_NOMEG);
         mCardGiocatoreList = new ArrayList<>();
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void buildRecyclerView(){
+    public void setRecyclerView() {
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager((this));

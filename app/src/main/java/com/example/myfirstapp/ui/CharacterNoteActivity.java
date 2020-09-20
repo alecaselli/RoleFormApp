@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.database.DBManager;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -22,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class CharacterNoteActivity extends AppCompatActivity {
 
@@ -29,8 +32,6 @@ public class CharacterNoteActivity extends AppCompatActivity {
     private EditText descrizioneEditText;
     private EditText sinossiEditText;
     private EditText generaliEditText;
-
-    private String filename;
 
     private Button idealsButton;
     private Button descriptionButton;
@@ -47,32 +48,75 @@ public class CharacterNoteActivity extends AppCompatActivity {
     private CardView synopsisCardView;
     private CardView generalCardView;
 
+    private DBManager db;
+    private String nomecamp;
+    private String nomeg;
+    private List<String> notelist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_note);
 
+        db = new DBManager(this);
+        this.estraiNote();
+        this.setView();
+        this.setButton();
+
+    }
+
+    public void estraiNote() {
         Intent intent = getIntent();
-        filename = intent.getStringExtra("filename");
+        nomecamp = intent.getStringExtra("nomecamp");
+        nomeg = intent.getStringExtra("nomeg");
+        assert nomeg != null;
+        assert nomecamp != null;
+        notelist = db.leggiNotevarie(nomecamp, nomeg);
+    }
+
+    public void setView() {
 
         idealiEditText = findViewById(R.id.note_ideals);
         descrizioneEditText = findViewById(R.id.note_description);
         sinossiEditText = findViewById(R.id.note_synopsis);
         generaliEditText = findViewById(R.id.note_general);
 
-        this.create();
-        this.load();
+        idealiEditText = (EditText) findViewById(R.id.note_ideals);
+        idealiEditText.setText(notelist.get(0));
+
+        descrizioneEditText = (EditText) findViewById(R.id.note_description);
+        descrizioneEditText.setText(notelist.get(1));
+
+
+        sinossiEditText = (EditText) findViewById(R.id.note_synopsis);
+        sinossiEditText.setText(notelist.get(2));
+
+        generaliEditText = (EditText) findViewById(R.id.note_general);
+        generaliEditText.setText(notelist.get(3));
+
+    }
+
+    public void save(View view) {
+        String ideali = idealiEditText.getText().toString();
+        String descrizione = descrizioneEditText.getText().toString();
+        String sinossi = sinossiEditText.getText().toString();
+        String generali = generaliEditText.getText().toString();
+
+        db.aggiornaNoteVarie(nomecamp, nomeg, ideali, descrizione, sinossi, generali);
+        Toast.makeText(this, "Note salvate", Toast.LENGTH_SHORT).show();
+    }
+
+    public void setButton() {
 
         idealsButton = findViewById(R.id.note_ideals_expandButton);
-        idealsView=findViewById(R.id.note_ideals_expandableView);
-        idealsCardView=findViewById(R.id.note_ideals_cardView);
+        idealsView = findViewById(R.id.note_ideals_expandableView);
+        idealsCardView = findViewById(R.id.note_ideals_cardView);
 
         idealsButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (idealsView.getVisibility()==View.GONE){
+                if (idealsView.getVisibility() == View.GONE) {
                     TransitionManager.beginDelayedTransition((ViewGroup) idealsCardView.getParent().getParent(), new AutoTransition());
                     idealsView.setVisibility(View.VISIBLE);
                     idealsButton.setBackgroundResource(R.drawable.ic_arrow_up);
@@ -85,14 +129,14 @@ public class CharacterNoteActivity extends AppCompatActivity {
         });
 
         descriptionButton = findViewById(R.id.note_description_expandButton);
-        descriptionlView=findViewById(R.id.note_description_expandableView);
-        descriptionCardView=findViewById(R.id.note_description_cardView);
+        descriptionlView = findViewById(R.id.note_description_expandableView);
+        descriptionCardView = findViewById(R.id.note_description_cardView);
 
         descriptionButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (descriptionlView.getVisibility()==View.GONE){
+                if (descriptionlView.getVisibility() == View.GONE) {
                     TransitionManager.beginDelayedTransition((ViewGroup) descriptionCardView.getParent().getParent(), new AutoTransition());
                     descriptionlView.setVisibility(View.VISIBLE);
                     descriptionButton.setBackgroundResource(R.drawable.ic_arrow_up);
@@ -105,14 +149,14 @@ public class CharacterNoteActivity extends AppCompatActivity {
         });
 
         synopsisButton = findViewById(R.id.note_synopsis_expandButton);
-        synopsisView=findViewById(R.id.note_synopsis_expandableView);
-        synopsisCardView=findViewById(R.id.note_synopsis_cardView);
+        synopsisView = findViewById(R.id.note_synopsis_expandableView);
+        synopsisCardView = findViewById(R.id.note_synopsis_cardView);
 
         synopsisButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (synopsisView.getVisibility()==View.GONE){
+                if (synopsisView.getVisibility() == View.GONE) {
                     TransitionManager.beginDelayedTransition((ViewGroup) synopsisCardView.getParent().getParent(), new AutoTransition());
                     synopsisView.setVisibility(View.VISIBLE);
                     synopsisButton.setBackgroundResource(R.drawable.ic_arrow_up);
@@ -125,14 +169,14 @@ public class CharacterNoteActivity extends AppCompatActivity {
         });
 
         generalButton = findViewById(R.id.note_general_expandButton);
-        generalView=findViewById(R.id.note_general_expandableView);
-        generalCardView=findViewById(R.id.note_general_cardView);
+        generalView = findViewById(R.id.note_general_expandableView);
+        generalCardView = findViewById(R.id.note_general_cardView);
 
         generalButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (generalView.getVisibility()==View.GONE){
+                if (generalView.getVisibility() == View.GONE) {
                     TransitionManager.beginDelayedTransition((ViewGroup) generalCardView.getParent().getParent(), new AutoTransition());
                     generalView.setVisibility(View.VISIBLE);
                     generalButton.setBackgroundResource(R.drawable.ic_arrow_up);
@@ -144,135 +188,6 @@ public class CharacterNoteActivity extends AppCompatActivity {
             }
         });
 
-    }
 
-    public void create(){
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(filename);
-        } catch (FileNotFoundException e) {
-            FileOutputStream fos = null;
-            try {
-                fos = openFileOutput(filename, MODE_PRIVATE);
-            } catch (FileNotFoundException e2) {
-                e2.printStackTrace();
-            } finally {
-                if (fos != null) {
-                    try {
-                        fos.close();
-                    } catch (IOException e2) {
-                        e2.printStackTrace();
-                    }
-                }
-            }
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public void load() {
-        FileInputStream fis = null;
-
-        try {
-            fis = openFileInput(filename);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
-            StringBuilder builder = new StringBuilder();
-            String line;
-
-            while ((line = reader.readLine()) != null && (line.compareTo("----") != 0)) {
-                builder.append(line).append("\n");
-            }
-            idealiEditText.setText(builder.toString());
-
-            builder = new StringBuilder();
-            while ((line = reader.readLine()) != null && (line.compareTo("----") != 0)) {
-                builder.append(line).append("\n");
-            }
-            descrizioneEditText.setText(builder.toString());
-
-            builder = new StringBuilder();
-            while ((line = reader.readLine()) != null && (line.compareTo("----") != 0)) {
-                builder.append(line).append("\n");
-            }
-            sinossiEditText.setText(builder.toString());
-
-            builder = new StringBuilder();
-            while ((line = reader.readLine()) != null && (line.compareTo("----") != 0)) {
-                builder.append(line).append("\n");
-            }
-            generaliEditText.setText(builder.toString());
-
-        } catch (FileNotFoundException e) {
-            FileOutputStream fos = null;
-            try {
-                fos = openFileOutput(filename, MODE_PRIVATE);
-            } catch (FileNotFoundException e2) {
-                e2.printStackTrace();
-            } finally {
-                if (fos != null) {
-                    try {
-                        fos.close();
-                    } catch (IOException e2) {
-                        e2.printStackTrace();
-                    }
-                }
-            }
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public void save(View view) {
-        String ideali = idealiEditText.getText().toString();
-        String descrizione = descrizioneEditText.getText().toString();
-        String sinossi = sinossiEditText.getText().toString();
-        String generali = generaliEditText.getText().toString();
-        FileOutputStream fos = null;
-        try {
-            fos = openFileOutput(filename, MODE_PRIVATE);
-            fos.write(ideali.getBytes());
-            fos.write("\n".getBytes());
-            fos.write("----".getBytes());
-            fos.write("\n".getBytes());
-            fos.write(descrizione.getBytes());
-            fos.write("\n".getBytes());
-            fos.write("----".getBytes());
-            fos.write("\n".getBytes());
-            fos.write(sinossi.getBytes());
-            fos.write("\n".getBytes());
-            fos.write("----".getBytes());
-            fos.write("\n".getBytes());
-            fos.write(generali.getBytes());
-
-            Toast.makeText(this, "Note salvate", Toast.LENGTH_SHORT).show();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 }

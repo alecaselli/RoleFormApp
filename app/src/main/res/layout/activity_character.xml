@@ -95,14 +95,16 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="3dp"
-                        android:orientation="vertical" >
+                        android:layout_marginEnd="0dp"
+
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/level"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
                             android:layout_alignParentEnd="true"
+                            android:layout_centerHorizontal="true"
                             android:layout_marginHorizontal="8dp"
                             android:text="Livello 10"
                             android:textColor="@color/black"
@@ -126,7 +128,27 @@
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="12dp"
                                 android:layout_toEndOf="@id/mana"
-                                android:text="80/80"
+                                android:text="@string/_80"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                            <TextView
+                                android:id="@+id/character_mana_separetore"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="0dp"
+                                android:layout_toEndOf="@id/character_mana"
+                                android:text="@string/back_slash"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                            <TextView
+                                android:id="@+id/character_max_mana"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="0dp"
+                                android:layout_toEndOf="@id/character_mana_separetore"
+                                android:text="@string/_80"
                                 android:textColor="@color/black"
                                 android:textSize="16sp" />
 
@@ -150,7 +172,27 @@
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="12dp"
                                 android:layout_toEndOf="@id/vita"
-                                android:text="80/80"
+                                android:text="@string/_80"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                            <TextView
+                                android:id="@+id/character_life_separetore"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="0dp"
+                                android:layout_toEndOf="@id/character_life"
+                                android:text="@string/back_slash"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                            <TextView
+                                android:id="@+id/character_max_life"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="0dp"
+                                android:layout_toEndOf="@id/character_life_separetore"
+                                android:text="@string/_80"
                                 android:textColor="@color/black"
                                 android:textSize="16sp" />
 

@@ -18,7 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(@NonNull SQLiteDatabase db) {
-        String q = "CREATE TABLE IF NOT EXISTS \"incantesmi\" (\n" +
+        String q = "CREATE TABLE IF NOT EXISTS \"incantesimi\" (\n" +
                 "\t\"nomei\"\tTEXT,\n" +
                 "\t\"desc\"\tTEXT,\n" +
                 "\t\"livello\"\tINTEGER,\n" +
@@ -132,6 +132,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "\t\"altezza\"\tTEXT,\n" +
                 "\t\"genere\"\tTEXT,\n" +
                 "\t\"noteAvventura\"\tTEXT,\n" +
+                "\t\"ideali\"\tTEXT,\n" +
+                "\t\"sinossi\"\tTEXT,\n" +
                 "\t\"lingua\"\tTEXT,\n" +
                 "\t\"nomecla\"\tTEXT NOT NULL,\n" +
                 "\t\"nomer\"\tTEXT NOT NULL,\n" +
@@ -204,7 +206,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "\t\"nomei\"\tTEXT,\n" +
                 "\tPRIMARY KEY(\"nomeCampagna\",\"nomeg\",\"nomei\"),\n" +
                 "\tFOREIGN KEY(\"nomeCampagna\",\"nomeg\") REFERENCES \"giocatore\"(\"nomeCampagna\",\"nomeg\") ON UPDATE CASCADE,\n" +
-                "\tFOREIGN KEY(\"nomei\") REFERENCES \"incantesmi\"(\"nomei\") ON UPDATE CASCADE\n" +
+                "\tFOREIGN KEY(\"nomei\") REFERENCES \"incantesimi\"(\"nomei\") ON UPDATE CASCADE\n" +
                 ");";
         db.execSQL(q);
 
@@ -222,7 +224,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "\t\"nomei\"\tTEXT,\n" +
                 "\tPRIMARY KEY(\"nomecla\",\"nomei\"),\n" +
                 "\tFOREIGN KEY(\"nomecla\") REFERENCES \"classe\"(\"nomecla\") ON UPDATE CASCADE,\n" +
-                "\tFOREIGN KEY(\"nomei\") REFERENCES \"incantesmi\"(\"nomei\") ON UPDATE CASCADE\n" +
+                "\tFOREIGN KEY(\"nomei\") REFERENCES \"incantesimi\"(\"nomei\") ON UPDATE CASCADE\n" +
                 ");";
         db.execSQL(q);
 
@@ -254,15 +256,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private void primoInserimento(@NotNull SQLiteDatabase db) {
         /* incantesimi */
-        String q = "INSERT INTO \"incantesmi\" (\"nomei\",\"desc\",\"livello\",\"tempoInvocazione\",\"raggioAzione\",\"componenti\",\"durata\") VALUES ('palla di fuoco','spari una palla di fuoco',1,'istantaneo','5m','nessuno','istantaneo');";
+        String q = "INSERT INTO \"incantesimi\" (\"nomei\",\"desc\",\"livello\",\"tempoInvocazione\",\"raggioAzione\",\"componenti\",\"durata\") VALUES ('palla di fuoco','spari una palla di fuoco',1,'istantaneo','5m','nessuno','istantaneo');";
         db.execSQL(q);
-        q = "INSERT INTO \"incantesmi\" (\"nomei\",\"desc\",\"livello\",\"tempoInvocazione\",\"raggioAzione\",\"componenti\",\"durata\") VALUES ('lanci di ghiaccio','spari una lancia di ghiaccio',2,'15sec','3m','ghiacciolo','istantaneo');";
+        q = "INSERT INTO \"incantesimi\" (\"nomei\",\"desc\",\"livello\",\"tempoInvocazione\",\"raggioAzione\",\"componenti\",\"durata\") VALUES ('lanci di ghiaccio','spari una lancia di ghiaccio',2,'15sec','3m','ghiacciolo','istantaneo');";
         db.execSQL(q);
-        q = "INSERT INTO \"incantesmi\" (\"nomei\",\"desc\",\"livello\",\"tempoInvocazione\",\"raggioAzione\",\"componenti\",\"durata\") VALUES ('cura','guarisci te stesso o un tuo alleato di 2 punto ferita ogni 30sec, devi mantenere il contatto',1,'istantaneo','contatto','pergamena del chierico','3min');";
+        q = "INSERT INTO \"incantesimi\" (\"nomei\",\"desc\",\"livello\",\"tempoInvocazione\",\"raggioAzione\",\"componenti\",\"durata\") VALUES ('cura','guarisci te stesso o un tuo alleato di 2 punto ferita ogni 30sec, devi mantenere il contatto',1,'istantaneo','contatto','pergamena del chierico','3min');";
         db.execSQL(q);
-        q = "INSERT INTO \"incantesmi\" (\"nomei\",\"desc\",\"livello\",\"tempoInvocazione\",\"raggioAzione\",\"componenti\",\"durata\") VALUES ('evocazione elementare','puoi evocare un pet elemntare 4/8, possiede un proprio turno e può attaccare 2 volte',5,'1min','2m','una lacrima di cervo',NULL);";
+        q = "INSERT INTO \"incantesimi\" (\"nomei\",\"desc\",\"livello\",\"tempoInvocazione\",\"raggioAzione\",\"componenti\",\"durata\") VALUES ('evocazione elementare','puoi evocare un pet elemntare 4/8, possiede un proprio turno e può attaccare 2 volte',5,'1min','2m','una lacrima di cervo',NULL);";
         db.execSQL(q);
-        q = "INSERT INTO \"incantesmi\" (\"nomei\",\"desc\",\"livello\",\"tempoInvocazione\",\"raggioAzione\",\"componenti\",\"durata\") VALUES ('freccia magica','spari 5 frecce di mana anzichè una normale, ogni freccia fa danno norale  -1',4,'istantaneo','15m','un crisallo di mana','istantaneo');";
+        q = "INSERT INTO \"incantesimi\" (\"nomei\",\"desc\",\"livello\",\"tempoInvocazione\",\"raggioAzione\",\"componenti\",\"durata\") VALUES ('freccia magica','spari 5 frecce di mana anzichè una normale, ogni freccia fa danno norale  -1',4,'istantaneo','15m','un crisallo di mana','istantaneo');";
         db.execSQL(q);
 
         /* valuta */
@@ -358,34 +360,6 @@ public class DBHelper extends SQLiteOpenHelper {
         q = "INSERT INTO \"nomeVal\" (\"nomev\",\"nome\") VALUES ('moneta del regno di Ho','rame');";
         db.execSQL(q);
 
-        /* HA */
-        q = "INSERT INTO \"hace\" (\"nomecla\",\"nomee\") VALUES ('gueriero','mazza');";
-        db.execSQL(q);
-        q = "INSERT INTO \"hace\" (\"nomecla\",\"nomee\") VALUES ('ranger','maglia in cuoio');";
-        db.execSQL(q);
-        q = "INSERT INTO \"haci\" (\"nomecla\",\"nomei\") VALUES ('ranger','evocazione elementare');";
-        db.execSQL(q);
-        q = "INSERT INTO \"haci\" (\"nomecla\",\"nomei\") VALUES ('ranger','freccia magica');";
-        db.execSQL(q);
-        q = "INSERT INTO \"hacp\" (\"nomecla\",\"nomep\") VALUES ('gueriero','leader in prima linea');";
-        db.execSQL(q);
-        q = "INSERT INTO \"hacp\" (\"nomecla\",\"nomep\") VALUES ('gueriero','maetro della guerra');";
-        db.execSQL(q);
-        q = "INSERT INTO \"hacp\" (\"nomecla\",\"nomep\") VALUES ('ranger','naturalista');";
-        db.execSQL(q);
-        q = "INSERT INTO \"hacp\" (\"nomecla\",\"nomep\") VALUES ('ranger','protezione della foresta');";
-        db.execSQL(q);
-        q = "INSERT INTO \"harp\" (\"nomer\",\"nomep\") VALUES ('elfo','agilità superiore');";
-        db.execSQL(q);
-        q = "INSERT INTO \"harp\" (\"nomer\",\"nomep\") VALUES ('elfo','meditazione');";
-        db.execSQL(q);
-        q = "INSERT INTO \"harp\" (\"nomer\",\"nomep\") VALUES ('nano','durascorza');";
-        db.execSQL(q);
-        q = "INSERT INTO \"harp\" (\"nomer\",\"nomep\") VALUES ('nano','furia');";
-        db.execSQL(q);
-        q = "INSERT INTO \"harp\" (\"nomer\",\"nomep\") VALUES ('nano','instancabile');";
-        db.execSQL(q);
-
         /* abilità */
         q = "INSERT INTO \"abilita\" (\"nomea\",\"desc\") VALUES ('correre','sai correre');";
         db.execSQL(q);
@@ -414,8 +388,8 @@ public class DBHelper extends SQLiteOpenHelper {
         q = "INSERT INTO \"carBase\" (\"nomer\",\"nomecb\",\"valore\") VALUES ('nano','forza',3);";
         db.execSQL(q);
 
-        q = "INSERT INTO \"giocatore\" (\"nomeCampagna\",\"nomeg\",\"desc\",\"mana\",\"livello\",\"puntiXP\",\"modCompetenza\",\"capacitaBorsa\",\"puntiFerita\",\"classeArmatura\",\"puntiStat\",\"nDadi\",\"dado\",\"iniziativa\",\"eta\",\"altezza\",\"genere\",\"noteAvventura\",\"lingua\",\"nomecla\",\"nomer\",\"nomev\",\"valoreVal\") " +
-                "VALUES ('campagna','ciro','un rozzo nano ',0,1,0,2,0,13,0,0,1,8,'0','130','90','M',NULL,NULL,'gueriero','nano','moneta del regno di Ho',0);";
+        q = "INSERT INTO \"giocatore\" (\"nomeCampagna\",\"nomeg\",\"desc\",\"mana\",\"livello\",\"puntiXP\",\"modCompetenza\",\"capacitaBorsa\",\"puntiFerita\",\"classeArmatura\",\"puntiStat\",\"nDadi\",\"dado\",\"iniziativa\",\"eta\",\"altezza\",\"genere\",\"noteAvventura\",\"ideali\",\"sinossi\",\"lingua\",\"nomecla\",\"nomer\",\"nomev\",\"valoreVal\") " +
+                "VALUES ('campagna','ciro','un rozzo nano ',0,1,0,2,0,13,0,0,1,8,'0','130','90','M',NULL,NULL,NULL,NULL,'gueriero','nano','moneta del regno di Ho',0);";
         db.execSQL(q);
         q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','carisma',0,0,0,0,0);";
         db.execSQL(q);
@@ -430,8 +404,8 @@ public class DBHelper extends SQLiteOpenHelper {
         q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','intelligenza',0,0,0,0,0);";
         db.execSQL(q);
 
-        q = "INSERT INTO \"giocatore\" (\"nomeCampagna\",\"nomeg\",\"desc\",\"mana\",\"livello\",\"puntiXP\",\"modCompetenza\",\"capacitaBorsa\",\"puntiFerita\",\"classeArmatura\",\"puntiStat\",\"nDadi\",\"dado\",\"iniziativa\",\"eta\",\"altezza\",\"genere\",\"noteAvventura\",\"lingua\",\"nomecla\",\"nomer\",\"nomev\",\"valoreVal\") " +
-                "VALUES ('Arcadia','Fieryor','drago elettrico',0,12,0,2,0,70,0,0,1,8,'0','27','192','M',NULL,NULL,'ranger','elfo','moneta del regno di Ho',0);";
+        q = "INSERT INTO \"giocatore\" (\"nomeCampagna\",\"nomeg\",\"desc\",\"mana\",\"livello\",\"puntiXP\",\"modCompetenza\",\"capacitaBorsa\",\"puntiFerita\",\"classeArmatura\",\"puntiStat\",\"nDadi\",\"dado\",\"iniziativa\",\"eta\",\"altezza\",\"genere\",\"noteAvventura\",\"ideali\",\"sinossi\",\"lingua\",\"nomecla\",\"nomer\",\"nomev\",\"valoreVal\") " +
+                "VALUES ('Arcadia','Fieryor','drago elettrico',0,12,0,2,0,70,0,0,1,8,'0','27','192','M',NULL,NULL,NULL,NULL,'ranger','elfo','moneta del regno di Ho',0);";
         db.execSQL(q);
         q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('Arcadia','Fieryor','carisma',0,0,0,0,0);";
         db.execSQL(q);
@@ -446,8 +420,57 @@ public class DBHelper extends SQLiteOpenHelper {
         q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('Arcadia','Fieryor','intelligenza',0,0,0,0,0);";
         db.execSQL(q);
 
-
-
+        /* HA */
+        q = "INSERT INTO \"hace\" (\"nomecla\",\"nomee\") VALUES ('gueriero','mazza');";
+        db.execSQL(q);
+        q = "INSERT INTO \"hace\" (\"nomecla\",\"nomee\") VALUES ('ranger','maglia in cuoio');";
+        db.execSQL(q);
+        q = "INSERT INTO \"haci\" (\"nomecla\",\"nomei\") VALUES ('ranger','evocazione elementare');";
+        db.execSQL(q);
+        q = "INSERT INTO \"haci\" (\"nomecla\",\"nomei\") VALUES ('ranger','freccia magica');";
+        db.execSQL(q);
+        q = "INSERT INTO \"hacp\" (\"nomecla\",\"nomep\") VALUES ('gueriero','leader in prima linea');";
+        db.execSQL(q);
+        q = "INSERT INTO \"hacp\" (\"nomecla\",\"nomep\") VALUES ('gueriero','maetro della guerra');";
+        db.execSQL(q);
+        q = "INSERT INTO \"hacp\" (\"nomecla\",\"nomep\") VALUES ('ranger','naturalista');";
+        db.execSQL(q);
+        q = "INSERT INTO \"hacp\" (\"nomecla\",\"nomep\") VALUES ('ranger','protezione della foresta');";
+        db.execSQL(q);
+        q = "INSERT INTO \"harp\" (\"nomer\",\"nomep\") VALUES ('elfo','agilità superiore');";
+        db.execSQL(q);
+        q = "INSERT INTO \"harp\" (\"nomer\",\"nomep\") VALUES ('elfo','meditazione');";
+        db.execSQL(q);
+        q = "INSERT INTO \"harp\" (\"nomer\",\"nomep\") VALUES ('nano','durascorza');";
+        db.execSQL(q);
+        q = "INSERT INTO \"harp\" (\"nomer\",\"nomep\") VALUES ('nano','furia');";
+        db.execSQL(q);
+        q = "INSERT INTO \"harp\" (\"nomer\",\"nomep\") VALUES ('nano','instancabile');";
+        db.execSQL(q);
+        q = "INSERT INTO \"hagi\" (\"nomeCampagna\",\"nomeg\",\"nomei\") VALUES ('Arcadia','Fieryor','evocazione elementare');";
+        db.execSQL(q);
+        q = "INSERT INTO \"hagi\" (\"nomeCampagna\",\"nomeg\",\"nomei\") VALUES ('Arcadia','Fieryor','freccia magica');";
+        db.execSQL(q);
+        q = "INSERT INTO \"haga\" (\"nomeCampagna\",\"nomeg\",\"nomea\",\"competenza\") VALUES ('campagna','ciro','arrampicare',0);";
+        db.execSQL(q);
+        q = "INSERT INTO \"haga\" (\"nomeCampagna\",\"nomeg\",\"nomea\",\"competenza\") VALUES ('campagna','ciro','correre',1);";
+        db.execSQL(q);
+        q = "INSERT INTO \"haga\" (\"nomeCampagna\",\"nomeg\",\"nomea\",\"competenza\") VALUES ('campagna','ciro','cavalcare',0);";
+        db.execSQL(q);
+        q = "INSERT INTO \"haga\" (\"nomeCampagna\",\"nomeg\",\"nomea\",\"competenza\") VALUES ('campagna','ciro','scassinare',1);";
+        db.execSQL(q);
+        q = "INSERT INTO \"haga\" (\"nomeCampagna\",\"nomeg\",\"nomea\",\"competenza\") VALUES ('campagna','ciro','schermire',0);";
+        db.execSQL(q);
+        q = "INSERT INTO \"haga\" (\"nomeCampagna\",\"nomeg\",\"nomea\",\"competenza\") VALUES ('Arcadia','Fieryor','arrampicare',1);";
+        db.execSQL(q);
+        q = "INSERT INTO \"haga\" (\"nomeCampagna\",\"nomeg\",\"nomea\",\"competenza\") VALUES ('Arcadia','Fieryor','correre',0);";
+        db.execSQL(q);
+        q = "INSERT INTO \"haga\" (\"nomeCampagna\",\"nomeg\",\"nomea\",\"competenza\") VALUES ('Arcadia','Fieryor','cavalcare',1);";
+        db.execSQL(q);
+        q = "INSERT INTO \"haga\" (\"nomeCampagna\",\"nomeg\",\"nomea\",\"competenza\") VALUES ('Arcadia','Fieryor','scassinare',0);";
+        db.execSQL(q);
+        q = "INSERT INTO \"haga\" (\"nomeCampagna\",\"nomeg\",\"nomea\",\"competenza\") VALUES ('Arcadia','Fieryor','schermire',1);";
+        db.execSQL(q);
     }
 }
 

@@ -22,7 +22,9 @@ public class Giocatore extends Descrivibile {
     private String eta;
     private String altezza;
     private String genere;
-    private StringBuffer noteAvventura;
+    private String noteAvventura;
+    private String ideali;
+    private String sinossi;
     private StringBuffer lingua;
     private Valuta portafoglio;
     private Classe classe;
@@ -33,8 +35,10 @@ public class Giocatore extends Descrivibile {
     private List<Incantesimo> incantesimiGiocatore;
     private List<Abilita> abilitaList;
 
-    public Giocatore(String nome, StringBuffer descrizione, String nomeCampagna, String eta, String altezza, String genere, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Abilita> abilitaList) {
+    public Giocatore(String nome, StringBuffer descrizione, String nomeCampagna, String eta, String altezza, String genere, String ideali, String sinossi, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Abilita> abilitaList) {
         super(nome, descrizione);
+        this.ideali = ideali;
+        this.sinossi = sinossi;
         this.classe = classe;
         this.nomeCampagna = nomeCampagna;
         this.eta = eta;
@@ -47,7 +51,7 @@ public class Giocatore extends Descrivibile {
         this.inizializzazionePG();
     }
 
-    public Giocatore(String nome, StringBuffer descrizione, int mana, int livello, int puntiEsperienza, int modCompetenza, int capacitaBorsa, int puntiFerita, int nDadi, int dado, int classeArmatura, int puntiStat, String nomeCampagna, String iniziativa, String eta, String altezza, String genere, StringBuffer noteAvventura, StringBuffer lingua, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Equipaggiamento> borsa, List<Equipaggiamento> equipaggiato, List<Incantesimo> incantesimiGiocatore, List<Abilita> abilitaList) {
+    public Giocatore(String nome, StringBuffer descrizione, int mana, int livello, int puntiEsperienza, int modCompetenza, int capacitaBorsa, int puntiFerita, int nDadi, int dado, int classeArmatura, int puntiStat, String nomeCampagna, String iniziativa, String eta, String altezza, String genere, String noteAvventura, String ideali, String sinossi, StringBuffer lingua, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Equipaggiamento> borsa, List<Equipaggiamento> equipaggiato, List<Incantesimo> incantesimiGiocatore, List<Abilita> abilitaList) {
         super(nome, descrizione);
         this.mana = mana;
         this.livello = livello;
@@ -55,9 +59,11 @@ public class Giocatore extends Descrivibile {
         this.modCompetenza = modCompetenza;
         this.capacitaBorsa = capacitaBorsa;
         this.puntiFerita = puntiFerita;
-        this.inizPuntiFeritaMax();
+        this.ideali = ideali;
+        this.sinossi = sinossi;
         this.nDadi = nDadi;
         this.dado = dado;
+        this.inizPuntiFeritaMax();
         this.classeArmatura = classeArmatura;
         this.puntiStat = puntiStat;
         this.nomeCampagna = nomeCampagna;
@@ -205,12 +211,28 @@ public class Giocatore extends Descrivibile {
         this.genere = genere;
     }
 
-    public StringBuffer getNoteAvventura() {
+    public String getNoteAvventura() {
         return noteAvventura;
     }
 
-    public void setNoteAvventura(StringBuffer noteAvventura) {
+    public void setNoteAvventura(String noteAvventura) {
         this.noteAvventura = noteAvventura;
+    }
+
+    public String getIdeali() {
+        return ideali;
+    }
+
+    public void setIdeali(String ideali) {
+        this.ideali = ideali;
+    }
+
+    public String getSinossi() {
+        return sinossi;
+    }
+
+    public void setSinossi(String sinossi) {
+        this.sinossi = sinossi;
     }
 
     public StringBuffer getLingua() {
@@ -376,7 +398,7 @@ public class Giocatore extends Descrivibile {
             }
         }
         this.classeArmatura = this.puntiStat = this.mana = this.puntiEsperienza = this.capacitaBorsa = 0;
-        this.noteAvventura = new StringBuffer();
+        this.noteAvventura = "";
         this.setModCompetenza(2);
         this.setLivello(1);
         this.setIniziativa("0");

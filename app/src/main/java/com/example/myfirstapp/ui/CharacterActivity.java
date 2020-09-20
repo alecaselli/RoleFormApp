@@ -39,7 +39,7 @@ public class CharacterActivity extends AppCompatActivity {
         giocatore = db.leggiGiocatore(nomecamp, nomeg);
     }
 
-    public void setView(){
+    public void setView() {
 
         txt = (TextView) findViewById(R.id.campaign_name);
         txt.setText(giocatore.getNomeCampagna());
@@ -53,6 +53,18 @@ public class CharacterActivity extends AppCompatActivity {
         String liv = "Livello" + " " + giocatore.getLivello();
         txt = (TextView) findViewById(R.id.level);
         txt.setText(liv);
+
+        txt = (TextView) findViewById(R.id.character_life);
+        txt.setText(String.valueOf(giocatore.getPuntiFerita()));
+
+        txt = (TextView) findViewById(R.id.character_max_life);
+        txt.setText(String.valueOf(giocatore.getPuntiFeritaMax()));
+
+        txt = (TextView) findViewById(R.id.character_mana);
+        txt.setText(String.valueOf(giocatore.getMana()));
+
+        txt = (TextView) findViewById(R.id.character_max_mana);
+        txt.setText(String.valueOf(giocatore.getMana()));
 
         String alt = giocatore.getAltezza() + " " + "cm";
         txt = (TextView) findViewById(R.id.character_height);
@@ -135,7 +147,8 @@ public class CharacterActivity extends AppCompatActivity {
 
     public void openCharacterNote(View view) {
         Intent intent = new Intent(this, CharacterNoteActivity.class);
-        intent.putExtra("filename", giocatore.getNoteAvventura().toString());
+        intent.putExtra("nomecamp", giocatore.getNomeCampagna());
+        intent.putExtra("nomeg", giocatore.getNome());
         startActivity(intent);
     }
 
@@ -146,11 +159,15 @@ public class CharacterActivity extends AppCompatActivity {
 
     public void openCharacterSkills(View view) {
         Intent intent = new Intent(this, CharacterSkillsActivity.class);
+        intent.putExtra("nomecamp", giocatore.getNomeCampagna());
+        intent.putExtra("nomeg", giocatore.getNome());
         startActivity(intent);
     }
 
     public void openCharacterSpells(View view) {
         Intent intent = new Intent(this, CharacterSpellsActivity.class);
+        intent.putExtra("nomecamp", giocatore.getNomeCampagna());
+        intent.putExtra("nomeg", giocatore.getNome());
         startActivity(intent);
     }
 
