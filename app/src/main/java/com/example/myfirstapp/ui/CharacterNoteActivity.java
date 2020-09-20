@@ -69,7 +69,6 @@ public class CharacterNoteActivity extends AppCompatActivity {
         Intent intent = getIntent();
         nomecamp = intent.getStringExtra("nomecamp");
         nomeg = intent.getStringExtra("nomeg");
-        db = new DBManager(this);
         assert nomeg != null;
         assert nomecamp != null;
         notelist = db.leggiNotevarie(nomecamp, nomeg);

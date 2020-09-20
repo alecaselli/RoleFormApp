@@ -1485,6 +1485,43 @@ public class DBManager {
         }
     }
 
+    public List<List<Incantesimo>> leggiIncantesimilist(@NonNull String nomecamp, @NonNull String nomeg) {
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        String table = TabelleHA.TBL_HAGI;
+        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
+        String[] whereArgs = new String[]{nomecamp, nomeg};
+
+        try {
+            Cursor resultSet = db.query(table, null, whereClause, whereArgs, null, null, null);
+            if (resultSet == null || resultSet.getCount() == 0) {
+                return null;
+            }
+            resultSet.moveToFirst();
+
+            List<List<Incantesimo>> supincantesimi = new ArrayList<>();
+            for (int i = 0; i <= 9; ++i) {
+                List<Incantesimo> incantesimi = new ArrayList<Incantesimo>();
+                supincantesimi.add(incantesimi);
+            }
+
+            while (!resultSet.isAfterLast()) {
+                Incantesimo incantesimo = leggiIncantesimo(resultSet.getString(resultSet.getColumnIndex(TabellaIncantesimi.FIELD_NOMEI)));
+                if (incantesimo != null)
+                    for (int i = 0; i <= 9; ++i)
+                        if (incantesimo.getLivello() == i)
+                            supincantesimi.get(i).add(incantesimo);
+                resultSet.moveToNext();
+            }
+
+            resultSet.close();
+            return supincantesimi;
+        } catch (SQLiteException sqle) {
+            Log.e("LEGGI INCLIST LIV", "leggi fallita", sqle);
+            return null;
+        }
+
+    }
+
     public Abilita leggiAbilita(@NotNull String nomea) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaAbilita.FIELD_NOMEA + " = ? ";

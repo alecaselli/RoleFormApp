@@ -159,11 +159,15 @@ public class CharacterActivity extends AppCompatActivity {
 
     public void openCharacterSkills(View view) {
         Intent intent = new Intent(this, CharacterSkillsActivity.class);
+        intent.putExtra("nomecamp", giocatore.getNomeCampagna());
+        intent.putExtra("nomeg", giocatore.getNome());
         startActivity(intent);
     }
 
     public void openCharacterSpells(View view) {
         Intent intent = new Intent(this, CharacterSpellsActivity.class);
+        intent.putExtra("nomecamp", giocatore.getNomeCampagna());
+        intent.putExtra("nomeg", giocatore.getNome());
         startActivity(intent);
     }
 
