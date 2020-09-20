@@ -51,7 +51,7 @@ public class CharacterSpellsActivity extends AppCompatActivity {
     }
 
     public void buildRecyclerView(){
-        mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView = findViewById(R.id.spells_level_one_recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager((this));
         mAdapter = new CardGiocatoreAdapter(mCardIncantesimoList);
