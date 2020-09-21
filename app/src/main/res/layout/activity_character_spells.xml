@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/spells_deceptions_cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,9 +89,9 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/spells_level_one_cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -144,9 +144,9 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/spells_level_two_cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -199,9 +199,9 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/spells_level_three_cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -254,9 +254,9 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/spells_level_four_cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -309,9 +309,9 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/spells_level_five_cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -364,9 +364,9 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/spells_level_six_cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -419,9 +419,9 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/spells_level_seven_cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -474,9 +474,9 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/spells_level_eight_cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -529,9 +529,9 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/spells_level_nine_cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -584,7 +584,7 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
 
         </LinearLayout>
