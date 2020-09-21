@@ -87,7 +87,6 @@ public class CharacterNoteActivity extends AppCompatActivity {
         descrizioneEditText = (EditText) findViewById(R.id.note_description);
         descrizioneEditText.setText(notelist.get(1));
 
-
         sinossiEditText = (EditText) findViewById(R.id.note_synopsis);
         sinossiEditText.setText(notelist.get(2));
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -29,11 +28,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/activity_character_header"
         android:layout_above="@id/character_navbar"
-        android:scrollbars="none"
+        android:layout_below="@id/activity_character_header"
         android:background="@color/whitesmoke"
-        android:paddingHorizontal="12dp">
+        android:paddingHorizontal="12dp"
+        android:scrollbars="none">
 
 
         <RelativeLayout
@@ -50,10 +49,10 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/character_character"
-                android:onClick="openCharacterCharacter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="6dp"
+                android:onClick="openCharacterCharacter"
                 app:cardCornerRadius="15dp">
 
                 <RelativeLayout
@@ -96,107 +95,94 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="3dp"
                         android:layout_marginEnd="0dp"
-
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/level"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerHorizontal="true"
                             android:layout_marginHorizontal="8dp"
                             android:text="Livello 10"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp">
 
                             <ImageView
                                 android:id="@+id/mana"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:src="@drawable/staff" />
 
                             <TextView
                                 android:id="@+id/character_mana"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
                                 android:layout_marginStart="12dp"
-                                android:layout_toEndOf="@id/mana"
                                 android:text="@string/_80"
                                 android:textColor="@color/black"
                                 android:textSize="16sp" />
+
                             <TextView
-                                android:id="@+id/character_mana_separetore"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="0dp"
-                                android:layout_toEndOf="@id/character_mana"
+                                android:layout_marginStart="2dp"
                                 android:text="@string/back_slash"
                                 android:textColor="@color/black"
                                 android:textSize="16sp" />
+
                             <TextView
                                 android:id="@+id/character_max_mana"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="0dp"
-                                android:layout_toEndOf="@id/character_mana_separetore"
+                                android:layout_marginStart="2dp"
                                 android:text="@string/_80"
                                 android:textColor="@color/black"
                                 android:textSize="16sp" />
 
-                        </RelativeLayout>
+                        </LinearLayout>
 
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp">
 
                             <ImageView
                                 android:id="@+id/vita"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:src="@drawable/heart" />
 
                             <TextView
                                 android:id="@+id/character_life"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
                                 android:layout_marginStart="12dp"
-                                android:layout_toEndOf="@id/vita"
-                                android:text="@string/_80"
-                                android:textColor="@color/black"
-                                android:textSize="16sp" />
-                            <TextView
-                                android:id="@+id/character_life_separetore"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="0dp"
-                                android:layout_toEndOf="@id/character_life"
-                                android:text="@string/back_slash"
-                                android:textColor="@color/black"
-                                android:textSize="16sp" />
-                            <TextView
-                                android:id="@+id/character_max_life"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="0dp"
-                                android:layout_toEndOf="@id/character_life_separetore"
                                 android:text="@string/_80"
                                 android:textColor="@color/black"
                                 android:textSize="16sp" />
 
-                        </RelativeLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:text="@string/back_slash"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/character_max_life"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:text="@string/_80"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
                     </LinearLayout>
 
                     <RelativeLayout
@@ -298,13 +284,13 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/character_stats"
-                android:onClick="openCharacterStats"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/character_character"
                 android:layout_marginVertical="6dp"
                 android:layout_marginRight="6dp"
                 android:layout_toStartOf="@id/activity_center"
+                android:onClick="openCharacterStats"
                 app:cardCornerRadius="15dp">
 
                 <LinearLayout
@@ -691,11 +677,12 @@
                         app:cardCornerRadius="15dp">
 
                         <Button
-                            android:onClick="openCharacterSpells"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="?android:selectableItemBackground"
-                            android:text="Incantesimi" />
+                            android:onClick="openCharacterSpells"
+                            android:text="Incantesimi"
+                            android:textColor="@color/black" />
 
 
                     </androidx.cardview.widget.CardView>
@@ -708,11 +695,12 @@
                         app:cardCornerRadius="15dp">
 
                         <Button
-                            android:onClick="openCharacterSkills"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:background="?android:selectableItemBackground"
-                            android:text="Abilità" />
+                            android:onClick="openCharacterSkills"
+                            android:text="Abilità"
+                            android:textColor="@color/black" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -850,12 +838,12 @@
 
                             <Button
                                 android:id="@+id/character_bag"
-                                android:onClick="openCharacterBag"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_centerHorizontal="true"
                                 android:layout_centerVertical="true"
-                                android:background="?android:selectableItemBackground" />
+                                android:background="?android:selectableItemBackground"
+                                android:onClick="openCharacterBag" />
 
                         </RelativeLayout>
 
@@ -873,18 +861,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="4dp"
-        android:background="@color/whitesmoke">
+        android:background="@color/whitesmoke"
+        android:padding="4dp">
 
         <ImageButton
             android:id="@+id/character_note"
-            android:onClick="openCharacterNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginEnd="80dp"
             android:layout_toStartOf="@id/character_add"
             android:background="?android:selectableItemBackground"
+            android:onClick="openCharacterNote"
             android:src="@drawable/ic_edit" />
 
         <ImageButton
@@ -894,7 +882,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:background="?android:selectableItemBackground"
-            android:src="@drawable/ic_add" />
+            android:src="@drawable/ic_dice" />
 
         <ImageButton
             android:id="@+id/character_info"
