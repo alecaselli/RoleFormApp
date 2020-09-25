@@ -2,31 +2,43 @@ package com.example.myfirstapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.database.TabellaClasse;
 import com.example.myfirstapp.database.TabellaRazza;
+import com.example.myfirstapp.domain.Abilita;
+import com.example.myfirstapp.domain.Caratteristica;
+import com.example.myfirstapp.domain.Classe;
+import com.example.myfirstapp.domain.Giocatore;
+import com.example.myfirstapp.domain.Razza;
+import com.example.myfirstapp.domain.Valuta;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class CreateNewCharacterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    private DBManager db;
+    private final String VALUTADND = "moneta del regno di Ho";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_character);
 
-        DBManager db = new DBManager(this);
+        db = new DBManager(this);
 
-        List<List<String>> doubleRaceList = db.leggiPK(TabellaRazza.TBL_NOME, TabellaRazza.FIELD_NOMER);
-        doubleRaceList = DBManager.convertiLista(doubleRaceList);
-        List<String> raceList = doubleRaceList.get(0);
+
+        List<String> raceList = db.leggiPK(TabellaRazza.TBL_NOME, TabellaRazza.FIELD_NOMER);
         ArrayAdapter<String> raceSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_item);
         raceSpinnerAdapter.addAll(raceList);
         raceSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_custom_item);
@@ -34,9 +46,8 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
         raceSpinner.setAdapter(raceSpinnerAdapter);
         raceSpinner.setOnItemSelectedListener(this);
 
-        List<List<String>> doubleClassList = db.leggiPK(TabellaClasse.TBL_NOME, TabellaClasse.FIELD_NOMECLA);
-        doubleClassList = DBManager.convertiLista(doubleClassList);
-        List<String> classList = doubleClassList.get(0);
+
+        List<String> classList = db.leggiPK(TabellaClasse.TBL_NOME, TabellaClasse.FIELD_NOMECLA);
         ArrayAdapter<String> classSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_item);
         classSpinnerAdapter.addAll(classList);
         classSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_custom_item);
@@ -47,7 +58,7 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemSelected(@NotNull AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
     }
 
@@ -56,7 +67,27 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
 
     }
 
-    public void createNewCharacter(View view){
+    public void createNewCharacter(View view) {
+        StringBuffer desc = new StringBuffer();
+        String nomecamp = findViewById(R.id.create_campaign_name).toString();
+        String nomeg = findViewById(R.id.create_character_name).toString();
+        String eta = findViewById(R.id.create_character_age).toString();
+        String altezza = findViewById(R.id.create_character_height).toString();
+        String genere = findViewById(R.id.create_character_gender).toString();
+        Valuta portafoglio = db.leggiValuta(VALUTADND);
+        String nomeClasse = findViewById(R.id.create_character_class).toString();
+        Classe classe = db.leggiClasse(nomeClasse);
+        String nomeRazza = findViewById(R.id.create_character_race).toString();
+        Razza razza = db.leggiRazza(nomeRazza);
+        List<Caratteristica> caratteristicas = db.leggiCaratteristica();
+        List<Abilita> abilitas = db.leggiAbilita();
+        Giocatore nuovo = new Giocatore(nomeg, desc, nomecamp, eta, altezza, genere,portafoglio,classe,razza,caratteristicas,abilitas);
 
+        db.aggiungiGiocatore(nuovo);
+
+        Intent intent = new Intent(this, CharacterActivity.class);
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
+        startActivity(intent);
     }
 }

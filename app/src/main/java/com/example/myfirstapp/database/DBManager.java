@@ -1349,7 +1349,7 @@ public class DBManager {
     che punta a tante liste quante le righe della tabella,
     ciascuna di queste liste contiene i valori delle colonne selezionate,
      devono essere string*/
-    public List<List<String>> leggiPK(@NotNull String table, @NotNull String... nomePK) {
+    public List<List<String>> leggiPKs(@NotNull String table, @NotNull String... nomePK) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
 
         try {
@@ -1374,9 +1374,37 @@ public class DBManager {
             resultSet.close();
             return list;
         } catch (SQLiteException sqle) {
+            Log.e("LEGGI PKS", "leggi fallita", sqle);
+            return null;
+        }
+    }
+
+    public List<String> leggiPK(@NotNull String table, @NotNull String nomePK){
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+
+        try {
+            Cursor resultSet = db.query(table, null, null, null, null, null, null);
+            if (resultSet == null || resultSet.getCount() == 0) {
+                return null;
+            }
+            resultSet.moveToFirst();
+
+            List<String> list = new ArrayList<>();
+            while (!resultSet.isAfterLast()) {
+                String nome = resultSet.getString(resultSet.getColumnIndex(nomePK));
+                if(nome != null)
+                    list.add(nome);
+
+                resultSet.moveToNext();
+            }
+
+            resultSet.close();
+            return list;
+        } catch (SQLiteException sqle) {
             Log.e("LEGGI PK", "leggi fallita", sqle);
             return null;
         }
+
     }
 
     public List<List<String>> leggiDatiMenu(@NotNull String table, @NotNull String numerico, @NotNull String... nomePK) {
@@ -1552,6 +1580,34 @@ public class DBManager {
 
         try {
             Cursor resultSet = db.query(TabelleHA.TBL_HAGA, null, whereClause, whereArgs, null, null, null);
+            if (resultSet == null || resultSet.getCount() == 0) {
+                return null;
+            }
+            resultSet.moveToFirst();
+
+            List<Abilita> abilitaList = new ArrayList<Abilita>();
+            while (!resultSet.isAfterLast()) {
+                Abilita abilita = leggiAbilita(resultSet.getString(resultSet.getColumnIndex(TabellaAbilita.FIELD_NOMEA)));
+                if (abilita != null) {
+                    boolean comp = (resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_COMPETENZA)) == 1);
+                    abilita.setCompetenza(comp);
+                    abilitaList.add(abilita);
+                }
+                resultSet.moveToNext();
+            }
+
+            resultSet.close();
+            return abilitaList;
+        } catch (SQLiteException sqle) {
+            Log.e("LEGGI ABILITALIST", "fallita lettura", sqle);
+            return null;
+        }
+    }
+
+    public List<Abilita> leggiAbilita(){
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        try {
+            Cursor resultSet = db.query(TabelleHA.TBL_HAGA, null, null, null, null, null, null);
             if (resultSet == null || resultSet.getCount() == 0) {
                 return null;
             }
@@ -1958,6 +2014,41 @@ public class DBManager {
 
         try {
             Cursor resultSet = db.query(TabellaCaratteristicaG.TBL_NOME, null, whereClause, whereArgs, null, null, null);
+            if (resultSet == null || resultSet.getCount() == 0) {
+                return null;
+            }
+            resultSet.moveToFirst();
+
+            List<Caratteristica> caratteristicaList = new ArrayList<Caratteristica>();
+            while (!resultSet.isAfterLast()) {
+                Caratteristica caratteristica = leggiCaratteristica(resultSet.getString(resultSet.getColumnIndex(TabellaCaratteristica.FIELD_NOMECAR)));
+                if (caratteristica != null) {
+                    caratteristica.setTiroSalveza(resultSet.getInt(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_TIROSALVEZZA)) == 1);
+                    caratteristica.setValoreBase(resultSet.getInt(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_VALOREBASE)));
+                    caratteristica.setValoreLivello(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_VALORELIVELLO));
+                    caratteristica.setValoreEquipaggiamento(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_VALOREEQUIPAGGAMENTO));
+                    caratteristica.setValoreBonus(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_VALOREBONUS));
+                    caratteristica.setModificatore();
+                    caratteristicaList.add(caratteristica);
+                }
+
+                resultSet.moveToNext();
+            }
+
+            resultSet.close();
+            return caratteristicaList;
+
+        } catch (SQLiteException sqle) {
+            Log.e("LEGGI CARG", "leggi fallita", sqle);
+            return null;
+        }
+    }
+
+    public List<Caratteristica> leggiCaratteristica(){
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+
+        try {
+            Cursor resultSet = db.query(TabellaCaratteristicaG.TBL_NOME, null, null, null, null, null, null);
             if (resultSet == null || resultSet.getCount() == 0) {
                 return null;
             }
