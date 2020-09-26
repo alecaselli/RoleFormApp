@@ -53,6 +53,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="6dp"
                 android:onClick="openCharacterCharacter"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
                 app:cardCornerRadius="15dp">
 
                 <RelativeLayout
