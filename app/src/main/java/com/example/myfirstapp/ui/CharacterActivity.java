@@ -180,4 +180,9 @@ public class CharacterActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CharacterBagActivity.class);
         startActivity(intent);
     }
+
+    public void openCharacterInfo(View view){
+        Intent intent = new Intent(this, CharacterInfoActivity.class);
+        startActivity(intent);
+    }
 }
