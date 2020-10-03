@@ -387,20 +387,11 @@ public class Giocatore extends Descrivibile {
     }
 
     /* serie di metodi necessari alla creazione di un nuovo PG */
-
     public void inizializzazionePG() {
-
 
         for(CaratteristicaBase elementoR : this.razza.getCaratteristicaBaseList()){
             this.getCaratteristica(elementoR.getNome()).addValoreBase(elementoR.getValore());
         }
-
-       /* for (CaratteristicaBase elementoR : this.razza.getCaratteristicaBaseList()) {
-            for (Caratteristica elementoC : this.caratteristicaList) {
-                if (elementoC.getNome().compareToIgnoreCase(elementoR.getNome()) == 0)
-                    elementoC.addValoreBase(elementoR.getValore());
-            }
-        }*/
         this.classeArmatura = this.puntiStat = this.mana = this.puntiEsperienza = this.capacitaBorsa = 0;
         this.noteAvventura = "";
         this.setModCompetenza(2);
@@ -412,10 +403,9 @@ public class Giocatore extends Descrivibile {
         this.setDado(this.classe.getDado());
         this.inizPuntiFeritaMax();
         this.setPuntiFerita(this.puntiFeritaMax);
-        this.equipaggiato = new ArrayList<Equipaggiamento>() {
-        };
-        this.aggiungiBorsa(this.classe.getEquipaggiamentoList());
-        this.aggiungiDescrizione(this.classe.getDescrizionePrivilegiPoteri().toString());
+        this.setEquipaggiato(new ArrayList<Equipaggiamento>());
+        this.setBorsa(this.classe.getEquipaggiamentoList());
+        this.setDescrizione(this.classe.getDescrizionePrivilegiPoteri());
         this.aggiungiDescrizione(this.classe.getCompetenza().toString());
     }
 
