@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.database.DBManager;
@@ -22,11 +24,15 @@ import com.example.myfirstapp.domain.Razza;
 import com.example.myfirstapp.domain.Valuta;
 
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
 import java.util.List;
 
 public class CreateNewCharacterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    private EditText editText;
+    private String nomeClasse;
+    private String nomeRazza;
     private DBManager db;
     private final String VALUTADND = "moneta del regno di Ho";
 
@@ -68,22 +74,28 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
     }
 
     public void createNewCharacter(View view) {
+        editText = (EditText) findViewById(R.id.create_campaign_name);
         StringBuffer desc = new StringBuffer();
-        String nomecamp = findViewById(R.id.create_campaign_name).toString();
-        String nomeg = findViewById(R.id.create_character_name).toString();
-        String eta = findViewById(R.id.create_character_age).toString();
-        String altezza = findViewById(R.id.create_character_height).toString();
-        String genere = findViewById(R.id.create_character_gender).toString();
+        String nomecamp = editText.getText().toString();
+        editText = (EditText) findViewById(R.id.create_character_name);
+        String nomeg = editText.getText().toString();
+        editText = findViewById(R.id.create_character_age);
+        String eta = editText.getText().toString();
+        editText = findViewById(R.id.create_character_height);
+        String altezza = editText.getText().toString();
+        editText = findViewById(R.id.create_character_gender);
+        String genere = editText.getText().toString();
         Valuta portafoglio = db.leggiValuta(VALUTADND);
-        String nomeClasse = findViewById(R.id.create_character_class).toString();
+        nomeClasse = "ranger";
         Classe classe = db.leggiClasse(nomeClasse);
-        String nomeRazza = findViewById(R.id.create_character_race).toString();
+        nomeRazza = "nano";
         Razza razza = db.leggiRazza(nomeRazza);
         List<Caratteristica> caratteristicas = db.leggiCaratteristica();
         List<Abilita> abilitas = db.leggiAbilita();
-        Giocatore nuovo = new Giocatore(nomeg, desc, nomecamp, eta, altezza, genere,portafoglio,classe,razza,caratteristicas,abilitas);
+        Giocatore nuovo = new Giocatore(nomeg, desc, nomecamp, eta, altezza, genere, portafoglio, classe, razza, caratteristicas, abilitas);
 
         db.aggiungiGiocatore(nuovo);
+        Toast.makeText(this, "giocatore inserito", Toast.LENGTH_LONG).show();
 
         Intent intent = new Intent(this, CharacterActivity.class);
         intent.putExtra("nomecamp", nomecamp);

@@ -304,27 +304,28 @@ public class DBManager {
 
         try {
             if (db.insert(TabellaGiocatore.TBL_NOME, null, cv) > 0) {
+                boolean error = false;
                 for (Caratteristica nuovac : nuovo.getCaratteristicaList()) {
                     if (!this.aggiungiCaratteristicaG(nuovo.getNomeCampagna(), nuovo.getNome(), nuovac))
-                        return false;
+                        error = true;
                 }
                 for (Equipaggiamento nuovoe : nuovo.getEquipaggiato()) {
                     if (!this.aggiungiHage(nuovo.getNomeCampagna(), nuovo.getNome(), nuovoe.getNome(), false))
-                        return false;
+                        error = true;
                 }
                 for (Equipaggiamento nuovoe : nuovo.getBorsa()) {
                     if (!this.aggiungiHage(nuovo.getNomeCampagna(), nuovo.getNome(), nuovoe.getNome(), true))
-                        return false;
+                        error = true;
                 }
                 for (Incantesimo nuovoi : nuovo.getIncantesimiGiocatore()) {
                     if (!this.aggiungiHagi(nuovo.getNomeCampagna(), nuovo.getNome(), nuovoi.getNome()))
-                        return false;
+                        error = true;
                 }
                 for (Abilita nuovaa : nuovo.getAbilitaList()) {
                     if (!this.aggiungiHaga(nuovo.getNomeCampagna(), nuovo.getNome(), nuovaa.getNome(), nuovaa.isCompetenza()))
-                        return false;
+                        error = true;
                 }
-                return true;
+                return !error;
             }
             return false;
         } catch (SQLiteException sqle) {
@@ -394,7 +395,7 @@ public class DBManager {
         cv.put(CampiComuni.FIELD_COMPETENZA, flag);
         cv.put(TabellaGiocatore.FIELD_NOMECAMPAGNA, nomecamp);
         cv.put(TabellaGiocatore.FIELD_NOMEG, nomeg);
-        cv.put(TabellaEquipaggiamento.FIELD_NOMEE, nomea);
+        cv.put(TabellaAbilita.FIELD_NOMEA, nomea);
 
         try {
             return db.insert(TabelleHA.TBL_HAGA, null, cv) > 0;
@@ -1379,7 +1380,7 @@ public class DBManager {
         }
     }
 
-    public List<String> leggiPK(@NotNull String table, @NotNull String nomePK){
+    public List<String> leggiPK(@NotNull String table, @NotNull String nomePK) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
 
         try {
@@ -1392,7 +1393,7 @@ public class DBManager {
             List<String> list = new ArrayList<>();
             while (!resultSet.isAfterLast()) {
                 String nome = resultSet.getString(resultSet.getColumnIndex(nomePK));
-                if(nome != null)
+                if (nome != null)
                     list.add(nome);
 
                 resultSet.moveToNext();
@@ -1573,13 +1574,10 @@ public class DBManager {
         }
     }
 
-    public List<Abilita> leggiAbilita(@NotNull String nomecamp, @NotNull String nomeg) {
+    public List<Abilita> leggiAbilita() {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
-        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
-        String[] whereArgs = new String[]{nomecamp, nomeg};
-
         try {
-            Cursor resultSet = db.query(TabelleHA.TBL_HAGA, null, whereClause, whereArgs, null, null, null);
+            Cursor resultSet = db.query(TabellaAbilita.TBL_NOME, null, null, null, null, null, null);
             if (resultSet == null || resultSet.getCount() == 0) {
                 return null;
             }
@@ -1587,12 +1585,11 @@ public class DBManager {
 
             List<Abilita> abilitaList = new ArrayList<Abilita>();
             while (!resultSet.isAfterLast()) {
-                Abilita abilita = leggiAbilita(resultSet.getString(resultSet.getColumnIndex(TabellaAbilita.FIELD_NOMEA)));
-                if (abilita != null) {
-                    boolean comp = (resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_COMPETENZA)) == 1);
-                    abilita.setCompetenza(comp);
-                    abilitaList.add(abilita);
-                }
+                StringBuffer desc = new StringBuffer();
+                desc.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+                String nome = resultSet.getString(resultSet.getColumnIndex(TabellaAbilita.FIELD_NOMEA));
+                abilitaList.add(new Abilita(nome, desc));
+
                 resultSet.moveToNext();
             }
 
@@ -1604,10 +1601,13 @@ public class DBManager {
         }
     }
 
-    public List<Abilita> leggiAbilita(){
+    public List<Abilita> leggiAbilita(@NotNull String nomecamp, @NotNull String nomeg) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
+        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
+        String[] whereArgs = new String[]{nomecamp, nomeg};
+
         try {
-            Cursor resultSet = db.query(TabelleHA.TBL_HAGA, null, null, null, null, null, null);
+            Cursor resultSet = db.query(TabelleHA.TBL_HAGA, null, whereClause, whereArgs, null, null, null);
             if (resultSet == null || resultSet.getCount() == 0) {
                 return null;
             }
@@ -1982,6 +1982,35 @@ public class DBManager {
         }
     }
 
+    public List<Caratteristica> leggiCaratteristica() {
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+
+        try {
+            Cursor resultSet = db.query(TabellaCaratteristica.TBL_NOME, null, null, null, null, null, null);
+            if (resultSet == null || resultSet.getCount() == 0) {
+                return null;
+            }
+            resultSet.moveToFirst();
+
+            List<Caratteristica> caratteristicaList = new ArrayList<Caratteristica>();
+            while (!resultSet.isAfterLast()) {
+                StringBuffer desc = new StringBuffer();
+                desc.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+                String nome = resultSet.getString(resultSet.getColumnIndex(TabellaCaratteristica.FIELD_NOMECAR));
+                caratteristicaList.add(new Caratteristica(nome, desc));
+
+                resultSet.moveToNext();
+            }
+
+            resultSet.close();
+            return caratteristicaList;
+
+        } catch (SQLiteException sqle) {
+            Log.e("LEGGI CARG", "leggi fallita", sqle);
+            return null;
+        }
+    }
+
     public Caratteristica leggiCaratteristica(@NotNull String nomecar) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaCaratteristica.FIELD_NOMECAR + " = ? ";
@@ -2014,41 +2043,6 @@ public class DBManager {
 
         try {
             Cursor resultSet = db.query(TabellaCaratteristicaG.TBL_NOME, null, whereClause, whereArgs, null, null, null);
-            if (resultSet == null || resultSet.getCount() == 0) {
-                return null;
-            }
-            resultSet.moveToFirst();
-
-            List<Caratteristica> caratteristicaList = new ArrayList<Caratteristica>();
-            while (!resultSet.isAfterLast()) {
-                Caratteristica caratteristica = leggiCaratteristica(resultSet.getString(resultSet.getColumnIndex(TabellaCaratteristica.FIELD_NOMECAR)));
-                if (caratteristica != null) {
-                    caratteristica.setTiroSalveza(resultSet.getInt(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_TIROSALVEZZA)) == 1);
-                    caratteristica.setValoreBase(resultSet.getInt(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_VALOREBASE)));
-                    caratteristica.setValoreLivello(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_VALORELIVELLO));
-                    caratteristica.setValoreEquipaggiamento(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_VALOREEQUIPAGGAMENTO));
-                    caratteristica.setValoreBonus(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_VALOREBONUS));
-                    caratteristica.setModificatore();
-                    caratteristicaList.add(caratteristica);
-                }
-
-                resultSet.moveToNext();
-            }
-
-            resultSet.close();
-            return caratteristicaList;
-
-        } catch (SQLiteException sqle) {
-            Log.e("LEGGI CARG", "leggi fallita", sqle);
-            return null;
-        }
-    }
-
-    public List<Caratteristica> leggiCaratteristica(){
-        SQLiteDatabase db = dbhelper.getReadableDatabase();
-
-        try {
-            Cursor resultSet = db.query(TabellaCaratteristicaG.TBL_NOME, null, null, null, null, null, null);
             if (resultSet == null || resultSet.getCount() == 0) {
                 return null;
             }

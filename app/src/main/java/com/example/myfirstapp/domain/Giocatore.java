@@ -332,8 +332,8 @@ public class Giocatore extends Descrivibile {
     }
 
 
-    public void aggiungiLingua(StringBuffer lingua) {
-        this.lingua.append(lingua);
+    public void aggiungiLingua (String nuova){
+        this.lingua.append(nuova);
     }
 
     /* serie di metodi per aggiornare i valori di parametri numerici */
@@ -391,19 +391,23 @@ public class Giocatore extends Descrivibile {
     public void inizializzazionePG() {
 
 
-        for (CaratteristicaBase elementoR : this.razza.getCaratteristicaBaseList()) {
+        for(CaratteristicaBase elementoR : this.razza.getCaratteristicaBaseList()){
+            this.getCaratteristica(elementoR.getNome()).addValoreBase(elementoR.getValore());
+        }
+
+       /* for (CaratteristicaBase elementoR : this.razza.getCaratteristicaBaseList()) {
             for (Caratteristica elementoC : this.caratteristicaList) {
                 if (elementoC.getNome().compareToIgnoreCase(elementoR.getNome()) == 0)
                     elementoC.addValoreBase(elementoR.getValore());
             }
-        }
+        }*/
         this.classeArmatura = this.puntiStat = this.mana = this.puntiEsperienza = this.capacitaBorsa = 0;
         this.noteAvventura = "";
         this.setModCompetenza(2);
         this.setLivello(1);
         this.setIniziativa("0");
         this.setIncantesimiGiocatore(this.classe.getIncantesimiClasse());
-        this.aggiungiLingua(this.razza.getLingua());
+        this.setLingua(this.razza.getLingua());
         this.setnDadi(this.classe.getnDadi());
         this.setDado(this.classe.getDado());
         this.inizPuntiFeritaMax();
