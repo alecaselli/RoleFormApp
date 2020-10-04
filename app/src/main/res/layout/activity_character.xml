@@ -894,6 +894,7 @@
             android:layout_marginStart="80dp"
             android:layout_toEndOf="@id/character_add"
             android:background="?android:selectableItemBackground"
+            android:onClick="openCharacterInfo"
             android:src="@drawable/ic_info" />
 
     </RelativeLayout>

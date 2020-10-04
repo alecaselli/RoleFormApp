@@ -154,6 +154,8 @@ public class CharacterActivity extends AppCompatActivity {
 
     public void openCharacterCharacter(View view) {
         Intent intent = new Intent(this, CharacterCharacterActivity.class);
+        intent.putExtra("nomecamp", giocatore.getNomeCampagna());
+        intent.putExtra("nomeg", giocatore.getNome());
         startActivity(intent);
     }
 
@@ -173,11 +175,18 @@ public class CharacterActivity extends AppCompatActivity {
 
     public void openCharacterStats(View view) {
         Intent intent = new Intent(this, CharacterStatsActivity.class);
+        intent.putExtra("nomecamp", giocatore.getNomeCampagna());
+        intent.putExtra("nomeg", giocatore.getNome());
         startActivity(intent);
     }
 
     public void openCharacterBag(View view) {
         Intent intent = new Intent(this, CharacterBagActivity.class);
+        startActivity(intent);
+    }
+
+    public void openCharacterInfo(View view) {
+        Intent intent = new Intent(this, CharacterInfoActivity.class);
         startActivity(intent);
     }
 }

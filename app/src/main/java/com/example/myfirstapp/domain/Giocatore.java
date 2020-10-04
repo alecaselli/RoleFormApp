@@ -1,5 +1,8 @@
 package com.example.myfirstapp.domain;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -310,7 +313,7 @@ public class Giocatore extends Descrivibile {
 
     /* metodi non base*/
     public void inizPuntiFeritaMax() {
-        this.puntiFeritaMax = this.getnDadi() * this.getDado();
+        this.setPuntiFeritaMax(this.getnDadi() * this.getDado());
     }
 
     public Caratteristica getCaratteristica(String nomec) {
@@ -332,8 +335,8 @@ public class Giocatore extends Descrivibile {
     }
 
 
-    public void aggiungiLingua(StringBuffer lingua) {
-        this.lingua.append(lingua);
+    public void aggiungiLingua(String nuova) {
+        this.lingua.append(nuova);
     }
 
     /* serie di metodi per aggiornare i valori di parametri numerici */
@@ -352,6 +355,14 @@ public class Giocatore extends Descrivibile {
     public void aggiornaClasseArmatura() {
         Armatura armatura = (Armatura) this.getEquipaggiato("armatura");
         this.aggiornaClasseArmatura(armatura.getModificatoreCA());
+    }
+
+    public void aggiornaPuntiStat(int val) {
+        this.puntiStat += val;
+    }
+
+    public void aggiornaModCompetenza(int val) {
+        this.modCompetenza += val;
     }
 
     /* serie di metodi per aggiungere/eliminare elementi da liste */
@@ -387,15 +398,10 @@ public class Giocatore extends Descrivibile {
     }
 
     /* serie di metodi necessari alla creazione di un nuovo PG */
-
     public void inizializzazionePG() {
 
-
         for (CaratteristicaBase elementoR : this.razza.getCaratteristicaBaseList()) {
-            for (Caratteristica elementoC : this.caratteristicaList) {
-                if (elementoC.getNome().compareToIgnoreCase(elementoR.getNome()) == 0)
-                    elementoC.addValoreBase(elementoR.getValore());
-            }
+            this.getCaratteristica(elementoR.getNome()).addValoreBase(elementoR.getValore());
         }
         this.classeArmatura = this.puntiStat = this.mana = this.puntiEsperienza = this.capacitaBorsa = 0;
         this.noteAvventura = "";
@@ -403,16 +409,34 @@ public class Giocatore extends Descrivibile {
         this.setLivello(1);
         this.setIniziativa("0");
         this.setIncantesimiGiocatore(this.classe.getIncantesimiClasse());
-        this.aggiungiLingua(this.razza.getLingua());
         this.setnDadi(this.classe.getnDadi());
         this.setDado(this.classe.getDado());
         this.inizPuntiFeritaMax();
         this.setPuntiFerita(this.puntiFeritaMax);
-        this.equipaggiato = new ArrayList<Equipaggiamento>() {
-        };
-        this.aggiungiBorsa(this.classe.getEquipaggiamentoList());
+        this.setEquipaggiato(new ArrayList<Equipaggiamento>());
+        this.setBorsa(this.classe.getEquipaggiamentoList());
+        this.setDescrizione(this.razza.getLingua());
         this.aggiungiDescrizione(this.classe.getDescrizionePrivilegiPoteri().toString());
         this.aggiungiDescrizione(this.classe.getCompetenza().toString());
     }
 
+    public void levelUp() {
+        this.aggiornaPuntiStat(2);
+        if (this.getLivello() % 4 == 0)
+            this.aggiornaModCompetenza(1);
+    }
+
+    public void assegnaPuntiStat(List<String> nomecarlist, @NotNull List<Integer> vallist, Context context) {
+        int valtot = 0;
+        for (int i : vallist)
+            valtot += i;
+
+        if ((this.getPuntiStat() - valtot) != 0) {
+            for (String nomecar : nomecarlist) {
+                this.getCaratteristica(nomecar).addValoreBase(vallist.get(nomecarlist.indexOf(nomecar)));
+            }
+            this.aggiornaPuntiStat(-valtot);
+        } else
+            Toast.makeText(context, "giocatore inserito", Toast.LENGTH_LONG).show();
+    }
 }
