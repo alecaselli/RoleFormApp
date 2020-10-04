@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Roleform"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -16,9 +16,7 @@
         <activity android:name=".ui.CharacterBagActivity" />
         <activity android:name=".ui.CreateNewItem" />
         <activity android:name=".ui.CreateNewSpell" />
-        <activity android:name=".ui.EquipActivity" />
         <activity android:name=".ui.CharacterStatsActivity" />
-        <activity android:name=".ui.CurrencyActivity" />
         <activity android:name=".ui.CreateNewCharacterActivity" />
         <activity android:name=".ui.InfoCreditsActivity" />
         <activity android:name=".ui.CharacterNoteActivity" />
@@ -26,7 +24,7 @@
         <activity android:name=".ui.AddNewSpell" />
         <activity
             android:name=".ui.MainActivity"
-            android:label="@string/app_name"
+            android:label="Roleform"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
