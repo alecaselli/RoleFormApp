@@ -1,5 +1,9 @@
 package com.example.myfirstapp.domain;
 
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -332,7 +336,7 @@ public class Giocatore extends Descrivibile {
     }
 
 
-    public void aggiungiLingua (String nuova){
+    public void aggiungiLingua(String nuova) {
         this.lingua.append(nuova);
     }
 
@@ -352,6 +356,10 @@ public class Giocatore extends Descrivibile {
     public void aggiornaClasseArmatura() {
         Armatura armatura = (Armatura) this.getEquipaggiato("armatura");
         this.aggiornaClasseArmatura(armatura.getModificatoreCA());
+    }
+
+    public void aggiornaPuntiStat(int val) {
+        this.puntiStat += val;
     }
 
     /* serie di metodi per aggiungere/eliminare elementi da liste */
@@ -389,7 +397,7 @@ public class Giocatore extends Descrivibile {
     /* serie di metodi necessari alla creazione di un nuovo PG */
     public void inizializzazionePG() {
 
-        for(CaratteristicaBase elementoR : this.razza.getCaratteristicaBaseList()){
+        for (CaratteristicaBase elementoR : this.razza.getCaratteristicaBaseList()) {
             this.getCaratteristica(elementoR.getNome()).addValoreBase(elementoR.getValore());
         }
         this.classeArmatura = this.puntiStat = this.mana = this.puntiEsperienza = this.capacitaBorsa = 0;
@@ -409,4 +417,22 @@ public class Giocatore extends Descrivibile {
         this.aggiungiDescrizione(this.classe.getCompetenza().toString());
     }
 
+    public void levelUp() {
+        this.aggiornaPuntiStat(2);
+    }
+
+    public void assegnaPuntiStat(List<String> nomecarlist, @NotNull List<Integer> vallist, Context context){
+        int valtot=0;
+        for(int i : vallist)
+            valtot += i;
+
+        if((this.getPuntiStat()-valtot)!=0){
+            for(String nomecar : nomecarlist){
+                this.getCaratteristica(nomecar).addValoreBase(vallist.get(nomecarlist.indexOf(nomecar)));
+            }
+            this.aggiornaPuntiStat(-valtot);
+        }
+        else
+            Toast.makeText(context, "giocatore inserito", Toast.LENGTH_LONG).show();
+    }
 }
