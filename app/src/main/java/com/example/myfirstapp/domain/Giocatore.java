@@ -1,7 +1,6 @@
 package com.example.myfirstapp.domain;
 
 import android.content.Context;
-import android.content.Intent;
 import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
@@ -314,7 +313,7 @@ public class Giocatore extends Descrivibile {
 
     /* metodi non base*/
     public void inizPuntiFeritaMax() {
-        this.puntiFeritaMax = this.getnDadi() * this.getDado();
+        this.setPuntiFeritaMax(this.getnDadi() * this.getDado());
     }
 
     public Caratteristica getCaratteristica(String nomec) {
@@ -362,6 +361,10 @@ public class Giocatore extends Descrivibile {
         this.puntiStat += val;
     }
 
+    public void aggiornaModCompetenza(int val) {
+        this.modCompetenza += val;
+    }
+
     /* serie di metodi per aggiungere/eliminare elementi da liste */
     public void aggiungiBorsa(List<Equipaggiamento> nuovo) {
         if (borsa == null)
@@ -406,33 +409,34 @@ public class Giocatore extends Descrivibile {
         this.setLivello(1);
         this.setIniziativa("0");
         this.setIncantesimiGiocatore(this.classe.getIncantesimiClasse());
-        this.setLingua(this.razza.getLingua());
         this.setnDadi(this.classe.getnDadi());
         this.setDado(this.classe.getDado());
         this.inizPuntiFeritaMax();
         this.setPuntiFerita(this.puntiFeritaMax);
         this.setEquipaggiato(new ArrayList<Equipaggiamento>());
         this.setBorsa(this.classe.getEquipaggiamentoList());
-        this.setDescrizione(this.classe.getDescrizionePrivilegiPoteri());
+        this.setDescrizione(this.razza.getLingua());
+        this.aggiungiDescrizione(this.classe.getDescrizionePrivilegiPoteri().toString());
         this.aggiungiDescrizione(this.classe.getCompetenza().toString());
     }
 
     public void levelUp() {
         this.aggiornaPuntiStat(2);
+        if (this.getLivello() % 4 == 0)
+            this.aggiornaModCompetenza(1);
     }
 
-    public void assegnaPuntiStat(List<String> nomecarlist, @NotNull List<Integer> vallist, Context context){
-        int valtot=0;
-        for(int i : vallist)
+    public void assegnaPuntiStat(List<String> nomecarlist, @NotNull List<Integer> vallist, Context context) {
+        int valtot = 0;
+        for (int i : vallist)
             valtot += i;
 
-        if((this.getPuntiStat()-valtot)!=0){
-            for(String nomecar : nomecarlist){
+        if ((this.getPuntiStat() - valtot) != 0) {
+            for (String nomecar : nomecarlist) {
                 this.getCaratteristica(nomecar).addValoreBase(vallist.get(nomecarlist.indexOf(nomecar)));
             }
             this.aggiornaPuntiStat(-valtot);
-        }
-        else
+        } else
             Toast.makeText(context, "giocatore inserito", Toast.LENGTH_LONG).show();
     }
 }
