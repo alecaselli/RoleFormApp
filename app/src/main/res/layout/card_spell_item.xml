@@ -22,5 +22,40 @@
             android:textSize="18sp"
             android:textStyle="normal" />
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spell_used_off"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            app:cardBackgroundColor="@color/black"
+            app:cardCornerRadius="90dp"
+            app:cardElevation="0dp" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="90dp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/spell_used_on"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_centerInParent="true"
+                    app:cardBackgroundColor="@color/black"
+                    android:visibility="gone"
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="90dp" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

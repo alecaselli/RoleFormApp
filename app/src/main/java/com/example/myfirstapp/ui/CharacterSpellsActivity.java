@@ -252,7 +252,7 @@ public class CharacterSpellsActivity extends AppCompatActivity {
                 } else {
                     TransitionManager.beginDelayedTransition((ViewGroup) spellsCardViews.get(4).getParent().getParent(), new AutoTransition());
                     spellsRecyclerViews.get(4).setVisibility(View.GONE);
-                    spellsAddButtons.get(4).setVisibility(View.VISIBLE);
+                    spellsAddButtons.get(4).setVisibility(View.GONE);
                     spellsExpandButtons.get(4).setBackgroundResource(R.drawable.ic_arrow_down);
                 }
             }

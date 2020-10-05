@@ -26,9 +26,9 @@
             android:id="@+id/skill_mod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="25dp"
+            android:layout_marginEnd="35dp"
             android:layout_toStartOf="@id/skill_mod_off"
-            android:text="18"
+            android:text="[18]"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="normal" />
@@ -48,8 +48,8 @@
                 android:layout_height="match_parent" >
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="21dp"
-                    android:layout_height="21dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerInParent="true"
                     app:cardBackgroundColor="@color/white"
                     app:cardElevation="0dp"
@@ -57,8 +57,8 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/skill_mod_on"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:layout_centerInParent="true"
                     app:cardBackgroundColor="@color/black"
                     android:visibility="gone"
