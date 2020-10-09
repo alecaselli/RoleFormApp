@@ -3,6 +3,7 @@ package com.example.myfirstapp.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<CardGiocatore> mCardGiocatoreList;
 
     private DBManager dbManager;
+    private String nomecamp;
+    private String nomeg;
 
     private RecyclerView mRecyclerView;
     private CardGiocatoreAdapter mAdapter;
@@ -71,12 +74,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openCharacterActivity(int position) {
-        String nomecamp = mCardGiocatoreList.get(position).getNomecampagna();
-        String nomeg = mCardGiocatoreList.get(position).getNomegiocatore();
+        nomecamp = mCardGiocatoreList.get(position).getNomecampagna();
+        nomeg = mCardGiocatoreList.get(position).getNomegiocatore();
         Intent intent = new Intent(this, CharacterActivity.class);
         intent.putExtra("nomecamp", nomecamp);
         intent.putExtra("nomeg", nomeg);
         startActivity(intent);
+    }
+
+    public void eliminaGiocatore(int position) {
+        nomecamp = mCardGiocatoreList.get(position).getNomecampagna();
+        nomeg = mCardGiocatoreList.get(position).getNomegiocatore();
+        if(dbManager.eliminaGiocatore(nomecamp, nomeg))
+            Toast.makeText(this, "giocatore eliminato", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(this, "eliminazione fallita", Toast.LENGTH_LONG).show();
+
+
     }
 
     public void openCreateNewCharacter(View view) {
