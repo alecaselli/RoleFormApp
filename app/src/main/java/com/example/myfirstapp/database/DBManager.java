@@ -295,7 +295,8 @@ public class DBManager {
         cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, nuovo.getNoteAvventura());
         cv.put(TabellaGiocatore.FIELD_IDEALI, nuovo.getIdeali());
         cv.put(TabellaGiocatore.FIELD_SINOSSI, nuovo.getSinossi());
-        cv.put(CampiComuni.FIELD_LINGUA, nuovo.getLingua().toString());
+        String lingua = nuovo.getLingua().toString();
+        cv.put(CampiComuni.FIELD_LINGUA, lingua);
         cv.put(TabellaClasse.FIELD_NOMECLA, nuovo.getClasse().getNome());
         cv.put(TabellaRazza.FIELD_NOMER, nuovo.getRazza().getNome());
         cv.put(TabellaValuta.FIELD_NOMEV, nuovo.getPortafoglio().getNome());

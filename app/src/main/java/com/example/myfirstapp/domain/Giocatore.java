@@ -415,7 +415,8 @@ public class Giocatore extends Descrivibile {
         this.setPuntiFerita(this.puntiFeritaMax);
         this.setEquipaggiato(new ArrayList<Equipaggiamento>());
         this.setBorsa(this.classe.getEquipaggiamentoList());
-        this.setDescrizione(this.razza.getLingua());
+        this.setLingua(this.razza.getLingua());
+        this.setDescrizione(this.getLingua());
         this.aggiungiDescrizione(this.classe.getDescrizionePrivilegiPoteri().toString());
         this.aggiungiDescrizione(this.classe.getCompetenza().toString());
     }

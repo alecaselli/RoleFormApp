@@ -43,27 +43,28 @@ public class CharacterSkillsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_skills);
 
-        Intent intent = getIntent();
-        nomecamp = intent.getStringExtra("nomecamp");
-        nomeg = intent.getStringExtra("nomeg");
-
-        dbManager = new DBManager(this);
-
+        this.estraiGiocatore();
         this.createListCardAbilita();
         this.setView();
         this.setRecyclerView();
     }
 
-    public void createListCardAbilita() {
-
+    public void estraiGiocatore() {
+        Intent intent = getIntent();
+        nomecamp = intent.getStringExtra("nomecamp");
+        nomeg = intent.getStringExtra("nomeg");
+        dbManager = new DBManager(this);
         giocatore = dbManager.leggiGiocatore(nomecamp, nomeg);
+    }
+
+    public void createListCardAbilita() {
         List<Abilita> abilitaList = giocatore.getAbilitaList();
 
         cardabilitalist = new ArrayList<>();
-        if(abilitaList != null)
-            for (Abilita abilita : abilitaList) {
-                cardabilitalist.add(new CardAbilita(abilita.getNome()));
-            }
+        if (abilitaList == null) return;
+        for (Abilita abilita : abilitaList) {
+            cardabilitalist.add(new CardAbilita(abilita.getNome()));
+        }
     }
 
     public void setView() {

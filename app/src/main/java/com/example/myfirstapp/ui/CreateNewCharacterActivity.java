@@ -103,8 +103,10 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
 
         Giocatore nuovo = new Giocatore(nomeg, desc, nomecamp, eta, altezza, genere, portafoglio, classe, razza, caratteristicas, abilitas);
 
-        db.aggiungiGiocatore(nuovo);
-        Toast.makeText(this, "giocatore inserito", Toast.LENGTH_LONG).show();
+        if(db.aggiungiGiocatore(nuovo))
+            Toast.makeText(this, "giocatore inserito", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(this, "inserimeto fallito", Toast.LENGTH_LONG).show();
 
         Intent intent = new Intent(this, CharacterActivity.class);
         intent.putExtra("nomecamp", nomecamp);
