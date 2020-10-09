@@ -63,5 +63,7 @@
     <string name="back_slash">/</string>
     <string name="_80">80</string>
     <string name="informazioni">Informazioni</string>
+    <string name="mod_comp">mod comp:</string>
+    <string name="_18">[18]</string>
 
 </resources>

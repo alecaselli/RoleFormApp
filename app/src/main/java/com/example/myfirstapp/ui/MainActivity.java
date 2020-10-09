@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
     public void createListCardGiocatore() {
 
         List<List<String>> datilist = dbManager.leggiDatiMenu(TabellaGiocatore.TBL_NOME, CampiComuni.FIELD_LIVELLO, TabellaGiocatore.FIELD_NOMECAMPAGNA, TabellaGiocatore.FIELD_NOMEG);
-        mCardGiocatoreList = new ArrayList<>();
 
+        mCardGiocatoreList = new ArrayList<>();
         if (datilist != null)
             for (List<String> dati : datilist) {
                 mCardGiocatoreList.add(new CardGiocatore(R.drawable.ic_baseline_image, dati.get(0), dati.get(1), "livello" + " " + dati.get(2)));

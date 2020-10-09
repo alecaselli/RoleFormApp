@@ -20,6 +20,7 @@ public class CardAbilitaAdapter extends RecyclerView.Adapter<CardAbilitaAdapter.
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
+
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener; }
 

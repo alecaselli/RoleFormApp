@@ -77,21 +77,30 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
         editText = (EditText) findViewById(R.id.create_campaign_name);
         StringBuffer desc = new StringBuffer();
         String nomecamp = editText.getText().toString();
+
         editText = (EditText) findViewById(R.id.create_character_name);
         String nomeg = editText.getText().toString();
+
         editText = findViewById(R.id.create_character_age);
         String eta = editText.getText().toString();
+
         editText = findViewById(R.id.create_character_height);
         String altezza = editText.getText().toString();
+
         editText = findViewById(R.id.create_character_gender);
         String genere = editText.getText().toString();
+
         Valuta portafoglio = db.leggiValuta(VALUTADND);
+
         nomeClasse = "ranger";
         Classe classe = db.leggiClasse(nomeClasse);
+
         nomeRazza = "nano";
         Razza razza = db.leggiRazza(nomeRazza);
+
         List<Caratteristica> caratteristicas = db.leggiCaratteristica();
         List<Abilita> abilitas = db.leggiAbilita();
+
         Giocatore nuovo = new Giocatore(nomeg, desc, nomecamp, eta, altezza, genere, portafoglio, classe, razza, caratteristicas, abilitas);
 
         db.aggiungiGiocatore(nuovo);
