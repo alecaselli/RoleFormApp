@@ -33,10 +33,10 @@ public class CharacterActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String nomecamp = intent.getStringExtra("nomecamp");
         String nomeg = intent.getStringExtra("nomeg");
-        DBManager db = new DBManager(this);
+        DBManager dbManager = new DBManager(this);
         assert nomeg != null;
         assert nomecamp != null;
-        giocatore = db.leggiGiocatore(nomecamp, nomeg);
+        giocatore = dbManager.leggiGiocatore(nomecamp, nomeg);
     }
 
     public void setView() {

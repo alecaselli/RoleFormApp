@@ -2119,7 +2119,7 @@ public class DBManager {
             List<Abilita> abilitaList = this.leggiAbilita(nomecamp, nomeg);
 
             resultSet.close();
-            return new Giocatore(nomeg, descrizione, mana, livello, puntiEsperienza, modCompetenza, capacitaBorsa, puntiFerita, nDadi, dado, classeArmatura, puntiStat, nomecamp, iniziativa, eta, altezza, genere, noteAvventura, ideali, sinossi, lingua, portafoglio, classe, razza, caratteristicaList, borsa, equipaggiato, incantesimiGiocatore, abilitaList);
+            return new Giocatore(nomeg, descrizione, capacitaBorsa, classeArmatura, dado, livello, mana, modCompetenza, nDadi, puntiEsperienza, puntiFerita, puntiStat, altezza, eta, genere, ideali, iniziativa, nomecamp, noteAvventura, sinossi, lingua, portafoglio, classe, razza, caratteristicaList, borsa, equipaggiato, incantesimiGiocatore, abilitaList);
 
         } catch (SQLiteException sqle) {
             Log.e("LEGGI GIOCATORE", "leggi fallita", sqle);

@@ -9,24 +9,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Giocatore extends Descrivibile {
-    private int mana;
-    private int livello;
-    private int puntiEsperienza;
-    private int modCompetenza;
     private int capacitaBorsa;
+    private int classeArmatura;
+    private int dado;
+    private int livello;
+    private int mana;
+    private int modCompetenza;
+    private int nDadi;
+    private int puntiEsperienza;
     private int puntiFerita;
     private int puntiFeritaMax;
-    private int nDadi;
-    private int dado;
-    private int classeArmatura;
     private int puntiStat;
-    private String nomeCampagna;
-    private String iniziativa;
-    private String eta;
     private String altezza;
+    private String eta;
     private String genere;
-    private String noteAvventura;
     private String ideali;
+    private String iniziativa;
+    private String nomeCampagna;
+    private String noteAvventura;
     private String sinossi;
     private StringBuffer lingua;
     private Valuta portafoglio;
@@ -40,8 +40,6 @@ public class Giocatore extends Descrivibile {
 
     public Giocatore(String nome, StringBuffer descrizione, String nomeCampagna, String eta, String altezza, String genere, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Abilita> abilitaList) {
         super(nome, descrizione);
-        this.ideali = ideali;
-        this.sinossi = sinossi;
         this.classe = classe;
         this.nomeCampagna = nomeCampagna;
         this.eta = eta;
@@ -54,27 +52,27 @@ public class Giocatore extends Descrivibile {
         this.inizializzazionePG();
     }
 
-    public Giocatore(String nome, StringBuffer descrizione, int mana, int livello, int puntiEsperienza, int modCompetenza, int capacitaBorsa, int puntiFerita, int nDadi, int dado, int classeArmatura, int puntiStat, String nomeCampagna, String iniziativa, String eta, String altezza, String genere, String noteAvventura, String ideali, String sinossi, StringBuffer lingua, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Equipaggiamento> borsa, List<Equipaggiamento> equipaggiato, List<Incantesimo> incantesimiGiocatore, List<Abilita> abilitaList) {
+    public Giocatore(String nome, StringBuffer descrizione, int capacitaBorsa, int classeArmatura, int dado, int livello, int mana, int modCompetenza, int nDadi, int puntiEsperienza, int puntiFerita, int puntiStat, String altezza, String eta, String genere, String ideali, String iniziativa, String nomeCampagna, String noteAvventura, String sinossi, StringBuffer lingua, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Equipaggiamento> borsa, List<Equipaggiamento> equipaggiato, List<Incantesimo> incantesimiGiocatore, List<Abilita> abilitaList) {
         super(nome, descrizione);
-        this.mana = mana;
-        this.livello = livello;
-        this.puntiEsperienza = puntiEsperienza;
-        this.modCompetenza = modCompetenza;
         this.capacitaBorsa = capacitaBorsa;
-        this.puntiFerita = puntiFerita;
-        this.ideali = ideali;
-        this.sinossi = sinossi;
-        this.nDadi = nDadi;
-        this.dado = dado;
-        this.inizPuntiFeritaMax();
         this.classeArmatura = classeArmatura;
+        this.dado = dado;
+        this.livello = livello;
+        this.mana = mana;
+        this.modCompetenza = modCompetenza;
+        this.nDadi = nDadi;
+        this.puntiEsperienza = puntiEsperienza;
+        this.puntiFerita = puntiFerita;
+        this.inizPuntiFeritaMax();
         this.puntiStat = puntiStat;
-        this.nomeCampagna = nomeCampagna;
-        this.iniziativa = iniziativa;
-        this.eta = eta;
         this.altezza = altezza;
+        this.eta = eta;
         this.genere = genere;
+        this.ideali = ideali;
+        this.iniziativa = iniziativa;
+        this.nomeCampagna = nomeCampagna;
         this.noteAvventura = noteAvventura;
+        this.sinossi = sinossi;
         this.lingua = lingua;
         this.portafoglio = portafoglio;
         this.classe = classe;
@@ -86,12 +84,28 @@ public class Giocatore extends Descrivibile {
         this.abilitaList = abilitaList;
     }
 
-    public int getMana() {
-        return mana;
+    public int getCapacitaBorsa() {
+        return capacitaBorsa;
     }
 
-    public void setMana(int mana) {
-        this.mana = mana;
+    public void setCapacitaBorsa(int capacitaBorsa) {
+        this.capacitaBorsa = capacitaBorsa;
+    }
+
+    public int getClasseArmatura() {
+        return classeArmatura;
+    }
+
+    public void setClasseArmatura(int classeArmatura) {
+        this.classeArmatura = classeArmatura;
+    }
+
+    public int getDado() {
+        return dado;
+    }
+
+    public void setDado(int dado) {
+        this.dado = dado;
     }
 
     public int getLivello() {
@@ -102,12 +116,12 @@ public class Giocatore extends Descrivibile {
         this.livello = livello;
     }
 
-    public int getPuntiEsperienza() {
-        return puntiEsperienza;
+    public int getMana() {
+        return mana;
     }
 
-    public void setPuntiEsperienza(int puntiEsperienza) {
-        this.puntiEsperienza = puntiEsperienza;
+    public void setMana(int mana) {
+        this.mana = mana;
     }
 
     public int getModCompetenza() {
@@ -118,12 +132,20 @@ public class Giocatore extends Descrivibile {
         this.modCompetenza = modCompetenza;
     }
 
-    public int getCapacitaBorsa() {
-        return capacitaBorsa;
+    public int getnDadi() {
+        return nDadi;
     }
 
-    public void setCapacitaBorsa(int capacitaBorsa) {
-        this.capacitaBorsa = capacitaBorsa;
+    public void setnDadi(int nDadi) {
+        this.nDadi = nDadi;
+    }
+
+    public int getPuntiEsperienza() {
+        return puntiEsperienza;
+    }
+
+    public void setPuntiEsperienza(int puntiEsperienza) {
+        this.puntiEsperienza = puntiEsperienza;
     }
 
     public int getPuntiFerita() {
@@ -142,60 +164,12 @@ public class Giocatore extends Descrivibile {
         this.puntiFeritaMax = puntiFeritaMax;
     }
 
-    public int getnDadi() {
-        return nDadi;
-    }
-
-    public void setnDadi(int nDadi) {
-        this.nDadi = nDadi;
-    }
-
-    public int getDado() {
-        return dado;
-    }
-
-    public void setDado(int dado) {
-        this.dado = dado;
-    }
-
-    public int getClasseArmatura() {
-        return classeArmatura;
-    }
-
-    public void setClasseArmatura(int classeArmatura) {
-        this.classeArmatura = classeArmatura;
-    }
-
     public int getPuntiStat() {
         return puntiStat;
     }
 
     public void setPuntiStat(int puntiStat) {
         this.puntiStat = puntiStat;
-    }
-
-    public String getNomeCampagna() {
-        return nomeCampagna;
-    }
-
-    public void setNomeCampagna(String nomeCampagna) {
-        this.nomeCampagna = nomeCampagna;
-    }
-
-    public String getIniziativa() {
-        return iniziativa;
-    }
-
-    public void setIniziativa(String iniziativa) {
-        this.iniziativa = iniziativa;
-    }
-
-    public String getEta() {
-        return eta;
-    }
-
-    public void setEta(String eta) {
-        this.eta = eta;
     }
 
     public String getAltezza() {
@@ -206,6 +180,14 @@ public class Giocatore extends Descrivibile {
         this.altezza = altezza;
     }
 
+    public String getEta() {
+        return eta;
+    }
+
+    public void setEta(String eta) {
+        this.eta = eta;
+    }
+
     public String getGenere() {
         return genere;
     }
@@ -214,20 +196,36 @@ public class Giocatore extends Descrivibile {
         this.genere = genere;
     }
 
-    public String getNoteAvventura() {
-        return noteAvventura;
-    }
-
-    public void setNoteAvventura(String noteAvventura) {
-        this.noteAvventura = noteAvventura;
-    }
-
     public String getIdeali() {
         return ideali;
     }
 
     public void setIdeali(String ideali) {
         this.ideali = ideali;
+    }
+
+    public String getIniziativa() {
+        return iniziativa;
+    }
+
+    public void setIniziativa(String iniziativa) {
+        this.iniziativa = iniziativa;
+    }
+
+    public String getNomeCampagna() {
+        return nomeCampagna;
+    }
+
+    public void setNomeCampagna(String nomeCampagna) {
+        this.nomeCampagna = nomeCampagna;
+    }
+
+    public String getNoteAvventura() {
+        return noteAvventura;
+    }
+
+    public void setNoteAvventura(String noteAvventura) {
+        this.noteAvventura = noteAvventura;
     }
 
     public String getSinossi() {
@@ -309,7 +307,6 @@ public class Giocatore extends Descrivibile {
     public void setAbilitaList(List<Abilita> abilitaList) {
         this.abilitaList = abilitaList;
     }
-
 
     /* metodi non base*/
     public void inizPuntiFeritaMax() {
@@ -403,19 +400,22 @@ public class Giocatore extends Descrivibile {
         for (CaratteristicaBase elementoR : this.razza.getCaratteristicaBaseList()) {
             this.getCaratteristica(elementoR.getNome()).addValoreBase(elementoR.getValore());
         }
-        this.classeArmatura = this.puntiStat = this.mana = this.puntiEsperienza = this.capacitaBorsa = 0;
-        this.noteAvventura = "";
-        this.setModCompetenza(2);
-        this.setLivello(1);
-        this.setIniziativa("0");
-        this.setIncantesimiGiocatore(this.classe.getIncantesimiClasse());
+        this.capacitaBorsa = this. classeArmatura = this.mana = this.puntiEsperienza = this.puntiStat= 0;
+        this.livello = 1;
+        this.modCompetenza = 2;
         this.setnDadi(this.classe.getnDadi());
         this.setDado(this.classe.getDado());
         this.inizPuntiFeritaMax();
         this.setPuntiFerita(this.puntiFeritaMax);
-        this.setEquipaggiato(new ArrayList<Equipaggiamento>());
+        this.ideali = "";
+        this.iniziativa = "0";
+        this.noteAvventura = "";
+        this.sinossi = "";
+        this.setLingua(this.razza.getLingua());
         this.setBorsa(this.classe.getEquipaggiamentoList());
-        this.setDescrizione(this.razza.getLingua());
+        this.setEquipaggiato(new ArrayList<Equipaggiamento>());
+        this.setIncantesimiGiocatore(this.classe.getIncantesimiClasse());
+        this.setDescrizione(this.getLingua());
         this.aggiungiDescrizione(this.classe.getDescrizionePrivilegiPoteri().toString());
         this.aggiungiDescrizione(this.classe.getCompetenza().toString());
     }
