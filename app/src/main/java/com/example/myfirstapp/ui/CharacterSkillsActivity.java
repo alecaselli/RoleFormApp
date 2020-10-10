@@ -30,7 +30,7 @@ public class CharacterSkillsActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private CardAbilitaAdapter mAdapter;
-    
+
     private ArrayList<CardAbilita> cardAbilitaList;
     private String nomecamp;
     private String nomeg;

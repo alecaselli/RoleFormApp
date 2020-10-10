@@ -37,14 +37,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dbManager = new DBManager(this);
-        /*dbManager.dropDB(this);*/
         this.createListCardGiocatore();
         this.setRecyclerView();
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
+    }
+
     public void createListCardGiocatore() {
+
+        dbManager = new DBManager(this);
+       /*dbManager.dropDB(this);*/
 
         List<List<String>> datilist = dbManager.leggiDatiMenu(TabellaGiocatore.TBL_NOME, CampiComuni.FIELD_LIVELLO, TabellaGiocatore.FIELD_NOMECAMPAGNA, TabellaGiocatore.FIELD_NOMEG);
 
@@ -70,6 +77,11 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 openCharacterActivity(position);
             }
+
+            @Override
+            public void onDeleteClick(int position) {
+                eliminaGiocatore(position);
+            }
         });
     }
 
@@ -85,12 +97,13 @@ public class MainActivity extends AppCompatActivity {
     public void eliminaGiocatore(int position) {
         nomecamp = mCardGiocatoreList.get(position).getNomecampagna();
         nomeg = mCardGiocatoreList.get(position).getNomegiocatore();
-        if(dbManager.eliminaGiocatore(nomecamp, nomeg))
+        if (dbManager.eliminaGiocatore(nomecamp, nomeg))
             Toast.makeText(this, "giocatore eliminato", Toast.LENGTH_LONG).show();
         else
             Toast.makeText(this, "eliminazione fallita", Toast.LENGTH_LONG).show();
 
-
+        mCardGiocatoreList.remove(position);
+        mAdapter.notifyItemRemoved(position);
     }
 
     public void openCreateNewCharacter(View view) {

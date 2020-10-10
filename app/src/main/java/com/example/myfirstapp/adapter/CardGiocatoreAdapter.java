@@ -20,6 +20,7 @@ public class CardGiocatoreAdapter extends RecyclerView.Adapter<CardGiocatoreAdap
 
     public interface OnItemClickListener {
         void onItemClick(int position);
+        void onDeleteClick(int position);
     }
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
@@ -30,6 +31,7 @@ public class CardGiocatoreAdapter extends RecyclerView.Adapter<CardGiocatoreAdap
         public TextView mNomeCampagnaView;
         public TextView mNomeGiocatoreView;
         public TextView mLivelloView;
+        public ImageView mDeleteImage;
 
         public CardGiocatoreViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -37,6 +39,7 @@ public class CardGiocatoreAdapter extends RecyclerView.Adapter<CardGiocatoreAdap
             mNomeCampagnaView = itemView.findViewById(R.id.campaign_name);
             mNomeGiocatoreView = itemView.findViewById(R.id.character_name);
             mLivelloView = itemView.findViewById(R.id.level);
+            mDeleteImage = itemView.findViewById(R.id.character_delete);
 
            itemView.setOnClickListener(new View.OnClickListener() {
 
@@ -50,6 +53,18 @@ public class CardGiocatoreAdapter extends RecyclerView.Adapter<CardGiocatoreAdap
                     }
                 }
             });
+
+            mDeleteImage.setOnClickListener((new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onDeleteClick(position);
+                        }
+                    }
+                }
+            }));
         }
     }
 

@@ -59,5 +59,14 @@
             android:textSize="16sp"
             android:textStyle="italic" />
 
+        <ImageView
+            android:id="@+id/character_delete"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="14dp"
+            android:padding="2dp"
+            android:src="@drawable/ic_delete" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
