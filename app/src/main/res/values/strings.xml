@@ -63,5 +63,6 @@
     <string name="back_slash">/</string>
     <string name="_80">80</string>
     <string name="informazioni">Informazioni</string>
+    <string name="skill_name">Skill name</string>
 
 </resources>

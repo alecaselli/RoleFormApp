@@ -11,17 +11,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
+        android:background="?android:attr/selectableItemBackground"
         android:paddingVertical="10dp">
 
         <TextView
             android:id="@+id/skill_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Skill name"
+            android:text="@string/skill_name"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="normal" />
 
+        <!--
         <TextView
             android:id="@+id/skill_mod"
             android:layout_width="wrap_content"
@@ -32,9 +34,9 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="normal" />
+            -->
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/skill_mod_off"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_alignParentEnd="true"
@@ -48,6 +50,7 @@
                 android:layout_height="match_parent" >
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/skill_mod_off"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_centerInParent="true"
@@ -60,6 +63,7 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_centerInParent="true"
+                    android:clickable="false"
                     app:cardBackgroundColor="@color/black"
                     android:visibility="gone"
                     app:cardElevation="0dp"

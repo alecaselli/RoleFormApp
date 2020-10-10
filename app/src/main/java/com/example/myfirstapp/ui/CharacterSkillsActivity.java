@@ -21,11 +21,11 @@ public class CharacterSkillsActivity extends AppCompatActivity {
 
     private List<RecyclerView> skillsRecyclerViews;
     private List<CardView> skillsCardViews;
+    private ArrayList<CardAbilita> mCardAbilitaList;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private CardAbilitaAdapter mAdapter;
-    private ArrayList<CardAbilita> mCardAbilitaList;
 
     private String nomecamp;
     private String nomeg;
@@ -42,22 +42,39 @@ public class CharacterSkillsActivity extends AppCompatActivity {
 
         dbManager = new DBManager(this);
 
-        this.createListCardAbilita();
-        this.setRecyclerView();
+        createCardAbilitaList();
+        setRecyclerView();
     }
 
-    public void createListCardAbilita() {
+    public void createCardAbilitaList() {
+        mCardAbilitaList = new ArrayList<>();
+        mCardAbilitaList.add(new CardAbilita("Colpo del dragone funesto", true));
+        mCardAbilitaList.add(new CardAbilita("Capriola tacobell", false));
 
     }
 
     public void setRecyclerView() {
         mRecyclerView = findViewById(R.id.skills_recyclerView);
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager((this));
+        mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new CardAbilitaAdapter(mCardAbilitaList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
+        mAdapter.setOnItemClickListener(new CardAbilitaAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                //entro nell'activity coi dettagli dell'abilità
+                mCardAbilitaList.get(position).changeAcquired();
+            }
+
+            @Override
+            public void onSelectClick(int position) {
+                mCardAbilitaList.get(position).changeAcquired();
+            }
+        });
+
     }
+
 }
