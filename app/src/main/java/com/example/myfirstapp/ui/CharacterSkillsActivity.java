@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,8 +18,6 @@ import com.example.myfirstapp.domain.Abilita;
 import com.example.myfirstapp.domain.Giocatore;
 import com.example.myfirstapp.utilities.CardAbilita;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,15 +25,13 @@ public class CharacterSkillsActivity extends AppCompatActivity {
 
     private List<RecyclerView> skillsRecyclerViews;
     private List<CardView> skillsCardViews;
-    private ArrayList<CardAbilita> mCardAbilitaList;
 
     private TextView txt;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private CardAbilitaAdapter mAdapter;
-
-    private Giocatore giocatore;
-    private ArrayList<CardAbilita> cardabilitalist;
+    
+    private ArrayList<CardAbilita> cardAbilitaList;
     private String nomecamp;
     private String nomeg;
     private DBManager dbManager;
@@ -44,41 +41,31 @@ public class CharacterSkillsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_skills);
 
-        this.estraiGiocatore();
-        this.createListCardAbilita();
+        this.estraiIntent();
+        this.createCardAbilitaList();
         this.setView();
         this.setRecyclerView();
     }
 
-    public void estraiGiocatore() {
+    public void estraiIntent() {
         Intent intent = getIntent();
         nomecamp = intent.getStringExtra("nomecamp");
         nomeg = intent.getStringExtra("nomeg");
         dbManager = new DBManager(this);
-
-        createCardAbilitaList();
-        setRecyclerView();
     }
 
     public void createCardAbilitaList() {
-        mCardAbilitaList = new ArrayList<>();
-        mCardAbilitaList.add(new CardAbilita("Colpo del dragone funesto", true));
-        mCardAbilitaList.add(new CardAbilita("Capriola tacobell", false));
+        List<Abilita> abilitaList = dbManager.leggiAbilita(nomecamp, nomeg);
 
-        giocatore = dbManager.leggiGiocatore(nomecamp, nomeg);
-    }
-
-    public void createListCardAbilita() {
-        List<Abilita> abilitaList = giocatore.getAbilitaList();
-
-        cardabilitalist = new ArrayList<>();
+        cardAbilitaList = new ArrayList<>();
         if (abilitaList == null) return;
         for (Abilita abilita : abilitaList) {
-            cardabilitalist.add(new CardAbilita(abilita.getNome()));
+            cardAbilitaList.add(new CardAbilita(abilita.getNome(), abilita.isCompetenza()));
         }
     }
+
     public void setView() {
-        String mod = "[" + giocatore.getModCompetenza() + "]";
+        String mod = "[" + dbManager.leggiModComp(nomecamp, nomeg) + "]";
         txt = (TextView) findViewById(R.id.skills_mod_value);
         txt.setText(mod);
     }
@@ -88,9 +75,9 @@ public class CharacterSkillsActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new CardAbilitaAdapter(mCardAbilitaList);
+        mAdapter = new CardAbilitaAdapter(cardAbilitaList);
         mLayoutManager = new LinearLayoutManager((this));
-        mAdapter = new CardAbilitaAdapter(cardabilitalist);
+        mAdapter = new CardAbilitaAdapter(cardAbilitaList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -99,15 +86,31 @@ public class CharacterSkillsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 //entro nell'activity coi dettagli dell'abilità
-                mCardAbilitaList.get(position).changeAcquired();
+                openSkillActivity(position);
             }
 
             @Override
-            public void onSelectClick(int position) {
-                mCardAbilitaList.get(position).changeAcquired();
+            public void onCompetenzaClick(int position) {
+                changeCompetenza(position);
             }
         });
 
+    }
+
+    public void changeCompetenza(int position) {
+        cardAbilitaList.get(position).changeAcquired();
+        mAdapter.notifyItemChanged(position);
+
+        if (dbManager.aggiornaHaga(nomecamp, nomeg, cardAbilitaList.get(position).getNomeabilita(), cardAbilitaList.get(position).getCompetenza()))
+            Toast.makeText(this, "competenza aggiornata", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(this, "aggiornamento fallito", Toast.LENGTH_LONG).show();
+    }
+
+    public void openSkillActivity(int position) {
+        /*Intent intent = new Intent(this, SkillActivity.class);
+        intent.putExtra("nomea", mCardAbilitaList.get(position).getNomeabilita());
+        startActivity(intent);*/
     }
 
 }

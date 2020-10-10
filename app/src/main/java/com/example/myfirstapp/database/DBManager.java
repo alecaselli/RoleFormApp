@@ -2157,4 +2157,26 @@ public class DBManager {
             return null;
         }
     }
+
+    public int leggiModComp(@NotNull String nomecamp, @NotNull String nomeg){
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
+        String[] whereArgs = new String[]{nomecamp, nomeg};
+
+        try {
+            Cursor resultSet = db.query(TabellaGiocatore.TBL_NOME, null, whereClause, whereArgs, null, null, null);
+            if (resultSet == null || resultSet.getCount() == 0) {
+                return 0;
+            }
+            resultSet.moveToFirst();
+
+            int modCompetenza = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_MODCOMPETENZA));
+            resultSet.close();
+            return modCompetenza;
+
+        }catch (SQLiteException sqle) {
+            Log.e("LEGGI MODCOMP", "leggi fallita", sqle);
+            return 0;
+        }
+    }
 }

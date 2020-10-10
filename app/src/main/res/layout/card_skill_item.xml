@@ -37,6 +37,7 @@
             -->
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/skill_ball"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_alignParentEnd="true"

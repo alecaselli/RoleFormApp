@@ -22,7 +22,7 @@ public class CardAbilitaAdapter extends RecyclerView.Adapter<CardAbilitaAdapter.
     public interface OnItemClickListener {
         void onItemClick(int position);
 
-        void onSelectClick(int position);
+        void onCompetenzaClick(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -31,15 +31,15 @@ public class CardAbilitaAdapter extends RecyclerView.Adapter<CardAbilitaAdapter.
 
     public static class CardAbilitaViewHolder extends RecyclerView.ViewHolder {
         public TextView mNomeAbilitaView;
-        public CardView mSelectCard;
-        public CardView mAcquiredCard;
+        public CardView mPallinoCard;
+        public CardView mColorePallinoCard;
 
 
         public CardAbilitaViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             mNomeAbilitaView = itemView.findViewById(R.id.skill_name);
-            mSelectCard = itemView.findViewById(R.id.skill_mod_off);
-            mAcquiredCard = itemView.findViewById(R.id.skill_mod_on);
+            mPallinoCard = itemView.findViewById(R.id.skill_ball);
+            mColorePallinoCard = itemView.findViewById(R.id.skill_mod_on);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -53,13 +53,13 @@ public class CardAbilitaAdapter extends RecyclerView.Adapter<CardAbilitaAdapter.
                 }
             });
 
-            mSelectCard.setOnClickListener(new View.OnClickListener() {
+            mPallinoCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
-                            listener.onSelectClick(position);
+                            listener.onCompetenzaClick(position);
                         }
                     }
                 }
@@ -83,11 +83,10 @@ public class CardAbilitaAdapter extends RecyclerView.Adapter<CardAbilitaAdapter.
         CardAbilita currentItem = mCardAbilitaList.get(position);
         if (currentItem != null) {
             holder.mNomeAbilitaView.setText(currentItem.getNomeabilita());
-            if (currentItem.getAcquisita()) {
-                holder.mAcquiredCard.setVisibility(View.VISIBLE);
-            }
-            else  {
-                holder.mAcquiredCard.setVisibility(View.GONE);
+            if (currentItem.getCompetenza()) {
+                holder.mColorePallinoCard.setVisibility(View.VISIBLE);
+            } else {
+                holder.mColorePallinoCard.setVisibility(View.GONE);
             }
         }
     }
