@@ -26,7 +26,7 @@ public class CardAbilita {
     }
 
     /* METODI NON STANDARD */
-    public void changeAcquired() {
+    public void swapCompetenza() {
         competenza = !competenza;
     }
 

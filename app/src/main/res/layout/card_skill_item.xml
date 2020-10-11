@@ -38,8 +38,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/skill_ball"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="23.5dp"
+            android:layout_height="23.5dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             app:cardBackgroundColor="@color/black"
@@ -52,8 +52,8 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/skill_mod_off"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="20.5dp"
+                    android:layout_height="20.5dp"
                     android:layout_centerInParent="true"
                     app:cardBackgroundColor="@color/white"
                     app:cardElevation="0dp"
@@ -61,8 +61,8 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/skill_mod_on"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="15.5dp"
+                    android:layout_height="15.5dp"
                     android:layout_centerInParent="true"
                     android:clickable="false"
                     app:cardBackgroundColor="@color/black"

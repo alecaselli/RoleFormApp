@@ -98,13 +98,12 @@ public class CharacterSkillsActivity extends AppCompatActivity {
     }
 
     public void changeCompetenza(int position) {
-        cardAbilitaList.get(position).changeAcquired();
+        cardAbilitaList.get(position).swapCompetenza();
         mAdapter.notifyItemChanged(position);
 
-        if (dbManager.aggiornaHaga(nomecamp, nomeg, cardAbilitaList.get(position).getNomeabilita(), cardAbilitaList.get(position).getCompetenza()))
-            Toast.makeText(this, "competenza aggiornata", Toast.LENGTH_LONG).show();
-        else
+        if (!dbManager.aggiornaHaga(nomecamp, nomeg, cardAbilitaList.get(position).getNomeabilita(), cardAbilitaList.get(position).getCompetenza()))
             Toast.makeText(this, "aggiornamento fallito", Toast.LENGTH_LONG).show();
+
     }
 
     public void openSkillActivity(int position) {

@@ -36,6 +36,9 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
     private DBManager db;
     private final String VALUTADND = "moneta del regno di Ho";
 
+    private Spinner raceSpinner;
+    private Spinner classSpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +51,7 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
         ArrayAdapter<String> raceSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_item);
         raceSpinnerAdapter.addAll(raceList);
         raceSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_custom_item);
-        Spinner raceSpinner = findViewById(R.id.create_character_race);
+        raceSpinner = findViewById(R.id.create_character_race);
         raceSpinner.setAdapter(raceSpinnerAdapter);
         raceSpinner.setOnItemSelectedListener(this);
 
@@ -57,7 +60,7 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
         ArrayAdapter<String> classSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_item);
         classSpinnerAdapter.addAll(classList);
         classSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_custom_item);
-        Spinner classSpinner = findViewById(R.id.create_character_class);
+        classSpinner = findViewById(R.id.create_character_class);
         classSpinner.setAdapter(classSpinnerAdapter);
         classSpinner.setOnItemSelectedListener(this);
 
@@ -92,25 +95,29 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
 
         Valuta portafoglio = db.leggiValuta(VALUTADND);
 
-        nomeClasse = "ranger";
-        Classe classe = db.leggiClasse(nomeClasse);
+        Classe classe = db.leggiClasse(classSpinner.getSelectedItem().toString());
 
-        nomeRazza = "nano";
-        Razza razza = db.leggiRazza(nomeRazza);
+        Razza razza = db.leggiRazza(raceSpinner.getSelectedItem().toString());
 
         List<Caratteristica> caratteristicas = db.leggiCaratteristica();
         List<Abilita> abilitas = db.leggiAbilita();
 
         Giocatore nuovo = new Giocatore(nomeg, desc, nomecamp, eta, altezza, genere, portafoglio, classe, razza, caratteristicas, abilitas);
 
-        if(db.aggiungiGiocatore(nuovo))
-            Toast.makeText(this, "giocatore inserito", Toast.LENGTH_LONG).show();
-        else
+        if (!db.aggiungiGiocatore(nuovo))
             Toast.makeText(this, "inserimeto fallito", Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(this, CharacterActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("nomecamp", nomecamp);
         intent.putExtra("nomeg", nomeg);
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

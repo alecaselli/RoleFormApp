@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("nomecamp", nomecamp);
         intent.putExtra("nomeg", nomeg);
         startActivity(intent);
+
     }
 
     public void eliminaGiocatore(int position) {
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
     public void openCreateNewCharacter(View view) {
         Intent intent = new Intent(this, CreateNewCharacterActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void openInfoCredits(View view) {

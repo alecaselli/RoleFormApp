@@ -26,42 +26,41 @@
             android:textSize="32sp"
             android:textStyle="bold|italic" />
 
-        <TextView
-            android:id="@+id/skills_mod"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_toEndOf="@id/skills_header"
-            android:text="@string/mod_comp"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="normal" />
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp">
 
-        <TextView
-            android:id="@+id/skills_mod_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@id/skills_mod"
-            android:text="@string/_18"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="normal" />
+            <TextView
+                android:id="@+id/skills_mod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Competenza:"
+                android:textColor="@color/black"
+                android:textSize="19sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/skills_mod_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="[16]"
+                android:textColor="@color/black"
+                android:textSize="19sp"
+                android:textStyle="normal" />
+        </LinearLayout>
     </RelativeLayout>
 
-    <ScrollView
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/skills_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none">
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/skills_recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-    </ScrollView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 </LinearLayout>
