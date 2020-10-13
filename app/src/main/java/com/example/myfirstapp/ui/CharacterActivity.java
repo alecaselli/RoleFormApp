@@ -117,11 +117,11 @@ public class CharacterActivity extends AppCompatActivity {
         txt.setText(String.valueOf(caratteristica.getBonus()));
 
         List<Integer> valoreint = giocatore.getPortafoglio().getValoreInMonete();
-        txt = (TextView) findViewById(R.id.character_copper);
+        txt = (TextView) findViewById(R.id.character_base_copper);
         txt.setText(String.valueOf(valoreint.get(0)));
-        txt = (TextView) findViewById(R.id.character_silver);
+        txt = (TextView) findViewById(R.id.character_base_silver);
         txt.setText(String.valueOf(valoreint.get(1)));
-        txt = (TextView) findViewById(R.id.character_gold);
+        txt = (TextView) findViewById(R.id.character_base_gold);
         txt.setText(String.valueOf(valoreint.get(2)));
 
 
