@@ -52,11 +52,11 @@ public class CharacterSpellsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_spells);
 
-        this.estraiGiocatore();
+        this.estraiIntent();
         this.createListCardIncantesimo();
         this.setButtons();
     }
-    public void estraiGiocatore() {
+    public void estraiIntent() {
         Intent intent = getIntent();
         nomecamp = intent.getStringExtra("nomecamp");
         nomeg = intent.getStringExtra("nomeg");

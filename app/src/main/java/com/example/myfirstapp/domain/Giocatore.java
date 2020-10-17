@@ -400,7 +400,7 @@ public class Giocatore extends Descrivibile {
         for (CaratteristicaBase elementoR : this.razza.getCaratteristicaBaseList()) {
             this.getCaratteristica(elementoR.getNome()).addValoreBase(elementoR.getValore());
         }
-        this.capacitaBorsa = this. classeArmatura = this.mana = this.puntiEsperienza = this.puntiStat= 0;
+        this.capacitaBorsa = this.classeArmatura = this.mana = this.puntiEsperienza = this.puntiStat = 0;
         this.livello = 1;
         this.modCompetenza = 2;
         this.setnDadi(this.classe.getnDadi());
@@ -412,9 +412,20 @@ public class Giocatore extends Descrivibile {
         this.noteAvventura = "";
         this.sinossi = "";
         this.setLingua(this.razza.getLingua());
-        this.setBorsa(this.classe.getEquipaggiamentoList());
+
+        List<Equipaggiamento> equitemp = this.classe.getEquipaggiamentoList();
+        if (equitemp != null)
+            this.setBorsa(equitemp);
+        else
+            this.setBorsa(new ArrayList<Equipaggiamento>());
         this.setEquipaggiato(new ArrayList<Equipaggiamento>());
-        this.setIncantesimiGiocatore(this.classe.getIncantesimiClasse());
+
+        List<Incantesimo> inctemp = this.classe.getIncantesimiClasse();
+        if (inctemp != null)
+            this.setIncantesimiGiocatore(inctemp);
+        else
+            this.setIncantesimiGiocatore(new ArrayList<Incantesimo>());
+
         this.setDescrizione(this.getLingua());
         this.aggiungiDescrizione(this.classe.getDescrizionePrivilegiPoteri().toString());
         this.aggiungiDescrizione(this.classe.getCompetenza().toString());

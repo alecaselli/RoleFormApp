@@ -1523,7 +1523,13 @@ public class DBManager {
         try {
             Cursor resultSet = db.query(table, null, whereClause, whereArgs, null, null, null);
             if (resultSet == null || resultSet.getCount() == 0) {
-                return null;
+
+                List<List<Incantesimo>> supincantesimi = new ArrayList<>();
+                for (int i = 0; i <= 9; ++i) {
+                    List<Incantesimo> incantesimi = new ArrayList<Incantesimo>();
+                    supincantesimi.add(incantesimi);
+                }
+                return supincantesimi;
             }
             resultSet.moveToFirst();
 
@@ -2113,10 +2119,24 @@ public class DBManager {
             Classe classe = this.leggiClasse(nomecla);
             Razza razza = this.leggiRazza(resultSet.getString(resultSet.getColumnIndex(TabellaRazza.FIELD_NOMER)));
             List<Caratteristica> caratteristicaList = this.leggiCaratteristicheG(nomecamp, nomeg);
+            if (caratteristicaList == null)
+                caratteristicaList = new ArrayList<>();
+
             List<Equipaggiamento> borsa = this.leggiEquipaggiamenti(true, nomecamp, nomeg);
+            if (borsa == null)
+                borsa = new ArrayList<>();
+
             List<Equipaggiamento> equipaggiato = this.leggiEquipaggiamenti(false, nomecamp, nomeg);
+            if (equipaggiato == null)
+                equipaggiato = new ArrayList<>();
+
             List<Incantesimo> incantesimiGiocatore = this.leggiIncantesimi(nomecamp, nomeg);
+            if (incantesimiGiocatore == null)
+                incantesimiGiocatore = new ArrayList<>();
+
             List<Abilita> abilitaList = this.leggiAbilita(nomecamp, nomeg);
+            if (abilitaList == null)
+                abilitaList = new ArrayList<>();
 
             resultSet.close();
             return new Giocatore(nomeg, descrizione, capacitaBorsa, classeArmatura, dado, livello, mana, modCompetenza, nDadi, puntiEsperienza, puntiFerita, puntiStat, altezza, eta, genere, ideali, iniziativa, nomecamp, noteAvventura, sinossi, lingua, portafoglio, classe, razza, caratteristicaList, borsa, equipaggiato, incantesimiGiocatore, abilitaList);
@@ -2158,7 +2178,7 @@ public class DBManager {
         }
     }
 
-    public int leggiModComp(@NotNull String nomecamp, @NotNull String nomeg){
+    public int leggiModComp(@NotNull String nomecamp, @NotNull String nomeg) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
         String[] whereArgs = new String[]{nomecamp, nomeg};
@@ -2174,7 +2194,7 @@ public class DBManager {
             resultSet.close();
             return modCompetenza;
 
-        }catch (SQLiteException sqle) {
+        } catch (SQLiteException sqle) {
             Log.e("LEGGI MODCOMP", "leggi fallita", sqle);
             return 0;
         }

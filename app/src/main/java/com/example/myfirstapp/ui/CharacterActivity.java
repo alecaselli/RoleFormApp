@@ -189,4 +189,11 @@ public class CharacterActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CharacterInfoActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

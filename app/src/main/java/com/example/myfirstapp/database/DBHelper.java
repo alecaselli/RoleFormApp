@@ -313,7 +313,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 "1,6,NULL,'armi: leggere; abilità: correre, arrampicarti; tiri salvezza: destrezza, carisma; ');";
         db.execSQL(q);
         q = "INSERT INTO \"classe\" (\"nomecla\",\"desc\",\"nDadi\",\"dado\",\"descPrivilegi\",\"competenza\") " +
-                "VALUES ('gueriero','sei nato per stare in battaglia, sei in prima linea in ogni combattimento. Pronto a proteggere i tuo compagni e attaccare i tuoi avversari'," +
+                "VALUES ('guerriero','sei nato per stare in battaglia, sei in prima linea in ogni combattimento. Pronto a proteggere i tuo compagni e attaccare i tuoi avversari'," +
+                "1,8,NULL,'armi:da guerra; abilità: schermire, riparare; tiri salvezza: forza, costituzione');";
+        db.execSQL(q);
+        q = "INSERT INTO \"classe\" (\"nomecla\",\"desc\",\"nDadi\",\"dado\",\"descPrivilegi\",\"competenza\") " +
+                "VALUES ('chierico','cose'," +
                 "1,8,NULL,'armi:da guerra; abilità: schermire, riparare; tiri salvezza: forza, costituzione');";
         db.execSQL(q);
 
@@ -389,7 +393,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(q);
 
         q = "INSERT INTO \"giocatore\" (\"nomeCampagna\",\"nomeg\",\"desc\",\"mana\",\"livello\",\"puntiXP\",\"modCompetenza\",\"capacitaBorsa\",\"puntiFerita\",\"classeArmatura\",\"puntiStat\",\"nDadi\",\"dado\",\"iniziativa\",\"eta\",\"altezza\",\"genere\",\"noteAvventura\",\"ideali\",\"sinossi\",\"lingua\",\"nomecla\",\"nomer\",\"nomev\",\"valoreVal\") " +
-                "VALUES ('campagna','ciro','un rozzo nano ',0,1,0,2,0,13,0,0,1,8,'0','130','90','M',NULL,NULL,NULL,NULL,'gueriero','nano','moneta del regno di Ho',0);";
+                "VALUES ('campagna','ciro','un rozzo nano ',0,1,0,2,0,13,0,0,1,8,'0','130','90','M',NULL,NULL,NULL,NULL,'guerriero','nano','moneta del regno di Ho',0);";
         db.execSQL(q);
         q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','carisma',0,0,0,0,0);";
         db.execSQL(q);
@@ -421,7 +425,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(q);
 
         /* HA */
-        q = "INSERT INTO \"hace\" (\"nomecla\",\"nomee\") VALUES ('gueriero','mazza');";
+        q = "INSERT INTO \"hace\" (\"nomecla\",\"nomee\") VALUES ('guerriero','mazza');";
         db.execSQL(q);
         q = "INSERT INTO \"hace\" (\"nomecla\",\"nomee\") VALUES ('ranger','maglia in cuoio');";
         db.execSQL(q);
@@ -429,9 +433,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(q);
         q = "INSERT INTO \"haci\" (\"nomecla\",\"nomei\") VALUES ('ranger','freccia magica');";
         db.execSQL(q);
-        q = "INSERT INTO \"hacp\" (\"nomecla\",\"nomep\") VALUES ('gueriero','leader in prima linea');";
+        q = "INSERT INTO \"hacp\" (\"nomecla\",\"nomep\") VALUES ('guerriero','leader in prima linea');";
         db.execSQL(q);
-        q = "INSERT INTO \"hacp\" (\"nomecla\",\"nomep\") VALUES ('gueriero','maetro della guerra');";
+        q = "INSERT INTO \"hacp\" (\"nomecla\",\"nomep\") VALUES ('guerriero','maetro della guerra');";
         db.execSQL(q);
         q = "INSERT INTO \"hacp\" (\"nomecla\",\"nomep\") VALUES ('ranger','naturalista');";
         db.execSQL(q);
