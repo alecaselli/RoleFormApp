@@ -88,17 +88,6 @@ public class CharacterSpellsActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-
-        /*
-        mAdapter.setOnItemClickListener(new CardGiocatoreAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                openCharacterSpellDetailActivity(position);
-            }
-        });
-
-         */
-
     }
 
     public void setButtons() {
