@@ -1094,25 +1094,25 @@ public class DBManager {
         try {
             if (db.update(TabellaClasse.TBL_NOME, cv, whereClause, whereArgs) > 0) {
 
-                boolean error=false;
+                boolean error = false;
                 this.eliminaHace(aggiornato.getNome(), "classe");
                 for (Equipaggiamento nuovoe : aggiornato.getEquipaggiamentoList()) {
                     if (!this.aggiungiHace(aggiornato.getNome(), nuovoe.getNome())) {
-                        error=true;
+                        error = true;
                     }
                 }
 
                 this.eliminaHaci(aggiornato.getNome(), "classe");
                 for (Incantesimo nuovoi : aggiornato.getIncantesimiClasse()) {
                     if (!this.aggiungiHaci(aggiornato.getNome(), nuovoi.getNome())) {
-                        error=true;
+                        error = true;
                     }
                 }
 
                 this.eliminaHacp(aggiornato.getNome(), "classe");
                 for (Descrivibile nuovoP : aggiornato.getPrivilegiClasse()) {
                     if (!this.aggiungiHacp(aggiornato.getNome(), nuovoP.getNome()))
-                        error=true;
+                        error = true;
                 }
                 return !error;
             }
@@ -1910,29 +1910,56 @@ public class DBManager {
         }
     }
 
-    public List<Equipaggiamento> leggiEquipaggiamenti(boolean borsa, @NotNull String... arg) {
+    public List<Equipaggiamento> leggiEquipaggiamenti(boolean borsa, @NotNull String nomecamp, @NotNull String nomeg) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
-        String table;
-        String whereClause;
-        String[] whereArgs;
-        switch (arg.length) {
-            case 1:
-                table = TabelleHA.TBL_HACE;
-                whereClause = TabellaClasse.FIELD_NOMECLA + "=?";
-                whereArgs = new String[]{arg[0]};
-                break;
-            case 2:
-                int flag = (borsa) ? 1 : 0;
-                table = TabelleHA.TBL_HAGE;
-                whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?" + " AND " + TabelleHA.FIELD_BORSA + "=?";
-                whereArgs = new String[]{arg[0], arg[1], Integer.toString(flag)};
-                break;
-            default:
-                return null;
-        }
+        int flag = (borsa) ? 1 : 0;
+        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?" + " AND " + TabelleHA.FIELD_BORSA + "=?";
+        String[] whereArgs = new String[]{nomecamp, nomeg, Integer.toString(flag)};
 
         try {
-            Cursor resultSet = db.query(table, null, whereClause, whereArgs, null, null, null);
+            Cursor resultSet = db.query(TabelleHA.TBL_HAGE, null, whereClause, whereArgs, null, null, null);
+            if (resultSet == null || resultSet.getCount() == 0) {
+                return null;
+            }
+            resultSet.moveToFirst();
+
+            List<Equipaggiamento> equipaggiamentoList = new ArrayList<Equipaggiamento>();
+            while (!resultSet.isAfterLast()) {
+                String nome = resultSet.getString(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_NOMEE));
+                Arma arma = this.leggiArma(nome);
+                if (arma != null)
+                    equipaggiamentoList.add(arma);
+                else {
+                    Armatura armatura = this.leggiArmatura(nome);
+                    if (armatura != null)
+                        equipaggiamentoList.add(armatura);
+                    else {
+                        Equipaggiamento equi = this.leggiEquipaggiamento(nome);
+                        if (equi != null)
+                            equipaggiamentoList.add(equi);
+                    }
+                }
+
+                resultSet.moveToNext();
+            }
+
+            resultSet.close();
+            return equipaggiamentoList;
+        } catch (
+                SQLiteException sqle) {
+            Log.e("LEGGI EQUILIST", "leggi fallita", sqle);
+            return null;
+        }
+
+    }
+
+    public List<Equipaggiamento> leggiEquipaggiamenti(@NotNull String nomecla) {
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        String whereClause = TabellaClasse.FIELD_NOMECLA + "=?";
+        String[] whereArgs = new String[]{nomecla};
+
+        try {
+            Cursor resultSet = db.query(TabelleHA.TBL_HACE, null, whereClause, whereArgs, null, null, null);
             if (resultSet == null || resultSet.getCount() == 0) {
                 return null;
             }
@@ -1986,7 +2013,7 @@ public class DBManager {
             descrizione.append(resultSet.getString(resultSet.getColumnIndex(TabellaClasse.FIELD_DESCPRIVILEGI)));
             StringBuffer competenza = new StringBuffer();
             descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_COMPETENZA)));
-            List<Equipaggiamento> equipaggiamentoList = this.leggiEquipaggiamenti(true, nomecla);
+            List<Equipaggiamento> equipaggiamentoList = this.leggiEquipaggiamenti(nomecla);
             List<Descrivibile> privilegiClasse = this.leggiPrivilegi(nomecla, "classe");
             List<Incantesimo> incantesimiClasse = this.leggiIncantesimi(nomecla);
 

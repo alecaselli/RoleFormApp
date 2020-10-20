@@ -105,8 +105,8 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
 
         if (!db.aggiungiGiocatore(nuovoGiocatore))
             Toast.makeText(this, "inserimeto fallito", Toast.LENGTH_LONG).show();
-
-        this.openCharacterActivity();
+        else
+            this.openCharacterActivity();
     }
 
     public void openCharacterActivity() {
@@ -116,11 +116,11 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
         startActivity(intent);
         finish();
     }
-/*
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
-    }*/
+    }
 }

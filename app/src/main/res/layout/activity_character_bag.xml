@@ -6,4 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".ui.CharacterBagActivity">
 
+    <TextView
+        android:id="@+id/bag_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="18sp"
+        android:text="@string/borsa_vuota"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bag_recyclerView"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bag_textView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

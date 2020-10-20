@@ -66,5 +66,6 @@
     <string name="skill_name">Skill name</string>
     <string name="mod_comp">mod comp:</string>
     <string name="_18">[18]</string>
+    <string name="borsa_vuota">borsa vuota</string>
 
 </resources>

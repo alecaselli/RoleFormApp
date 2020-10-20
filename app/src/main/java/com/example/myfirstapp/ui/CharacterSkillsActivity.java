@@ -7,31 +7,26 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.adapter.CardAbilitaAdapter;
+import com.example.myfirstapp.adapter.CardBoolAdapter;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.domain.Abilita;
-import com.example.myfirstapp.domain.Giocatore;
-import com.example.myfirstapp.utilities.CardAbilita;
+import com.example.myfirstapp.utilities.CardBool;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CharacterSkillsActivity extends AppCompatActivity {
 
-    private List<RecyclerView> skillsRecyclerViews;
-    private List<CardView> skillsCardViews;
-
     private TextView txt;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private CardAbilitaAdapter mAdapter;
+    private CardBoolAdapter mAdapter;
 
-    private ArrayList<CardAbilita> cardAbilitaList;
+    private ArrayList<CardBool> cardBoolList;
     private String nomecamp;
     private String nomeg;
     private DBManager dbManager;
@@ -57,11 +52,10 @@ public class CharacterSkillsActivity extends AppCompatActivity {
     public void createCardAbilitaList() {
         List<Abilita> abilitaList = dbManager.leggiAbilita(nomecamp, nomeg);
 
-        cardAbilitaList = new ArrayList<>();
-        if (abilitaList == null) return;
-        for (Abilita abilita : abilitaList) {
-            cardAbilitaList.add(new CardAbilita(abilita.getNome(), abilita.isCompetenza()));
-        }
+        cardBoolList = new ArrayList<>();
+        if (abilitaList != null)
+            for (Abilita abilita : abilitaList)
+                cardBoolList.add(new CardBool(abilita.getNome(), abilita.isCompetenza()));
     }
 
     public void setView() {
@@ -75,22 +69,21 @@ public class CharacterSkillsActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new CardAbilitaAdapter(cardAbilitaList);
+        mAdapter = new CardBoolAdapter(cardBoolList);
         mLayoutManager = new LinearLayoutManager((this));
-        mAdapter = new CardAbilitaAdapter(cardAbilitaList);
+        mAdapter = new CardBoolAdapter(cardBoolList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(new CardAbilitaAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new CardBoolAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                //entro nell'activity coi dettagli dell'abilità
                 openSkillActivity(position);
             }
 
             @Override
-            public void onCompetenzaClick(int position) {
+            public void onBoolClick(int position) {
                 changeCompetenza(position);
             }
         });
@@ -98,11 +91,14 @@ public class CharacterSkillsActivity extends AppCompatActivity {
     }
 
     public void changeCompetenza(int position) {
-        cardAbilitaList.get(position).swapCompetenza();
+        cardBoolList.get(position).swapBool();
         mAdapter.notifyItemChanged(position);
 
-        if (!dbManager.aggiornaHaga(nomecamp, nomeg, cardAbilitaList.get(position).getNomeabilita(), cardAbilitaList.get(position).getCompetenza()))
+        if (!dbManager.aggiornaHaga(nomecamp, nomeg, cardBoolList.get(position).getNome(), cardBoolList.get(position).getaBoolean())) {
             Toast.makeText(this, "aggiornamento fallito", Toast.LENGTH_LONG).show();
+            cardBoolList.get(position).swapBool();
+            mAdapter.notifyItemChanged(position);
+        }
 
     }
 

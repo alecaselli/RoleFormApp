@@ -182,6 +182,8 @@ public class CharacterActivity extends AppCompatActivity {
 
     public void openCharacterBag(View view) {
         Intent intent = new Intent(this, CharacterBagActivity.class);
+        intent.putExtra("nomecamp", giocatore.getNomeCampagna());
+        intent.putExtra("nomeg", giocatore.getNome());
         startActivity(intent);
     }
 
