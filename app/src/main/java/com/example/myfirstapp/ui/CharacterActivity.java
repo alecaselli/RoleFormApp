@@ -1,10 +1,15 @@
 package com.example.myfirstapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.myfirstapp.R;
@@ -20,6 +25,13 @@ public class CharacterActivity extends AppCompatActivity {
     private Giocatore giocatore;
     private TextView txt;
 
+    private Button currencyButton;
+
+    private View currencyBaseView;
+    private View currencyModView;
+
+    private CardView currencyCard;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +39,31 @@ public class CharacterActivity extends AppCompatActivity {
 
         this.estraiGiocatore();
         this.setView();
+        this.setButton();
+    }
+
+    public void setButton() {
+        currencyButton = findViewById(R.id.character_currency_button);
+        currencyBaseView = findViewById(R.id.character_currency_base);
+        currencyModView = findViewById(R.id.character_currency_mod);
+        currencyCard = findViewById(R.id.character_currency);
+
+        currencyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (currencyBaseView.getVisibility() == View.VISIBLE) {
+                    TransitionManager.beginDelayedTransition((ViewGroup) currencyCard.getParent().getParent(), new AutoTransition());
+                    currencyBaseView.setVisibility(View.GONE);
+                    currencyModView.setVisibility(View.VISIBLE);
+                    currencyButton.setBackgroundResource(R.drawable.ic_round_done);
+                } else {
+                    TransitionManager.beginDelayedTransition((ViewGroup) currencyCard.getParent().getParent(), new AutoTransition());
+                    currencyBaseView.setVisibility(View.VISIBLE);
+                    currencyModView.setVisibility(View.GONE);
+                    currencyButton.setBackgroundResource(R.drawable.ic_round_change_history);
+                }
+            }
+        });
     }
 
     public void estraiGiocatore() {
