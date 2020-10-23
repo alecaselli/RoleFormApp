@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.CharacterBagActivity">
+
+    <RelativeLayout
+        android:id="@+id/bag_first_relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/bag_armor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/bag_shield"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bag_armor"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/bag_weapon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bag_shield"
+            android:text="TextView" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bag_second_relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bag_first_relativelayout">
+
+        <TextView
+            android:id="@+id/bag_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="18sp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/borsa_vuota" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bag_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bag_third_relativelayout"
+        android:layout_below="@+id/bag_first_relativelayout"
+        android:background="@color/whitesmoke"
+        android:paddingHorizontal="12dp"
+        android:paddingTop="6dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/bag_third_relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="4dp"
+        android:background="@color/whitesmoke">
+
+        <Spinner
+            android:id="@+id/bag_add_item_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_toStartOf="@+id/create_button"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/rounded_spinner"
+            android:paddingHorizontal="15dp" />
+
+        <Button
+            android:id="@+id/create_button"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:background="?android:selectableItemBackground"
+            android:fontFamily="sans-serif"
+            android:onClick="openCreateNewItem"
+            android:text="@string/crea_nuovo"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -203,9 +203,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_marginHorizontal="20dp"
                 android:layout_toStartOf="@id/center"
-                android:layout_marginHorizontal="20dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/razza"
@@ -228,9 +228,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_marginHorizontal="20dp"
                 android:layout_toEndOf="@id/center"
-                android:layout_marginHorizontal="20dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/classe"
@@ -325,26 +325,26 @@
     </LinearLayout>
 
 
-        <androidx.cardview.widget.CardView
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="120dp"
+        app:cardCornerRadius="15dp">
+
+        <Button
+            android:id="@+id/create_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="120dp"
-            app:cardCornerRadius="15dp">
+            android:background="?android:selectableItemBackground"
+            android:fontFamily="sans-serif"
+            android:onClick="createNewCharacter"
+            android:text="@string/crea"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/create_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?android:selectableItemBackground"
-                android:fontFamily="sans-serif"
-                android:onClick="createNewCharacter"
-                android:text="@string/crea"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"/>
-
-        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

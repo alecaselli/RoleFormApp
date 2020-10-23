@@ -67,5 +67,7 @@
     <string name="mod_comp">mod comp:</string>
     <string name="_18">[18]</string>
     <string name="borsa_vuota">borsa vuota</string>
+    <string name="add">add</string>
+    <string name="crea_nuovo">crea nuovo</string>
 
 </resources>

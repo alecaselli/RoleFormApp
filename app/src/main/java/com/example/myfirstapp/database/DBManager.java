@@ -1910,6 +1910,46 @@ public class DBManager {
         }
     }
 
+    public List<Equipaggiamento> leggiEquipaggiamenti() {
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+
+        try {
+            Cursor resultSet = db.query(TabellaEquipaggiamento.TBL_NOME, null, null, null, null, null, null);
+            if (resultSet == null || resultSet.getCount() == 0) {
+                return null;
+            }
+            resultSet.moveToFirst();
+
+            List<Equipaggiamento> equipaggiamentoList = new ArrayList<Equipaggiamento>();
+            while (!resultSet.isAfterLast()) {
+                String nome = resultSet.getString(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_NOMEE));
+                Arma arma = this.leggiArma(nome);
+                if (arma != null)
+                    equipaggiamentoList.add(arma);
+                else {
+                    Armatura armatura = this.leggiArmatura(nome);
+                    if (armatura != null)
+                        equipaggiamentoList.add(armatura);
+                    else {
+                        Equipaggiamento equi = this.leggiEquipaggiamento(nome);
+                        if (equi != null)
+                            equipaggiamentoList.add(equi);
+                    }
+                }
+
+                resultSet.moveToNext();
+            }
+
+            resultSet.close();
+            return equipaggiamentoList;
+        } catch (
+                SQLiteException sqle) {
+            Log.e("LEGGI EQUILIST", "leggi fallita", sqle);
+            return null;
+        }
+
+    }
+
     public List<Equipaggiamento> leggiEquipaggiamenti(boolean borsa, @NotNull String nomecamp, @NotNull String nomeg) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         int flag = (borsa) ? 1 : 0;

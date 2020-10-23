@@ -14,7 +14,7 @@
         <activity android:name=".ui.CharacterCharacterActivity" />
         <activity android:name=".ui.EditActivity" />
         <activity android:name=".ui.CharacterBagActivity" />
-        <activity android:name=".ui.CreateNewItem" />
+        <activity android:name=".ui.CreateNewItemActivity" />
         <activity android:name=".ui.CreateNewSpell" />
         <activity android:name=".ui.CharacterStatsActivity" />
         <activity android:name=".ui.CreateNewCharacterActivity" />
