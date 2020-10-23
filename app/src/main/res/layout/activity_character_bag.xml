@@ -6,20 +6,47 @@
     android:layout_height="match_parent"
     tools:context=".ui.CharacterBagActivity">
 
+
     <TextView
-        android:id="@+id/bag_textView"
+        android:id="@+id/bag_armor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/bag_shield"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bag_armor" />
+
+    <TextView
+        android:id="@+id/bag_weapon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bag_shield" />
+
+    <TextView
+        android:id="@+id/bag_empty"
         android:layout_width="wrap_content"
         android:layout_height="18sp"
         android:text="@string/borsa_vuota"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/bag_weapon" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bag_recyclerView"
         android:layout_width="409dp"
         android:layout_height="729dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bag_textView" />
+        app:layout_constraintTop_toTopOf="@+id/bag_empty" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

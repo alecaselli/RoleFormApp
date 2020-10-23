@@ -13,7 +13,7 @@ public class Equipaggiamento extends Descrivibile {
             "attrezzo",
             "equipaggiamento da avventura",
             "scudo"));
-    private static final List<String> tipobase = new ArrayList<String>(Arrays.asList("arma","armatura","scudo"));
+    private static final List<String> tipobase = new ArrayList<String>(Arrays.asList("arma","armatura","scudo","oggetto"));
     private int costo;
     private int peso;
     private int capacita;

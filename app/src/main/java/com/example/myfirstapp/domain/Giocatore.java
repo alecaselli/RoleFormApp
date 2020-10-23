@@ -322,9 +322,19 @@ public class Giocatore extends Descrivibile {
     }
 
     public Equipaggiamento getEquipaggiato(String tipo) {
-        if (equipaggiato != null) {
-            for (Equipaggiamento equipaggiamento : equipaggiato) {
+        if (this.equipaggiato != null) {
+            for (Equipaggiamento equipaggiamento : this.equipaggiato) {
                 if (equipaggiamento.getTipo().equals(tipo))
+                    return equipaggiamento;
+            }
+        }
+        return null;
+    }
+
+    public Equipaggiamento getBorsa(String nomeo) {
+        if (this.borsa != null) {
+            for (Equipaggiamento equipaggiamento : this.borsa) {
+                if (equipaggiamento.getNome().equals(nomeo))
                     return equipaggiamento;
             }
         }
@@ -364,9 +374,11 @@ public class Giocatore extends Descrivibile {
 
     /* serie di metodi per aggiungere/eliminare elementi da liste */
     public void aggiungiBorsa(List<Equipaggiamento> nuovo) {
-        if (borsa == null)
-            borsa = new ArrayList<Equipaggiamento>();
         this.borsa.addAll(nuovo);
+    }
+
+    public void aggiungiBorsa(Equipaggiamento nuovo) {
+        this.borsa.add(nuovo);
     }
 
     public void eliminaBorsa(@NotNull List<Equipaggiamento> togli) {
@@ -374,10 +386,16 @@ public class Giocatore extends Descrivibile {
             this.borsa.remove(i);
     }
 
+    public void eliminaBorsa(@NotNull Equipaggiamento togli) {
+        this.borsa.remove(togli);
+    }
+
     public void aggiungiEquipaggiato(List<Equipaggiamento> nuovo) {
-        if (equipaggiato == null)
-            equipaggiato = new ArrayList<Equipaggiamento>();
         this.equipaggiato.addAll(nuovo);
+    }
+
+    public void aggiungiEquipaggiato(Equipaggiamento nuovo) {
+        this.equipaggiato.add(nuovo);
     }
 
     public void eliminaEquipaggiato(@NotNull List<Equipaggiamento> togli) {
@@ -385,13 +403,25 @@ public class Giocatore extends Descrivibile {
             this.equipaggiato.remove(i);
     }
 
+    public void eliminaEquipaggiato(@NotNull Equipaggiamento togli) {
+        this.equipaggiato.remove(togli);
+    }
+
     public void aggiungiIncantesimo(List<Incantesimo> nuovo) {
         this.incantesimiGiocatore.addAll(nuovo);
+    }
+
+    public void aggiungiIncantesimo(Incantesimo nuovo) {
+        this.incantesimiGiocatore.add(nuovo);
     }
 
     public void eliminaIncantesimo(@NotNull List<Incantesimo> togli) {
         for (Incantesimo i : togli)
             this.incantesimiGiocatore.remove(i);
+    }
+
+    public void eliminaIncantesimo(@NotNull Incantesimo togli) {
+        this.incantesimiGiocatore.remove(togli);
     }
 
     /* serie di metodi necessari alla creazione di un nuovo PG */
