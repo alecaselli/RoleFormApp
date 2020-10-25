@@ -329,7 +329,25 @@ public class DBHelper extends SQLiteOpenHelper {
                 "VALUES ('mazza',NULL,70,NULL,0,'arma');";
         db.execSQL(q);
         q = "INSERT INTO \"equipaggiamento\" (\"nomee\",\"desc\",\"costo\",\"peso\",\"capacita\",\"tipo\") " +
-                "VALUES ('razione','razione di cibo secco equivalente a un pasto',5,NULL,0,'equipaggiamento da avventura');";
+                "VALUES ('razione','razione di cibo secco equivalente a un pasto',5,NULL,0,'oggetto');";
+        db.execSQL(q);
+        q = "INSERT INTO \"equipaggiamento\" (\"nomee\",\"desc\",\"costo\",\"peso\",\"capacita\",\"tipo\") " +
+                "VALUES ('torcia',NULL,3,NULL,0,'oggetto');";
+        db.execSQL(q);
+        q = "INSERT INTO \"equipaggiamento\" (\"nomee\",\"desc\",\"costo\",\"peso\",\"capacita\",\"tipo\") " +
+                "VALUES ('spada',NULL,2,NULL,0,'arma');";
+        db.execSQL(q);
+        q = "INSERT INTO \"equipaggiamento\" (\"nomee\",\"desc\",\"costo\",\"peso\",\"capacita\",\"tipo\") " +
+                "VALUES ('armatura di metallo',NULL,34,NULL,0,'armatura');";
+        db.execSQL(q);
+        q = "INSERT INTO \"equipaggiamento\" (\"nomee\",\"desc\",\"costo\",\"peso\",\"capacita\",\"tipo\") " +
+                "VALUES ('scudo di legno',NULL,5,NULL,0,'scudo');";
+        db.execSQL(q);
+        q = "INSERT INTO \"equipaggiamento\" (\"nomee\",\"desc\",\"costo\",\"peso\",\"capacita\",\"tipo\") " +
+                "VALUES ('scudo hylia',NULL,5,NULL,0,'scudo');";
+        db.execSQL(q);
+        q = "INSERT INTO \"equipaggiamento\" (\"nomee\",\"desc\",\"costo\",\"peso\",\"capacita\",\"tipo\") " +
+                "VALUES ('bacchetta di fuoco',NULL,9,NULL,0,'arma');";
         db.execSQL(q);
 
         /* caratteristica */
@@ -350,8 +368,23 @@ public class DBHelper extends SQLiteOpenHelper {
         q = "INSERT INTO \"arma\" (\"nomee\",\"danno\",\"proprieta\") " +
                 "VALUES ('mazza','1xd4 + modificatore forza','leggera');";
         db.execSQL(q);
+        q = "INSERT INTO \"arma\" (\"nomee\",\"danno\",\"proprieta\") " +
+                "VALUES ('bacchetta di fuoco','1xd5+mod dest','cose');";
+        db.execSQL(q);
+        q = "INSERT INTO \"arma\" (\"nomee\",\"danno\",\"proprieta\") " +
+                "VALUES ('spada','prove','cose');";
+        db.execSQL(q);
         q = "INSERT INTO \"armatura\" (\"nomee\",\"nonFurtiva\",\"modificatoreCa\",\"tempoTogliere\",\"tempoIndossare\",\"forzaNecessaria\") " +
                 "VALUES ('maglia in cuoio',0,2,'4sec','3sec',NULL);";
+        db.execSQL(q);
+        q = "INSERT INTO \"armatura\" (\"nomee\",\"nonFurtiva\",\"modificatoreCa\",\"tempoTogliere\",\"tempoIndossare\",\"forzaNecessaria\") " +
+                "VALUES ('armatura di metallo',1,3,'8sec','10sec',NULL);";
+        db.execSQL(q);
+        q = "INSERT INTO \"armatura\" (\"nomee\",\"nonFurtiva\",\"modificatoreCa\",\"tempoTogliere\",\"tempoIndossare\",\"forzaNecessaria\") " +
+                "VALUES ('scudo di legno',0,1,'0','0',NULL);";
+        db.execSQL(q);
+        q = "INSERT INTO \"armatura\" (\"nomee\",\"nonFurtiva\",\"modificatoreCa\",\"tempoTogliere\",\"tempoIndossare\",\"forzaNecessaria\") " +
+                "VALUES ('scudo hylia',0,2,'0','0',NULL);";
         db.execSQL(q);
 
         /* nomi valute */

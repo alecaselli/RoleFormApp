@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,6 +38,7 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
     private String nomeg;
     private Giocatore giocatore;
     private DBManager dbManager;
+    private final String AGGIUNGI = "aggiungi";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +65,7 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         if (giocatore.getBorsa() != null)
             for (Equipaggiamento equipaggiamento : giocatore.getBorsa())
                 cardBoolList.add(new CardBool(equipaggiamento.getNome(), false));
-        /*if (giocatore.getEquipaggiato() != null)
-            for (Equipaggiamento equipaggiamento : giocatore.getEquipaggiato())
-                cardBoolList.add(new CardBool(equipaggiamento.getNome(), true));*/
-        if (/*giocatore.getEquipaggiato().size() != 0 ||*/ giocatore.getBorsa().size() != 0) {
+        if (giocatore.getBorsa().size() != 0) {
             text = (TextView) findViewById(R.id.bag_empty);
             text.setText("");
         }
@@ -122,6 +121,7 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
     public void setSpinner() {
         List<String> equipaggiamentoList = dbManager.leggiPK(TabellaEquipaggiamento.TBL_NOME, TabellaEquipaggiamento.FIELD_NOMEE);
         ArrayAdapter<String> ItemSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_item);
+        ItemSpinnerAdapter.add(AGGIUNGI);
         ItemSpinnerAdapter.addAll(equipaggiamentoList);
         ItemSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_custom_item);
         itemSpinner = findViewById(R.id.bag_add_item_spinner);
@@ -143,16 +143,18 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
                 cardBoolList.get(position).swapBool();
 
                 Equipaggiamento disequipaggiare = giocatore.getEquipaggiato(equipaggiare.getTipo());
-                giocatore.eliminaEquipaggiato(disequipaggiare);
-                giocatore.aggiungiBorsa(disequipaggiare);
+                if (disequipaggiare != null) {
+                    giocatore.eliminaEquipaggiato(disequipaggiare);
+                    giocatore.aggiungiBorsa(disequipaggiare);
+                    cardBoolList.add(new CardBool(disequipaggiare.getNome(), false));
+                    mAdapter.notifyItemInserted(cardBoolList.size() - 1);
+                }
 
                 giocatore.eliminaBorsa(equipaggiare);
                 giocatore.aggiungiEquipaggiato(equipaggiare);
-
                 cardBoolList.remove(position);
-                cardBoolList.add(new CardBool(disequipaggiare.getNome(), false));
+
                 mAdapter.notifyItemRemoved(position);
-                mAdapter.notifyItemInserted(cardBoolList.size()-1);
                 this.setView();
             } else {
                 Toast.makeText(this, "equipaggiamento fallito", Toast.LENGTH_LONG).show();
@@ -164,6 +166,7 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
     public void addItem() {
         String nomee = itemSpinner.getSelectedItem().toString();
         Equipaggiamento aggiunto = dbManager.leggiEquipaggiamento(nomee);
+        if (nomee.equals(AGGIUNGI)) return;
         switch (aggiunto.getTipo()) {
             case "arma":
                 aggiunto = dbManager.leggiArma(nomee);
