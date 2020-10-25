@@ -1,10 +1,10 @@
 package com.example.myfirstapp.utilities;
 
-public class CardBool {
+public class CardAbility {
     private String nome;
     private Boolean aBoolean;
 
-    public CardBool(String nome, Boolean aBoolean) {
+    public CardAbility(String nome, Boolean aBoolean) {
         this.nome = nome;
         this.aBoolean = aBoolean;
     }

@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,12 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.adapter.CardBoolAdapter;
+import com.example.myfirstapp.adapter.CardAbilityAdapter;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.database.TabellaEquipaggiamento;
 import com.example.myfirstapp.domain.Equipaggiamento;
 import com.example.myfirstapp.domain.Giocatore;
-import com.example.myfirstapp.utilities.CardBool;
+import com.example.myfirstapp.utilities.CardAbility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +29,10 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
     private TextView text;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private CardBoolAdapter mAdapter;
+    private CardAbilityAdapter mAdapter;
     private Spinner itemSpinner;
 
-    private ArrayList<CardBool> cardBoolList;
+    private ArrayList<CardAbility> cardAbilityList;
     private String nomecamp;
     private String nomeg;
     private Giocatore giocatore;
@@ -61,10 +60,10 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
     }
 
     public void createCardBorsaList() {
-        cardBoolList = new ArrayList<>();
+        cardAbilityList = new ArrayList<>();
         if (giocatore.getBorsa() != null)
             for (Equipaggiamento equipaggiamento : giocatore.getBorsa())
-                cardBoolList.add(new CardBool(equipaggiamento.getNome(), false));
+                cardAbilityList.add(new CardAbility(equipaggiamento.getNome(), false));
         if (giocatore.getBorsa().size() != 0) {
             text = (TextView) findViewById(R.id.bag_empty);
             text.setText("");
@@ -97,14 +96,14 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new CardBoolAdapter(cardBoolList);
+        mAdapter = new CardAbilityAdapter(cardAbilityList);
         mLayoutManager = new LinearLayoutManager((this));
-        mAdapter = new CardBoolAdapter(cardBoolList);
+        mAdapter = new CardAbilityAdapter(cardAbilityList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(new CardBoolAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new CardAbilityAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 openEquipment(position);
@@ -136,31 +135,50 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
     }
 
     public void changeEquipaggiamento(int position) {
-
-        Equipaggiamento equipaggiare = giocatore.getBorsa(cardBoolList.get(position).getNome());
+        Equipaggiamento equipaggiare = giocatore.getBorsa(cardAbilityList.get(position).getNome());
         if (!equipaggiare.getTipo().equals("oggetto")) {
-            if (dbManager.aggiornaHage(nomecamp, nomeg, cardBoolList.get(position).getNome(), false)) {
-                cardBoolList.get(position).swapBool();
+            if (dbManager.aggiornaHage(nomecamp, nomeg, cardAbilityList.get(position).getNome(), false)) {
+                cardAbilityList.get(position).swapBool();
 
                 Equipaggiamento disequipaggiare = giocatore.getEquipaggiato(equipaggiare.getTipo());
                 if (disequipaggiare != null) {
                     giocatore.eliminaEquipaggiato(disequipaggiare);
                     giocatore.aggiungiBorsa(disequipaggiare);
-                    cardBoolList.add(new CardBool(disequipaggiare.getNome(), false));
-                    mAdapter.notifyItemInserted(cardBoolList.size() - 1);
+                    cardAbilityList.add(new CardAbility(disequipaggiare.getNome(), false));
+                    mAdapter.notifyItemInserted(cardAbilityList.size() - 1);
                 }
 
                 giocatore.eliminaBorsa(equipaggiare);
                 giocatore.aggiungiEquipaggiato(equipaggiare);
-                cardBoolList.remove(position);
-
+                cardAbilityList.remove(position);
                 mAdapter.notifyItemRemoved(position);
                 this.setView();
-            } else {
-                Toast.makeText(this, "equipaggiamento fallito", Toast.LENGTH_LONG).show();
-            }
-
+            } else Toast.makeText(this, "equipaggiamento fallito", Toast.LENGTH_LONG).show();
         } else Toast.makeText(this, "oggetto non equipaggiabile", Toast.LENGTH_LONG).show();
+    }
+
+    public void removeItem(int position) {
+        Equipaggiamento rimuovere = giocatore.getBorsa(cardAbilityList.get(position).getNome());
+        if (dbManager.eliminaHage(nomecamp, nomeg, rimuovere.getNome())) {
+            cardAbilityList.remove(position);
+            mAdapter.notifyItemRemoved(position);
+        } else Toast.makeText(this, "eliminazione fallito", Toast.LENGTH_LONG).show();
+    }
+
+    public void openCreateNewItem(View view) {
+        Intent intent = new Intent(this, CreateNewItemActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        this.addItem();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     public void addItem() {
@@ -181,27 +199,9 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
 
         if (dbManager.aggiungiHage(nomecamp, nomeg, nomee, true)) {
             giocatore.aggiungiBorsa(aggiunto);
-            cardBoolList.add(new CardBool(aggiunto.getNome(), false));
-            mAdapter.notifyItemInserted(cardBoolList.size() - 1);
-        } else {
-            Toast.makeText(this, "aggiunta fallita", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void openCreateNewItem(View view) {
-        Intent intent = new Intent(this, CreateNewItemActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        this.addItem();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
+            cardAbilityList.add(new CardAbility(aggiunto.getNome(), false));
+            mAdapter.notifyItemInserted(cardAbilityList.size() - 1);
+        } else Toast.makeText(this, "aggiunta fallita", Toast.LENGTH_LONG).show();
     }
 
     @Override
