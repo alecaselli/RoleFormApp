@@ -1335,7 +1335,7 @@ public class DBManager {
         }
     }
 
-    public void aggiornaNoteVarie(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String ideali, @NotNull String desc, @NotNull String sinossi, @NotNull String generali) {
+    public boolean aggiornaNoteVarie(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String ideali, @NotNull String desc, @NotNull String sinossi, @NotNull String generali) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? ";
@@ -1348,9 +1348,10 @@ public class DBManager {
 
 
         try {
-            db.update(TabellaGiocatore.TBL_NOME, cv, whereClause, whereArgs);
+            return db.update(TabellaGiocatore.TBL_NOME, cv, whereClause, whereArgs) >= 0;
         } catch (SQLiteException sqle) {
             Log.e("AGGIORNA NOTE VARIE", "aggiornamento fallito", sqle);
+            return false;
         }
 
 

@@ -12,18 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.database.DBManager;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 
 public class CharacterNoteActivity extends AppCompatActivity {
@@ -48,7 +41,7 @@ public class CharacterNoteActivity extends AppCompatActivity {
     private CardView synopsisCardView;
     private CardView generalCardView;
 
-    private DBManager db;
+    private DBManager dbManager;
     private String nomecamp;
     private String nomeg;
     private List<String> notelist;
@@ -58,7 +51,6 @@ public class CharacterNoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_note);
 
-        db = new DBManager(this);
         this.estraiNote();
         this.setView();
         this.setButton();
@@ -66,12 +58,13 @@ public class CharacterNoteActivity extends AppCompatActivity {
     }
 
     public void estraiNote() {
+        dbManager = new DBManager(this);
         Intent intent = getIntent();
         nomecamp = intent.getStringExtra("nomecamp");
         nomeg = intent.getStringExtra("nomeg");
         assert nomeg != null;
         assert nomecamp != null;
-        notelist = db.leggiNotevarie(nomecamp, nomeg);
+        notelist = dbManager.leggiNotevarie(nomecamp, nomeg);
     }
 
     public void setView() {
@@ -101,8 +94,11 @@ public class CharacterNoteActivity extends AppCompatActivity {
         String sinossi = sinossiEditText.getText().toString();
         String generali = generaliEditText.getText().toString();
 
-        db.aggiornaNoteVarie(nomecamp, nomeg, ideali, descrizione, sinossi, generali);
-        Toast.makeText(this, "Note salvate", Toast.LENGTH_SHORT).show();
+        if (dbManager.aggiornaNoteVarie(nomecamp, nomeg, ideali, descrizione, sinossi, generali))
+            Toast.makeText(this, "note salvate", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(this, "salvataggio fallito", Toast.LENGTH_SHORT).show();
+
     }
 
     public void setButton() {
@@ -188,5 +184,14 @@ public class CharacterNoteActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, CharacterActivity.class);
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
+        startActivity(intent);
+        finish();
     }
 }

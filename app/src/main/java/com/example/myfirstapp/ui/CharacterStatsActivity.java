@@ -11,6 +11,8 @@ import com.example.myfirstapp.domain.Giocatore;
 
 public class CharacterStatsActivity extends AppCompatActivity {
 
+    private String nomecamp;
+    private String nomeg;
     private Giocatore giocatore;
 
     @Override
@@ -31,5 +33,13 @@ public class CharacterStatsActivity extends AppCompatActivity {
         giocatore = db.leggiGiocatore(nomecamp, nomeg);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, CharacterActivity.class);
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
+        startActivity(intent);
+        finish();
+    }
 
 }

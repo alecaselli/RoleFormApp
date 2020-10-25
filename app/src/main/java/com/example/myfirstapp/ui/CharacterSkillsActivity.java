@@ -108,4 +108,12 @@ public class CharacterSkillsActivity extends AppCompatActivity {
         startActivity(intent);*/
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, CharacterActivity.class);
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
+        startActivity(intent);
+        finish();
+    }
 }

@@ -2,12 +2,14 @@ package com.example.myfirstapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.database.DBManager;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -25,9 +27,13 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
-
+        DBManager dbManager = new DBManager(this);
+        dbManager.dropDB(this);
     }
 
-
-
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

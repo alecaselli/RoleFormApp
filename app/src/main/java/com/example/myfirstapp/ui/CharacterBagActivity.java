@@ -128,10 +128,14 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         itemSpinner.setOnItemSelectedListener(this);
     }
 
-    public void openEquipment(int position) {
-        /*Intent intent = new Intent(this, EquipmentActivity.class);
-        intent.putExtra("nomee", cardBoolList.get(position).getNome());
-        startActivity(intent);*/
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        this.addItem();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     public void changeEquipaggiamento(int position) {
@@ -165,26 +169,10 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         } else Toast.makeText(this, "eliminazione fallito", Toast.LENGTH_LONG).show();
     }
 
-    public void openCreateNewItem(View view) {
-        Intent intent = new Intent(this, CreateNewItemActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        this.addItem();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
     public void addItem() {
         String nomee = itemSpinner.getSelectedItem().toString();
-        Equipaggiamento aggiunto = dbManager.leggiEquipaggiamento(nomee);
         if (nomee.equals(AGGIUNGI)) return;
+        Equipaggiamento aggiunto = dbManager.leggiEquipaggiamento(nomee);
         switch (aggiunto.getTipo()) {
             case "arma":
                 aggiunto = dbManager.leggiArma(nomee);
@@ -199,9 +187,25 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
 
         if (dbManager.aggiungiHage(nomecamp, nomeg, nomee, true)) {
             giocatore.aggiungiBorsa(aggiunto);
-            cardAbilityList.add(new CardAbility(aggiunto.getNome(), false));
-            mAdapter.notifyItemInserted(cardAbilityList.size() - 1);
+            CardAbility nuovo = new CardAbility(aggiunto.getNome(), false);
+            cardAbilityList.add(0,nuovo);
+            mAdapter.notifyItemInserted(0);
         } else Toast.makeText(this, "aggiunta fallita", Toast.LENGTH_LONG).show();
+    }
+
+    public void openEquipment(int position) {
+        /*Intent intent = new Intent(this, EquipmentActivity.class);
+        intent.putExtra("nomee", cardBoolList.get(position).getNome());
+        startActivity(intent);
+        finish();*/
+    }
+
+    public void openCreateNewItem(View view) {
+        Intent intent = new Intent(this, CreateNewItemActivity.class);
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -213,18 +217,3 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         finish();
     }
 }
-
-
-
-/*giocatore.getBorsa(cardBoolList.get(position).getNome())
-        giocatore.eliminaEquipaggiato(new ArrayList<Equipaggiamento>(Arrays.asList()));
-
-
-        cardBoolList.get(position).swapBool();
-        mAdapter.notifyItemChanged(position);
-
-        if (!dbManager.aggiornaHage(nomecamp, nomeg, cardBoolList.get(position).getNome(), cardBoolList.get(position).getaBoolean())) {
-            Toast.makeText(this, "aggiornamento fallito", Toast.LENGTH_LONG).show();
-            cardBoolList.get(position).swapBool();
-            mAdapter.notifyItemChanged(position);
-        }*/

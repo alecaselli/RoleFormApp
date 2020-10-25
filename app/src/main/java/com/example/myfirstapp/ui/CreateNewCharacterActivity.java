@@ -30,7 +30,7 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
 
     private EditText editText;
     Giocatore nuovoGiocatore;
-    private DBManager db;
+    private DBManager dbManager;
     private final String VALUTADND = "moneta del regno di Ho";
 
     private Spinner raceSpinner;
@@ -44,10 +44,10 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
         this.setSpinner();
     }
 
-    public void setSpinner(){
-        db = new DBManager(this);
+    public void setSpinner() {
+        dbManager = new DBManager(this);
 
-        List<String> raceList = db.leggiPK(TabellaRazza.TBL_NOME, TabellaRazza.FIELD_NOMER);
+        List<String> raceList = dbManager.leggiPK(TabellaRazza.TBL_NOME, TabellaRazza.FIELD_NOMER);
         ArrayAdapter<String> raceSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_item);
         raceSpinnerAdapter.addAll(raceList);
         raceSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_custom_item);
@@ -56,7 +56,7 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
         raceSpinner.setOnItemSelectedListener(this);
 
 
-        List<String> classList = db.leggiPK(TabellaClasse.TBL_NOME, TabellaClasse.FIELD_NOMECLA);
+        List<String> classList = dbManager.leggiPK(TabellaClasse.TBL_NOME, TabellaClasse.FIELD_NOMECLA);
         ArrayAdapter<String> classSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_item);
         classSpinnerAdapter.addAll(classList);
         classSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_custom_item);
@@ -92,30 +92,36 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
         editText = findViewById(R.id.create_character_gender);
         String genere = editText.getText().toString();
 
-        Valuta portafoglio = db.leggiValuta(VALUTADND);
+        Valuta portafoglio = dbManager.leggiValuta(VALUTADND);
 
-        Classe classe = db.leggiClasse(classSpinner.getSelectedItem().toString());
+        Classe classe = dbManager.leggiClasse(classSpinner.getSelectedItem().toString());
 
-        Razza razza = db.leggiRazza(raceSpinner.getSelectedItem().toString());
+        Razza razza = dbManager.leggiRazza(raceSpinner.getSelectedItem().toString());
 
-        List<Caratteristica> caratteristicas = db.leggiCaratteristica();
-        List<Abilita> abilitas = db.leggiAbilita();
+        List<Caratteristica> caratteristicas = dbManager.leggiCaratteristica();
+        List<Abilita> abilitas = dbManager.leggiAbilita();
 
         nuovoGiocatore = new Giocatore(nomeg, desc, nomecamp, eta, altezza, genere, portafoglio, classe, razza, caratteristicas, abilitas);
 
-        if (!db.aggiungiGiocatore(nuovoGiocatore))
+        if (!dbManager.aggiungiGiocatore(nuovoGiocatore))
             Toast.makeText(this, "inserimeto fallito", Toast.LENGTH_LONG).show();
         else
-            this.openCharacterActivity();
+            this.openMainActivity();
     }
 
-    public void openCharacterActivity() {
+    public void openMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    /*public void openCharacterActivity() {
         Intent intent = new Intent(this, CharacterActivity.class);
         intent.putExtra("nomecamp", nuovoGiocatore.getNomeCampagna());
         intent.putExtra("nomeg", nuovoGiocatore.getNome());
         startActivity(intent);
         finish();
-    }
+    }*/
 
     @Override
     public void onBackPressed() {

@@ -56,6 +56,7 @@ public class CharacterSpellsActivity extends AppCompatActivity {
         this.createListCardIncantesimo();
         this.setButtons();
     }
+
     public void estraiIntent() {
         Intent intent = getIntent();
         nomecamp = intent.getStringExtra("nomecamp");
@@ -121,5 +122,14 @@ public class CharacterSpellsActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, CharacterActivity.class);
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
+        startActivity(intent);
+        finish();
     }
 }

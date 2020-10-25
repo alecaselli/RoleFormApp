@@ -71,23 +71,33 @@
             android:id="@+id/bag_add_item_spinner"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_toStartOf="@+id/create_button"
+            android:layout_toStartOf="@+id/create_button_cardview"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
             android:background="@drawable/rounded_spinner"
             android:paddingHorizontal="15dp" />
 
-        <Button
-            android:id="@+id/create_button"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/create_button_cardview"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:background="?android:selectableItemBackground"
-            android:fontFamily="sans-serif"
-            android:onClick="openCreateNewItem"
-            android:text="@string/crea_nuovo"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_marginStart="10dp"
+            app:cardCornerRadius="15dp">
+
+            <Button
+                android:id="@+id/create_button"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="?android:selectableItemBackground"
+                android:fontFamily="sans-serif"
+                android:onClick="openCreateNewItem"
+                android:text="@string/crea_nuovo"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
+
     </RelativeLayout>
 </RelativeLayout>
