@@ -25,11 +25,9 @@ public class CharacterStatsActivity extends AppCompatActivity {
 
     public void estraiGiocatore() {
         Intent intent = getIntent();
-        String nomecamp = intent.getStringExtra("nomecamp");
-        String nomeg = intent.getStringExtra("nomeg");
+        nomecamp = intent.getStringExtra("nomecamp");
+        nomeg = intent.getStringExtra("nomeg");
         DBManager db = new DBManager(this);
-        assert nomeg != null;
-        assert nomecamp != null;
         giocatore = db.leggiGiocatore(nomecamp, nomeg);
     }
 
