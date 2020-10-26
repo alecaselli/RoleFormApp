@@ -10,12 +10,12 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.utilities.CardBool;
+import com.example.myfirstapp.utilities.CardAbility;
 
 import java.util.ArrayList;
 
-public class CardBoolAdapter extends RecyclerView.Adapter<CardBoolAdapter.CardAbilitaViewHolder> {
-    private ArrayList<CardBool> mCardBoolList;
+public class CardAbilityAdapter extends RecyclerView.Adapter<CardAbilityAdapter.CardAbilitaViewHolder> {
+    private ArrayList<CardAbility> mCardAbilityList;
     private OnItemClickListener mListener;
 
 
@@ -66,8 +66,8 @@ public class CardBoolAdapter extends RecyclerView.Adapter<CardBoolAdapter.CardAb
         }
     }
 
-    public CardBoolAdapter(ArrayList<CardBool> cardabilitaList) {
-        mCardBoolList = cardabilitaList;
+    public CardAbilityAdapter(ArrayList<CardAbility> cardabilitaList) {
+        mCardAbilityList = cardabilitaList;
     }
 
     @NonNull
@@ -79,7 +79,7 @@ public class CardBoolAdapter extends RecyclerView.Adapter<CardBoolAdapter.CardAb
 
     @Override
     public void onBindViewHolder(CardAbilitaViewHolder holder, int position) {
-        CardBool currentItem = mCardBoolList.get(position);
+        CardAbility currentItem = mCardAbilityList.get(position);
         if (currentItem != null) {
             holder.mNomeAbilitaView.setText(currentItem.getNome());
             if (currentItem.getaBoolean()) {
@@ -92,7 +92,7 @@ public class CardBoolAdapter extends RecyclerView.Adapter<CardBoolAdapter.CardAb
 
     @Override
     public int getItemCount() {
-        return mCardBoolList.size();
+        return mCardAbilityList.size();
     }
 
 }

@@ -14,29 +14,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.adapter.CardBoolAdapter;
+import com.example.myfirstapp.adapter.CardAbilityAdapter;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.database.TabellaEquipaggiamento;
 import com.example.myfirstapp.domain.Equipaggiamento;
 import com.example.myfirstapp.domain.Giocatore;
-import com.example.myfirstapp.utilities.CardBool;
+import com.example.myfirstapp.utilities.CardAbility;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CharacterBagActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    private String NONEQUIP = "Non equipaggiato";
     private TextView text;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private CardBoolAdapter mAdapter;
+    private CardAbilityAdapter mAdapter;
     private Spinner itemSpinner;
 
-    private ArrayList<CardBool> cardBoolList;
+    private ArrayList<CardAbility> cardAbilityList;
     private String nomecamp;
     private String nomeg;
     private Giocatore giocatore;
     private DBManager dbManager;
+    private final String AGGIUNGI = "aggiungi";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +61,12 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
     }
 
     public void createCardBorsaList() {
-        cardBoolList = new ArrayList<>();
+        cardAbilityList = new ArrayList<>();
         if (giocatore.getBorsa() != null)
             for (Equipaggiamento equipaggiamento : giocatore.getBorsa())
-                cardBoolList.add(new CardBool(equipaggiamento.getNome(), false));
-        /*if (giocatore.getEquipaggiato() != null)
-            for (Equipaggiamento equipaggiamento : giocatore.getEquipaggiato())
-                cardBoolList.add(new CardBool(equipaggiamento.getNome(), true));*/
-        if (/*giocatore.getEquipaggiato().size() != 0 ||*/ giocatore.getBorsa().size() != 0) {
+                if (equipaggiamento != null)
+                    cardAbilityList.add(new CardAbility(equipaggiamento.getNome(), false));
+        if (giocatore.getBorsa().size() != 0) {
             text = (TextView) findViewById(R.id.bag_empty);
             text.setText("");
         }
@@ -76,19 +76,19 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         Equipaggiamento equipaggiamento = giocatore.getEquipaggiato("armatura");
         String nome;
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
-        else nome = "Non equipaggiato";
+        else nome = NONEQUIP;
         text = (TextView) findViewById(R.id.bag_armor);
         text.setText(nome);
 
         equipaggiamento = giocatore.getEquipaggiato("scudo");
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
-        else nome = "Non equipaggiato";
+        else nome = NONEQUIP;
         text = (TextView) findViewById(R.id.bag_shield);
         text.setText(nome);
 
         equipaggiamento = giocatore.getEquipaggiato("arma");
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
-        else nome = "Non equipaggiato";
+        else nome = NONEQUIP;
         text = (TextView) findViewById(R.id.bag_weapon);
         text.setText(nome);
     }
@@ -98,14 +98,14 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new CardBoolAdapter(cardBoolList);
+        mAdapter = new CardAbilityAdapter(cardAbilityList);
         mLayoutManager = new LinearLayoutManager((this));
-        mAdapter = new CardBoolAdapter(cardBoolList);
+        mAdapter = new CardAbilityAdapter(cardAbilityList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(new CardBoolAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new CardAbilityAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 openEquipment(position);
@@ -113,7 +113,7 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
 
             @Override
             public void onBoolClick(int position) {
-                changeEquipaggiamento(position);
+                equipaggia(position);
             }
         });
 
@@ -122,6 +122,7 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
     public void setSpinner() {
         List<String> equipaggiamentoList = dbManager.leggiPK(TabellaEquipaggiamento.TBL_NOME, TabellaEquipaggiamento.FIELD_NOMEE);
         ArrayAdapter<String> ItemSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_item);
+        ItemSpinnerAdapter.add(AGGIUNGI);
         ItemSpinnerAdapter.addAll(equipaggiamentoList);
         ItemSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_custom_item);
         itemSpinner = findViewById(R.id.bag_add_item_spinner);
@@ -129,40 +130,50 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         itemSpinner.setOnItemSelectedListener(this);
     }
 
-    public void openEquipment(int position) {
-        /*Intent intent = new Intent(this, EquipmentActivity.class);
-        intent.putExtra("nomee", cardBoolList.get(position).getNome());
-        startActivity(intent);*/
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        this.addItem();
     }
 
-    public void changeEquipaggiamento(int position) {
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
-        Equipaggiamento equipaggiare = giocatore.getBorsa(cardBoolList.get(position).getNome());
-        if (!equipaggiare.getTipo().equals("oggetto")) {
-            if (dbManager.aggiornaHage(nomecamp, nomeg, cardBoolList.get(position).getNome(), false)) {
-                cardBoolList.get(position).swapBool();
+    }
+
+    public void equipaggia(int position) {
+        Equipaggiamento equipaggiare = giocatore.getBorsa(cardAbilityList.get(position).getNome());
+        if (!equipaggiare.getTipo().equals(Equipaggiamento.getTipobase().get(3))) { // tipo==oggetto
+            if (dbManager.aggiornaHage(nomecamp, nomeg, cardAbilityList.get(position).getNome(), false)) {
+                cardAbilityList.get(position).swapBool();
 
                 Equipaggiamento disequipaggiare = giocatore.getEquipaggiato(equipaggiare.getTipo());
-                giocatore.eliminaEquipaggiato(disequipaggiare);
-                giocatore.aggiungiBorsa(disequipaggiare);
+                if (disequipaggiare != null) {
+                    giocatore.eliminaEquipaggiato(disequipaggiare);
+                    giocatore.aggiungiBorsa(disequipaggiare);
+                    cardAbilityList.add(new CardAbility(disequipaggiare.getNome(), false));
+                    mAdapter.notifyItemInserted(cardAbilityList.size() - 1);
+                }
 
                 giocatore.eliminaBorsa(equipaggiare);
                 giocatore.aggiungiEquipaggiato(equipaggiare);
-
-                cardBoolList.remove(position);
-                cardBoolList.add(new CardBool(disequipaggiare.getNome(), false));
+                cardAbilityList.remove(position);
                 mAdapter.notifyItemRemoved(position);
-                mAdapter.notifyItemInserted(cardBoolList.size()-1);
                 this.setView();
-            } else {
-                Toast.makeText(this, "equipaggiamento fallito", Toast.LENGTH_LONG).show();
-            }
-
+            } else Toast.makeText(this, "equipaggiamento fallito", Toast.LENGTH_LONG).show();
         } else Toast.makeText(this, "oggetto non equipaggiabile", Toast.LENGTH_LONG).show();
+    }
+
+    public void removeItem(int position) {
+        Equipaggiamento rimuovere = giocatore.getBorsa(cardAbilityList.get(position).getNome());
+        if (dbManager.eliminaHage(nomecamp, nomeg, rimuovere.getNome())) {
+            cardAbilityList.remove(position);
+            mAdapter.notifyItemRemoved(position);
+        } else Toast.makeText(this, "eliminazione fallito", Toast.LENGTH_LONG).show();
     }
 
     public void addItem() {
         String nomee = itemSpinner.getSelectedItem().toString();
+        if (nomee.equals(AGGIUNGI)) return;
         Equipaggiamento aggiunto = dbManager.leggiEquipaggiamento(nomee);
         switch (aggiunto.getTipo()) {
             case "arma":
@@ -178,27 +189,49 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
 
         if (dbManager.aggiungiHage(nomecamp, nomeg, nomee, true)) {
             giocatore.aggiungiBorsa(aggiunto);
-            cardBoolList.add(new CardBool(aggiunto.getNome(), false));
-            mAdapter.notifyItemInserted(cardBoolList.size() - 1);
-        } else {
-            Toast.makeText(this, "aggiunta fallita", Toast.LENGTH_LONG).show();
+            CardAbility nuovo = new CardAbility(aggiunto.getNome(), false);
+            cardAbilityList.add(nuovo);
+            mAdapter.notifyItemInserted(cardAbilityList.size() - 1);
+        } else Toast.makeText(this, "aggiunta fallita", Toast.LENGTH_LONG).show();
+    }
+
+    public void openEquipment(int position) {
+        /*Intent intent = new Intent(this, EquipmentActivity.class);
+        intent.putExtra("nomee", cardBoolList.get(position).getNome());
+        startActivity(intent);
+        finish();*/
+    }
+
+    public void disequipaggiaArma(View view) {
+        this.disequipaggia(R.id.bag_weapon, Equipaggiamento.getTipobase().get(0));
+    }
+
+    public void disequipaggiaArmatura(View view) {
+        this.disequipaggia(R.id.bag_armor, Equipaggiamento.getTipobase().get(1));
+    }
+
+    public void disequipaggiaScudo(View view) {
+        this.disequipaggia(R.id.bag_shield, Equipaggiamento.getTipobase().get(2));
+    }
+
+    public void disequipaggia(int id, String tipo) {
+        Equipaggiamento disequipaggiare = giocatore.getEquipaggiato(tipo);
+        if (disequipaggiare != null) {
+            text = (TextView) findViewById(id);
+            text.setText(NONEQUIP);
+            giocatore.eliminaEquipaggiato(disequipaggiare);
+            giocatore.aggiungiBorsa(disequipaggiare);
+            cardAbilityList.add(new CardAbility(disequipaggiare.getNome(), false));
+            mAdapter.notifyItemInserted(cardAbilityList.size() - 1);
         }
     }
 
     public void openCreateNewItem(View view) {
         Intent intent = new Intent(this, CreateNewItemActivity.class);
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
         startActivity(intent);
         finish();
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        this.addItem();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
     @Override
@@ -210,18 +243,3 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         finish();
     }
 }
-
-
-
-/*giocatore.getBorsa(cardBoolList.get(position).getNome())
-        giocatore.eliminaEquipaggiato(new ArrayList<Equipaggiamento>(Arrays.asList()));
-
-
-        cardBoolList.get(position).swapBool();
-        mAdapter.notifyItemChanged(position);
-
-        if (!dbManager.aggiornaHage(nomecamp, nomeg, cardBoolList.get(position).getNome(), cardBoolList.get(position).getaBoolean())) {
-            Toast.makeText(this, "aggiornamento fallito", Toast.LENGTH_LONG).show();
-            cardBoolList.get(position).swapBool();
-            mAdapter.notifyItemChanged(position);
-        }*/

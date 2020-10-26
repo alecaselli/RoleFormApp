@@ -11,6 +11,8 @@ import com.example.myfirstapp.domain.Giocatore;
 
 public class CharacterStatsActivity extends AppCompatActivity {
 
+    private String nomecamp;
+    private String nomeg;
     private Giocatore giocatore;
 
     @Override
@@ -23,13 +25,19 @@ public class CharacterStatsActivity extends AppCompatActivity {
 
     public void estraiGiocatore() {
         Intent intent = getIntent();
-        String nomecamp = intent.getStringExtra("nomecamp");
-        String nomeg = intent.getStringExtra("nomeg");
+        nomecamp = intent.getStringExtra("nomecamp");
+        nomeg = intent.getStringExtra("nomeg");
         DBManager db = new DBManager(this);
-        assert nomeg != null;
-        assert nomecamp != null;
         giocatore = db.leggiGiocatore(nomecamp, nomeg);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, CharacterActivity.class);
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
+        startActivity(intent);
+        finish();
+    }
 
 }

@@ -42,17 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mAdapter.notifyDataSetChanged();
-    }
-
     public void createListCardGiocatore() {
 
         dbManager = new DBManager(this);
-        /*dbManager.dropDB(this);*/
-
         List<List<String>> datilist = dbManager.leggiDatiMenu(TabellaGiocatore.TBL_NOME, CampiComuni.FIELD_LIVELLO, TabellaGiocatore.FIELD_NOMECAMPAGNA, TabellaGiocatore.FIELD_NOMEG);
 
         mCardGiocatoreList = new ArrayList<>();
@@ -85,6 +77,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void eliminaGiocatore(int position) {
+        nomecamp = mCardGiocatoreList.get(position).getNomecampagna();
+        nomeg = mCardGiocatoreList.get(position).getNomegiocatore();
+        if (dbManager.eliminaGiocatore(nomecamp, nomeg)) {
+            Toast.makeText(this, "giocatore eliminato", Toast.LENGTH_LONG).show();
+            mCardGiocatoreList.remove(position);
+            mAdapter.notifyItemRemoved(position);
+        } else {
+            Toast.makeText(this, "eliminazione fallita", Toast.LENGTH_LONG).show();
+        }
+    }
+
     public void openCharacterActivity(int position) {
         nomecamp = mCardGiocatoreList.get(position).getNomecampagna();
         nomeg = mCardGiocatoreList.get(position).getNomegiocatore();
@@ -92,19 +96,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("nomecamp", nomecamp);
         intent.putExtra("nomeg", nomeg);
         startActivity(intent);
-
-    }
-
-    public void eliminaGiocatore(int position) {
-        nomecamp = mCardGiocatoreList.get(position).getNomecampagna();
-        nomeg = mCardGiocatoreList.get(position).getNomegiocatore();
-        if (dbManager.eliminaGiocatore(nomecamp, nomeg))
-            Toast.makeText(this, "giocatore eliminato", Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(this, "eliminazione fallita", Toast.LENGTH_LONG).show();
-
-        mCardGiocatoreList.remove(position);
-        mAdapter.notifyItemRemoved(position);
+        finish();
     }
 
     public void openCreateNewCharacter(View view) {
@@ -116,11 +108,13 @@ public class MainActivity extends AppCompatActivity {
     public void openInfoCredits(View view) {
         Intent intent = new Intent(this, InfoCreditsActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void openEdit(View view) {
         Intent intent = new Intent(this, EditActivity.class);
         startActivity(intent);
+        finish();
     }
 
 }

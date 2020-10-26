@@ -69,5 +69,20 @@
     <string name="borsa_vuota">borsa vuota</string>
     <string name="add">add</string>
     <string name="crea_nuovo">crea nuovo</string>
+    <string name="nome">Nome:</string>
+    <string name="descrizione">Descrizione:</string>
+    <string name="costo">Costo:</string>
+    <string name="peso">Peso:</string>
+    <string name="capacit">Capacità:</string>
+    <string name="danno">Danno:</string>
+    <string name="propriet">Proprietà:</string>
+    <string name="tempo_per_togliere_l_armatura">Tempo per togliere\nl\'armatura:</string>
+    <string name="tempo_per_mettere_l_armatura">Tempo per mettere\nl\'armatura:</string>
+    <string name="forza_necessaria">Forza necessaria:</string>
+    <string name="furtivit">Furtività:</string>
+    <string name="ca">CA:</string>
+    <string name="ntemp1">es: 3sec</string>
+    <string name="ntemp2">es: 3min</string>
+    <string name="es_1d4_mod_forza">es: 1d4 + mod forza</string>
 
 </resources>

@@ -2,6 +2,7 @@ package com.example.myfirstapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -23,6 +24,10 @@ public class CharacterInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_info);
 
+        this.readInfo();
+    }
+
+    public void readInfo() {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("character_info"), StandardCharsets.UTF_8))) {
 
             String line;
@@ -36,7 +41,7 @@ public class CharacterInfoActivity extends AppCompatActivity {
             txt.setText(info);
 
         } catch (IOException e) {
-            Log.e("CREDITS", "fsiled asset read", e);
+            Log.e("CREDITS", "filed asset read", e);
 
         }
     }
