@@ -26,6 +26,7 @@ import java.util.List;
 
 public class CharacterBagActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    private String NONEQUIP = "Non equipaggiato";
     private TextView text;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -63,7 +64,8 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         cardAbilityList = new ArrayList<>();
         if (giocatore.getBorsa() != null)
             for (Equipaggiamento equipaggiamento : giocatore.getBorsa())
-                cardAbilityList.add(new CardAbility(equipaggiamento.getNome(), false));
+                if (equipaggiamento != null)
+                    cardAbilityList.add(new CardAbility(equipaggiamento.getNome(), false));
         if (giocatore.getBorsa().size() != 0) {
             text = (TextView) findViewById(R.id.bag_empty);
             text.setText("");
@@ -74,19 +76,19 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         Equipaggiamento equipaggiamento = giocatore.getEquipaggiato("armatura");
         String nome;
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
-        else nome = "Non equipaggiato";
+        else nome = NONEQUIP;
         text = (TextView) findViewById(R.id.bag_armor);
         text.setText(nome);
 
         equipaggiamento = giocatore.getEquipaggiato("scudo");
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
-        else nome = "Non equipaggiato";
+        else nome = NONEQUIP;
         text = (TextView) findViewById(R.id.bag_shield);
         text.setText(nome);
 
         equipaggiamento = giocatore.getEquipaggiato("arma");
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
-        else nome = "Non equipaggiato";
+        else nome = NONEQUIP;
         text = (TextView) findViewById(R.id.bag_weapon);
         text.setText(nome);
     }
@@ -111,7 +113,7 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
 
             @Override
             public void onBoolClick(int position) {
-                changeEquipaggiamento(position);
+                equipaggia(position);
             }
         });
 
@@ -138,9 +140,9 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
 
     }
 
-    public void changeEquipaggiamento(int position) {
+    public void equipaggia(int position) {
         Equipaggiamento equipaggiare = giocatore.getBorsa(cardAbilityList.get(position).getNome());
-        if (!equipaggiare.getTipo().equals("oggetto")) {
+        if (!equipaggiare.getTipo().equals(Equipaggiamento.getTipobase().get(3))) { // tipo==oggetto
             if (dbManager.aggiornaHage(nomecamp, nomeg, cardAbilityList.get(position).getNome(), false)) {
                 cardAbilityList.get(position).swapBool();
 
@@ -188,8 +190,8 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         if (dbManager.aggiungiHage(nomecamp, nomeg, nomee, true)) {
             giocatore.aggiungiBorsa(aggiunto);
             CardAbility nuovo = new CardAbility(aggiunto.getNome(), false);
-            cardAbilityList.add(0,nuovo);
-            mAdapter.notifyItemInserted(0);
+            cardAbilityList.add(nuovo);
+            mAdapter.notifyItemInserted(cardAbilityList.size() - 1);
         } else Toast.makeText(this, "aggiunta fallita", Toast.LENGTH_LONG).show();
     }
 
@@ -198,6 +200,30 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         intent.putExtra("nomee", cardBoolList.get(position).getNome());
         startActivity(intent);
         finish();*/
+    }
+
+    public void disequipaggiaArma(View view) {
+        this.disequipaggia(R.id.bag_weapon, Equipaggiamento.getTipobase().get(0));
+    }
+
+    public void disequipaggiaArmatura(View view) {
+        this.disequipaggia(R.id.bag_armor, Equipaggiamento.getTipobase().get(1));
+    }
+
+    public void disequipaggiaScudo(View view) {
+        this.disequipaggia(R.id.bag_shield, Equipaggiamento.getTipobase().get(2));
+    }
+
+    public void disequipaggia(int id, String tipo) {
+        Equipaggiamento disequipaggiare = giocatore.getEquipaggiato(tipo);
+        if (disequipaggiare != null) {
+            text = (TextView) findViewById(id);
+            text.setText(NONEQUIP);
+            giocatore.eliminaEquipaggiato(disequipaggiare);
+            giocatore.aggiungiBorsa(disequipaggiare);
+            cardAbilityList.add(new CardAbility(disequipaggiare.getNome(), false));
+            mAdapter.notifyItemInserted(cardAbilityList.size() - 1);
+        }
     }
 
     public void openCreateNewItem(View view) {

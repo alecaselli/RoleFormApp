@@ -29,6 +29,7 @@ public class EditActivity extends AppCompatActivity {
 
         DBManager dbManager = new DBManager(this);
         dbManager.dropDB(this);
+        onBackPressed();
     }
 
     public void onBackPressed() {

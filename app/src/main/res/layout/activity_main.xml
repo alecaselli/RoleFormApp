@@ -78,7 +78,8 @@
             android:layout_toStartOf="@id/create"
             android:background="?android:selectableItemBackground"
             android:onClick="openEdit"
-            android:src="@drawable/ic_edit" />
+            android:src="@drawable/ic_delete" />
+        <!--android:src="@drawable/ic_edit"-->
 
         <ImageButton
             android:id="@+id/create"

@@ -212,6 +212,22 @@ public class DBManager {
         }
     }
 
+    public boolean aggiungiCaratteristica(@NotNull Caratteristica nuovo) {
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(TabellaCaratteristica.FIELD_NOMECAR, nuovo.getNome());
+        cv.put(CampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
+
+
+        try {
+            return db.insert(TabellaCaratteristica.TBL_NOME, null, cv) > 0;
+        } catch (SQLiteException sqle) {
+            Log.e("AGGIUNGI CAR", "aggiunta fallita", sqle);
+            return false;
+        }
+    }
+
     public boolean aggiungiEquipaggiamento(@NotNull Equipaggiamento nuovo) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -232,22 +248,6 @@ public class DBManager {
         }
     }
 
-    public boolean aggiungiCaratteristica(@NotNull Caratteristica nuovo) {
-        SQLiteDatabase db = dbhelper.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-
-        cv.put(TabellaCaratteristica.FIELD_NOMECAR, nuovo.getNome());
-        cv.put(CampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
-
-
-        try {
-            return db.insert(TabellaCaratteristica.TBL_NOME, null, cv) > 0;
-        } catch (SQLiteException sqle) {
-            Log.e("AGGIUNGI CAR", "aggiunta fallita", sqle);
-            return false;
-        }
-    }
-
     public boolean aggiungiArma(@NotNull Arma nuovo) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -259,10 +259,9 @@ public class DBManager {
         try {
             if (this.aggiungiEquipaggiamento(nuovo)) {
                 if (db.insert(TabellaArma.TBL_NOME, null, cv) > 0) {
-                    db.delete(TabellaEquipaggiamento.TBL_NOME, TabellaEquipaggiamento.FIELD_NOMEE + " = ? ", new String[]{nuovo.getNome()});
-                    return false;
+                    return true;
                 }
-                return true;
+                db.delete(TabellaEquipaggiamento.TBL_NOME, TabellaEquipaggiamento.FIELD_NOMEE + " = ? ", new String[]{nuovo.getNome()});
             }
             return false;
         } catch (SQLiteException sqle) {
@@ -284,12 +283,11 @@ public class DBManager {
         cv.put(TabellaArmatura.FIELD_FORZANECESSARIA, nuovo.getForzaNecessaria());
 
         try {
-            if (!this.aggiungiEquipaggiamento(nuovo)) {
+            if (this.aggiungiEquipaggiamento(nuovo)) {
                 if (db.insert(TabellaArmatura.TBL_NOME, null, cv) > 0) {
-                    db.delete(TabellaEquipaggiamento.TBL_NOME, TabellaEquipaggiamento.FIELD_NOMEE + " = ? ", new String[]{nuovo.getNome()});
-                    return false;
+                    return true;
                 }
-                return true;
+                db.delete(TabellaEquipaggiamento.TBL_NOME, TabellaEquipaggiamento.FIELD_NOMEE + " = ? ", new String[]{nuovo.getNome()});
             }
             return false;
         } catch (SQLiteException sqle) {
@@ -1123,6 +1121,22 @@ public class DBManager {
         }
     }
 
+    public boolean aggiornaCaratteristica(String nomecar, @NotNull StringBuffer desc) {
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        String whereClause = TabellaCaratteristica.FIELD_NOMECAR + " = ? ";
+        String[] whereArgs = new String[]{nomecar};
+
+        cv.put(CampiComuni.FIELD_DESC, desc.toString());
+
+        try {
+            return db.update(TabellaCaratteristica.TBL_NOME, cv, whereClause, whereArgs) > 0;
+        } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA CAR", "aggiorna fallita", sqle);
+            return false;
+        }
+    }
+
     public boolean aggiornaEquipaggiamento(@NotNull Equipaggiamento aggiornato) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -1144,23 +1158,7 @@ public class DBManager {
         }
     }
 
-    public boolean aggiornaCaratteristica(String nomecar, @NotNull StringBuffer desc) {
-        SQLiteDatabase db = dbhelper.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        String whereClause = TabellaCaratteristica.FIELD_NOMECAR + " = ? ";
-        String[] whereArgs = new String[]{nomecar};
-
-        cv.put(CampiComuni.FIELD_DESC, desc.toString());
-
-        try {
-            return db.update(TabellaCaratteristica.TBL_NOME, cv, whereClause, whereArgs) > 0;
-        } catch (SQLiteException sqle) {
-            Log.e("AGGIORNA CAR", "aggiorna fallita", sqle);
-            return false;
-        }
-    }
-
-    public boolean aggiornaArma(@NotNull Arma aggiornato) {
+    public void aggiornaArma(@NotNull Arma aggiornato) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaEquipaggiamento.FIELD_NOMEE + " = ? ";
@@ -1170,16 +1168,14 @@ public class DBManager {
         cv.put(TabellaArma.FIELD_PROPRIETA, aggiornato.getProprieta());
 
         try {
-            if (this.aggiornaEquipaggiamento(aggiornato))
-                return db.update(TabellaArma.TBL_NOME, cv, whereClause, whereArgs) > 0;
-            return false;
+            this.aggiornaEquipaggiamento(aggiornato);
+            db.update(TabellaArma.TBL_NOME, cv, whereClause, whereArgs);
         } catch (SQLiteException sqle) {
             Log.e("AGGIORNA ARMA", "aggiorna fallita", sqle);
-            return false;
         }
     }
 
-    public boolean aggiornaArmatura(@NotNull Armatura aggiornato) {
+    public void aggiornaArmatura(@NotNull Armatura aggiornato) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaEquipaggiamento.FIELD_NOMEE + " = ? ";
@@ -1193,12 +1189,10 @@ public class DBManager {
         cv.put(TabellaArmatura.FIELD_FORZANECESSARIA, aggiornato.getForzaNecessaria());
 
         try {
-            if (this.aggiornaEquipaggiamento(aggiornato))
-                return db.insert(TabellaArmatura.TBL_NOME, null, cv) > 0;
-            return false;
+            this.aggiornaEquipaggiamento(aggiornato);
+            db.insert(TabellaArmatura.TBL_NOME, null, cv);
         } catch (SQLiteException sqle) {
             Log.e("AGGIORNA ARMATURA", "aggiorna fallita", sqle);
-            return false;
         }
     }
 
@@ -1235,27 +1229,33 @@ public class DBManager {
 
         try {
             if (db.update(TabellaGiocatore.TBL_NOME, cv, whereClause, whereArgs) > 0) {
+                boolean error = false;
                 for (Caratteristica nuovac : aggiornato.getCaratteristicaList()) {
-                    this.aggiornaCaratteristicaG(aggiornato.getNomeCampagna(), aggiornato.getNome(), nuovac);
+                    if (!this.aggiornaCaratteristicaG(aggiornato.getNomeCampagna(), aggiornato.getNome(), nuovac))
+                        error = true;
                 }
 
                 for (Abilita nuovaa : aggiornato.getAbilitaList()) {
-                    this.aggiornaHaga(aggiornato.getNomeCampagna(), aggiornato.getNome(), nuovaa.getNome(), nuovaa.isCompetenza());
+                    if (this.aggiornaHaga(aggiornato.getNomeCampagna(), aggiornato.getNome(), nuovaa.getNome(), nuovaa.isCompetenza()))
+                        error = true;
                 }
 
                 for (Equipaggiamento nuovoe : aggiornato.getEquipaggiato()) {
-                    this.aggiornaHage(aggiornato.getNomeCampagna(), aggiornato.getNome(), nuovoe.getNome(), false);
+                    if (this.aggiornaHage(aggiornato.getNomeCampagna(), aggiornato.getNome(), nuovoe.getNome(), false))
+                        error = true;
                 }
 
                 for (Equipaggiamento nuovoe : aggiornato.getBorsa()) {
-                    this.aggiornaHage(aggiornato.getNomeCampagna(), aggiornato.getNome(), nuovoe.getNome(), true);
+                    if (this.aggiornaHage(aggiornato.getNomeCampagna(), aggiornato.getNome(), nuovoe.getNome(), true))
+                        error = true;
                 }
 
                 this.eliminaHagi(aggiornato.getNomeCampagna(), aggiornato.getNome());
                 for (Incantesimo nuovoi : aggiornato.getIncantesimiGiocatore()) {
-                    this.aggiungiHagi(aggiornato.getNomeCampagna(), aggiornato.getNome(), nuovoi.getNome());
+                    if (this.aggiungiHagi(aggiornato.getNomeCampagna(), aggiornato.getNome(), nuovoi.getNome()))
+                        error = true;
                 }
-                return true;
+                return !error;
             }
             return false;
         } catch (SQLiteException sqle) {

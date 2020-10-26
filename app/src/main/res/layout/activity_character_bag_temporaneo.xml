@@ -15,21 +15,51 @@
             android:id="@+id/bag_armor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="DISEQUIP"
+            android:textSize="20sp"
+            android:onClick="disequipaggiaArmatura"/>
 
         <TextView
             android:id="@+id/bag_shield"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/bag_armor"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/bag_armor"
+            android:text="DISEQUIP"
+            android:textSize="20sp"
+            android:onClick="disequipaggiaScudo"/>
 
         <TextView
             android:id="@+id/bag_weapon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/bag_shield"
-            android:text="TextView" />
+            android:layout_marginBottom="5dp"
+            android:text="TextView"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/bag_shield"
+            android:text="DISEQUIP"
+            android:textSize="20sp"
+            android:onClick="disequipaggiaArma"/>
 
     </RelativeLayout>
 

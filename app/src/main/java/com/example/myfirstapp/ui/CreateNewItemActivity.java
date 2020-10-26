@@ -42,7 +42,7 @@ public class CreateNewItemActivity extends AppCompatActivity implements AdapterV
         this.setSpinner();
     }
 
-    public void estraiIntent(){
+    public void estraiIntent() {
         Intent intent = getIntent();
         nomecamp = intent.getStringExtra("nomecamp");
         nomeg = intent.getStringExtra("nomeg");
@@ -89,14 +89,22 @@ public class CreateNewItemActivity extends AppCompatActivity implements AdapterV
         desc.append(editText.getText().toString());
 
         editText = (EditText) findViewById(R.id.create_item_price);
-        int costo = Integer.parseInt(editText.getText().toString());
+        String temp = editText.getText().toString();
+        int costo = 0;
+        if (!temp.equals(""))
+            costo = Integer.parseInt(temp);
 
         editText = (EditText) findViewById(R.id.create_item_weight);
-        int peso = Integer.parseInt(editText.getText().toString());
+        temp = editText.getText().toString();
+        int peso = 0;
+        if (!temp.equals(""))
+            peso = Integer.parseInt(temp);
 
         editText = (EditText) findViewById(R.id.create_item_capacity);
-        int capacita = Integer.parseInt(editText.getText().toString());
-
+        temp = editText.getText().toString();
+        int capacita = 0;
+        if (!temp.equals(""))
+            capacita = Integer.parseInt(editText.getText().toString());
 
         String tipo = typeSpinner.getSelectedItem().toString();
 
@@ -106,10 +114,8 @@ public class CreateNewItemActivity extends AppCompatActivity implements AdapterV
         }
 
         String subtipo = subtypeSpinner.getSelectedItem().toString();
-        if (subtipo.equals(SELEZIONAST)) {
-            Toast.makeText(this, "selezionare un sottotipo", Toast.LENGTH_LONG).show();
-            return;
-        }
+        if (subtipo.equals(SELEZIONAST))
+            subtipo = "";
 
         switch (tipo) {
             case "arma":
@@ -151,10 +157,16 @@ public class CreateNewItemActivity extends AppCompatActivity implements AdapterV
 
     public void createArmor(String nome, StringBuffer desc, String tipo, int costo, int peso, int capacita, String subtipo) {
         editText = (EditText) findViewById(R.id.create_item_armor_stealth);
-        boolean nonFurtiva = (Integer.parseInt(editText.getText().toString()) == 0);
+        String temp = editText.getText().toString();
+        boolean nonFurtiva = true;
+        if (!temp.equals(""))
+            nonFurtiva = (Integer.parseInt(editText.getText().toString()) == 0);
 
         editText = (EditText) findViewById(R.id.create_item_armor_CA);
-        int modCA = Integer.parseInt(editText.getText().toString());
+        temp = editText.getText().toString();
+        int modCA = 0;
+        if (!temp.equals(""))
+            modCA = Integer.parseInt(editText.getText().toString());
 
         editText = (EditText) findViewById(R.id.create_item_armor_time_off);
         String tempoTogliere = editText.getText().toString();
