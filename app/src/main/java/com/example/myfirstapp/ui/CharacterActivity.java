@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.database.DBManager;
@@ -32,6 +33,7 @@ public class CharacterActivity extends AppCompatActivity {
 
     private CardView currencyCard;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,42 @@ public class CharacterActivity extends AppCompatActivity {
         this.estraiGiocatore();
         this.setView();
         this.setButton();
+
+        CardView goldBaseButton = findViewById(R.id.goldBaseButton);
+        goldBaseButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                return true;
+            }
+        });
+
+        CardView silverBaseButton = findViewById(R.id.silverBaseButton);
+        silverBaseButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                return true;
+            }
+        });
+
+        CardView bronzeBaseButton = findViewById(R.id.bronzeBaseButton);
+        bronzeBaseButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                return true;
+            }
+        });
+    }
+
+    public void goldBaseButton(View view){
+        return;
+    }
+
+    public void silverBaseButton(View view){
+        return;
+    }
+
+    public void bronzeBaseButton(View view){
+        return;
     }
 
     public void setButton() {
@@ -181,6 +219,11 @@ public class CharacterActivity extends AppCompatActivity {
         txt = (TextView) findViewById(R.id.weapon_name);
         txt.setText(nome);
     }
+
+    public void baseGoldButton(View view){
+
+    }
+
 
     public void openCharacterNote(View view) {
         Intent intent = new Intent(this, CharacterNoteActivity.class);
