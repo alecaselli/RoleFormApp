@@ -220,16 +220,13 @@ public class CharacterActivity extends AppCompatActivity {
         txt.setText(nome);
     }
 
-    public void baseGoldButton(View view){
-
-    }
-
 
     public void openCharacterNote(View view) {
         Intent intent = new Intent(this, CharacterNoteActivity.class);
         intent.putExtra("nomecamp", giocatore.getNomeCampagna());
         intent.putExtra("nomeg", giocatore.getNome());
         startActivity(intent);
+        finish();
     }
 
     public void openCharacterCharacter(View view) {
@@ -237,6 +234,7 @@ public class CharacterActivity extends AppCompatActivity {
         intent.putExtra("nomecamp", giocatore.getNomeCampagna());
         intent.putExtra("nomeg", giocatore.getNome());
         startActivity(intent);
+        finish();
     }
 
     public void openCharacterSkills(View view) {
@@ -244,6 +242,7 @@ public class CharacterActivity extends AppCompatActivity {
         intent.putExtra("nomecamp", giocatore.getNomeCampagna());
         intent.putExtra("nomeg", giocatore.getNome());
         startActivity(intent);
+        finish();
     }
 
     public void openCharacterSpells(View view) {
@@ -251,6 +250,7 @@ public class CharacterActivity extends AppCompatActivity {
         intent.putExtra("nomecamp", giocatore.getNomeCampagna());
         intent.putExtra("nomeg", giocatore.getNome());
         startActivity(intent);
+        finish();
     }
 
     public void openCharacterStats(View view) {
@@ -258,6 +258,7 @@ public class CharacterActivity extends AppCompatActivity {
         intent.putExtra("nomecamp", giocatore.getNomeCampagna());
         intent.putExtra("nomeg", giocatore.getNome());
         startActivity(intent);
+        finish();
     }
 
     public void openCharacterBag(View view) {
@@ -265,11 +266,13 @@ public class CharacterActivity extends AppCompatActivity {
         intent.putExtra("nomecamp", giocatore.getNomeCampagna());
         intent.putExtra("nomeg", giocatore.getNome());
         startActivity(intent);
+        finish();
     }
 
     public void openCharacterInfo(View view) {
         Intent intent = new Intent(this, CharacterInfoActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override
