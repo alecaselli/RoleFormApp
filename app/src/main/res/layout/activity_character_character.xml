@@ -1,199 +1,400 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CharacterCharacterActivity"
     android:background="@color/whitesmoke"
-    android:padding="12dp">
+    android:padding="12dp"
+    android:scrollbars="none"
+    tools:context=".ui.CharacterCharacterActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/nome_personaggio"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/character_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_centerHorizontal="true"
+                android:text="@string/character_name"
+                android:textColor="@color/black"
+                android:textSize="27sp" />
+        </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/character_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/character_name"
-                    android:textColor="@color/black"
-                    android:textSize="22sp" />
+        <RelativeLayout
+            android:id="@+id/nome_personaggio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/character_genre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="14dp"
-                    android:layout_toEndOf="@id/character_name"
-                    android:text="[Genre]"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+            <TextView
+                android:id="@+id/character_genre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="14dp"
+                android:text="[Genre]"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
-            </RelativeLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="3dp"
-                android:orientation="vertical" >
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="8dp"
+                android:text="Livello 10"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+        </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/level"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="8dp"
-                    android:text="Livello 10"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+
+        <RelativeLayout
+            android:id="@+id/altezza_personaggio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nome_personaggio"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/altezza"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Altezza:"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/character_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/altezza"
+                android:text="192 cm"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/eta_personaggio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/altezza_personaggio"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/eta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Età:"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/character_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/eta"
+                android:text="27 anni"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                app:cardElevation="0dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp">
+                    android:layout_height="match_parent"
+                    android:background="@color/whitesmoke">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_centerInParent="true"
+                        app:cardCornerRadius="15dp"
+                        app:strokeColor="@color/black"
+                        app:strokeWidth="1dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="9dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@android:color/transparent"
+                                android:inputType="numberDecimal"
+                                android:maxLength="2"
+                                android:hint="00"
+                                android:text="80"
+                                android:textSize="30dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="/ 80"
+                                android:textColor="@color/black" />
+
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
 
                     <ImageView
-                        android:id="@+id/mana"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/staff" />
-
-                    <TextView
-                        android:id="@+id/character_mana"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="12dp"
-                        android:layout_toEndOf="@id/mana"
-                        android:text="80/80"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:elevation="2dp"
+                        android:foreground="@drawable/cloud_heart" />
 
                 </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                app:cardElevation="0dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp">
+                    android:layout_height="match_parent"
+                    android:background="@color/whitesmoke">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_centerInParent="true"
+                        app:cardCornerRadius="15dp"
+                        app:strokeColor="@color/black"
+                        app:strokeWidth="1dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="9dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@android:color/transparent"
+                                android:inputType="numberDecimal"
+                                android:hint="00"
+                                android:maxLength="2"
+                                android:text="25"
+                                android:textSize="30dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="/ 25"
+                                android:textColor="@color/black" />
+
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
 
                     <ImageView
-                        android:id="@+id/vita"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/heart" />
-
-                    <TextView
-                        android:id="@+id/character_life"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="12dp"
-                        android:layout_toEndOf="@id/vita"
-                        android:text="80/80"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:elevation="2dp"
+                        android:foreground="@drawable/cloud_mana" />
 
                 </RelativeLayout>
-            </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-            <RelativeLayout
-                android:id="@+id/altezza_personaggio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/nome_personaggio"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                app:cardElevation="0dp">
 
-                <TextView
-                    android:id="@+id/altezza"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Altezza:"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/whitesmoke">
 
-                <TextView
-                    android:id="@+id/character_height"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@id/altezza"
-                    android:text="192 cm"
-                    android:textColor="@color/black"
-                    android:textSize="17sp" />
-            </RelativeLayout>
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_centerInParent="true"
+                        app:cardCornerRadius="15dp"
+                        app:strokeColor="@color/black"
+                        app:strokeWidth="1dp">
 
-            <RelativeLayout
-                android:id="@+id/eta_personaggio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/altezza_personaggio"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/eta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Età:"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:background="@android:color/transparent"
+                                android:inputType="numberDecimal"
+                                android:hint="00"
+                                android:maxLength="2"
+                                android:text="15"
+                                android:textSize="35dp" />
 
-                <TextView
-                    android:id="@+id/character_age"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@id/eta"
-                    android:text="27 anni"
-                    android:textColor="@color/black"
-                    android:textSize="17sp" />
-            </RelativeLayout>
+                        </RelativeLayout>
 
-            <RelativeLayout
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:elevation="2dp"
+                        android:foreground="@drawable/cloud_armor" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/eta_personaggio">
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="15dp">
 
-                <TextView
-                    android:id="@+id/character_race"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="13dp"
-                    android:layout_toStartOf="@id/separator"
-                    android:text="Razza"
-                    android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
-                <TextView
-                    android:id="@+id/separator"
-                    android:layout_width="wrap_content"
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="15dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/character_character_race"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_marginEnd="13dp"
+                                android:text="Razza"
+                                android:textColor="@color/black"
+                                android:textSize="18dp" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="4dp"
+                        android:paddingHorizontal="10dp"
+                        android:fontFamily="casual"
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                        android:textColor="@color/grey"
+                        android:textStyle="bold"
+                        android:textSize="13sp">
+
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="6dp"
+                app:cardCornerRadius="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="---"
-                    android:textColor="@color/black"
-                    android:textSize="22sp" />
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
-                <TextView
-                    android:id="@+id/character_class"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="13dp"
-                    android:layout_toEndOf="@id/separator"
-                    android:text="Classe"
-                    android:textColor="@color/black"
-                    android:textSize="18dp" />
-            </RelativeLayout>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="15dp">
 
-</RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/character_character_class"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_marginEnd="13dp"
+                                android:text="Classe"
+                                android:textColor="@color/black"
+                                android:textSize="18dp" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="4dp"
+                        android:paddingHorizontal="10dp"
+                        android:fontFamily="casual"
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                        android:textColor="@color/grey"
+                        android:textStyle="bold"
+                        android:textSize="13sp">
+
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
