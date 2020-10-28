@@ -207,7 +207,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="casual"
-                            android:text="La forza misura la prestanza e potenza fisica di un personaggio, ne determina fisicità, atletismo ed alcune caratteristiche come la quantità di equipaggiamento trasportabile e le armi ed armature utilizzabili."
+                            android:text="La destrezza rappresenta l'agilità e velocità nei movimenti, la coordinazione, i riflessi e l'equilibrio del personaggio, tipicamente utilizzatore di equipaggiamento leggero."
                             android:textColor="@color/grey"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -300,7 +300,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="casual"
-                            android:text="La forza misura la prestanza e potenza fisica di un personaggio, ne determina fisicità, atletismo ed alcune caratteristiche come la quantità di equipaggiamento trasportabile e le armi ed armature utilizzabili."
+                            android:text="La costituzione rappresenza la salute, la stamina e la resistenza del personaggio, un valore di costituzione alto comporta un valore più alto di punti ferita."
                             android:textColor="@color/grey"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -393,7 +393,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="casual"
-                            android:text="La forza misura la prestanza e potenza fisica di un personaggio, ne determina fisicità, atletismo ed alcune caratteristiche come la quantità di equipaggiamento trasportabile e le armi ed armature utilizzabili."
+                            android:text="L'intelligenza determina la capacità di ragionamento ed apprendimento del personaggio, influisce il numero di incantesimi utilizzabili e quando difficile sia resistervi, un valore alto caratterizza un personaggio colto dal ragionamento analitico"
                             android:textColor="@color/grey"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -486,7 +486,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="casual"
-                            android:text="La forza misura la prestanza e potenza fisica di un personaggio, ne determina fisicità, atletismo ed alcune caratteristiche come la quantità di equipaggiamento trasportabile e le armi ed armature utilizzabili."
+                            android:text="La saggezza misura la capacità di un personaggio di prendere decisioni ed analizzare al meglio un contesto, indica la forza di volontà, il buonsenso e la perspicacia."
                             android:textColor="@color/grey"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -579,7 +579,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="casual"
-                            android:text="La forza misura la prestanza e potenza fisica di un personaggio, ne determina fisicità, atletismo ed alcune caratteristiche come la quantità di equipaggiamento trasportabile e le armi ed armature utilizzabili."
+                            android:text="Il carisma corrisponde alla forza della personalità, alla capacità di persuasione, al fascino ed alla predisposizione al comando di un personaggio, tipicamente accattivante o intimidatorio"
                             android:textColor="@color/grey"
                             android:textSize="13sp"
                             android:textStyle="bold" />
