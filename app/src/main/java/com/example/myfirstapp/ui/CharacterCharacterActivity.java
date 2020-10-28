@@ -17,13 +17,25 @@ public class CharacterCharacterActivity extends AppCompatActivity {
     private TextView txt;
     private EditText edit;
 
+    private String nomecamp;
+    private String nomeg;
+    private DBManager dbManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_character);
 
+        this.estraiIntent();
         this.estraiGiocatore();
         this.setView();
+    }
+
+    public void estraiIntent() {
+        Intent intent = getIntent();
+        nomecamp = intent.getStringExtra("nomecamp");
+        nomeg = intent.getStringExtra("nomeg");
+        dbManager = new DBManager(this);
     }
 
     public void estraiGiocatore() {
@@ -89,5 +101,14 @@ public class CharacterCharacterActivity extends AppCompatActivity {
         edit = (EditText) findViewById();
         edit.setText(giocatore.getClasseArmatura());
 */
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, CharacterActivity.class);
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
+        startActivity(intent);
+        finish();
     }
 }
