@@ -559,7 +559,8 @@
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="2dp"
-                        android:background="@drawable/ic_round_change_history" />
+                        android:background="@drawable/ic_add"/>
+                       <!-- android:background="@drawable/ic_round_change_history"-->
 
                     <RelativeLayout
                         android:id="@+id/character_currency_base"
@@ -586,9 +587,10 @@
                                 app:cardElevation="0dp">
 
                                 <TextView
+                                    android:id="@+id/character_base_gold_text"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text=" Oro: "
+                                    android:text="@string/oro"
                                     android:textColor="@color/black"
                                     android:textSize="22sp" />
                             </androidx.cardview.widget.CardView>
@@ -600,7 +602,7 @@
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="6dp"
                                 android:layout_toEndOf="@id/goldBaseButton"
-                                android:text="5"
+                                android:text="@string/_0"
                                 android:textColor="@color/black"
                                 android:textSize="20sp" />
 
@@ -628,9 +630,10 @@
                                 app:cardElevation="0dp">
 
                                 <TextView
+                                    android:id="@+id/character_base_silver_text"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text=" Argento: "
+                                    android:text="@string/argento"
                                     android:textColor="@color/black"
                                     android:textSize="22sp" />
                             </androidx.cardview.widget.CardView>
@@ -642,7 +645,7 @@
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="6dp"
                                 android:layout_toEndOf="@id/silverBaseButton"
-                                android:text="54"
+                                android:text="@string/_0"
                                 android:textColor="@color/black"
                                 android:textSize="20sp" />
 
@@ -668,11 +671,12 @@
                                 app:cardElevation="0dp">
 
                                 <TextView
+                                    android:id="@+id/character_base_copper_text"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentBottom="true"
                                     android:layout_toEndOf="@id/bronzeBaseButton"
-                                    android:text=" Bronzo: "
+                                    android:text="@string/bronzo"
                                     android:textColor="@color/black"
                                     android:textSize="22sp" />
                             </androidx.cardview.widget.CardView>
@@ -684,7 +688,7 @@
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="6dp"
                                 android:layout_toEndOf="@id/bronzeBaseButton"
-                                android:text="78"
+                                android:text="@string/_0"
                                 android:textColor="@color/black"
                                 android:textSize="20sp" />
 
@@ -707,9 +711,10 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:id="@+id/character_mod_gold_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Oro:"
+                                android:text="@string/oro"
                                 android:textColor="@color/black"
                                 android:textSize="22sp" />
 
@@ -719,8 +724,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
                                 android:background="@android:color/transparent"
-                                android:hint="5"
-                                android:inputType="numberDecimal"
+                                android:hint="@string/add"
+                                android:inputType="numberSigned"
                                 android:maxLength="6"
                                 android:textColor="@color/black"
                                 android:textSize="20sp" />
@@ -736,9 +741,10 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:id="@+id/character_mod_silver_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Argento:"
+                                android:text="@string/argento"
                                 android:textColor="@color/black"
                                 android:textSize="22sp" />
 
@@ -748,8 +754,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
                                 android:background="@android:color/transparent"
-                                android:hint="54"
-                                android:inputType="numberDecimal"
+                                android:hint="@string/add"
+                                android:inputType="numberSigned"
                                 android:textColor="@color/black"
                                 android:textSize="20sp" />
 
@@ -764,9 +770,10 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:id="@+id/character_mod_copper_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Bronzo:"
+                                android:text="@string/bronzo"
                                 android:textColor="@color/black"
                                 android:textSize="22sp" />
 
@@ -776,8 +783,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
                                 android:background="@android:color/transparent"
-                                android:hint="78"
-                                android:inputType="numberDecimal"
+                                android:hint="@string/add"
+                                android:inputType="numberSigned"
                                 android:textColor="@color/black"
                                 android:textSize="20sp" />
 

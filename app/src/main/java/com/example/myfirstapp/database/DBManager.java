@@ -1264,6 +1264,23 @@ public class DBManager {
         }
     }
 
+    public boolean aggiornaPortafoglioGiocatore(@NotNull Giocatore aggiornato) {
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? ";
+        String[] whereArgs = new String[]{aggiornato.getNomeCampagna(), aggiornato.getNome()};
+
+        cv.put(TabellaGiocatore.FIELD_VALOREVAL, aggiornato.getPortafoglio().getValore());
+
+        try {
+            return db.update(TabellaGiocatore.TBL_NOME, cv, whereClause, whereArgs) > 0;
+        } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA PORTGIOC", "aggiorna fallita", sqle);
+            return false;
+        }
+
+    }
+
     public boolean aggiornaCarBase(@NotNull String nomer, @NotNull CaratteristicaBase aggiornato) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -2193,7 +2210,6 @@ public class DBManager {
             lingua.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_LINGUA)));
             Valuta portafoglio = this.leggiValuta(resultSet.getString(resultSet.getColumnIndex(TabellaValuta.FIELD_NOMEV)));
             portafoglio.setValore(resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_VALOREVAL)));
-            portafoglio.setValoreInMonete();
             String nomecla = resultSet.getString(resultSet.getColumnIndex(TabellaClasse.FIELD_NOMECLA));
             Classe classe = this.leggiClasse(nomecla);
             Razza razza = this.leggiRazza(resultSet.getString(resultSet.getColumnIndex(TabellaRazza.FIELD_NOMER)));

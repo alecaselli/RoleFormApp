@@ -173,8 +173,8 @@ public class DBHelper extends SQLiteOpenHelper {
         q = "CREATE TABLE IF NOT EXISTS \"nomeVal\" (\n" +
                 "\t\"nomev\"\tTEXT,\n" +
                 "\t\"nome\"\tTEXT,\n" +
-                "\tFOREIGN KEY(\"nomev\") REFERENCES \"valuta\"(\"nomev\") ON UPDATE CASCADE,\n" +
-                "\tCONSTRAINT \"PF_nomeval\" PRIMARY KEY(\"nomev\",\"nome\")\n" +
+                "\tCONSTRAINT \"PF_nomeval\" PRIMARY KEY(\"nomev\",\"nome\"),\n" +
+                "\tFOREIGN KEY(\"nomev\") REFERENCES \"valuta\"(\"nomev\") ON UPDATE CASCADE\n" +
                 ");";
         db.execSQL(q);
 
@@ -268,7 +268,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(q);
 
         /* valuta */
-        q = "INSERT INTO \"valuta\" (\"nomev\",\"desc\",\"ratio\") VALUES ('moneta del regno di Ho','la valuta di uso comune nel regno di ho, si suddivide in 5 tagli',10);";
+        q = "INSERT INTO \"valuta\" (\"nomev\",\"desc\",\"ratio\") VALUES ('moneta del regno di Ho','la valuta di uso comune nel regno di ho, si suddivide in 3 tagli',10);";
         db.execSQL(q);
 
         /* razza */
@@ -388,13 +388,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(q);
 
         /* nomi valute */
-        q = "INSERT INTO \"nomeVal\" (\"nomev\",\"nome\") VALUES ('moneta del regno di Ho','platino');";
-        db.execSQL(q);
-        q = "INSERT INTO \"nomeVal\" (\"nomev\",\"nome\") VALUES ('moneta del regno di Ho','oro');";
+        q = "INSERT INTO \"nomeVal\" (\"nomev\",\"nome\") VALUES ('moneta del regno di Ho','rame')";
         db.execSQL(q);
         q = "INSERT INTO \"nomeVal\" (\"nomev\",\"nome\") VALUES ('moneta del regno di Ho','argento');";
         db.execSQL(q);
-        q = "INSERT INTO \"nomeVal\" (\"nomev\",\"nome\") VALUES ('moneta del regno di Ho','rame');";
+        q = "INSERT INTO \"nomeVal\" (\"nomev\",\"nome\") VALUES ('moneta del regno di Ho','oro');";
         db.execSQL(q);
 
         /* abilità */

@@ -84,5 +84,9 @@
     <string name="ntemp1">es: 3sec</string>
     <string name="ntemp2">es: 3min</string>
     <string name="es_1d4_mod_forza">es: 1d4 + mod forza</string>
+    <string name="oro">Oro:</string>
+    <string name="argento">Argento:</string>
+    <string name="bronzo">Bronzo:</string>
+    <string name="_0">0</string>
 
 </resources>

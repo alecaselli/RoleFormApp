@@ -177,6 +177,13 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         } else Toast.makeText(this, "eliminazione fallito", Toast.LENGTH_LONG).show();
     }
 
+    public void openEquipment(int position) {
+        /*Intent intent = new Intent(this, EquipmentActivity.class);
+        intent.putExtra("nomee", cardBoolList.get(position).getNome());
+        startActivity(intent);
+        finish();*/
+    }
+
     public void addItem() {
         String nomee = itemSpinner.getSelectedItem().toString();
         if (nomee.equals(AGGIUNGI)) return;
@@ -199,13 +206,6 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
             cardAbilityList.add(nuovo);
             mAdapter.notifyItemInserted(cardAbilityList.size() - 1);
         } else Toast.makeText(this, "aggiunta fallita", Toast.LENGTH_LONG).show();
-    }
-
-    public void openEquipment(int position) {
-        /*Intent intent = new Intent(this, EquipmentActivity.class);
-        intent.putExtra("nomee", cardBoolList.get(position).getNome());
-        startActivity(intent);
-        finish();*/
     }
 
     public void disequipaggiaArma(View view) {
