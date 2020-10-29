@@ -268,7 +268,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(q);
 
         /* valuta */
-        q = "INSERT INTO \"valuta\" (\"nomev\",\"desc\",\"ratio\") VALUES ('moneta del regno di Ho','la valuta di uso comune nel regno di ho, si suddivide in 3 tagli',10);";
+        q = "INSERT INTO \"valuta\" (\"nomev\",\"desc\",\"ratio\") VALUES ('moneta del regno di Ho','la valuta di uso comune nel regno di ho, si suddivide in 3 tagli',100);";
         db.execSQL(q);
 
         /* razza */
