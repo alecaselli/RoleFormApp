@@ -143,15 +143,21 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
     public void equipaggia(int position) {
         Equipaggiamento equipaggiare = giocatore.getBorsa(cardAbilityList.get(position).getNome());
         if (!equipaggiare.getTipo().equals(Equipaggiamento.getTipobase().get(3))) { // tipo==oggetto
-            if (dbManager.aggiornaHage(nomecamp, nomeg, cardAbilityList.get(position).getNome(), false)) {
-                cardAbilityList.get(position).swapBool();
+            if (dbManager.aggiornaHage(nomecamp, nomeg, equipaggiare.getNome(), false)) {
 
                 Equipaggiamento disequipaggiare = giocatore.getEquipaggiato(equipaggiare.getTipo());
-                if (disequipaggiare != null) {
-                    giocatore.eliminaEquipaggiato(disequipaggiare);
-                    giocatore.aggiungiBorsa(disequipaggiare);
-                    cardAbilityList.add(new CardAbility(disequipaggiare.getNome(), false));
-                    mAdapter.notifyItemInserted(cardAbilityList.size() - 1);
+                if(disequipaggiare!=null){
+                    if(dbManager.aggiornaHage(nomecamp, nomeg, disequipaggiare.getNome(), true)){
+                        giocatore.eliminaEquipaggiato(disequipaggiare);
+                        giocatore.aggiungiBorsa(disequipaggiare);
+                        cardAbilityList.add(new CardAbility(disequipaggiare.getNome(), false));
+                        mAdapter.notifyItemInserted(cardAbilityList.size() - 1);
+                    }
+                    else{
+                        Toast.makeText(this, "equipaggiamento fallito", Toast.LENGTH_LONG).show();
+                        dbManager.aggiornaHage(nomecamp, nomeg, equipaggiare.getNome(), true);
+                        return;
+                    }
                 }
 
                 giocatore.eliminaBorsa(equipaggiare);
@@ -217,12 +223,15 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
     public void disequipaggia(int id, String tipo) {
         Equipaggiamento disequipaggiare = giocatore.getEquipaggiato(tipo);
         if (disequipaggiare != null) {
-            text = (TextView) findViewById(id);
-            text.setText(NONEQUIP);
-            giocatore.eliminaEquipaggiato(disequipaggiare);
-            giocatore.aggiungiBorsa(disequipaggiare);
-            cardAbilityList.add(new CardAbility(disequipaggiare.getNome(), false));
-            mAdapter.notifyItemInserted(cardAbilityList.size() - 1);
+            if(dbManager.aggiornaHage(nomecamp, nomeg, disequipaggiare.getNome(), true)){
+                text = (TextView) findViewById(id);
+                text.setText(NONEQUIP);
+                giocatore.eliminaEquipaggiato(disequipaggiare);
+                giocatore.aggiungiBorsa(disequipaggiare);
+                cardAbilityList.add(new CardAbility(disequipaggiare.getNome(), false));
+                mAdapter.notifyItemInserted(cardAbilityList.size() - 1);
+            }
+            else Toast.makeText(this, "disequipaggiamento fallito", Toast.LENGTH_LONG).show();
         }
     }
 
