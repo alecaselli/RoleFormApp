@@ -26,25 +26,15 @@ public class CharacterCharacterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_character);
 
-        this.estraiIntent();
         this.estraiGiocatore();
         this.setView();
     }
 
-    public void estraiIntent() {
+    public void estraiGiocatore() {
         Intent intent = getIntent();
         nomecamp = intent.getStringExtra("nomecamp");
         nomeg = intent.getStringExtra("nomeg");
-        dbManager = new DBManager(this);
-    }
-
-    public void estraiGiocatore() {
-        Intent intent = getIntent();
-        String nomecamp = intent.getStringExtra("nomecamp");
-        String nomeg = intent.getStringExtra("nomeg");
         DBManager db = new DBManager(this);
-        assert nomeg != null;
-        assert nomecamp != null;
         giocatore = db.leggiGiocatore(nomecamp, nomeg);
     }
 
