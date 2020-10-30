@@ -320,28 +320,41 @@
                             android:textSize="22sp" />
 
                         <TextView
-                            android:id="@+id/character_base_strenght"
-                            android:layout_width="34dp"
+                            android:id="@+id/character_total_strenght"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="16dp"
-                            android:layout_toStartOf="@id/character_bonus_strenght"
-                            android:text="[15]"
+                            android:layout_marginEnd="22dp"
+                            android:layout_toStartOf="@id/forzac"
+                            android:onClick="strenghtButton"
+                            android:text="15"
+                            android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="20sp"
-                            android:onClick="strenghtButton"/>
+                            android:textSize="20sp" />
 
-                        <TextView
-                            android:id="@+id/character_bonus_strenght"
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/forzac"
                             android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="10dp"
-                            android:text="+3"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:layout_marginEnd="2dp">
 
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#e6e6e6">
+
+                                <TextView
+                                    android:id="@+id/character_mod_strenght"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="3"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp" />
+                            </RelativeLayout>
+                        </com.google.android.material.card.MaterialCardView>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -359,27 +372,41 @@
                             android:textSize="22sp" />
 
                         <TextView
-                            android:id="@+id/character_base_dexterity"
-                            android:layout_width="34dp"
+                            android:id="@+id/character_total_dexterity"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="16dp"
-                            android:layout_toStartOf="@id/character_bonus_dexterity"
-                            android:text="[15]"
+                            android:layout_marginEnd="22dp"
+                            android:layout_toStartOf="@id/destrezzac"
+                            android:onClick="dexterityButton"
+                            android:text="15"
+                            android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="20sp"
-                            android:onClick="dexterityButton"/>
+                            android:textSize="20sp" />
 
-                        <TextView
-                            android:id="@+id/character_bonus_dexterity"
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/destrezzac"
                             android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="10dp"
-                            android:text="+3"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:layout_marginEnd="2dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#e6e6e6">
+
+                                <TextView
+                                    android:id="@+id/character_mod_dexterity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="3"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp" />
+                            </RelativeLayout>
+                        </com.google.android.material.card.MaterialCardView>
 
                     </RelativeLayout>
 
@@ -398,27 +425,41 @@
                             android:textSize="22sp" />
 
                         <TextView
-                            android:id="@+id/character_base_constitution"
-                            android:layout_width="34dp"
+                            android:id="@+id/character_total_constitution"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="16dp"
-                            android:layout_toStartOf="@id/character_bonus_constitution"
-                            android:text="[15]"
+                            android:layout_marginEnd="22dp"
+                            android:layout_toStartOf="@id/costituzionec"
+                            android:onClick="consitutionButton"
+                            android:text="15"
+                            android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="20sp"
-                            android:onClick="consitutionButton"/>
+                            android:textSize="20sp" />
 
-                        <TextView
-                            android:id="@+id/character_bonus_constitution"
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/costituzionec"
                             android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="10dp"
-                            android:text="+3"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:layout_marginEnd="2dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#e6e6e6">
+
+                                <TextView
+                                    android:id="@+id/character_mod_constitution"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="3"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp" />
+                            </RelativeLayout>
+                        </com.google.android.material.card.MaterialCardView>
 
                     </RelativeLayout>
 
@@ -437,27 +478,41 @@
                             android:textSize="22sp" />
 
                         <TextView
-                            android:id="@+id/character_base_intelligence"
-                            android:layout_width="34dp"
+                            android:id="@+id/character_total_intelligence"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="16dp"
-                            android:layout_toStartOf="@id/character_bonus_intelligence"
-                            android:text="[15]"
+                            android:layout_marginEnd="22dp"
+                            android:layout_toStartOf="@id/intelligenzac"
+                            android:onClick="intelligenceButton"
+                            android:text="15"
+                            android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="20sp"
-                            android:onClick="intelligenceButton"/>
+                            android:textSize="20sp" />
 
-                        <TextView
-                            android:id="@+id/character_bonus_intelligence"
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/intelligenzac"
                             android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="10dp"
-                            android:text="+3"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:layout_marginEnd="2dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#e6e6e6">
+
+                                <TextView
+                                    android:id="@+id/character_mod_intelligence"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="3"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp" />
+                            </RelativeLayout>
+                        </com.google.android.material.card.MaterialCardView>
 
                     </RelativeLayout>
 
@@ -476,27 +531,41 @@
                             android:textSize="22sp" />
 
                         <TextView
-                            android:id="@+id/character_base_wisdom"
-                            android:layout_width="34dp"
+                            android:id="@+id/character_total_wisdom"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="16dp"
-                            android:layout_toStartOf="@id/character_bonus_wisdom"
-                            android:text="[15]"
+                            android:layout_marginEnd="22dp"
+                            android:layout_toStartOf="@id/saggezzac"
+                            android:onClick="wisdomButton"
+                            android:text="15"
+                            android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="20sp"
-                            android:onClick="wisdomButton"/>
+                            android:textSize="20sp" />
 
-                        <TextView
-                            android:id="@+id/character_bonus_wisdom"
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/saggezzac"
                             android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="10dp"
-                            android:text="+3"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:layout_marginEnd="2dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#e6e6e6">
+
+                                <TextView
+                                    android:id="@+id/character_mod_wisdom"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="3"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp" />
+                            </RelativeLayout>
+                        </com.google.android.material.card.MaterialCardView>
 
                     </RelativeLayout>
 
@@ -515,27 +584,41 @@
                             android:textSize="22sp" />
 
                         <TextView
-                            android:id="@+id/character_base_charisma"
-                            android:layout_width="34dp"
+                            android:id="@+id/character_total_charisma"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="16dp"
-                            android:layout_toStartOf="@id/character_bonus_charisma"
-                            android:text="[15]"
+                            android:layout_marginEnd="22dp"
+                            android:layout_toStartOf="@id/carismac"
+                            android:onClick="charismaButton"
+                            android:text="15"
+                            android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="20sp"
-                            android:onClick="charismaButton"/>
+                            android:textSize="20sp" />
 
-                        <TextView
-                            android:id="@+id/character_bonus_charisma"
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/carismac"
                             android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="10dp"
-                            android:text="+3"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:layout_marginEnd="2dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#e6e6e6">
+
+                                <TextView
+                                    android:id="@+id/character_mod_charisma"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="3"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp" />
+                            </RelativeLayout>
+                        </com.google.android.material.card.MaterialCardView>
 
                     </RelativeLayout>
                 </LinearLayout>
@@ -560,13 +643,12 @@
 
                     <Button
                         android:id="@+id/character_currency_button"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginTop="2dp"
-                        android:background="@drawable/ic_add"/>
-                       <!-- android:background="@drawable/ic_round_change_history"-->
+                        android:background="@drawable/ic_add" />
+                    <!-- android:background="@drawable/ic_round_change_history"-->
 
                     <RelativeLayout
                         android:id="@+id/character_currency_base"

@@ -103,12 +103,12 @@ public class CharacterActivity extends AppCompatActivity {
         txt = (TextView) findViewById(R.id.character_class);
         txt.setText(giocatore.getClasse().getNome());
 
-        this.setCaratteristica("forza", R.id.character_base_strenght, R.id.character_bonus_strenght);
-        this.setCaratteristica("destrezza", R.id.character_base_dexterity, R.id.character_bonus_dexterity);
-        this.setCaratteristica("costituzione", R.id.character_base_constitution, R.id.character_bonus_constitution);
-        this.setCaratteristica("intelligenza", R.id.character_base_intelligence, R.id.character_bonus_intelligence);
-        this.setCaratteristica("saggezza", R.id.character_base_wisdom, R.id.character_bonus_wisdom);
-        this.setCaratteristica("carisma", R.id.character_base_charisma, R.id.character_bonus_charisma);
+        this.setCaratteristica("forza", R.id.character_total_strenght, R.id.character_mod_strenght);
+        this.setCaratteristica("destrezza", R.id.character_total_dexterity, R.id.character_mod_dexterity);
+        this.setCaratteristica("costituzione", R.id.character_total_constitution, R.id.character_mod_constitution);
+        this.setCaratteristica("intelligenza", R.id.character_total_intelligence, R.id.character_mod_intelligence);
+        this.setCaratteristica("saggezza", R.id.character_total_wisdom, R.id.character_mod_wisdom);
+        this.setCaratteristica("carisma", R.id.character_total_charisma, R.id.character_mod_charisma);
 
         this.setEquipaggiamento("armatura", R.id.armor_name);
         this.setEquipaggiamento("scudo", R.id.shield_name);
@@ -185,23 +185,23 @@ public class CharacterActivity extends AppCompatActivity {
         CardView bronzeBaseButton = findViewById(R.id.bronzeBaseButton);
         this.setCurrencyOnLongClick(bronzeBaseButton, -1, 0, 0);
 
-        TextView strenghtButton = findViewById(R.id.character_base_strenght);
-        this.setCaratteristicaOnLongClick(strenghtButton, "forza", R.id.character_base_strenght);
+        TextView strenghtButton = findViewById(R.id.character_total_strenght);
+        this.setCaratteristicaOnLongClick(strenghtButton, "forza", R.id.character_total_strenght);
 
-        TextView dexterityButton = findViewById(R.id.character_base_dexterity);
-        this.setCaratteristicaOnLongClick(dexterityButton, "destrezza", R.id.character_base_dexterity);
+        TextView dexterityButton = findViewById(R.id.character_total_dexterity);
+        this.setCaratteristicaOnLongClick(dexterityButton, "destrezza", R.id.character_total_dexterity);
 
-        TextView constitutionButton = findViewById(R.id.character_base_constitution);
-        this.setCaratteristicaOnLongClick(constitutionButton, "costituzione", R.id.character_base_constitution);
+        TextView constitutionButton = findViewById(R.id.character_total_constitution);
+        this.setCaratteristicaOnLongClick(constitutionButton, "costituzione", R.id.character_total_constitution);
 
-        TextView intelligenceButton = findViewById(R.id.character_base_intelligence);
-        this.setCaratteristicaOnLongClick(intelligenceButton, "intelligenza", R.id.character_base_intelligence);
+        TextView intelligenceButton = findViewById(R.id.character_total_intelligence);
+        this.setCaratteristicaOnLongClick(intelligenceButton, "intelligenza", R.id.character_total_intelligence);
 
-        TextView wisdomButton = findViewById(R.id.character_base_wisdom);
-        this.setCaratteristicaOnLongClick(wisdomButton, "saggezza", R.id.character_base_wisdom);
+        TextView wisdomButton = findViewById(R.id.character_total_wisdom);
+        this.setCaratteristicaOnLongClick(wisdomButton, "saggezza", R.id.character_total_wisdom);
 
-        TextView charismaButton = findViewById(R.id.character_base_charisma);
-        this.setCaratteristicaOnLongClick(charismaButton, "carisma", R.id.character_base_charisma);
+        TextView charismaButton = findViewById(R.id.character_total_charisma);
+        this.setCaratteristicaOnLongClick(charismaButton, "carisma", R.id.character_total_charisma);
     }
 
     public void setCurrencyOnLongClick(@NotNull CardView currencyButton, final int val0, final int val1, final int val2) {
@@ -301,27 +301,27 @@ public class CharacterActivity extends AppCompatActivity {
     }
 
     public void strenghtButton(View view) {
-        this.aggiornaCaratteristica("forza", R.id.character_base_strenght, 1);
+        this.aggiornaCaratteristica("forza", R.id.character_total_strenght, 1);
     }
 
     public void dexterityButton(View view) {
-        this.aggiornaCaratteristica("destrezza", R.id.character_base_dexterity, 1);
+        this.aggiornaCaratteristica("destrezza", R.id.character_total_dexterity, 1);
     }
 
     public void consitutionButton(View view) {
-        this.aggiornaCaratteristica("costituzione", R.id.character_base_constitution, 1);
+        this.aggiornaCaratteristica("costituzione", R.id.character_total_constitution, 1);
     }
 
     public void intelligenceButton(View view) {
-        this.aggiornaCaratteristica("intelligenza", R.id.character_base_intelligence, 1);
+        this.aggiornaCaratteristica("intelligenza", R.id.character_total_intelligence, 1);
     }
 
     public void wisdomButton(View view) {
-        this.aggiornaCaratteristica("saggezza", R.id.character_base_wisdom, 1);
+        this.aggiornaCaratteristica("saggezza", R.id.character_total_wisdom, 1);
     }
 
     public void charismaButton(View view) {
-        this.aggiornaCaratteristica("carisma", R.id.character_base_charisma, 1);
+        this.aggiornaCaratteristica("carisma", R.id.character_total_charisma, 1);
     }
 
     /* OPEN */
