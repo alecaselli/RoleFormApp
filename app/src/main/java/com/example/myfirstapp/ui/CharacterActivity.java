@@ -177,31 +177,31 @@ public class CharacterActivity extends AppCompatActivity {
 
     public void setOnLongClick() {
         CardView goldBaseButton = findViewById(R.id.goldBaseButton);
-        this.setCurrencyOnLongClick(goldBaseButton,0, 0, -1);
+        this.setCurrencyOnLongClick(goldBaseButton, 0, 0, -1);
 
         CardView silverBaseButton = findViewById(R.id.silverBaseButton);
-        this.setCurrencyOnLongClick(silverBaseButton,0, -1, 0);
+        this.setCurrencyOnLongClick(silverBaseButton, 0, -1, 0);
 
         CardView bronzeBaseButton = findViewById(R.id.bronzeBaseButton);
-        this.setCurrencyOnLongClick(bronzeBaseButton,-1, 0, 0);
+        this.setCurrencyOnLongClick(bronzeBaseButton, -1, 0, 0);
 
         TextView strenghtButton = findViewById(R.id.character_base_strenght);
-        this.setCaratteristicaOnLongClick(strenghtButton, R.id.character_base_strenght);
+        this.setCaratteristicaOnLongClick(strenghtButton, "forza", R.id.character_base_strenght);
 
         TextView dexterityButton = findViewById(R.id.character_base_dexterity);
-        this.setCaratteristicaOnLongClick(dexterityButton, R.id.character_base_dexterity);
+        this.setCaratteristicaOnLongClick(dexterityButton, "destrezza", R.id.character_base_dexterity);
 
         TextView consitutionButton = findViewById(R.id.character_base_constitution);
-        this.setCaratteristicaOnLongClick(consitutionButton, R.id.character_base_constitution);
+        this.setCaratteristicaOnLongClick(consitutionButton, "costituzione", R.id.character_base_constitution);
 
         TextView intelligenceButton = findViewById(R.id.character_base_intelligence);
-        this.setCaratteristicaOnLongClick(intelligenceButton, R.id.character_base_intelligence);
+        this.setCaratteristicaOnLongClick(intelligenceButton, "intelligenza", R.id.character_base_intelligence);
 
         TextView wisdomButton = findViewById(R.id.character_base_wisdom);
-        this.setCaratteristicaOnLongClick(wisdomButton, R.id.character_base_wisdom);
+        this.setCaratteristicaOnLongClick(wisdomButton, "saggezza", R.id.character_base_wisdom);
 
         TextView charismaButton = findViewById(R.id.character_base_charisma);
-        this.setCaratteristicaOnLongClick(charismaButton, R.id.character_base_charisma);
+        this.setCaratteristicaOnLongClick(charismaButton, "carisma", R.id.character_base_charisma);
     }
 
     public void setCurrencyOnLongClick(@NotNull CardView currencyButton, final int val0, final int val1, final int val2) {
@@ -214,11 +214,11 @@ public class CharacterActivity extends AppCompatActivity {
         });
     }
 
-    public void setCaratteristicaOnLongClick(@NotNull TextView CaratteristicaButton, final int id) {
+    public void setCaratteristicaOnLongClick(@NotNull TextView CaratteristicaButton, final String tipo, final int id) {
         CaratteristicaButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                aggiornaCaratteristica("forza", id, -1);
+                aggiornaCaratteristica(tipo, id, -1);
                 return true;
             }
         });
