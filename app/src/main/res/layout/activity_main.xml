@@ -89,7 +89,7 @@
             android:layout_centerVertical="true"
             android:background="?android:selectableItemBackground"
             android:onClick="openCreateNewCharacter"
-            android:src="@drawable/ic_add" />
+            android:src="@drawable/ic_add_big" />
 
         <ImageButton
             android:id="@+id/info_button"

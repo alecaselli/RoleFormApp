@@ -168,7 +168,7 @@ public class CharacterActivity extends AppCompatActivity {
                     TransitionManager.beginDelayedTransition((ViewGroup) currencyCard.getParent().getParent(), new AutoTransition());
                     currencyBaseView.setVisibility(View.VISIBLE);
                     currencyModView.setVisibility(View.GONE);
-                    currencyButton.setBackgroundResource(R.drawable.ic_round_change_history);
+                    currencyButton.setBackgroundResource(R.drawable.ic_add);
                     aggiornaValuta();
                 }
             }
@@ -191,8 +191,8 @@ public class CharacterActivity extends AppCompatActivity {
         TextView dexterityButton = findViewById(R.id.character_base_dexterity);
         this.setCaratteristicaOnLongClick(dexterityButton, "destrezza", R.id.character_base_dexterity);
 
-        TextView consitutionButton = findViewById(R.id.character_base_constitution);
-        this.setCaratteristicaOnLongClick(consitutionButton, "costituzione", R.id.character_base_constitution);
+        TextView constitutionButton = findViewById(R.id.character_base_constitution);
+        this.setCaratteristicaOnLongClick(constitutionButton, "costituzione", R.id.character_base_constitution);
 
         TextView intelligenceButton = findViewById(R.id.character_base_intelligence);
         this.setCaratteristicaOnLongClick(intelligenceButton, "intelligenza", R.id.character_base_intelligence);
