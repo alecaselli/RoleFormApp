@@ -351,17 +351,17 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(q);
 
         /* caratteristica */
-        q = "INSERT INTO \"caratteristica\" (\"nomecar\",\"desc\") VALUES ('forza','la tua forza fisica');";
+        q = "INSERT INTO \"caratteristica\" (\"nomecar\",\"desc\") VALUES ('forza','La forza misura la prestanza e potenza fisica di un personaggio, ne determina fisicità, atletismo ed alcune caratteristiche come la quantità di equipaggiamento trasportabile e le armi ed armature utilizzabili.');";
         db.execSQL(q);
-        q = "INSERT INTO \"caratteristica\" (\"nomecar\",\"desc\") VALUES ('destrezza','la capacità di cavartela in ogni circostanza');";
+        q = "INSERT INTO \"caratteristica\" (\"nomecar\",\"desc\") VALUES ('destrezza','La destrezza rappresenta l''agilità e velocità nei movimenti, la coordinazione, i riflessi e l''equilibrio del personaggio, tipicamente utilizzatore di equipaggiamento leggero.');";
         db.execSQL(q);
-        q = "INSERT INTO \"caratteristica\" (\"nomecar\",\"desc\") VALUES ('costituzione','la tua vitalità');";
+        q = "INSERT INTO \"caratteristica\" (\"nomecar\",\"desc\") VALUES ('costituzione','La costituzione rappresenza la salute, la stamina e la resistenza del personaggio, un valore di costituzione alto comporta un valore più alto di punti ferita.');";
         db.execSQL(q);
-        q = "INSERT INTO \"caratteristica\" (\"nomecar\",\"desc\") VALUES ('intelligenza','la tua mole di conoscenza');";
+        q = "INSERT INTO \"caratteristica\" (\"nomecar\",\"desc\") VALUES ('intelligenza','L''intelligenza determina la capacità di ragionamento ed apprendimento del personaggio, influisce il numero di incantesimi utilizzabili e quando difficile sia resistervi, un valore alto caratterizza un personaggio colto dal ragionamento analitico.');";
         db.execSQL(q);
-        q = "INSERT INTO \"caratteristica\" (\"nomecar\",\"desc\") VALUES ('saggezza','iil tuo grado di discernimento della natura intrinseca delle cose');";
+        q = "INSERT INTO \"caratteristica\" (\"nomecar\",\"desc\") VALUES ('saggezza','La saggezza misura la capacità di un personaggio di prendere decisioni ed analizzare al meglio un contesto, indica la forza di volontà, il buonsenso e la perspicacia.');";
         db.execSQL(q);
-        q = "INSERT INTO \"caratteristica\" (\"nomecar\",\"desc\") VALUES ('carisma','capacità nell''affascinare gli altri');";
+        q = "INSERT INTO \"caratteristica\" (\"nomecar\",\"desc\") VALUES ('carisma','Il carisma corrisponde alla forza della personalità, alla capacità di persuasione, al fascino ed alla predisposizione al comando di un personaggio, tipicamente accattivante o intimidatorio.');";
         db.execSQL(q);
 
         /* arma/armatura */

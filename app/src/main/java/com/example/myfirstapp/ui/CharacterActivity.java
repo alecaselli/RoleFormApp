@@ -21,6 +21,8 @@ import com.example.myfirstapp.domain.Caratteristica;
 import com.example.myfirstapp.domain.Equipaggiamento;
 import com.example.myfirstapp.domain.Giocatore;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class CharacterActivity extends AppCompatActivity {
         this.estraiGiocatore();
         this.setView();
         this.setButton();
-        this.setLongClick();
+        this.setOnLongClick();
 
     }
 
@@ -61,6 +63,7 @@ public class CharacterActivity extends AppCompatActivity {
         giocatore = dbManager.leggiGiocatore(nomecamp, nomeg);
     }
 
+    /* SET */
     @SuppressLint("DefaultLocale")
     public void setView() {
 
@@ -100,62 +103,41 @@ public class CharacterActivity extends AppCompatActivity {
         txt = (TextView) findViewById(R.id.character_class);
         txt.setText(giocatore.getClasse().getNome());
 
-        Caratteristica caratteristica = giocatore.getCaratteristica("forza");
-        txt = (TextView) findViewById(R.id.character_base_strenght);
-        txt.setText(String.valueOf(caratteristica.getBase()));
-        txt = (TextView) findViewById(R.id.character_bonus_strenght);
-        txt.setText(String.valueOf(caratteristica.getBonus()));
+        this.setCaratteristica("forza", R.id.character_base_strenght, R.id.character_bonus_strenght);
+        this.setCaratteristica("destrezza", R.id.character_base_dexterity, R.id.character_bonus_dexterity);
+        this.setCaratteristica("costituzione", R.id.character_base_constitution, R.id.character_bonus_constitution);
+        this.setCaratteristica("intelligenza", R.id.character_base_intelligence, R.id.character_bonus_intelligence);
+        this.setCaratteristica("saggezza", R.id.character_base_wisdom, R.id.character_bonus_wisdom);
+        this.setCaratteristica("carisma", R.id.character_base_charisma, R.id.character_bonus_charisma);
 
-        caratteristica = giocatore.getCaratteristica("destrezza");
-        txt = (TextView) findViewById(R.id.character_base_dexterity);
-        txt.setText(String.valueOf(caratteristica.getBase()));
-        txt = (TextView) findViewById(R.id.character_bonus_dexterity);
-        txt.setText(String.valueOf(caratteristica.getBonus()));
+        this.setEquipaggiamento("armatura", R.id.armor_name);
+        this.setEquipaggiamento("scudo", R.id.shield_name);
+        this.setEquipaggiamento("arma", R.id.weapon_name);
 
-        caratteristica = giocatore.getCaratteristica("costituzione");
-        txt = (TextView) findViewById(R.id.character_base_constitution);
-        txt.setText(String.valueOf(caratteristica.getBase()));
-        txt = (TextView) findViewById(R.id.character_bonus_constitution);
-        txt.setText(String.valueOf(caratteristica.getBonus()));
+        this.setPortafoglio();
+    }
 
-        caratteristica = giocatore.getCaratteristica("intelligenza");
-        txt = (TextView) findViewById(R.id.character_base_intelligence);
+    public void setCaratteristica(String tipo, int idBase, int idBonus) {
+        Caratteristica caratteristica = giocatore.getCaratteristica(tipo);
+        txt = (TextView) findViewById(idBase);
         txt.setText(String.valueOf(caratteristica.getBase()));
-        txt = (TextView) findViewById(R.id.character_bonus_intelligence);
+        txt = (TextView) findViewById(idBonus);
         txt.setText(String.valueOf(caratteristica.getBonus()));
+    }
 
-        caratteristica = giocatore.getCaratteristica("saggezza");
-        txt = (TextView) findViewById(R.id.character_base_wisdom);
+    public void setCaratteristica(String tipo, int idBase) {
+        Caratteristica caratteristica = giocatore.getCaratteristica(tipo);
+        txt = (TextView) findViewById(idBase);
         txt.setText(String.valueOf(caratteristica.getBase()));
-        txt = (TextView) findViewById(R.id.character_bonus_wisdom);
-        txt.setText(String.valueOf(caratteristica.getBonus()));
+    }
 
-        caratteristica = giocatore.getCaratteristica("carisma");
-        txt = (TextView) findViewById(R.id.character_base_charisma);
-        txt.setText(String.valueOf(caratteristica.getBase()));
-        txt = (TextView) findViewById(R.id.character_bonus_charisma);
-        txt.setText(String.valueOf(caratteristica.getBonus()));
-
-        Equipaggiamento equipaggiamento = giocatore.getEquipaggiato("armatura");
+    public void setEquipaggiamento(String tipo, int id) {
+        Equipaggiamento equipaggiamento = giocatore.getEquipaggiato(tipo);
         String nome;
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
         else nome = "Non equipaggiato";
-        txt = (TextView) findViewById(R.id.armor_name);
+        txt = (TextView) findViewById(id);
         txt.setText(nome);
-
-        equipaggiamento = giocatore.getEquipaggiato("scudo");
-        if (equipaggiamento != null) nome = equipaggiamento.getNome();
-        else nome = "Non equipaggiato";
-        txt = (TextView) findViewById(R.id.shield_name);
-        txt.setText(nome);
-
-        equipaggiamento = giocatore.getEquipaggiato("arma");
-        if (equipaggiamento != null) nome = equipaggiamento.getNome();
-        else nome = "Non equipaggiato";
-        txt = (TextView) findViewById(R.id.weapon_name);
-        txt.setText(nome);
-
-        this.setPortafoglio();
     }
 
     public void setPortafoglio() {
@@ -193,35 +175,56 @@ public class CharacterActivity extends AppCompatActivity {
         });
     }
 
-    public void setLongClick() {
+    public void setOnLongClick() {
         CardView goldBaseButton = findViewById(R.id.goldBaseButton);
-        goldBaseButton.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                aggiornaValuta(0, 0, -1);
-                return true;
-            }
-        });
+        this.setCurrencyOnLongClick(goldBaseButton,0, 0, -1);
 
         CardView silverBaseButton = findViewById(R.id.silverBaseButton);
-        silverBaseButton.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                aggiornaValuta(0, -1, 0);
-                return true;
-            }
-        });
+        this.setCurrencyOnLongClick(silverBaseButton,0, -1, 0);
 
         CardView bronzeBaseButton = findViewById(R.id.bronzeBaseButton);
-        bronzeBaseButton.setOnLongClickListener(new View.OnLongClickListener() {
+        this.setCurrencyOnLongClick(bronzeBaseButton,-1, 0, 0);
+
+        TextView strenghtButton = findViewById(R.id.character_base_strenght);
+        this.setCaratteristicaOnLongClick(strenghtButton, R.id.character_base_strenght);
+
+        TextView dexterityButton = findViewById(R.id.character_base_dexterity);
+        this.setCaratteristicaOnLongClick(dexterityButton, R.id.character_base_dexterity);
+
+        TextView consitutionButton = findViewById(R.id.character_base_constitution);
+        this.setCaratteristicaOnLongClick(consitutionButton, R.id.character_base_constitution);
+
+        TextView intelligenceButton = findViewById(R.id.character_base_intelligence);
+        this.setCaratteristicaOnLongClick(intelligenceButton, R.id.character_base_intelligence);
+
+        TextView wisdomButton = findViewById(R.id.character_base_wisdom);
+        this.setCaratteristicaOnLongClick(wisdomButton, R.id.character_base_wisdom);
+
+        TextView charismaButton = findViewById(R.id.character_base_charisma);
+        this.setCaratteristicaOnLongClick(charismaButton, R.id.character_base_charisma);
+    }
+
+    public void setCurrencyOnLongClick(@NotNull CardView currencyButton, final int val0, final int val1, final int val2) {
+        currencyButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                aggiornaValuta(-1, 0, 0);
+                aggiornaValuta(val0, val1, val2);
                 return true;
             }
         });
     }
 
+    public void setCaratteristicaOnLongClick(@NotNull TextView CaratteristicaButton, final int id) {
+        CaratteristicaButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                aggiornaCaratteristica("forza", id, -1);
+                return true;
+            }
+        });
+    }
+
+    /* CURRENCY BUTTON */
     public void aggiornaValuta() {
         List<Integer> valore = new ArrayList<>();
         boolean aggiorna = false;
@@ -285,6 +288,43 @@ public class CharacterActivity extends AppCompatActivity {
         this.aggiornaValuta(1, 0, 0);
     }
 
+    /* CARATTERISTICHE BUTTON */
+    public void aggiornaCaratteristica(String tipo, int idBase, int valore) {
+        Caratteristica caratteristica = giocatore.getCaratteristica(tipo);
+        caratteristica.addValoreBase(valore);
+        if (dbManager.aggiornaCaratteristicaG(giocatore.getNomeCampagna(), giocatore.getNome(), caratteristica)) {
+            this.setCaratteristica(tipo, idBase);
+        } else {
+            Toast.makeText(this, "aggiornamento caratteristica fallito", Toast.LENGTH_LONG).show();
+            caratteristica.addValoreBase(-valore);
+        }
+    }
+
+    public void strenghtButton(View view) {
+        this.aggiornaCaratteristica("forza", R.id.character_base_strenght, 1);
+    }
+
+    public void dexterityButton(View view) {
+        this.aggiornaCaratteristica("destrezza", R.id.character_base_dexterity, 1);
+    }
+
+    public void consitutionButton(View view) {
+        this.aggiornaCaratteristica("costituzione", R.id.character_base_constitution, 1);
+    }
+
+    public void intelligenceButton(View view) {
+        this.aggiornaCaratteristica("intelligenza", R.id.character_base_intelligence, 1);
+    }
+
+    public void wisdomButton(View view) {
+        this.aggiornaCaratteristica("saggezza", R.id.character_base_wisdom, 1);
+    }
+
+    public void charismaButton(View view) {
+        this.aggiornaCaratteristica("carisma", R.id.character_base_charisma, 1);
+    }
+
+    /* OPEN */
     public void openCharacterNote(View view) {
         Intent intent = new Intent(this, CharacterNoteActivity.class);
         intent.putExtra("nomecamp", giocatore.getNomeCampagna());

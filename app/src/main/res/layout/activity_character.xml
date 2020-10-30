@@ -328,7 +328,8 @@
                             android:layout_toStartOf="@id/character_bonus_strenght"
                             android:text="[15]"
                             android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:onClick="strenghtButton"/>
 
                         <TextView
                             android:id="@+id/character_bonus_strenght"
@@ -366,7 +367,8 @@
                             android:layout_toStartOf="@id/character_bonus_dexterity"
                             android:text="[15]"
                             android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:onClick="dexterityButton"/>
 
                         <TextView
                             android:id="@+id/character_bonus_dexterity"
@@ -404,7 +406,8 @@
                             android:layout_toStartOf="@id/character_bonus_constitution"
                             android:text="[15]"
                             android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:onClick="consitutionButton"/>
 
                         <TextView
                             android:id="@+id/character_bonus_constitution"
@@ -442,7 +445,8 @@
                             android:layout_toStartOf="@id/character_bonus_intelligence"
                             android:text="[15]"
                             android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:onClick="intelligenceButton"/>
 
                         <TextView
                             android:id="@+id/character_bonus_intelligence"
@@ -480,7 +484,8 @@
                             android:layout_toStartOf="@id/character_bonus_wisdom"
                             android:text="[15]"
                             android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:onClick="wisdomButton"/>
 
                         <TextView
                             android:id="@+id/character_bonus_wisdom"
@@ -518,7 +523,8 @@
                             android:layout_toStartOf="@id/character_bonus_charisma"
                             android:text="[15]"
                             android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:onClick="charismaButton"/>
 
                         <TextView
                             android:id="@+id/character_bonus_charisma"

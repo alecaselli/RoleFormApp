@@ -393,7 +393,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="casual"
-                            android:text="L'intelligenza determina la capacità di ragionamento ed apprendimento del personaggio, influisce il numero di incantesimi utilizzabili e quando difficile sia resistervi, un valore alto caratterizza un personaggio colto dal ragionamento analitico"
+                            android:text="L'intelligenza determina la capacità di ragionamento ed apprendimento del personaggio, influisce il numero di incantesimi utilizzabili e quando difficile sia resistervi, un valore alto caratterizza un personaggio colto dal ragionamento analitico."
                             android:textColor="@color/grey"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -579,7 +579,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="casual"
-                            android:text="Il carisma corrisponde alla forza della personalità, alla capacità di persuasione, al fascino ed alla predisposizione al comando di un personaggio, tipicamente accattivante o intimidatorio"
+                            android:text="Il carisma corrisponde alla forza della personalità, alla capacità di persuasione, al fascino ed alla predisposizione al comando di un personaggio, tipicamente accattivante o intimidatorio."
                             android:textColor="@color/grey"
                             android:textSize="13sp"
                             android:textStyle="bold" />
