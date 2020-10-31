@@ -45,6 +45,9 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_bag_temporaneo);
 
+        itemSpinner = findViewById(R.id.bag_add_item_spinner);
+        itemSpinner.setPrompt("Proviamo");
+
         this.estraiGiocatore();
         this.createCardBorsaList();
         this.setView();
@@ -126,6 +129,7 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         ItemSpinnerAdapter.addAll(equipaggiamentoList);
         ItemSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_custom_item);
         itemSpinner = findViewById(R.id.bag_add_item_spinner);
+        itemSpinner.setPrompt("Proviamo");
         itemSpinner.setAdapter(ItemSpinnerAdapter);
         itemSpinner.setOnItemSelectedListener(this);
     }
