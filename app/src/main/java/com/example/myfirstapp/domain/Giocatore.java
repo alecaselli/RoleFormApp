@@ -3,6 +3,8 @@ package com.example.myfirstapp.domain;
 import android.content.Context;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -382,8 +384,7 @@ public class Giocatore extends Descrivibile {
     }
 
     public void eliminaBorsa(@NotNull List<Equipaggiamento> togli) {
-        for (Equipaggiamento i : togli)
-            this.borsa.remove(i);
+            this.borsa.removeAll(togli);
     }
 
     public void eliminaBorsa(@NotNull Equipaggiamento togli) {
@@ -399,8 +400,7 @@ public class Giocatore extends Descrivibile {
     }
 
     public void eliminaEquipaggiato(@NotNull List<Equipaggiamento> togli) {
-        for (Equipaggiamento i : togli)
-            this.equipaggiato.remove(i);
+            this.equipaggiato.removeAll(togli);
     }
 
     public void eliminaEquipaggiato(@NotNull Equipaggiamento togli) {
@@ -416,8 +416,7 @@ public class Giocatore extends Descrivibile {
     }
 
     public void eliminaIncantesimo(@NotNull List<Incantesimo> togli) {
-        for (Incantesimo i : togli)
-            this.incantesimiGiocatore.remove(i);
+            this.incantesimiGiocatore.removeAll(togli);
     }
 
     public void eliminaIncantesimo(@NotNull Incantesimo togli) {
@@ -479,5 +478,19 @@ public class Giocatore extends Descrivibile {
             this.aggiornaPuntiStat(-valtot);
         } else
             Toast.makeText(context, "giocatore inserito", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        assert obj != null;
+        if (!obj.getClass().equals(this.getClass()))
+            return false;
+        Giocatore that = (Giocatore) obj;
+        boolean equal = false;
+        if (this.getNomeCampagna().equals(that.getNomeCampagna()))
+            return this.getNome().equals(that.getNome());
+        else
+            return false;
+
     }
 }
