@@ -43,9 +43,7 @@
                 android:id="@+id/activity_center"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_centerHorizontal="true">
-
-            </RelativeLayout>
+                android:layout_centerHorizontal="true"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/character_character"
@@ -648,7 +646,6 @@
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
                         android:background="@drawable/ic_add" />
-                    <!-- android:background="@drawable/ic_round_change_history"-->
 
                     <RelativeLayout
                         android:id="@+id/character_currency_base"
