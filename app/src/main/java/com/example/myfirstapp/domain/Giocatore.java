@@ -3,6 +3,8 @@ package com.example.myfirstapp.domain;
 import android.content.Context;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -479,5 +481,19 @@ public class Giocatore extends Descrivibile {
             this.aggiornaPuntiStat(-valtot);
         } else
             Toast.makeText(context, "giocatore inserito", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        assert obj != null;
+        if (!obj.getClass().equals(this.getClass()))
+            return false;
+        Giocatore that = (Giocatore) obj;
+        boolean equal = false;
+        if (this.getNomeCampagna().equals(that.getNomeCampagna()))
+            return this.getNome().equals(that.getNome());
+        else
+            return false;
+
     }
 }
