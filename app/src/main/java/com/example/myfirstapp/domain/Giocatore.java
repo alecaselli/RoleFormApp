@@ -384,8 +384,7 @@ public class Giocatore extends Descrivibile {
     }
 
     public void eliminaBorsa(@NotNull List<Equipaggiamento> togli) {
-        for (Equipaggiamento i : togli)
-            this.borsa.remove(i);
+            this.borsa.removeAll(togli);
     }
 
     public void eliminaBorsa(@NotNull Equipaggiamento togli) {
@@ -401,8 +400,7 @@ public class Giocatore extends Descrivibile {
     }
 
     public void eliminaEquipaggiato(@NotNull List<Equipaggiamento> togli) {
-        for (Equipaggiamento i : togli)
-            this.equipaggiato.remove(i);
+            this.equipaggiato.removeAll(togli);
     }
 
     public void eliminaEquipaggiato(@NotNull Equipaggiamento togli) {
@@ -418,8 +416,7 @@ public class Giocatore extends Descrivibile {
     }
 
     public void eliminaIncantesimo(@NotNull List<Incantesimo> togli) {
-        for (Incantesimo i : togli)
-            this.incantesimiGiocatore.remove(i);
+            this.incantesimiGiocatore.removeAll(togli);
     }
 
     public void eliminaIncantesimo(@NotNull Incantesimo togli) {
