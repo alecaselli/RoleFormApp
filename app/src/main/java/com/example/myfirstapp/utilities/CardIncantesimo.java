@@ -4,7 +4,7 @@ public class CardIncantesimo {
     private String nomeincantesimo;
     private Boolean aBoolean;
 
-    public CardIncantesimo(String nomeincantesimo) {
+    public CardIncantesimo(String nomeincantesimo, boolean aBoolean) {
         this.nomeincantesimo = nomeincantesimo;
         this.aBoolean = aBoolean;
     }

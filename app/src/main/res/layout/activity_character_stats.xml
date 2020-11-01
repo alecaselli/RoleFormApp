@@ -135,6 +135,7 @@
                             android:padding="10dp">
 
                             <TextView
+                                android:id="@+id/stats_desc_strenght"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="casual"
@@ -247,6 +248,7 @@
                             android:padding="10dp">
 
                             <TextView
+                                android:id="@+id/stats_desc_dexterity"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="casual"
@@ -359,6 +361,7 @@
                             android:padding="10dp">
 
                             <TextView
+                                android:id="@+id/stats_desc_constitution"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="casual"
@@ -471,6 +474,7 @@
                             android:padding="10dp">
 
                             <TextView
+                                android:id="@+id/stats_desc_intelligence"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="casual"
@@ -583,6 +587,7 @@
                             android:padding="10dp">
 
                             <TextView
+                                android:id="@+id/stats_desc_wisdom"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="casual"
@@ -695,6 +700,7 @@
                             android:padding="10dp">
 
                             <TextView
+                                android:id="@+id/stats_desc_charisma"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="casual"

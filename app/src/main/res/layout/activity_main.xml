@@ -79,7 +79,6 @@
             android:background="?android:selectableItemBackground"
             android:onClick="openEdit"
             android:src="@drawable/ic_edit" />
-        <!--android:src="@drawable/ic_edit"-->
 
         <ImageButton
             android:id="@+id/create"

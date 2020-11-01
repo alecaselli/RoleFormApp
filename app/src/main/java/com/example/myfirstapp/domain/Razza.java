@@ -68,4 +68,13 @@ public class Razza extends Descrivibile {
     public void setCaratteristicaBaseList(List<CaratteristicaBase> caratteristicaBaseList) {
         this.caratteristicaBaseList = caratteristicaBaseList;
     }
+
+    /* METODI NON BASE */
+    public CaratteristicaBase getCaratteristicaBase(String nomec) {
+        for (CaratteristicaBase caratteristicabase : this.getCaratteristicaBaseList()) {
+            if (caratteristicabase.getNome().equals(nomec))
+                return caratteristicabase;
+        }
+        return null;
+    }
 }

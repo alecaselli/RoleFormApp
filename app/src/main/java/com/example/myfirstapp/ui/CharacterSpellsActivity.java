@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.adapter.CardAbilityAdapter;
 import com.example.myfirstapp.adapter.CardIncantesimoAdapter;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.domain.Incantesimo;
@@ -23,6 +22,7 @@ import com.example.myfirstapp.utilities.CardIncantesimo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class CharacterSpellsActivity extends AppCompatActivity {
@@ -34,8 +34,9 @@ public class CharacterSpellsActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private CardIncantesimoAdapter mAdapter;
-    private ArrayList<CardIncantesimo> mCardIncantesimoList;
+    private HashMap<Integer, CardIncantesimoAdapter> mAdapter;
+    private HashMap<Integer, ArrayList<CardIncantesimo>> mCardIncantesimoMap;
+    private ArrayList<CardIncantesimo> mcardIncantesimoList;
 
     private final List<Integer> recyclerViewIds = new ArrayList<>(Arrays.asList(R.id.spells_deceptions_recyclerView, R.id.spells_level_one_recyclerView, R.id.spells_level_two_recyclerView, R.id.spells_level_three_recyclerView, R.id.spells_level_four_recyclerView, R.id.spells_level_five_recyclerView, R.id.spells_level_six_recyclerView, R.id.spells_level_seven_recyclerView, R.id.spells_level_eight_recyclerView, R.id.spells_level_nine_recyclerView));
     private final List<Integer> expandButtonIds = new ArrayList<>(Arrays.asList(R.id.spells_deceptions_expandButton, R.id.spells_level_one_expandButton, R.id.spells_level_two_expandButton, R.id.spells_level_three_expandButton, R.id.spells_level_four_expandButton, R.id.spells_level_five_expandButton, R.id.spells_level_six_expandButton, R.id.spells_level_seven_expandButton, R.id.spells_level_eight_expandButton, R.id.spells_level_nine_expandButton));
@@ -67,40 +68,43 @@ public class CharacterSpellsActivity extends AppCompatActivity {
     }
 
     public void createListCardIncantesimo() {
+        mAdapter = new HashMap<>();
+        mCardIncantesimoMap = new HashMap<>();
         List<List<Incantesimo>> supinclist = dbManager.leggiIncantesimilist(nomecamp, nomeg);
 
         for (List<Incantesimo> inclist : supinclist) {
-            mCardIncantesimoList = new ArrayList<>();
+            mcardIncantesimoList = new ArrayList<>();
             if ((inclist != null) && (inclist.size() != 0)) {
                 for (Incantesimo inc : inclist) {
                     if (inc != null) {
-                        mCardIncantesimoList.add(new CardIncantesimo(inc.getNome()));
+                        mcardIncantesimoList.add(new CardIncantesimo(inc.getNome(), false));
                     }
                 }
                 int indice = inclist.get(0).getLivello();
-                this.setRecyclerView(recyclerViewIds.get(indice));
+                mCardIncantesimoMap.put(indice, mcardIncantesimoList);
+                this.setRecyclerView(indice);
             }
         }
     }
 
-    public void setRecyclerView(int recyclerViewId) {
-        mRecyclerView = findViewById(recyclerViewId);
+    public void setRecyclerView(final int indice) {
+        mRecyclerView = findViewById(recyclerViewIds.get(indice));
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager((this));
-        mAdapter = new CardIncantesimoAdapter(mCardIncantesimoList);
+        mAdapter.put(indice, new CardIncantesimoAdapter(mCardIncantesimoMap.get(indice)));
 
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mAdapter.get(indice));
 
-        mAdapter.setOnItemClickListener(new CardIncantesimoAdapter.OnItemClickListener() {
+        mAdapter.get(indice).setOnItemClickListener(new CardIncantesimoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                openSpellActivity(position);
+                openSpellActivity(position, indice);
             }
 
             @Override
             public void onBoolClick(int position) {
-                changeCompetenza(position);
+                changeCompetenza(position, indice);
             }
         });
     }
@@ -138,21 +142,14 @@ public class CharacterSpellsActivity extends AppCompatActivity {
         }
     }
 
-    public void changeCompetenza(int position) {
-        mCardIncantesimoList.get(position).swapBool();
-        mAdapter.notifyItemChanged(position);
-
-        if (!dbManager.aggiornaHaga(nomecamp, nomeg, mCardIncantesimoList.get(position).getNomeincantesimo(), mCardIncantesimoList.get(position).getaBoolean())) {
-            Toast.makeText(this, "aggiornamento fallito", Toast.LENGTH_LONG).show();
-            mCardIncantesimoList.get(position).swapBool();
-            mAdapter.notifyItemChanged(position);
-        }
-
+    public void changeCompetenza(int position, int indice) {
+        mCardIncantesimoMap.get(indice).get(position).swapBool();
+        mAdapter.get(indice).notifyItemChanged(position);
     }
 
-    public void openSpellActivity(int position) {
+    public void openSpellActivity(int position, int indice) {
         /*Intent intent = new Intent(this, SkillActivity.class);
-        intent.putExtra("nomea", mCardIncantesimoList.get(position).getNomeIncantesimo());
+        intent.putExtra("nomei", mCardIncantesimoMap.get(indice).get(position).getNomeincantesimo());
         startActivity(intent);*/
     }
 
