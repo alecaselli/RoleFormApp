@@ -150,7 +150,57 @@ public class CharacterSpellsActivity extends AppCompatActivity {
     public void openSpellActivity(int position, int indice) {
         /*Intent intent = new Intent(this, SkillActivity.class);
         intent.putExtra("nomei", mCardIncantesimoMap.get(indice).get(position).getNomeincantesimo());
-        startActivity(intent);*/
+        startActivity(intent);
+        finish();*/
+    }
+
+    public void addLevel0Spell(View view){
+        this.addSpell(0);
+    }
+
+    public void addLevel1Spell(View view){
+        this.addSpell(1);
+    }
+
+    public void addLevel2Spell(View view){
+        this.addSpell(2);
+    }
+
+    public void addLevel3Spell(View view){
+        this.addSpell(3);
+    }
+
+    public void addLevel4Spell(View view){
+        this.addSpell(4);
+    }
+
+    public void addLevel5Spell(View view){
+        this.addSpell(5);
+    }
+
+    public void addLevel6Spell(View view){
+        this.addSpell(6);
+    }
+
+    public void addLevel7Spell(View view){
+        this.addSpell(7);
+    }
+
+    public void addLevel8Spell(View view){
+        this.addSpell(8);
+    }
+
+    public void addLevel9Spell(View view){
+        this.addSpell(9);
+    }
+
+    public void addSpell(int livello){
+        /*Intent intent = new Intent(this, AddNewSpell.class);
+        intent.putExtra("livello", livello);
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
+        startActivity(intent);
+        finish();*/
     }
 
     @Override

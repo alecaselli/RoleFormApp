@@ -7,7 +7,7 @@
     android:background="@color/whitesmoke"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".ui.CharacterNoteActivity">
+    tools:context=".ui.CharacterSpellsActivity">
 
 
     <RelativeLayout
@@ -105,7 +105,8 @@
                                 android:text="Aggiungi inganno"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
-                                android:textStyle="normal" />
+                                android:textStyle="normal"
+                                android:onClick="addLevel0Spell"/>
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
@@ -189,7 +190,8 @@
                                 android:text="Aggiungi incantesimo di primo livello"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
-                                android:textStyle="normal" />
+                                android:textStyle="normal"
+                                android:onClick="addLevel1Spell"/>
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
@@ -273,7 +275,8 @@
                                 android:text="Aggiungi incantesimo di secondo livello"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
-                                android:textStyle="normal" />
+                                android:textStyle="normal"
+                                android:onClick="addLevel2Spell"/>
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
@@ -357,7 +360,8 @@
                                 android:text="Aggiungi incantesimo di terzo livello"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
-                                android:textStyle="normal" />
+                                android:textStyle="normal"
+                                android:onClick="addLevel3Spell"/>
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
@@ -441,7 +445,8 @@
                                 android:text="Aggiungi incantesimo di quarto livello"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
-                                android:textStyle="normal" />
+                                android:textStyle="normal"
+                                android:onClick="addLevel4Spell"/>
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
@@ -525,7 +530,8 @@
                                 android:text="Aggiungi incantesimo di quinto livello"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
-                                android:textStyle="normal" />
+                                android:textStyle="normal"
+                                android:onClick="addLevel5Spell"/>
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
@@ -609,7 +615,8 @@
                                 android:text="Aggiungi incantesimo di sesto livello"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
-                                android:textStyle="normal" />
+                                android:textStyle="normal"
+                                android:onClick="addLevel6Spell"/>
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
@@ -693,7 +700,8 @@
                                 android:text="Aggiungi incantesimo di settimo livello"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
-                                android:textStyle="normal" />
+                                android:textStyle="normal"
+                                android:onClick="addLevel7Spell"/>
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
@@ -777,7 +785,8 @@
                                 android:text="Aggiungi incantesimo di ottavo livello"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
-                                android:textStyle="normal" />
+                                android:textStyle="normal"
+                                android:onClick="addLevel8Spell"/>
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
@@ -861,7 +870,8 @@
                                 android:text="Aggiungi incantesimo di nono livello"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
-                                android:textStyle="normal" />
+                                android:textStyle="normal"
+                                android:onClick="addLevel9Spell"/>
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
