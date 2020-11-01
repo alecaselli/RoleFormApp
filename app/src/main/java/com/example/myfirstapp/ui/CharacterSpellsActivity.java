@@ -7,6 +7,7 @@ import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.adapter.CardAbilityAdapter;
 import com.example.myfirstapp.adapter.CardIncantesimoAdapter;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.domain.Incantesimo;
@@ -89,6 +91,18 @@ public class CharacterSpellsActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new CardIncantesimoAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                openSpellActivity(position);
+            }
+
+            @Override
+            public void onBoolClick(int position) {
+                changeCompetenza(position);
+            }
+        });
     }
 
     public void setButtons() {
@@ -122,6 +136,24 @@ public class CharacterSpellsActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public void changeCompetenza(int position) {
+        mCardIncantesimoList.get(position).swapBool();
+        mAdapter.notifyItemChanged(position);
+
+        if (!dbManager.aggiornaHaga(nomecamp, nomeg, mCardIncantesimoList.get(position).getNomeincantesimo(), mCardIncantesimoList.get(position).getaBoolean())) {
+            Toast.makeText(this, "aggiornamento fallito", Toast.LENGTH_LONG).show();
+            mCardIncantesimoList.get(position).swapBool();
+            mAdapter.notifyItemChanged(position);
+        }
+
+    }
+
+    public void openSpellActivity(int position) {
+        /*Intent intent = new Intent(this, SkillActivity.class);
+        intent.putExtra("nomea", mCardIncantesimoList.get(position).getNomeIncantesimo());
+        startActivity(intent);*/
     }
 
     @Override

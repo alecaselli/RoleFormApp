@@ -1,8 +1,11 @@
 package com.example.myfirstapp.adapter;
 
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,15 +33,15 @@ public class CardAbilityAdapter extends RecyclerView.Adapter<CardAbilityAdapter.
 
     public static class CardAbilitaViewHolder extends RecyclerView.ViewHolder {
         public TextView mNomeAbilitaView;
-        public CardView mPallinoCard;
-        public CardView mColorePallinoCard;
+        public RelativeLayout mPallinoButton;
+        public ImageView mPallinoImage;
 
 
         public CardAbilitaViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             mNomeAbilitaView = itemView.findViewById(R.id.skill_name);
-            mPallinoCard = itemView.findViewById(R.id.skill_ball);
-            mColorePallinoCard = itemView.findViewById(R.id.skill_mod_on);
+            mPallinoButton = itemView.findViewById(R.id.skill_ball_button);
+            mPallinoImage = itemView.findViewById(R.id.skill_ball);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -52,7 +55,7 @@ public class CardAbilityAdapter extends RecyclerView.Adapter<CardAbilityAdapter.
                 }
             });
 
-            mPallinoCard.setOnClickListener(new View.OnClickListener() {
+            mPallinoButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
@@ -83,9 +86,9 @@ public class CardAbilityAdapter extends RecyclerView.Adapter<CardAbilityAdapter.
         if (currentItem != null) {
             holder.mNomeAbilitaView.setText(currentItem.getNome());
             if (currentItem.getaBoolean()) {
-                holder.mColorePallinoCard.setVisibility(View.VISIBLE);
+                holder.mPallinoImage.setBackgroundResource(R.drawable.ic_round_radio_button);
             } else {
-                holder.mColorePallinoCard.setVisibility(View.GONE);
+                holder.mPallinoImage.setBackgroundResource(R.drawable.ic_round_radio_button_unchecked);
             }
         }
     }

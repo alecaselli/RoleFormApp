@@ -9,53 +9,36 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
-        android:paddingHorizontal="20dp">
+        android:layout_height="44dp"
+        android:background="?android:attr/selectableItemBackground">
 
         <TextView
             android:id="@+id/spell_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
             android:text="Spell name"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="normal" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/spell_used_off"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+        <RelativeLayout
+            android:id="@+id/spell_ball_button"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            app:cardBackgroundColor="@color/black"
-            app:cardCornerRadius="90dp"
-            app:cardElevation="0dp" >
+            android:layout_marginEnd="10dp"
+            android:paddingRight="10dp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+            <ImageView
+                android:id="@+id/spell_ball"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_round_radio_button_unchecked"/>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerInParent="true"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardElevation="0dp"
-                    app:cardCornerRadius="90dp" />
+        </RelativeLayout>
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/spell_used_on"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_centerInParent="true"
-                    app:cardBackgroundColor="@color/black"
-                    android:visibility="gone"
-                    app:cardElevation="0dp"
-                    app:cardCornerRadius="90dp" />
-
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

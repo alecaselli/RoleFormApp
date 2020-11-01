@@ -310,7 +310,8 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/forza"
+                            android:id="@+id/character_strenght"
+                            android:onClick="strenghtButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="FOR"
@@ -324,7 +325,6 @@
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="22dp"
                             android:layout_toStartOf="@id/forzac"
-                            android:onClick="strenghtButton"
                             android:text="15"
                             android:textAlignment="center"
                             android:textColor="@color/black"
@@ -362,7 +362,8 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/destrezza"
+                            android:id="@+id/character_dexterity"
+                            android:onClick="dexterityButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="DES"
@@ -376,7 +377,6 @@
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="22dp"
                             android:layout_toStartOf="@id/destrezzac"
-                            android:onClick="dexterityButton"
                             android:text="15"
                             android:textAlignment="center"
                             android:textColor="@color/black"
@@ -415,7 +415,8 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/costituzione"
+                            android:id="@+id/character_constitution"
+                            android:onClick="consitutionButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="COS"
@@ -429,7 +430,6 @@
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="22dp"
                             android:layout_toStartOf="@id/costituzionec"
-                            android:onClick="consitutionButton"
                             android:text="15"
                             android:textAlignment="center"
                             android:textColor="@color/black"
@@ -468,7 +468,8 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/intelligenza"
+                            android:id="@+id/character_intelligence"
+                            android:onClick="intelligenceButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="INT"
@@ -482,7 +483,6 @@
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="22dp"
                             android:layout_toStartOf="@id/intelligenzac"
-                            android:onClick="intelligenceButton"
                             android:text="15"
                             android:textAlignment="center"
                             android:textColor="@color/black"
@@ -521,7 +521,8 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/saggezza"
+                            android:id="@+id/character_wisdom"
+                            android:onClick="wisdomButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="SAG"
@@ -535,7 +536,6 @@
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="22dp"
                             android:layout_toStartOf="@id/saggezzac"
-                            android:onClick="wisdomButton"
                             android:text="15"
                             android:textAlignment="center"
                             android:textColor="@color/black"
@@ -574,7 +574,8 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/carisma"
+                            android:id="@+id/character_charisma"
+                            android:onClick="charismaButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="CAR"
@@ -588,7 +589,6 @@
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="22dp"
                             android:layout_toStartOf="@id/carismac"
-                            android:onClick="charismaButton"
                             android:text="15"
                             android:textAlignment="center"
                             android:textColor="@color/black"

@@ -2,6 +2,7 @@ package com.example.myfirstapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -17,8 +18,6 @@ public class CharacterCharacterActivity extends AppCompatActivity {
     private TextView txt;
     private EditText edit;
 
-    private String nomecamp;
-    private String nomeg;
     private DBManager dbManager;
 
     @Override
@@ -32,72 +31,69 @@ public class CharacterCharacterActivity extends AppCompatActivity {
 
     public void estraiGiocatore() {
         Intent intent = getIntent();
-        nomecamp = intent.getStringExtra("nomecamp");
-        nomeg = intent.getStringExtra("nomeg");
-        DBManager db = new DBManager(this);
-        giocatore = db.leggiGiocatore(nomecamp, nomeg);
+        String nomecamp = intent.getStringExtra("nomecamp");
+        String nomeg = intent.getStringExtra("nomeg");
+        dbManager = new DBManager(this);
+        assert nomeg != null;
+        assert nomecamp != null;
+        giocatore = dbManager.leggiGiocatore(nomecamp, nomeg);
     }
 
+    @SuppressLint("DefaultLocale")
     public void setView() {
-/*
-        txt = (TextView) findViewById();
-        txt.setText(giocatore.getNomeCampagna());
 
-        txt = (TextView) findViewById();
+        txt = (TextView) findViewById(R.id.character_character_name);
         txt.setText(giocatore.getNome());
 
-        txt = (TextView) findViewById();
+        txt = (TextView) findViewById(R.id.character_character_genre);
         txt.setText(giocatore.getGenere());
 
-        String liv = "" + giocatore.getLivello();
-        txt = (TextView) findViewById();
-        txt.setText(liv);
+        txt = (TextView) findViewById(R.id.character_character_level);
+        txt.setText(String.valueOf(giocatore.getLivello()));
 
-        txt = (TextView) findViewById();
-        txt.setText(String.valueOf(giocatore.getPuntiFerita()));
+        edit = (EditText) findViewById(R.id.character_character_life);
+        edit.setText(String.valueOf(giocatore.getPuntiFerita()));
 
-        txt = (TextView) findViewById();
+        txt = (TextView) findViewById(R.id.character_character_max_life);
         txt.setText(String.valueOf(giocatore.getPuntiFeritaMax()));
 
-        txt = (TextView) findViewById();
-        txt.setText(String.valueOf(giocatore.getMana()));
+        edit = (EditText) findViewById(R.id.character_character_mana);
+        edit.setText(String.valueOf(giocatore.getMana()));
 
-        txt = (TextView) findViewById();
-        txt.setText(String.valueOf(giocatore.getMana()));
+        /*
+        txt = (TextView) findViewById(R.id.character_character_max_mana);
+        txt.setText(String.valueOf(giocatore.getManaMax()));
+        */
 
-        String alt = giocatore.getAltezza() + "";
-        txt = (TextView) findViewById();
-        txt.setText(alt);
+        txt = (TextView) findViewById(R.id.character_character_height);
+        txt.setText(String.format("%s cm", giocatore.getAltezza()));
 
-        String eta = giocatore.getEta() + "";
-        txt = (TextView) findViewById();
-        txt.setText(eta);
+        txt = (TextView) findViewById(R.id.character_character_age);
+        txt.setText(String.format("%s anni", giocatore.getEta()));
 
-        txt = (TextView) findViewById();
+        txt = (TextView) findViewById(R.id.character_character_race);
         txt.setText(giocatore.getRazza().getNome());
 
-        txt = (TextView) findViewById();
+        txt = (TextView) findViewById(R.id.character_character_race_description);
         txt.setText(giocatore.getRazza().getDescrizione());
 
-        txt = (TextView) findViewById();
+        txt = (TextView) findViewById(R.id.character_character_class);
         txt.setText(giocatore.getClasse().getNome());
 
-        txt = (TextView) findViewById();
+        txt = (TextView) findViewById(R.id.character_character_class_description);
         txt.setText(giocatore.getClasse().getDescrizione());
 
-        edit = (EditText) findViewById();
-        edit.setText(giocatore.getIniziativa());
+        edit = (EditText) findViewById(R.id.character_character_armorClass);
+        edit.setText(String.valueOf(giocatore.getClasseArmatura()));
 
-        edit = (EditText) findViewById();
-        edit.setText(giocatore.getClasseArmatura());
-*/
+        //implementare iniziativa
     }
 
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, CharacterActivity.class);
-        intent.putExtra("nomecamp", nomecamp);
-        intent.putExtra("nomeg", nomeg);
+        intent.putExtra("nomecamp", giocatore.getNomeCampagna());
+        intent.putExtra("nomeg", giocatore.getNome());
         startActivity(intent);
         finish();
     }
