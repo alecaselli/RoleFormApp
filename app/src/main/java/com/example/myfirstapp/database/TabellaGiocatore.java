@@ -4,6 +4,7 @@ public class TabellaGiocatore {
     public static final String FIELD_NOMECAMPAGNA = "nomeCampagna";
     public static final String FIELD_NOMEG = "nomeg";
     public static final String FIELD_MANA = "mana";
+    public static final String FIELD_MANAMAX = "manaMax";
     public static final String FIELD_PUNTIXP = "puntiXP";
     public static final String FIELD_MODCOMPETENZA = "modCompetenza";
     public static final String FIELD_CAPACITABORSA = "capacitaBorsa";

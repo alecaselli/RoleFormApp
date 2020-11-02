@@ -118,6 +118,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "\t\"nomeg\"\tTEXT,\n" +
                 "\t\"desc\"\tTEXT,\n" +
                 "\t\"mana\"\tINTEGER,\n" +
+                "\t\"manaMax\"\tINTEGER,\n" +
                 "\t\"livello\"\tINTEGER,\n" +
                 "\t\"puntiXP\"\tINTEGER,\n" +
                 "\t\"modCompetenza\"\tINTEGER,\n" +
@@ -423,8 +424,9 @@ public class DBHelper extends SQLiteOpenHelper {
         q = "INSERT INTO \"carBase\" (\"nomer\",\"nomecb\",\"valore\") VALUES ('nano','forza',3);";
         db.execSQL(q);
 
-        q = "INSERT INTO \"giocatore\" (\"nomeCampagna\",\"nomeg\",\"desc\",\"mana\",\"livello\",\"puntiXP\",\"modCompetenza\",\"capacitaBorsa\",\"puntiFerita\",\"classeArmatura\",\"puntiStat\",\"nDadi\",\"dado\",\"iniziativa\",\"eta\",\"altezza\",\"genere\",\"noteAvventura\",\"ideali\",\"sinossi\",\"lingua\",\"nomecla\",\"nomer\",\"nomev\",\"valoreVal\") " +
-                "VALUES ('campagna','ciro','un rozzo nano ',0,1,0,2,0,13,0,0,1,8,'0','130','90','M',NULL,NULL,NULL,NULL,'guerriero','nano','moneta del regno di Ho',0);";
+        /* Giocatori */
+        q = "INSERT INTO \"giocatore\" (\"nomeCampagna\",\"nomeg\",\"desc\",\"mana\",\"manaMax\",\"livello\",\"puntiXP\",\"modCompetenza\",\"capacitaBorsa\",\"puntiFerita\",\"classeArmatura\",\"puntiStat\",\"nDadi\",\"dado\",\"iniziativa\",\"eta\",\"altezza\",\"genere\",\"noteAvventura\",\"ideali\",\"sinossi\",\"lingua\",\"nomecla\",\"nomer\",\"nomev\",\"valoreVal\") " +
+                "VALUES ('campagna','ciro','un rozzo nano ',0,0,1,0,2,0,13,0,0,1,8,'0','130','90','M',NULL,NULL,NULL,NULL,'guerriero','nano','moneta del regno di Ho',0);";
         db.execSQL(q);
         q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','carisma',0,0,0,0,0);";
         db.execSQL(q);
@@ -439,8 +441,8 @@ public class DBHelper extends SQLiteOpenHelper {
         q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('campagna','ciro','intelligenza',0,0,0,0,0);";
         db.execSQL(q);
 
-        q = "INSERT INTO \"giocatore\" (\"nomeCampagna\",\"nomeg\",\"desc\",\"mana\",\"livello\",\"puntiXP\",\"modCompetenza\",\"capacitaBorsa\",\"puntiFerita\",\"classeArmatura\",\"puntiStat\",\"nDadi\",\"dado\",\"iniziativa\",\"eta\",\"altezza\",\"genere\",\"noteAvventura\",\"ideali\",\"sinossi\",\"lingua\",\"nomecla\",\"nomer\",\"nomev\",\"valoreVal\") " +
-                "VALUES ('Arcadia','Fieryor','drago elettrico',0,12,0,2,0,70,0,0,1,8,'0','27','192','M',NULL,NULL,NULL,NULL,'ranger','elfo','moneta del regno di Ho',0);";
+        q = "INSERT INTO \"giocatore\" (\"nomeCampagna\",\"nomeg\",\"desc\",\"mana\",\"manaMax\",\"livello\",\"puntiXP\",\"modCompetenza\",\"capacitaBorsa\",\"puntiFerita\",\"classeArmatura\",\"puntiStat\",\"nDadi\",\"dado\",\"iniziativa\",\"eta\",\"altezza\",\"genere\",\"noteAvventura\",\"ideali\",\"sinossi\",\"lingua\",\"nomecla\",\"nomer\",\"nomev\",\"valoreVal\") " +
+                "VALUES ('Arcadia','Fieryor','drago elettrico',0,15,12,0,2,0,70,0,0,1,8,'0','27','192','M',NULL,NULL,NULL,NULL,'ranger','elfo','moneta del regno di Ho',0);";
         db.execSQL(q);
         q = "INSERT INTO \"caratteristicaG\" (\"nomeCampagna\",\"nomeg\",\"nomecar\",\"tiroSalvezza\",\"valoreBase\",\"valoreLivello\",\"valoreEquipaggiamento\",\"valoreBonus\") VALUES ('Arcadia','Fieryor','carisma',0,0,0,0,0);";
         db.execSQL(q);

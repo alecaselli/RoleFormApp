@@ -16,6 +16,7 @@ public class Giocatore extends Descrivibile {
     private int dado;
     private int livello;
     private int mana;
+    private int manaMax;
     private int modCompetenza;
     private int nDadi;
     private int puntiEsperienza;
@@ -54,13 +55,14 @@ public class Giocatore extends Descrivibile {
         this.inizializzazionePG();
     }
 
-    public Giocatore(String nome, StringBuffer descrizione, int capacitaBorsa, int classeArmatura, int dado, int livello, int mana, int modCompetenza, int nDadi, int puntiEsperienza, int puntiFerita, int puntiStat, String altezza, String eta, String genere, String ideali, String iniziativa, String nomeCampagna, String noteAvventura, String sinossi, StringBuffer lingua, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Equipaggiamento> borsa, List<Equipaggiamento> equipaggiato, List<Incantesimo> incantesimiGiocatore, List<Abilita> abilitaList) {
+    public Giocatore(String nome, StringBuffer descrizione, int capacitaBorsa, int classeArmatura, int dado, int livello, int mana, int manaMax, int modCompetenza, int nDadi, int puntiEsperienza, int puntiFerita, int puntiStat, String altezza, String eta, String genere, String ideali, String iniziativa, String nomeCampagna, String noteAvventura, String sinossi, StringBuffer lingua, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Equipaggiamento> borsa, List<Equipaggiamento> equipaggiato, List<Incantesimo> incantesimiGiocatore, List<Abilita> abilitaList) {
         super(nome, descrizione);
         this.capacitaBorsa = capacitaBorsa;
         this.classeArmatura = classeArmatura;
         this.dado = dado;
         this.livello = livello;
         this.mana = mana;
+        this.manaMax = manaMax;
         this.modCompetenza = modCompetenza;
         this.nDadi = nDadi;
         this.puntiEsperienza = puntiEsperienza;
@@ -124,6 +126,14 @@ public class Giocatore extends Descrivibile {
 
     public void setMana(int mana) {
         this.mana = mana;
+    }
+
+    public int getManaMax() {
+        return manaMax;
+    }
+
+    public void setManaMax(int manaMax) {
+        this.manaMax = manaMax;
     }
 
     public int getModCompetenza() {
@@ -353,6 +363,10 @@ public class Giocatore extends Descrivibile {
         this.mana += val;
     }
 
+    public void aggiornaPuntiFerita(int val) {
+        this.puntiFerita += val;
+    }
+
     public void aggiornaPuntiEsperienza(int val) {
         this.puntiEsperienza += val;
     }
@@ -374,6 +388,24 @@ public class Giocatore extends Descrivibile {
         this.modCompetenza += val;
     }
 
+    public void aggiornaLivello(int val) {
+        this.livello += val;
+    }
+
+    public void levelDown() {
+        this.livello -= 1;
+        this.aggiornaPuntiStat(-2);
+        if (this.getLivello() % 4 == 3)
+            this.aggiornaModCompetenza(-1);
+    }
+
+    public void levelUp() {
+        this.livello += 1;
+        this.aggiornaPuntiStat(2);
+        if (this.getLivello() % 4 == 0)
+            this.aggiornaModCompetenza(1);
+    }
+
     /* serie di metodi per aggiungere/eliminare elementi da liste */
     public void aggiungiBorsa(List<Equipaggiamento> nuovo) {
         this.borsa.addAll(nuovo);
@@ -384,7 +416,7 @@ public class Giocatore extends Descrivibile {
     }
 
     public void eliminaBorsa(@NotNull List<Equipaggiamento> togli) {
-            this.borsa.removeAll(togli);
+        this.borsa.removeAll(togli);
     }
 
     public void eliminaBorsa(@NotNull Equipaggiamento togli) {
@@ -400,7 +432,7 @@ public class Giocatore extends Descrivibile {
     }
 
     public void eliminaEquipaggiato(@NotNull List<Equipaggiamento> togli) {
-            this.equipaggiato.removeAll(togli);
+        this.equipaggiato.removeAll(togli);
     }
 
     public void eliminaEquipaggiato(@NotNull Equipaggiamento togli) {
@@ -416,14 +448,14 @@ public class Giocatore extends Descrivibile {
     }
 
     public void eliminaIncantesimo(@NotNull List<Incantesimo> togli) {
-            this.incantesimiGiocatore.removeAll(togli);
+        this.incantesimiGiocatore.removeAll(togli);
     }
 
     public void eliminaIncantesimo(@NotNull Incantesimo togli) {
         this.incantesimiGiocatore.remove(togli);
     }
-
     /* serie di metodi necessari alla creazione di un nuovo PG */
+
     public void inizializzazionePG() {
 
         for (CaratteristicaBase elementoR : this.razza.getCaratteristicaBaseList()) {
@@ -436,6 +468,8 @@ public class Giocatore extends Descrivibile {
         this.setDado(this.classe.getDado());
         this.inizPuntiFeritaMax();
         this.setPuntiFerita(this.puntiFeritaMax);
+        this.setManaMax(15);
+        this.setMana(15);
         this.ideali = "";
         this.iniziativa = "0";
         this.noteAvventura = "";
@@ -458,12 +492,6 @@ public class Giocatore extends Descrivibile {
         this.setDescrizione(this.getLingua());
         this.aggiungiDescrizione(this.classe.getDescrizionePrivilegiPoteri().toString());
         this.aggiungiDescrizione(this.classe.getCompetenza().toString());
-    }
-
-    public void levelUp() {
-        this.aggiornaPuntiStat(2);
-        if (this.getLivello() % 4 == 0)
-            this.aggiornaModCompetenza(1);
     }
 
     public void assegnaPuntiStat(List<String> nomecarlist, @NotNull List<Integer> vallist, Context context) {

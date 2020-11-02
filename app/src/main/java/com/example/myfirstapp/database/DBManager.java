@@ -304,6 +304,7 @@ public class DBManager {
         cv.put(TabellaGiocatore.FIELD_NOMEG, nuovo.getNome());
         cv.put(CampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
         cv.put(TabellaGiocatore.FIELD_MANA, nuovo.getMana());
+        cv.put(TabellaGiocatore.FIELD_MANAMAX, nuovo.getManaMax());
         cv.put(CampiComuni.FIELD_LIVELLO, nuovo.getLivello());
         cv.put(TabellaGiocatore.FIELD_PUNTIXP, nuovo.getPuntiEsperienza());
         cv.put(TabellaGiocatore.FIELD_MODCOMPETENZA, nuovo.getModCompetenza());
@@ -1204,6 +1205,7 @@ public class DBManager {
 
         cv.put(CampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
         cv.put(TabellaGiocatore.FIELD_MANA, aggiornato.getMana());
+        cv.put(TabellaGiocatore.FIELD_MANAMAX, aggiornato.getManaMax());
         cv.put(CampiComuni.FIELD_LIVELLO, aggiornato.getLivello());
         cv.put(TabellaGiocatore.FIELD_PUNTIXP, aggiornato.getPuntiEsperienza());
         cv.put(TabellaGiocatore.FIELD_MODCOMPETENZA, aggiornato.getModCompetenza());
@@ -1264,18 +1266,32 @@ public class DBManager {
         }
     }
 
-    public boolean aggiornaPortafoglioGiocatore(@NotNull Giocatore aggiornato) {
+    public boolean aggiornaDettagliGiocatore(@NotNull Giocatore aggiornato) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? ";
         String[] whereArgs = new String[]{aggiornato.getNomeCampagna(), aggiornato.getNome()};
 
+        cv.put(CampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
+        cv.put(TabellaGiocatore.FIELD_MANA, aggiornato.getMana());
+        cv.put(CampiComuni.FIELD_LIVELLO, aggiornato.getLivello());
+        cv.put(TabellaGiocatore.FIELD_PUNTIXP, aggiornato.getPuntiEsperienza());
+        cv.put(TabellaGiocatore.FIELD_MODCOMPETENZA, aggiornato.getModCompetenza());
+        cv.put(TabellaGiocatore.FIELD_CAPACITABORSA, aggiornato.getCapacitaBorsa());
+        cv.put(TabellaGiocatore.FIELD_PUNTIFERITA, aggiornato.getPuntiFerita());
+        cv.put(TabellaGiocatore.FIELD_CLASSEARMATURA, aggiornato.getClasseArmatura());
+        cv.put(TabellaGiocatore.FIELD_PUNTISTAT, aggiornato.getPuntiStat());
+        cv.put(TabellaGiocatore.FIELD_INIZIATIVA, aggiornato.getIniziativa());
+        cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, aggiornato.getNoteAvventura());
+        cv.put(TabellaGiocatore.FIELD_IDEALI, aggiornato.getIdeali());
+        cv.put(TabellaGiocatore.FIELD_SINOSSI, aggiornato.getSinossi());
+        cv.put(CampiComuni.FIELD_LINGUA, aggiornato.getLingua().toString());
         cv.put(TabellaGiocatore.FIELD_VALOREVAL, aggiornato.getPortafoglio().getValore());
 
         try {
             return db.update(TabellaGiocatore.TBL_NOME, cv, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
-            Log.e("AGGIORNA PORTGIOC", "aggiorna fallita", sqle);
+            Log.e("AGGIORNA DETTGIOC", "aggiorna fallita", sqle);
             return false;
         }
 
@@ -2190,6 +2206,7 @@ public class DBManager {
             StringBuffer descrizione = new StringBuffer();
             descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
             int mana = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_MANA));
+            int manaMax = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_MANAMAX));
             int livello = resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_LIVELLO));
             int puntiEsperienza = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_PUNTIXP));
             int modCompetenza = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_MODCOMPETENZA));
@@ -2234,7 +2251,7 @@ public class DBManager {
                 abilitaList = new ArrayList<>();
 
             resultSet.close();
-            return new Giocatore(nomeg, descrizione, capacitaBorsa, classeArmatura, dado, livello, mana, modCompetenza, nDadi, puntiEsperienza, puntiFerita, puntiStat, altezza, eta, genere, ideali, iniziativa, nomecamp, noteAvventura, sinossi, lingua, portafoglio, classe, razza, caratteristicaList, borsa, equipaggiato, incantesimiGiocatore, abilitaList);
+            return new Giocatore(nomeg, descrizione, capacitaBorsa, classeArmatura, dado, livello, mana, manaMax, modCompetenza, nDadi, puntiEsperienza, puntiFerita, puntiStat, altezza, eta, genere, ideali, iniziativa, nomecamp, noteAvventura, sinossi, lingua, portafoglio, classe, razza, caratteristicaList, borsa, equipaggiato, incantesimiGiocatore, abilitaList);
 
         } catch (SQLiteException sqle) {
             Log.e("LEGGI GIOCATORE", "leggi fallita", sqle);

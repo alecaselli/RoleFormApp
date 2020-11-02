@@ -89,7 +89,7 @@ public class CharacterActivity extends AppCompatActivity {
         txt.setText(String.valueOf(giocatore.getMana()));
 
         txt = (TextView) findViewById(R.id.character_max_mana);
-        txt.setText(String.valueOf(giocatore.getMana()));
+        txt.setText(String.valueOf(giocatore.getManaMax()));
 
         txt = (TextView) findViewById(R.id.character_height);
         txt.setText(String.format("%s cm", giocatore.getAltezza()));
@@ -271,7 +271,7 @@ public class CharacterActivity extends AppCompatActivity {
 
     public void aggiornaValuta(List<Integer> valore) {
         giocatore.getPortafoglio().aggiornaValore(valore);
-        if (!dbManager.aggiornaPortafoglioGiocatore(giocatore)) {
+        if (!dbManager.aggiornaDettagliGiocatore(giocatore)) {
             Toast.makeText(this, "aggiornamento portafoglio fallito", Toast.LENGTH_LONG).show();
         }
         this.setPortafoglio();

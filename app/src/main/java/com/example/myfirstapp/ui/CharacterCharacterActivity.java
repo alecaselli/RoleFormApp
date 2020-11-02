@@ -10,7 +10,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,35 +32,8 @@ public class CharacterCharacterActivity extends AppCompatActivity {
 
         this.estraiGiocatore();
         this.setView();
+        this.setEdit();
         this.longLevelButton();
-
-        final EditText editPuntiFerita = (EditText) findViewById(R.id.character_character_life);
-        editPuntiFerita.setFocusableInTouchMode(true);
-        editPuntiFerita.requestFocus();
-        editPuntiFerita.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_GO) {
-                    giocatore.setPuntiFerita(Integer.parseInt(editPuntiFerita.getText().toString()));
-                    Toast.makeText(CharacterCharacterActivity.this, editPuntiFerita.getText(), Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        final EditText editMana = (EditText) findViewById(R.id.character_character_mana);
-        editMana.setFocusableInTouchMode(true);
-        editMana.requestFocus();
-        editMana.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    giocatore.setMana(Integer.parseInt(editMana.getText().toString()));
-                    Toast.makeText(CharacterCharacterActivity.this, editMana.getText(), Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-                return false;
-            }
-        });
     }
 
     public void estraiGiocatore() {
@@ -96,10 +68,10 @@ public class CharacterCharacterActivity extends AppCompatActivity {
         edit = (EditText) findViewById(R.id.character_character_mana);
         edit.setText(String.valueOf(giocatore.getMana()));
 
-        /*
+
         txt = (TextView) findViewById(R.id.character_character_max_mana);
-        txt.setText(String.format("/ %d", giocatore.getmanaMax()));
-        */
+        txt.setText(String.format("/ %d", giocatore.getManaMax()));
+
 
         txt = (TextView) findViewById(R.id.character_character_height);
         txt.setText(String.format("%s cm", giocatore.getAltezza()));
@@ -125,23 +97,85 @@ public class CharacterCharacterActivity extends AppCompatActivity {
         //implementare iniziativa
     }
 
-    public void levelButton(View view) {
-        giocatore.setLivello(giocatore.getLivello() + 1);
-        txt = (TextView) findViewById(R.id.character_character_level);
-        txt.setText(String.valueOf(giocatore.getLivello()));
+    public void setEdit() {
+        final EditText editPuntiFerita = (EditText) findViewById(R.id.character_character_life);
+        editPuntiFerita.setFocusableInTouchMode(true);
+        editPuntiFerita.requestFocus();
+        editPuntiFerita.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_GO) {
+                    setPuntiFerita(Integer.parseInt(editPuntiFerita.getText().toString()));
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        final EditText editMana = (EditText) findViewById(R.id.character_character_mana);
+        editMana.setFocusableInTouchMode(true);
+        editMana.requestFocus();
+        editMana.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    setMana(Integer.parseInt(editMana.getText().toString()));
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
-    public void longLevelButton(){
+    public void setPuntiFerita(int val) {
+        giocatore.setPuntiFerita(val);
+        if (dbManager.aggiornaDettagliGiocatore(giocatore)) {
+            edit = (EditText) findViewById(R.id.character_character_life);
+            edit.setText(String.valueOf(giocatore.getPuntiFerita()));
+        } else Toast.makeText(this, "nessun aggiornamento", Toast.LENGTH_LONG).show();
+    }
+
+    public void setMana(int val) {
+        giocatore.setMana(val);
+        if (dbManager.aggiornaDettagliGiocatore(giocatore)) {
+            edit = (EditText) findViewById(R.id.character_character_mana);
+            edit.setText(String.valueOf(giocatore.getMana()));
+        } else Toast.makeText(this, "nessun aggiornamento", Toast.LENGTH_LONG).show();
+    }
+
+    public void longLevelButton() {
         CardView levelButton = (CardView) findViewById(R.id.levelButton);
         levelButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                giocatore.setLivello(giocatore.getLivello() - 1);
-                txt = (TextView) findViewById(R.id.character_character_level);
-                txt.setText(String.valueOf(giocatore.getLivello()));
+                levelDown();
                 return true;
             }
         });
+    }
+
+    public void levelButton(View view) {
+        this.levelUp();
+    }
+
+    public void levelUp() {
+        giocatore.levelUp();
+        if (dbManager.aggiornaDettagliGiocatore(giocatore)) {
+            txt = (TextView) findViewById(R.id.character_character_level);
+            txt.setText(String.valueOf(giocatore.getLivello()));
+        } else {
+            Toast.makeText(this, "level up fallito", Toast.LENGTH_LONG).show();
+            giocatore.levelDown();
+        }
+    }
+
+    public void levelDown() {
+        giocatore.levelDown();
+        if (dbManager.aggiornaDettagliGiocatore(giocatore)) {
+            txt = (TextView) findViewById(R.id.character_character_level);
+            txt.setText(String.valueOf(giocatore.getLivello()));
+        } else {
+            Toast.makeText(this, "level down fallito", Toast.LENGTH_LONG).show();
+            giocatore.levelUp();
+        }
     }
 
     @Override
