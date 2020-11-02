@@ -24,10 +24,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="@string/character_name"
-                android:textColor="@color/black"
                 android:textAlignment="center"
-                android:textStyle="bold|italic"
-                android:textSize="30sp" />
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold|italic" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -103,20 +103,35 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true">
 
-                <ImageView
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/levelButton"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginEnd="5dp"
                     android:layout_toStartOf="@id/character_character_level"
-                    android:src="@drawable/man" />
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:onClick="levelButton"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/whitesmoke"
+                        android:src="@drawable/man"
+                        android:paddingBottom="5dp"/>
+
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:id="@+id/character_character_level"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
                     android:text="10"
                     android:textColor="@color/black"
                     android:textSize="22sp" />
@@ -160,6 +175,7 @@
                                 android:layout_marginStart="9dp"
                                 android:layout_marginTop="5dp"
                                 android:background="@android:color/transparent"
+                                android:imeOptions="actionGo"
                                 android:hint="00"
                                 android:inputType="numberDecimal"
                                 android:maxLength="2"
@@ -224,6 +240,7 @@
                                 android:layout_marginStart="9dp"
                                 android:layout_marginTop="5dp"
                                 android:background="@android:color/transparent"
+                                android:imeOptions="actionDone"
                                 android:hint="00"
                                 android:inputType="numberDecimal"
                                 android:maxLength="2"
@@ -280,18 +297,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <EditText
+                            <TextView
                                 android:id="@+id/character_character_armorClass"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
                                 android:background="@android:color/transparent"
-                                android:hint="00"
-                                android:inputType="numberDecimal"
                                 android:maxLength="2"
                                 android:text="15"
                                 android:textAlignment="center"
-                                android:textSize="35sp" />
+                                android:textSize="35sp"
+                                android:textColor="@color/black"/>
 
                         </RelativeLayout>
 

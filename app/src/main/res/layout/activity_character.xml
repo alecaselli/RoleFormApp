@@ -43,7 +43,7 @@
                 android:id="@+id/activity_center"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/character_character"
@@ -309,14 +309,24 @@
                         android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/character_strenght"
-                            android:onClick="strenghtButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="FOR"
-                            android:textColor="@color/black"
-                            android:textSize="22sp" />
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:onClick="strenghtButton"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="FOR"
+                                android:textColor="@color/black"
+                                android:textSize="22sp" />
+                        </androidx.cardview.widget.CardView>
 
                         <TextView
                             android:id="@+id/character_total_strenght"
@@ -361,14 +371,24 @@
                         android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/character_dexterity"
-                            android:onClick="dexterityButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="DES"
-                            android:textColor="@color/black"
-                            android:textSize="22sp" />
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:onClick="dexterityButton"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="DES"
+                                android:textColor="@color/black"
+                                android:textSize="22sp" />
+                        </androidx.cardview.widget.CardView>
 
                         <TextView
                             android:id="@+id/character_total_dexterity"
@@ -414,14 +434,24 @@
                         android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/character_constitution"
-                            android:onClick="consitutionButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="COS"
-                            android:textColor="@color/black"
-                            android:textSize="22sp" />
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:onClick="consitutionButton"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="COS"
+                                android:textColor="@color/black"
+                                android:textSize="22sp" />
+                        </androidx.cardview.widget.CardView>
 
                         <TextView
                             android:id="@+id/character_total_constitution"
@@ -467,14 +497,24 @@
                         android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/character_intelligence"
-                            android:onClick="intelligenceButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="INT"
-                            android:textColor="@color/black"
-                            android:textSize="22sp" />
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:onClick="intelligenceButton"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="INT"
+                                android:textColor="@color/black"
+                                android:textSize="22sp" />
+                        </androidx.cardview.widget.CardView>
 
                         <TextView
                             android:id="@+id/character_total_intelligence"
@@ -520,14 +560,24 @@
                         android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/character_wisdom"
-                            android:onClick="wisdomButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="SAG"
-                            android:textColor="@color/black"
-                            android:textSize="22sp" />
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:onClick="wisdomButton"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="SAG"
+                                android:textColor="@color/black"
+                                android:textSize="22sp" />
+                        </androidx.cardview.widget.CardView>
 
                         <TextView
                             android:id="@+id/character_total_wisdom"
@@ -573,14 +623,24 @@
                         android:layout_marginVertical="10dp"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/character_charisma"
-                            android:onClick="charismaButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="CAR"
-                            android:textColor="@color/black"
-                            android:textSize="22sp" />
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:onClick="charismaButton"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="CAR"
+                                android:textColor="@color/black"
+                                android:textSize="22sp" />
+                        </androidx.cardview.widget.CardView>
 
                         <TextView
                             android:id="@+id/character_total_charisma"
