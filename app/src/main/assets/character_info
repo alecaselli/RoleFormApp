@@ -1,1 +1,11 @@
-le informazioni di come usare la schermata giocatore
+Il primo blocco contiene le informazioni relative al personaggio, cliccando su di esso è possibile entrare in una schermata di dettaglio che permette di modificare i punti ferita, il mana ed il livello, nonché di visualizzare dati come la classe armatura e le descrizioni di classe e razza
+
+Il secondo blocco è interamente dedicato alle statistiche di gioco, cliccando sui rispettivi nomi si può aumentare il valore della caratteristica corrispondente, presente sulla prima colonna ed impattare sul modificatore visibile sulla seconda colonna
+Cliccando sul blocco inoltre si può accedere ad una schermata dov'è possibile leggere in dettaglio una descrizione di ciascuna delle caratteristiche
+
+Il terzo blocco riguarda la valuta, cliccando sui ciascun nome si aumenta di 1 unità la valuta corrispondente, tenendo premuto invece di decrementa, cliccando sul tasti "+" è possibile inserire un valore di guadagno che una volta confermato verrà sommato ai propri possedimenti
+
+Il quarto blocco serve ad accedere alla lista di incantesimi ed equipaggiamenti, i migliori amici di un giocatore di D&D
+
+L'ultimo blocco mostra l'equipaggiamento del giocatore; a sinistra è possibile visualizzare l'equipaggiamento in utilizzo mentre cliccando sulla borsa è possibile entrare nella schermata a lei relativa, in essa son presenti tutti gli oggetti posseduti 
+Dentro la borsa è possibile equipaggiare, disequipaggiare, sostituire o rimuovere elementi, è possibile inoltre aggiungerne o crearne di nuovi
