@@ -345,48 +345,48 @@ public class CharacterActivity extends AppCompatActivity {
     /* OPEN */
     public void openCharacterNote(View view) {
         Intent intent = new Intent(this, CharacterNoteActivity.class);
-        intent.putExtra("nomecamp", giocatore.getNomeCampagna());
-        intent.putExtra("nomeg", giocatore.getNome());
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
         startActivity(intent);
         finish();
     }
 
     public void openCharacterCharacter(View view) {
         Intent intent = new Intent(this, CharacterCharacterActivity.class);
-        intent.putExtra("nomecamp", giocatore.getNomeCampagna());
-        intent.putExtra("nomeg", giocatore.getNome());
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
         startActivity(intent);
         finish();
     }
 
     public void openCharacterSkills(View view) {
         Intent intent = new Intent(this, CharacterSkillsActivity.class);
-        intent.putExtra("nomecamp", giocatore.getNomeCampagna());
-        intent.putExtra("nomeg", giocatore.getNome());
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
         startActivity(intent);
         finish();
     }
 
     public void openCharacterSpells(View view) {
         Intent intent = new Intent(this, CharacterSpellsActivity.class);
-        intent.putExtra("nomecamp", giocatore.getNomeCampagna());
-        intent.putExtra("nomeg", giocatore.getNome());
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
         startActivity(intent);
         finish();
     }
 
     public void openCharacterStats(View view) {
         Intent intent = new Intent(this, CharacterStatsActivity.class);
-        intent.putExtra("nomecamp", giocatore.getNomeCampagna());
-        intent.putExtra("nomeg", giocatore.getNome());
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
         startActivity(intent);
         finish();
     }
 
     public void openCharacterBag(View view) {
         Intent intent = new Intent(this, CharacterBagActivity.class);
-        intent.putExtra("nomecamp", giocatore.getNomeCampagna());
-        intent.putExtra("nomeg", giocatore.getNome());
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
         startActivity(intent);
         finish();
     }

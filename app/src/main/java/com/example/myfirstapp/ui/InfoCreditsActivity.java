@@ -2,6 +2,7 @@ package com.example.myfirstapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -22,6 +23,10 @@ public class InfoCreditsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_credits);
 
+        this.leggiInfoCredit();
+    }
+
+    public void leggiInfoCredit(){
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("info_credits"), StandardCharsets.UTF_8))) {
 
             String line;
@@ -49,4 +54,10 @@ public class InfoCreditsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

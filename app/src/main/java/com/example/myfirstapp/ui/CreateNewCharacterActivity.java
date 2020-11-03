@@ -29,7 +29,7 @@ import java.util.List;
 public class CreateNewCharacterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private EditText editText;
-    Giocatore nuovoGiocatore;
+    private Giocatore nuovoGiocatore;
     private DBManager dbManager;
     private final String VALUTADND = "moneta del regno di Ho";
 
@@ -106,16 +106,16 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
         if (!dbManager.aggiungiGiocatore(nuovoGiocatore))
             Toast.makeText(this, "inserimeto fallito", Toast.LENGTH_LONG).show();
         else
-            this.openMainActivity();
+            onBackPressed();
     }
 
-    public void openMainActivity() {
+    /*public void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
 
-    /*public void openCharacterActivity() {
+    public void openCharacterActivity() {
         Intent intent = new Intent(this, CharacterActivity.class);
         intent.putExtra("nomecamp", nuovoGiocatore.getNomeCampagna());
         intent.putExtra("nomeg", nuovoGiocatore.getNome());

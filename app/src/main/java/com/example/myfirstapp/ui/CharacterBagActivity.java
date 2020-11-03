@@ -256,16 +256,16 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         }
     }
 
+    public void equipButton(View view){
+        return;
+    }
+
     public void openCreateNewItem(View view) {
         Intent intent = new Intent(this, CreateNewItemActivity.class);
         intent.putExtra("nomecamp", nomecamp);
         intent.putExtra("nomeg", nomeg);
         startActivity(intent);
         finish();
-    }
-
-    public void equipButton(View view){
-        return;
     }
 
     @Override
