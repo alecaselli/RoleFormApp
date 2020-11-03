@@ -68,6 +68,6 @@
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="14dp"
             android:padding="2dp"
-            android:src="@drawable/ic_delete" />
+            android:src="@drawable/ic_trash" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

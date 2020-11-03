@@ -31,7 +31,6 @@ public class CharacterActivity extends AppCompatActivity {
     private DBManager dbManager;
     private Giocatore giocatore;
     private TextView txt;
-    private EditText editText;
 
     private Button currencyButton;
 
@@ -163,6 +162,9 @@ public class CharacterActivity extends AppCompatActivity {
                     TransitionManager.beginDelayedTransition((ViewGroup) currencyCard.getParent().getParent(), new AutoTransition());
                     currencyBaseView.setVisibility(View.GONE);
                     currencyModView.setVisibility(View.VISIBLE);
+                    ((EditText) findViewById(R.id.character_mod_copper)).setText("");
+                    ((EditText) findViewById(R.id.character_mod_silver)).setText("");
+                    ((EditText) findViewById(R.id.character_mod_gold)).setText("");
                     currencyButton.setBackgroundResource(R.drawable.ic_round_done);
                 } else {
                     TransitionManager.beginDelayedTransition((ViewGroup) currencyCard.getParent().getParent(), new AutoTransition());
@@ -230,7 +232,7 @@ public class CharacterActivity extends AppCompatActivity {
         List<Integer> valore = new ArrayList<>();
         boolean aggiorna = false;
 
-        editText = (EditText) findViewById(R.id.character_mod_copper);
+        EditText editText = (EditText) findViewById(R.id.character_mod_copper);
         String temp = editText.getText().toString();
         if (temp.equals(""))
             valore.add(0);
@@ -308,7 +310,7 @@ public class CharacterActivity extends AppCompatActivity {
         txt.setText(String.valueOf(caratteristica.getModificatore()));
     }
 
-    public void strenghtButton(View view) {
+    public void strengthButton(View view) {
         this.aggiornaCaratteristica("forza", R.id.character_total_strenght, 1);
         this.aggiornaModificatore("forza", R.id.character_mod_strenght);
     }
@@ -318,7 +320,7 @@ public class CharacterActivity extends AppCompatActivity {
         this.aggiornaModificatore("destrezza", R.id.character_mod_dexterity);
     }
 
-    public void consitutionButton(View view) {
+    public void constitutionButton(View view) {
         this.aggiornaCaratteristica("costituzione", R.id.character_total_constitution, 1);
         this.aggiornaModificatore("costituzione", R.id.character_mod_constitution);
     }

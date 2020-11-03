@@ -316,7 +316,7 @@
                             android:clickable="true"
                             android:focusable="true"
                             android:foreground="?android:attr/selectableItemBackground"
-                            android:onClick="strenghtButton"
+                            android:onClick="strengthButton"
                             app:cardCornerRadius="10dp"
                             app:cardElevation="0dp">
 
@@ -441,7 +441,7 @@
                             android:clickable="true"
                             android:focusable="true"
                             android:foreground="?android:attr/selectableItemBackground"
-                            android:onClick="consitutionButton"
+                            android:onClick="constitutionButton"
                             app:cardCornerRadius="10dp"
                             app:cardElevation="0dp">
 
@@ -871,7 +871,7 @@
                                 android:background="@android:color/transparent"
                                 android:hint="@string/add"
                                 android:inputType="numberSigned"
-                                android:maxLength="6"
+                                android:maxLength="5"
                                 android:textColor="@color/black"
                                 android:textSize="20sp" />
 
@@ -901,6 +901,7 @@
                                 android:background="@android:color/transparent"
                                 android:hint="@string/add"
                                 android:inputType="numberSigned"
+                                android:maxLength="5"
                                 android:textColor="@color/black"
                                 android:textSize="20sp" />
 
@@ -930,6 +931,7 @@
                                 android:background="@android:color/transparent"
                                 android:hint="@string/add"
                                 android:inputType="numberSigned"
+                                android:maxLength="5"
                                 android:textColor="@color/black"
                                 android:textSize="20sp" />
 
