@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.CharacterSkillsActivity"></activity>
+        <activity android:name=".ui.CharacterSkillsActivity" />
         <activity android:name=".ui.CharacterSpellsActivity" />
         <activity android:name=".ui.CharacterCharacterActivity" />
         <activity android:name=".ui.EditActivity" />
@@ -22,6 +22,7 @@
         <activity android:name=".ui.CharacterNoteActivity" />
         <activity android:name=".ui.AddNewItem" />
         <activity android:name=".ui.AddNewSpell" />
+        <activity android:name=".ui.CharacterInfoActivity" />
         <activity
             android:name=".ui.MainActivity"
             android:label="Roleform"
