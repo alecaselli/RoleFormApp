@@ -32,8 +32,8 @@ public class CharacterInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_info);
 
-        this.readInfo();
         this.estraiIntent();
+        this.readInfo();
     }
 
     public void estraiIntent() {

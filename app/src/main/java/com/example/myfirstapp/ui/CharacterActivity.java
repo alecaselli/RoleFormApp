@@ -29,6 +29,8 @@ import java.util.List;
 public class CharacterActivity extends AppCompatActivity {
 
     private DBManager dbManager;
+    private String nomecamp;
+    private String nomeg;
     private Giocatore giocatore;
     private TextView txt;
 
@@ -54,8 +56,8 @@ public class CharacterActivity extends AppCompatActivity {
 
     public void estraiGiocatore() {
         Intent intent = getIntent();
-        String nomecamp = intent.getStringExtra("nomecamp");
-        String nomeg = intent.getStringExtra("nomeg");
+        nomecamp = intent.getStringExtra("nomecamp");
+        nomeg = intent.getStringExtra("nomeg");
         dbManager = new DBManager(this);
         assert nomeg != null;
         assert nomecamp != null;
@@ -391,6 +393,8 @@ public class CharacterActivity extends AppCompatActivity {
 
     public void openCharacterInfo(View view) {
         Intent intent = new Intent(this, CharacterInfoActivity.class);
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
         startActivity(intent);
         finish();
     }
