@@ -50,9 +50,6 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_bag_temporaneo);
 
-        itemSpinner = findViewById(R.id.bag_add_item_spinner);
-        itemSpinner.setPrompt("Proviamo");
-
         this.estraiGiocatore();
         this.createCardBorsaList();
         this.setView();
@@ -71,13 +68,14 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
 
     public void createCardBorsaList() {
         cardEquipList = new ArrayList<>();
-        if (giocatore.getBorsa() != null)
+        if (giocatore.getBorsa() != null){
             this.aggiornaBorsa();
-        for (Equipaggiamento equipaggiamento : giocatore.getBorsa())
-            if (equipaggiamento != null)
-                cardEquipList.add(new CardEquip(equipaggiamento.getNome(),equipaggiamento.getTipo(), false));
-        if (giocatore.getBorsa().size() != 0) {
-            this.aggiornaBorsa();
+            for (Equipaggiamento equipaggiamento : giocatore.getBorsa())
+                if (equipaggiamento != null)
+                    cardEquipList.add(new CardEquip(equipaggiamento.getNome(),equipaggiamento.getTipo(), false));
+            if (giocatore.getBorsa().size() != 0) {
+                this.aggiornaBorsa();
+            }
         }
     }
 
@@ -140,6 +138,9 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
     }
 
     public void setSpinner() {
+        itemSpinner = findViewById(R.id.bag_add_item_spinner);
+        itemSpinner.setPrompt("Proviamo");
+
         List<String> equipaggiamentoList = dbManager.leggiPK(TabellaEquipaggiamento.TBL_NOME, TabellaEquipaggiamento.FIELD_NOMEE);
         ArrayAdapter<String> ItemSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_item);
         ItemSpinnerAdapter.add(AGGIUNGI);

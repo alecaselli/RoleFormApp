@@ -19,6 +19,10 @@ import java.util.ArrayList;
 public class CardEquipAdapter extends RecyclerView.Adapter<CardEquipAdapter.CardEquipViewHolder>{
     private ArrayList<CardEquip> mCardEquipList;
     private CardEquipAdapter.OnItemClickListener mListener;
+    private final String ARMA = "arma";
+    private final String ARMATURA = "armatura";
+    private final String SCUDO = "scudo";
+
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -99,6 +103,20 @@ public class CardEquipAdapter extends RecyclerView.Adapter<CardEquipAdapter.Card
         CardEquip currentItem = mCardEquipList.get(position);
         if (currentItem != null) {
             holder.mNomeEquipView.setText(currentItem.getNome());
+            switch (currentItem.getTipo()){
+                case ARMA:
+                    holder.mTipoImage.setImageResource(R.drawable.equip_sword);
+                    break;
+                case ARMATURA:
+                    holder.mTipoImage.setImageResource(R.drawable.equip_breastplate);
+                    break;
+                case SCUDO:
+                    holder.mTipoImage.setImageResource(R.drawable.equip_shield);
+                    break;
+                default:
+                    holder.mTipoImage.setImageResource(R.drawable.equip_box);
+                    break;
+            }
         }
     }
 
