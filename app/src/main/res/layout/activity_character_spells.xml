@@ -41,8 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardElevation="0dp"
-                android:backgroundTint="@color/whitesmoke">
+                android:backgroundTint="@color/whitesmoke"
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -84,12 +84,13 @@
                     <Spinner
                         android:id="@+id/spells_deceptions_addButton"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="41dp"
                         android:layout_marginBottom="12dp"
                         android:background="@drawable/rounded_spinner"
                         android:gravity="center"
+                        android:paddingHorizontal="15dp"
                         android:spinnerMode="dialog"
-                        android:paddingHorizontal="15dp" />
+                        android:visibility="visible" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -105,8 +106,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardElevation="0dp"
-                android:backgroundTint="@color/whitesmoke">
+                android:backgroundTint="@color/whitesmoke"
+                app:cardElevation="0dp">
 
 
                 <LinearLayout
@@ -146,35 +147,16 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
 
-                    <androidx.cardview.widget.CardView
+                    <Spinner
                         android:id="@+id/spells_level_one_addButton"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="41dp"
                         android:layout_marginBottom="12dp"
-                        app:cardBackgroundColor="@color/lightgrey"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:visibility="gone"
-                        app:cardCornerRadius="15dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingVertical="10dp"
-                            android:paddingHorizontal="20dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:text="Aggiungi incantesimo di primo livello"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="normal"
-                                android:onClick="addLevel1Spell"/>
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
+                        android:background="@drawable/rounded_spinner"
+                        android:gravity="center"
+                        android:paddingHorizontal="15dp"
+                        android:spinnerMode="dialog"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -190,8 +172,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardElevation="0dp"
-                android:backgroundTint="@color/whitesmoke">
+                android:backgroundTint="@color/whitesmoke"
+                app:cardElevation="0dp">
 
 
                 <LinearLayout
@@ -231,35 +213,16 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
 
-                    <androidx.cardview.widget.CardView
+                    <Spinner
                         android:id="@+id/spells_level_two_addButton"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="41dp"
                         android:layout_marginBottom="12dp"
-                        app:cardBackgroundColor="@color/lightgrey"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:visibility="gone"
-                        app:cardCornerRadius="15dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingVertical="10dp"
-                            android:paddingHorizontal="20dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:text="Aggiungi incantesimo di secondo livello"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="normal"
-                                android:onClick="addLevel2Spell"/>
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
+                        android:background="@drawable/rounded_spinner"
+                        android:gravity="center"
+                        android:paddingHorizontal="15dp"
+                        android:spinnerMode="dialog"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -275,8 +238,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardElevation="0dp"
-                android:backgroundTint="@color/whitesmoke">
+                android:backgroundTint="@color/whitesmoke"
+                app:cardElevation="0dp">
 
 
                 <LinearLayout
@@ -316,35 +279,16 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
 
-                    <androidx.cardview.widget.CardView
+                    <Spinner
                         android:id="@+id/spells_level_three_addButton"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="41dp"
                         android:layout_marginBottom="12dp"
-                        app:cardBackgroundColor="@color/lightgrey"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:visibility="gone"
-                        app:cardCornerRadius="15dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingVertical="10dp"
-                            android:paddingHorizontal="20dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:text="Aggiungi incantesimo di terzo livello"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="normal"
-                                android:onClick="addLevel3Spell"/>
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
+                        android:background="@drawable/rounded_spinner"
+                        android:gravity="center"
+                        android:paddingHorizontal="15dp"
+                        android:spinnerMode="dialog"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -360,8 +304,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardElevation="0dp"
-                android:backgroundTint="@color/whitesmoke">
+                android:backgroundTint="@color/whitesmoke"
+                app:cardElevation="0dp">
 
 
                 <LinearLayout
@@ -401,35 +345,16 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
 
-                    <androidx.cardview.widget.CardView
+                    <Spinner
                         android:id="@+id/spells_level_four_addButton"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="41dp"
                         android:layout_marginBottom="12dp"
-                        app:cardBackgroundColor="@color/lightgrey"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:visibility="gone"
-                        app:cardCornerRadius="15dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingVertical="10dp"
-                            android:paddingHorizontal="20dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:text="Aggiungi incantesimo di quarto livello"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="normal"
-                                android:onClick="addLevel4Spell"/>
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
+                        android:background="@drawable/rounded_spinner"
+                        android:gravity="center"
+                        android:paddingHorizontal="15dp"
+                        android:spinnerMode="dialog"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -445,8 +370,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardElevation="0dp"
-                android:backgroundTint="@color/whitesmoke">
+                android:backgroundTint="@color/whitesmoke"
+                app:cardElevation="0dp">
 
 
                 <LinearLayout
@@ -486,35 +411,16 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
 
-                    <androidx.cardview.widget.CardView
+                    <Spinner
                         android:id="@+id/spells_level_five_addButton"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="41dp"
                         android:layout_marginBottom="12dp"
-                        app:cardBackgroundColor="@color/lightgrey"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:visibility="gone"
-                        app:cardCornerRadius="15dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingVertical="10dp"
-                            android:paddingHorizontal="20dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:text="Aggiungi incantesimo di quinto livello"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="normal"
-                                android:onClick="addLevel5Spell"/>
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
+                        android:background="@drawable/rounded_spinner"
+                        android:gravity="center"
+                        android:paddingHorizontal="15dp"
+                        android:spinnerMode="dialog"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -530,8 +436,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardElevation="0dp"
-                android:backgroundTint="@color/whitesmoke">
+                android:backgroundTint="@color/whitesmoke"
+                app:cardElevation="0dp">
 
 
                 <LinearLayout
@@ -571,35 +477,16 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
 
-                    <androidx.cardview.widget.CardView
+                    <Spinner
                         android:id="@+id/spells_level_six_addButton"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="41dp"
                         android:layout_marginBottom="12dp"
-                        app:cardBackgroundColor="@color/lightgrey"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:visibility="gone"
-                        app:cardCornerRadius="15dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingVertical="10dp"
-                            android:paddingHorizontal="20dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:text="Aggiungi incantesimo di sesto livello"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="normal"
-                                android:onClick="addLevel6Spell"/>
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
+                        android:background="@drawable/rounded_spinner"
+                        android:gravity="center"
+                        android:paddingHorizontal="15dp"
+                        android:spinnerMode="dialog"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -615,8 +502,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardElevation="0dp"
-                android:backgroundTint="@color/whitesmoke">
+                android:backgroundTint="@color/whitesmoke"
+                app:cardElevation="0dp">
 
 
                 <LinearLayout
@@ -656,35 +543,16 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
 
-                    <androidx.cardview.widget.CardView
+                    <Spinner
                         android:id="@+id/spells_level_seven_addButton"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="41dp"
                         android:layout_marginBottom="12dp"
-                        app:cardBackgroundColor="@color/lightgrey"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:visibility="gone"
-                        app:cardCornerRadius="15dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingVertical="10dp"
-                            android:paddingHorizontal="20dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:text="Aggiungi incantesimo di settimo livello"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="normal"
-                                android:onClick="addLevel7Spell"/>
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
+                        android:background="@drawable/rounded_spinner"
+                        android:gravity="center"
+                        android:paddingHorizontal="15dp"
+                        android:spinnerMode="dialog"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -700,8 +568,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardElevation="0dp"
-                android:backgroundTint="@color/whitesmoke">
+                android:backgroundTint="@color/whitesmoke"
+                app:cardElevation="0dp">
 
 
                 <LinearLayout
@@ -741,35 +609,16 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
 
-                    <androidx.cardview.widget.CardView
+                    <Spinner
                         android:id="@+id/spells_level_eight_addButton"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="41dp"
                         android:layout_marginBottom="12dp"
-                        app:cardBackgroundColor="@color/lightgrey"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:visibility="gone"
-                        app:cardCornerRadius="15dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingVertical="10dp"
-                            android:paddingHorizontal="20dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:text="Aggiungi incantesimo di ottavo livello"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="normal"
-                                android:onClick="addLevel8Spell"/>
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
+                        android:background="@drawable/rounded_spinner"
+                        android:gravity="center"
+                        android:paddingHorizontal="15dp"
+                        android:spinnerMode="dialog"
+                        android:visibility="gone"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -785,8 +634,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardElevation="0dp"
-                android:backgroundTint="@color/whitesmoke">
+                android:backgroundTint="@color/whitesmoke"
+                app:cardElevation="0dp">
 
 
                 <LinearLayout
@@ -826,35 +675,16 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
 
-                    <androidx.cardview.widget.CardView
+                    <Spinner
                         android:id="@+id/spells_level_nine_addButton"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="41dp"
                         android:layout_marginBottom="12dp"
-                        app:cardBackgroundColor="@color/lightgrey"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:visibility="gone"
-                        app:cardCornerRadius="15dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingVertical="10dp"
-                            android:paddingHorizontal="20dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:text="Aggiungi incantesimo di nono livello"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="normal"
-                                android:onClick="addLevel9Spell"/>
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
+                        android:background="@drawable/rounded_spinner"
+                        android:gravity="center"
+                        android:paddingHorizontal="15dp"
+                        android:spinnerMode="dialog"
+                        android:visibility="gone"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"

@@ -7,6 +7,7 @@ import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +30,7 @@ public class CharacterSpellsActivity extends AppCompatActivity {
 
     private List<RecyclerView> spellsRecyclerViews;
     private List<Button> spellsExpandButtons;
-    private List<CardView> spellsAddButtons;
+    private List<Spinner> spellsAddButtons;
     private List<CardView> spellsCardViews;
 
     private RecyclerView mRecyclerView;
@@ -118,7 +119,7 @@ public class CharacterSpellsActivity extends AppCompatActivity {
         for (final int i : indici) {
             spellsRecyclerViews.add((RecyclerView) findViewById(recyclerViewIds.get(i)));
             spellsExpandButtons.add((Button) findViewById(expandButtonIds.get(i)));
-            spellsAddButtons.add((CardView) findViewById(addButtonIds.get(i)));
+            spellsAddButtons.add((Spinner) findViewById(addButtonIds.get(i)));
             spellsCardViews.add((CardView) findViewById(cardViewIds.get(i)));
 
             spellsExpandButtons.get(i).setOnClickListener(new View.OnClickListener() {
