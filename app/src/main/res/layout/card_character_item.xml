@@ -11,8 +11,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingVertical="10dp"
-        android:background="?android:attr/selectableItemBackground">
+        android:background="?android:attr/selectableItemBackground"
+        android:paddingVertical="10dp">
 
         <ImageView
             android:id="@+id/imageView"
@@ -60,14 +60,19 @@
             android:textSize="16sp"
             android:textStyle="italic" />
 
+
         <ImageView
             android:id="@+id/character_delete"
             android:layout_width="45dp"
             android:layout_height="45dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="14dp"
             android:padding="2dp"
-            android:src="@drawable/ic_trash" />
+            android:src="@drawable/eraser" />
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
