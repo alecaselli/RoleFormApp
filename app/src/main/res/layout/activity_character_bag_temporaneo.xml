@@ -205,8 +205,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/rounded_spinner"
-                android:gravity="center"
-                android:paddingHorizontal="15dp" />
+                android:gravity="center" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/create_button_cardview"

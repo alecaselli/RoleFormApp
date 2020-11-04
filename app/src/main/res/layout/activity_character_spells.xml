@@ -81,35 +81,15 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
 
-                    <androidx.cardview.widget.CardView
+                    <Spinner
                         android:id="@+id/spells_deceptions_addButton"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
                         android:layout_marginBottom="12dp"
-                        app:cardBackgroundColor="@color/lightgrey"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:visibility="gone"
-                        app:cardCornerRadius="15dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingVertical="10dp"
-                            android:paddingHorizontal="20dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:text="Aggiungi inganno"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="normal"
-                                android:onClick="addLevel0Spell"/>
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
+                        android:background="@drawable/rounded_spinner"
+                        android:gravity="center"
+                        android:spinnerMode="dialog"
+                        android:paddingHorizontal="15dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

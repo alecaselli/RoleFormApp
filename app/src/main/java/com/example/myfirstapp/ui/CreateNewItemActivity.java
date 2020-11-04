@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -156,14 +157,11 @@ public class CreateNewItemActivity extends AppCompatActivity implements AdapterV
     }
 
     public void createArmor(String nome, StringBuffer desc, String tipo, int costo, int peso, int capacita, String subtipo) {
-        editText = (EditText) findViewById(R.id.create_item_armor_stealth);
-        String temp = editText.getText().toString();
-        boolean nonFurtiva = true;
-        if (!temp.equals(""))
-            nonFurtiva = (Integer.parseInt(editText.getText().toString()) == 0);
+
+        boolean nonFurtiva = !((CheckBox) findViewById(R.id.create_item_armor_stealth)).isChecked();
 
         editText = (EditText) findViewById(R.id.create_item_armor_CA);
-        temp = editText.getText().toString();
+        String temp = editText.getText().toString();
         int modCA = 0;
         if (!temp.equals(""))
             modCA = Integer.parseInt(editText.getText().toString());

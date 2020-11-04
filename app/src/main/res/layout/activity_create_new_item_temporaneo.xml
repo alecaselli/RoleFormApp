@@ -38,8 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
-            android:background="@drawable/rounded_spinner"
-            android:paddingHorizontal="15dp" />
+            android:background="@drawable/rounded_spinner" />
 
         <Spinner
             android:id="@+id/create_item_subtype_selection_spinner"
@@ -47,8 +46,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_spinner"
-            android:paddingHorizontal="15dp" />
+            android:background="@drawable/rounded_spinner" />
     </LinearLayout>
 
     <ScrollView
@@ -81,12 +79,13 @@
                 <EditText
                     android:id="@+id/create_item_name"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/rounded_edittext"
                     android:inputType="textCapSentences"
-                    android:maxLength="50"
+                    android:maxLength="30"
                     android:paddingHorizontal="15dp"
+                    android:paddingVertical="8dp"
                     android:text=""
                     android:textSize="20sp" />
             </LinearLayout>
@@ -109,12 +108,14 @@
                 <EditText
                     android:id="@+id/create_item_desc"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/rounded_edittext"
-                    android:inputType="textCapSentences"
-                    android:maxLength="50"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:scrollHorizontally="false"
+                    android:maxLength="300"
                     android:paddingHorizontal="15dp"
+                    android:paddingVertical="8dp"
                     android:text=""
                     android:textSize="20sp" />
             </LinearLayout>
@@ -141,13 +142,15 @@
                     <EditText
                         android:id="@+id/create_item_price"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/rounded_edittext"
                         android:inputType="numberDecimal"
-                        android:maxLength="10"
+                        android:maxLength="6"
                         android:paddingHorizontal="15dp"
+                        android:paddingVertical="8dp"
                         android:text=""
+                        android:textAlignment="center"
                         android:textSize="20sp" />
                 </LinearLayout>
 
@@ -169,13 +172,15 @@
                     <EditText
                         android:id="@+id/create_item_weight"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/rounded_edittext"
                         android:inputType="numberDecimal"
-                        android:maxLength="10"
+                        android:maxLength="6"
                         android:paddingHorizontal="15dp"
+                        android:paddingVertical="8dp"
                         android:text=""
+                        android:textAlignment="center"
                         android:textSize="20sp" />
                 </LinearLayout>
 
@@ -197,13 +202,15 @@
                     <EditText
                         android:id="@+id/create_item_capacity"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/rounded_edittext"
                         android:inputType="numberDecimal"
-                        android:maxLength="10"
+                        android:maxLength="6"
                         android:paddingHorizontal="15dp"
+                        android:paddingVertical="8dp"
                         android:text=""
+                        android:textAlignment="center"
                         android:textSize="20sp" />
                 </LinearLayout>
             </RelativeLayout>
@@ -227,13 +234,14 @@
                 <EditText
                     android:id="@+id/create_item_weapon_damage"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/rounded_edittext"
                     android:hint="@string/es_1d4_mod_forza"
                     android:inputType="textCapSentences"
-                    android:maxLength="50"
+                    android:maxLength="35"
                     android:paddingHorizontal="15dp"
+                    android:paddingVertical="8dp"
                     android:text=""
                     android:textSize="20sp" />
             </LinearLayout>
@@ -257,12 +265,14 @@
                 <EditText
                     android:id="@+id/create_item_weapon_property"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/rounded_edittext"
-                    android:inputType="textCapSentences"
-                    android:maxLength="50"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:scrollHorizontally="false"
+                    android:maxLength="150"
                     android:paddingHorizontal="15dp"
+                    android:paddingVertical="8dp"
                     android:text=""
                     android:textSize="20sp" />
             </LinearLayout>
@@ -277,7 +287,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="10dp">
+                    android:layout_marginStart="25dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -289,12 +299,13 @@
                     <EditText
                         android:id="@+id/create_item_armor_CA"
                         android:layout_width="100dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:background="@drawable/rounded_edittext"
                         android:inputType="numberDecimal"
-                        android:maxLength="10"
+                        android:maxLength="6"
                         android:paddingHorizontal="15dp"
+                        android:paddingVertical="8dp"
                         android:text=""
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -304,7 +315,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="25dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -314,17 +325,12 @@
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
-                    <EditText
+                    <CheckBox
                         android:id="@+id/create_item_armor_stealth"
-                        android:layout_width="100dp"
+                        android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginStart="10dp"
-                        android:background="@drawable/rounded_edittext"
-                        android:inputType="numberDecimal"
-                        android:maxLength="10"
-                        android:paddingHorizontal="15dp"
-                        android:text=""
-                        android:textSize="20sp" />
+                        android:button="@drawable/checkbox_background" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -352,13 +358,14 @@
                     <EditText
                         android:id="@+id/create_item_armor_time_off"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/rounded_edittext"
                         android:hint="@string/ntemp1"
                         android:inputType="textCapSentences"
-                        android:maxLength="50"
+                        android:maxLength="20"
                         android:paddingHorizontal="15dp"
+                        android:paddingVertical="8dp"
                         android:text=""
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -381,13 +388,14 @@
                     <EditText
                         android:id="@+id/create_item_armor_time_on"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/rounded_edittext"
                         android:hint="@string/ntemp2"
                         android:inputType="textCapSentences"
-                        android:maxLength="50"
+                        android:maxLength="20"
                         android:paddingHorizontal="15dp"
+                        android:paddingVertical="8dp"
                         android:text=""
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -406,20 +414,21 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/forza_necessaria"
                     android:layout_marginStart="10dp"
+                    android:text="@string/forza_necessaria"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/create_item_armor_streight_needed"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/rounded_edittext"
                     android:inputType="textCapSentences"
                     android:maxLength="50"
                     android:paddingHorizontal="15dp"
+                    android:paddingVertical="8dp"
                     android:text=""
                     android:textSize="20sp" />
             </LinearLayout>
@@ -435,7 +444,7 @@
         android:background="@color/whitesmoke">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="50dp"
             android:layout_centerInParent="true"
             app:cardCornerRadius="15dp">
