@@ -22,6 +22,7 @@ import com.example.myfirstapp.R;
 import com.example.myfirstapp.adapter.CardEquipAdapter;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.database.TabellaEquipaggiamento;
+import com.example.myfirstapp.domain.Armatura;
 import com.example.myfirstapp.domain.Equipaggiamento;
 import com.example.myfirstapp.domain.Giocatore;
 import com.example.myfirstapp.utilities.CardEquip;
@@ -174,6 +175,11 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
                         giocatore.aggiungiBorsa(disequipaggiare);
                         cardEquipList.add(new CardEquip(disequipaggiare.getNome(), disequipaggiare.getTipo(),false));
                         mAdapter.notifyItemInserted(cardEquipList.size() - 1);
+                        if(disequipaggiare instanceof Armatura) {
+                            Armatura dis = (Armatura) disequipaggiare;
+                            giocatore.aggiornaClasseArmatura(-dis.getModificatoreCA());
+                            dbManager.aggiornaDettagliGiocatore(giocatore);
+                        }
                     } else {
                         Toast.makeText(this, "equipaggiamento fallito", Toast.LENGTH_LONG).show();
                         dbManager.aggiornaHage(nomecamp, nomeg, equipaggiare.getNome(), true);
@@ -185,6 +191,11 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
                 giocatore.aggiungiEquipaggiato(equipaggiare);
                 cardEquipList.remove(position);
                 mAdapter.notifyItemRemoved(position);
+                if(equipaggiare instanceof Armatura) {
+                    Armatura equip = (Armatura) equipaggiare;
+                    giocatore.aggiornaClasseArmatura(equip.getModificatoreCA());
+                    dbManager.aggiornaDettagliGiocatore(giocatore);
+                }
                 this.setView();
             } else Toast.makeText(this, "equipaggiamento fallito", Toast.LENGTH_LONG).show();
         } else Toast.makeText(this, "oggetto non equipaggiabile", Toast.LENGTH_LONG).show();
@@ -252,6 +263,11 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
                 giocatore.aggiungiBorsa(disequipaggiare);
                 cardEquipList.add(new CardEquip(disequipaggiare.getNome(), disequipaggiare.getTipo(),false));
                 mAdapter.notifyItemInserted(cardEquipList.size() - 1);
+                if(disequipaggiare instanceof Armatura){
+                    Armatura dis = (Armatura) disequipaggiare;
+                    giocatore.aggiornaClasseArmatura(-dis.getModificatoreCA());
+                    dbManager.aggiornaDettagliGiocatore(giocatore);
+                }
             } else Toast.makeText(this, "disequipaggiamento fallito", Toast.LENGTH_LONG).show();
         }
     }
