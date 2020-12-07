@@ -32,7 +32,8 @@ import java.util.List;
 
 public class CharacterBagActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private String NONEQUIP = "Non equipaggiata";
+    private final String NONEQUIP = "Non equipaggiata";
+    private final String AGGIUNGI = "AGGIUNGI";
     private TextView text;
     private RecyclerView mRecyclerView;
     private GridLayoutManager mGridLayoutManager;
@@ -44,7 +45,6 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
     private String nomeg;
     private Giocatore giocatore;
     private DBManager dbManager;
-    private final String AGGIUNGI = "AGGIUNGI";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

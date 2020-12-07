@@ -6,9 +6,10 @@ import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -26,12 +27,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class CharacterSpellsActivity extends AppCompatActivity {
+public class CharacterSpellsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private List<RecyclerView> spellsRecyclerViews;
     private List<Button> spellsExpandButtons;
     private List<Spinner> spellsAddButtons;
     private List<CardView> spellsCardViews;
+    private List<ArrayAdapter<String>> itemSpinnerAdapter;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -39,11 +41,12 @@ public class CharacterSpellsActivity extends AppCompatActivity {
     private HashMap<Integer, ArrayList<CardIncantesimo>> mCardIncantesimoMap;
     private ArrayList<CardIncantesimo> mcardIncantesimoList;
 
-    private final List<Integer> recyclerViewIds = new ArrayList<>(Arrays.asList(R.id.spells_deceptions_recyclerView, R.id.spells_level_one_recyclerView, R.id.spells_level_two_recyclerView, R.id.spells_level_three_recyclerView, R.id.spells_level_four_recyclerView, R.id.spells_level_five_recyclerView, R.id.spells_level_six_recyclerView, R.id.spells_level_seven_recyclerView, R.id.spells_level_eight_recyclerView, R.id.spells_level_nine_recyclerView));
-    private final List<Integer> expandButtonIds = new ArrayList<>(Arrays.asList(R.id.spells_deceptions_expandButton, R.id.spells_level_one_expandButton, R.id.spells_level_two_expandButton, R.id.spells_level_three_expandButton, R.id.spells_level_four_expandButton, R.id.spells_level_five_expandButton, R.id.spells_level_six_expandButton, R.id.spells_level_seven_expandButton, R.id.spells_level_eight_expandButton, R.id.spells_level_nine_expandButton));
-    private final List<Integer> addButtonIds = new ArrayList<>(Arrays.asList(R.id.spells_deceptions_addButton, R.id.spells_level_one_addButton, R.id.spells_level_two_addButton, R.id.spells_level_three_addButton, R.id.spells_level_four_addButton, R.id.spells_level_five_addButton, R.id.spells_level_six_addButton, R.id.spells_level_seven_addButton, R.id.spells_level_eight_addButton, R.id.spells_level_nine_addButton));
-    private final List<Integer> cardViewIds = new ArrayList<>(Arrays.asList(R.id.spells_deceptions_cardView, R.id.spells_level_one_cardView, R.id.spells_level_two_cardView, R.id.spells_level_three_cardView, R.id.spells_level_four_cardView, R.id.spells_level_five_cardView, R.id.spells_level_six_cardView, R.id.spells_level_seven_cardView, R.id.spells_level_eight_cardView, R.id.spells_level_nine_cardView));
-    private final List<Integer> indici = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
+    private final String AGGIUNGI = "Aggiungi incantesimo";
+    private final List<Integer> RECYCLERVIEWIDS = new ArrayList<>(Arrays.asList(R.id.spells_deceptions_recyclerView, R.id.spells_level_one_recyclerView, R.id.spells_level_two_recyclerView, R.id.spells_level_three_recyclerView, R.id.spells_level_four_recyclerView, R.id.spells_level_five_recyclerView, R.id.spells_level_six_recyclerView, R.id.spells_level_seven_recyclerView, R.id.spells_level_eight_recyclerView, R.id.spells_level_nine_recyclerView));
+    private final List<Integer> EXPANDBUTTONIDS = new ArrayList<>(Arrays.asList(R.id.spells_deceptions_expandButton, R.id.spells_level_one_expandButton, R.id.spells_level_two_expandButton, R.id.spells_level_three_expandButton, R.id.spells_level_four_expandButton, R.id.spells_level_five_expandButton, R.id.spells_level_six_expandButton, R.id.spells_level_seven_expandButton, R.id.spells_level_eight_expandButton, R.id.spells_level_nine_expandButton));
+    private final List<Integer> ADDBUTTONIDS = new ArrayList<>(Arrays.asList(R.id.spells_deceptions_addButton, R.id.spells_level_one_addButton, R.id.spells_level_two_addButton, R.id.spells_level_three_addButton, R.id.spells_level_four_addButton, R.id.spells_level_five_addButton, R.id.spells_level_six_addButton, R.id.spells_level_seven_addButton, R.id.spells_level_eight_addButton, R.id.spells_level_nine_addButton));
+    private final List<Integer> CARDVIEWIDS = new ArrayList<>(Arrays.asList(R.id.spells_deceptions_cardView, R.id.spells_level_one_cardView, R.id.spells_level_two_cardView, R.id.spells_level_three_cardView, R.id.spells_level_four_cardView, R.id.spells_level_five_cardView, R.id.spells_level_six_cardView, R.id.spells_level_seven_cardView, R.id.spells_level_eight_cardView, R.id.spells_level_nine_cardView));
+    private final List<Integer> INDICI = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
 
 
     private String nomecamp;
@@ -59,6 +62,7 @@ public class CharacterSpellsActivity extends AppCompatActivity {
         this.estraiIntent();
         this.createListCardIncantesimo();
         this.setButtons();
+        this.setSpinner();
     }
 
     public void estraiIntent() {
@@ -89,7 +93,7 @@ public class CharacterSpellsActivity extends AppCompatActivity {
     }
 
     public void setRecyclerView(final int indice) {
-        mRecyclerView = findViewById(recyclerViewIds.get(indice));
+        mRecyclerView = findViewById(RECYCLERVIEWIDS.get(indice));
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager((this));
         mAdapter.put(indice, new CardIncantesimoAdapter(mCardIncantesimoMap.get(indice)));
@@ -116,11 +120,11 @@ public class CharacterSpellsActivity extends AppCompatActivity {
         spellsAddButtons = new ArrayList<>();
         spellsCardViews = new ArrayList<>();
 
-        for (final int i : indici) {
-            spellsRecyclerViews.add((RecyclerView) findViewById(recyclerViewIds.get(i)));
-            spellsExpandButtons.add((Button) findViewById(expandButtonIds.get(i)));
-            spellsAddButtons.add((Spinner) findViewById(addButtonIds.get(i)));
-            spellsCardViews.add((CardView) findViewById(cardViewIds.get(i)));
+        for (final int i : INDICI) {
+            spellsRecyclerViews.add((RecyclerView) findViewById(RECYCLERVIEWIDS.get(i)));
+            spellsExpandButtons.add((Button) findViewById(EXPANDBUTTONIDS.get(i)));
+            spellsAddButtons.add((Spinner) findViewById(ADDBUTTONIDS.get(i)));
+            spellsCardViews.add((CardView) findViewById(CARDVIEWIDS.get(i)));
 
             spellsExpandButtons.get(i).setOnClickListener(new View.OnClickListener() {
 
@@ -143,6 +147,20 @@ public class CharacterSpellsActivity extends AppCompatActivity {
         }
     }
 
+    public void setSpinner() {
+        itemSpinnerAdapter = new ArrayList<>();
+        List<List<String>> suplist = dbManager.leggiIncantesimilist();
+
+        for (int i : INDICI) {
+            itemSpinnerAdapter.add(new ArrayAdapter<String>(this, R.layout.spinner_custom_item));
+            itemSpinnerAdapter.get(i).add(AGGIUNGI);
+            itemSpinnerAdapter.get(i).addAll(suplist.get(i));
+            itemSpinnerAdapter.get(i).setDropDownViewResource(R.layout.spinner_dropdown_custom_item);
+            spellsAddButtons.get(i).setAdapter(itemSpinnerAdapter.get(i));
+            spellsAddButtons.get(i).setOnItemSelectedListener(this);
+        }
+    }
+
     public void changeCompetenza(int position, int indice) {
         mCardIncantesimoMap.get(indice).get(position).swapBool();
         mAdapter.get(indice).notifyItemChanged(position);
@@ -155,47 +173,47 @@ public class CharacterSpellsActivity extends AppCompatActivity {
         finish();*/
     }
 
-    public void addLevel0Spell(View view){
+    public void addLevel0Spell(View view) {
         this.addSpell(0);
     }
 
-    public void addLevel1Spell(View view){
+    public void addLevel1Spell(View view) {
         this.addSpell(1);
     }
 
-    public void addLevel2Spell(View view){
+    public void addLevel2Spell(View view) {
         this.addSpell(2);
     }
 
-    public void addLevel3Spell(View view){
+    public void addLevel3Spell(View view) {
         this.addSpell(3);
     }
 
-    public void addLevel4Spell(View view){
+    public void addLevel4Spell(View view) {
         this.addSpell(4);
     }
 
-    public void addLevel5Spell(View view){
+    public void addLevel5Spell(View view) {
         this.addSpell(5);
     }
 
-    public void addLevel6Spell(View view){
+    public void addLevel6Spell(View view) {
         this.addSpell(6);
     }
 
-    public void addLevel7Spell(View view){
+    public void addLevel7Spell(View view) {
         this.addSpell(7);
     }
 
-    public void addLevel8Spell(View view){
+    public void addLevel8Spell(View view) {
         this.addSpell(8);
     }
 
-    public void addLevel9Spell(View view){
+    public void addLevel9Spell(View view) {
         this.addSpell(9);
     }
 
-    public void addSpell(int livello){
+    public void addSpell(int livello) {
         /*Intent intent = new Intent(this, AddNewSpell.class);
         intent.putExtra("livello", livello);
         intent.putExtra("nomecamp", nomecamp);
@@ -211,5 +229,15 @@ public class CharacterSpellsActivity extends AppCompatActivity {
         intent.putExtra("nomeg", nomeg);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

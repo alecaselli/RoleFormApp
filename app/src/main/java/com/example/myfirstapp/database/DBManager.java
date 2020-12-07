@@ -1559,6 +1559,36 @@ public class DBManager {
         }
     }
 
+    public List<List<String>> leggiIncantesimilist() {
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+
+        try {
+            Cursor resultSet = db.query(TabellaIncantesimi.TBL_NOME, null, null, null, null, null, null);
+            if (resultSet == null || resultSet.getCount() == 0) {
+                return null;
+            }
+            resultSet.moveToFirst();
+
+            List<List<String>> supincantesimi = new ArrayList<>();
+            for (int i = 0; i <= 9; ++i) {
+                List<String> incantesimi = new ArrayList<>();
+                supincantesimi.add(incantesimi);
+            }
+
+            while (!resultSet.isAfterLast()) {
+                supincantesimi.get(resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_LIVELLO))).add(resultSet.getString(resultSet.getColumnIndex(TabellaIncantesimi.FIELD_NOMEI)));
+                resultSet.moveToNext();
+            }
+
+            resultSet.close();
+            return supincantesimi;
+        } catch (SQLiteException sqle) {
+            Log.e("LEGGI INCLIST LIV", "leggi fallita", sqle);
+            return null;
+        }
+
+    }
+
     public List<List<Incantesimo>> leggiIncantesimilist(@NonNull String nomecamp, @NonNull String nomeg) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String table = TabelleHA.TBL_HAGI;
@@ -1599,7 +1629,6 @@ public class DBManager {
             Log.e("LEGGI INCLIST LIV", "leggi fallita", sqle);
             return null;
         }
-
     }
 
     public Abilita leggiAbilita(@NotNull String nomea) {
