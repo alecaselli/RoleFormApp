@@ -28,6 +28,7 @@ import java.util.List;
 
 public class CharacterActivity extends AppCompatActivity {
 
+    private ValutaController valutaController;
     private DBManager dbManager;
     private String nomecamp;
     private String nomeg;
@@ -47,14 +48,14 @@ public class CharacterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character);
 
-        this.estraiGiocatore();
+        this.estraiIntent();
         this.setView();
         this.setButton();
         this.setOnLongClick();
 
     }
 
-    public void estraiGiocatore() {
+    private void estraiIntent() {
         Intent intent = getIntent();
         nomecamp = intent.getStringExtra("nomecamp");
         nomeg = intent.getStringExtra("nomeg");
@@ -62,46 +63,47 @@ public class CharacterActivity extends AppCompatActivity {
         assert nomeg != null;
         assert nomecamp != null;
         giocatore = dbManager.leggiGiocatore(nomecamp, nomeg);
+        valutaController=new ValutaController(giocatore.getPortafoglio(),nomecamp,nomeg,this);
     }
 
     /* SET */
     @SuppressLint("DefaultLocale")
-    public void setView() {
+    private void setView() {
 
-        txt = (TextView) findViewById(R.id.campaign_name);
+        txt = findViewById(R.id.campaign_name);
         txt.setText(giocatore.getNomeCampagna());
 
-        txt = (TextView) findViewById(R.id.character_name);
+        txt = findViewById(R.id.character_name);
         txt.setText(giocatore.getNome());
 
-        txt = (TextView) findViewById(R.id.character_genre);
+        txt = findViewById(R.id.character_genre);
         txt.setText(giocatore.getGenere());
 
-        txt = (TextView) findViewById(R.id.level);
+        txt = findViewById(R.id.level);
         txt.setText(String.format("Livello %d", giocatore.getLivello()));
 
-        txt = (TextView) findViewById(R.id.character_life);
+        txt = findViewById(R.id.character_life);
         txt.setText(String.valueOf(giocatore.getPuntiFerita()));
 
-        txt = (TextView) findViewById(R.id.character_max_life);
+        txt = findViewById(R.id.character_max_life);
         txt.setText(String.valueOf(giocatore.getPuntiFeritaMax()));
 
-        txt = (TextView) findViewById(R.id.character_mana);
+        txt = findViewById(R.id.character_mana);
         txt.setText(String.valueOf(giocatore.getMana()));
 
-        txt = (TextView) findViewById(R.id.character_max_mana);
+        txt = findViewById(R.id.character_max_mana);
         txt.setText(String.valueOf(giocatore.getManaMax()));
 
-        txt = (TextView) findViewById(R.id.character_height);
+        txt = findViewById(R.id.character_height);
         txt.setText(String.format("%s cm", giocatore.getAltezza()));
 
-        txt = (TextView) findViewById(R.id.character_age);
+        txt = findViewById(R.id.character_age);
         txt.setText(String.format("%s anni", giocatore.getEta()));
 
-        txt = (TextView) findViewById(R.id.character_race);
+        txt = findViewById(R.id.character_race);
         txt.setText(giocatore.getRazza().getNome());
 
-        txt = (TextView) findViewById(R.id.character_class);
+        txt = findViewById(R.id.character_class);
         txt.setText(giocatore.getClasse().getNome());
 
         this.setCaratteristica("forza", R.id.character_total_strenght, R.id.character_mod_strenght);
@@ -118,7 +120,7 @@ public class CharacterActivity extends AppCompatActivity {
         this.setPortafoglio();
     }
 
-    public void setCaratteristica(String tipo, int idBase, int idBonus) {
+    private void setCaratteristica(String tipo, int idBase, int idBonus) {
         Caratteristica caratteristica = giocatore.getCaratteristica(tipo);
         txt = (TextView) findViewById(idBase);
         txt.setText(String.valueOf(caratteristica.getBase()));
@@ -126,13 +128,13 @@ public class CharacterActivity extends AppCompatActivity {
         txt.setText(String.valueOf(caratteristica.getModificatore()));
     }
 
-    public void setCaratteristica(String tipo, int idBase) {
+    private void setCaratteristica(String tipo, int idBase) {
         Caratteristica caratteristica = giocatore.getCaratteristica(tipo);
         txt = (TextView) findViewById(idBase);
         txt.setText(String.valueOf(caratteristica.getBase()));
     }
 
-    public void setEquipaggiamento(String tipo, int id) {
+    private void setEquipaggiamento(String tipo, int id) {
         Equipaggiamento equipaggiamento = giocatore.getEquipaggiato(tipo);
         String nome;
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
@@ -141,7 +143,7 @@ public class CharacterActivity extends AppCompatActivity {
         txt.setText(nome);
     }
 
-    public void setPortafoglio() {
+    private void setPortafoglio() {
         List<Integer> valoremonete = giocatore.getPortafoglio().getValoreInMonete();
         txt = (TextView) findViewById(R.id.character_base_copper);
         txt.setText(String.valueOf(valoremonete.get(0)));
@@ -151,7 +153,7 @@ public class CharacterActivity extends AppCompatActivity {
         txt.setText(String.valueOf(valoremonete.get(2)));
     }
 
-    public void setButton() {
+    private void setButton() {
         currencyButton = findViewById(R.id.character_currency_button);
         currencyBaseView = findViewById(R.id.character_currency_base);
         currencyModView = findViewById(R.id.character_currency_mod);
@@ -179,7 +181,7 @@ public class CharacterActivity extends AppCompatActivity {
         });
     }
 
-    public void setOnLongClick() {
+    private void setOnLongClick() {
         CardView goldBaseButton = findViewById(R.id.goldBaseButton);
         this.setCurrencyOnLongClick(goldBaseButton, 0, 0, -1);
 
@@ -208,17 +210,17 @@ public class CharacterActivity extends AppCompatActivity {
         this.setCaratteristicaOnLongClick(charismaButton, "carisma", R.id.character_total_charisma, R.id.character_mod_charisma);
     }
 
-    public void setCurrencyOnLongClick(@NotNull CardView currencyButton, final int val0, final int val1, final int val2) {
+    private void setCurrencyOnLongClick(@NotNull CardView currencyButton, final int val0, final int val1, final int val2) {
         currencyButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                aggiornaValuta(val0, val1, val2);
+                aggiornaValutaOnLongClick(val0,val1,val2);
                 return true;
             }
         });
     }
 
-    public void setCaratteristicaOnLongClick(@NotNull CardView CaratteristicaButton, final String tipo, final int idBase, final int idBonus) {
+    private void setCaratteristicaOnLongClick(@NotNull CardView CaratteristicaButton, final String tipo, final int idBase, final int idBonus) {
         CaratteristicaButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -230,7 +232,7 @@ public class CharacterActivity extends AppCompatActivity {
     }
 
     /* CURRENCY BUTTON */
-    public void aggiornaValuta() {
+    private void aggiornaValuta() {
         List<Integer> valore = new ArrayList<>();
         boolean aggiorna = false;
 
@@ -261,36 +263,31 @@ public class CharacterActivity extends AppCompatActivity {
                 break;
             }
 
-        if (aggiorna)
-            this.aggiornaValuta(valore);
-    }
-
-    public void aggiornaValuta(int val0, int val1, int val2) {
-        List<Integer> valore = new ArrayList<>();
-        valore.add(val0);
-        valore.add(val1);
-        valore.add(val2);
-        this.aggiornaValuta(valore);
-    }
-
-    public void aggiornaValuta(List<Integer> valore) {
-        giocatore.getPortafoglio().aggiornaValore(valore);
-        if (!dbManager.aggiornaDettagliGiocatore(giocatore)) {
-            Toast.makeText(this, "aggiornamento portafoglio fallito", Toast.LENGTH_LONG).show();
+        if (aggiorna) {
+            valutaController.aggiornaValuta(valore.get(0),valore.get(1),valore.get(2));
+            this.setPortafoglio();
         }
+
+    }
+
+    public void aggiornaValutaOnLongClick(int val0,int val1,int val2){
+        valutaController.aggiornaValuta(val0, val1, val2);
         this.setPortafoglio();
     }
 
     public void goldBaseButton(View view) {
-        this.aggiornaValuta(0, 0, 1);
+        valutaController.aggiornaValuta(0, 0, 1);
+        this.setPortafoglio();
     }
 
     public void silverBaseButton(View view) {
-        this.aggiornaValuta(0, 1, 0);
+        valutaController.aggiornaValuta(0, 1, 0);
+        this.setPortafoglio();
     }
 
     public void bronzeBaseButton(View view) {
-        this.aggiornaValuta(1, 0, 0);
+        valutaController.aggiornaValuta(1, 0, 0);
+        this.setPortafoglio();
     }
 
     /* CARATTERISTICHE BUTTON */

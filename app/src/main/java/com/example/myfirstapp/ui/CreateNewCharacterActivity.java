@@ -20,7 +20,7 @@ import com.example.myfirstapp.domain.Caratteristica;
 import com.example.myfirstapp.domain.Classe;
 import com.example.myfirstapp.domain.Giocatore;
 import com.example.myfirstapp.domain.Razza;
-import com.example.myfirstapp.domain.Valuta;
+import com.example.myfirstapp.domain.ValutaOld;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -92,7 +92,7 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
         editText = findViewById(R.id.create_character_gender);
         String genere = editText.getText().toString();
 
-        Valuta portafoglio = dbManager.leggiValuta(VALUTADND);
+        ValutaOld portafoglio = dbManager.leggiValuta(VALUTADND);
 
         Classe classe = dbManager.leggiClasse(classSpinner.getSelectedItem().toString());
 

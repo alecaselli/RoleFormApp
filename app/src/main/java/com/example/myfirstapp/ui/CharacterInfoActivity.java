@@ -57,7 +57,7 @@ public class CharacterInfoActivity extends AppCompatActivity {
             txt.setText(info);
 
         } catch (IOException e) {
-            Log.e("CREDITS", "filed asset read", e);
+            Log.e("INFO", "filed asset read", e);
 
         }
     }
