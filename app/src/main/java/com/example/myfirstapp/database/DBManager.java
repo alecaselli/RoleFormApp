@@ -20,7 +20,7 @@ import com.example.myfirstapp.domain.Equipaggiamento;
 import com.example.myfirstapp.domain.Giocatore;
 import com.example.myfirstapp.domain.Incantesimo;
 import com.example.myfirstapp.domain.Razza;
-import com.example.myfirstapp.domain.Valuta;
+import com.example.myfirstapp.domain.ValutaOld;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -93,7 +93,7 @@ public class DBManager {
         }
     }
 
-    public boolean aggiungiValuta(@NotNull Valuta nuovo) {
+    public boolean aggiungiValuta(@NotNull ValutaOld nuovo) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -1001,7 +1001,7 @@ public class DBManager {
         }
     }
 
-    public boolean aggiornaValuta(@NotNull Valuta aggiornato) {
+    public boolean aggiornaValuta(@NotNull ValutaOld aggiornato) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaValuta.FIELD_NOMEV + " = ? ";
@@ -1741,7 +1741,7 @@ public class DBManager {
         }
     }
 
-    public Valuta leggiValuta(@NotNull String nomev) {
+    public ValutaOld leggiValuta(@NotNull String nomev) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaValuta.FIELD_NOMEV + " = ? ";
         String[] whereArgs = new String[]{nomev};
@@ -1759,7 +1759,7 @@ public class DBManager {
             int ratio = resultSet.getInt(resultSet.getColumnIndex(TabellaValuta.FIELD_RATIO));
 
             resultSet.close();
-            return new Valuta(nomev, descrizione, ratio, 0, this.leggiNomeVal(nomev));
+            return new ValutaOld(nomev, descrizione, ratio, 0, this.leggiNomeVal(nomev));
         } catch (SQLiteException sqle) {
             Log.e("LEGGI VALUTA", "leggi fallita", sqle);
             return null;
@@ -2254,7 +2254,7 @@ public class DBManager {
             String sinossi = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_SINOSSI));
             StringBuffer lingua = new StringBuffer();
             lingua.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_LINGUA)));
-            Valuta portafoglio = this.leggiValuta(resultSet.getString(resultSet.getColumnIndex(TabellaValuta.FIELD_NOMEV)));
+            ValutaOld portafoglio = this.leggiValuta(resultSet.getString(resultSet.getColumnIndex(TabellaValuta.FIELD_NOMEV)));
             portafoglio.setValore(resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_VALOREVAL)));
             String nomecla = resultSet.getString(resultSet.getColumnIndex(TabellaClasse.FIELD_NOMECLA));
             Classe classe = this.leggiClasse(nomecla);

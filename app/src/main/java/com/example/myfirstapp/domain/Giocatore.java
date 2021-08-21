@@ -32,7 +32,7 @@ public class Giocatore extends Descrivibile {
     private String noteAvventura;
     private String sinossi;
     private StringBuffer lingua;
-    private Valuta portafoglio;
+    private ValutaOld portafoglio;
     private Classe classe;
     private Razza razza;
     private List<Caratteristica> caratteristicaList;
@@ -41,7 +41,7 @@ public class Giocatore extends Descrivibile {
     private List<Incantesimo> incantesimiGiocatore;
     private List<Abilita> abilitaList;
 
-    public Giocatore(String nome, StringBuffer descrizione, String nomeCampagna, String eta, String altezza, String genere, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Abilita> abilitaList) {
+    public Giocatore(String nome, StringBuffer descrizione, String nomeCampagna, String eta, String altezza, String genere, ValutaOld portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Abilita> abilitaList) {
         super(nome, descrizione);
         this.classe = classe;
         this.nomeCampagna = nomeCampagna;
@@ -55,7 +55,7 @@ public class Giocatore extends Descrivibile {
         this.inizializzazionePG();
     }
 
-    public Giocatore(String nome, StringBuffer descrizione, int capacitaBorsa, int classeArmatura, int dado, int livello, int mana, int manaMax, int modCompetenza, int nDadi, int puntiEsperienza, int puntiFerita, int puntiStat, String altezza, String eta, String genere, String ideali, String iniziativa, String nomeCampagna, String noteAvventura, String sinossi, StringBuffer lingua, Valuta portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Equipaggiamento> borsa, List<Equipaggiamento> equipaggiato, List<Incantesimo> incantesimiGiocatore, List<Abilita> abilitaList) {
+    public Giocatore(String nome, StringBuffer descrizione, int capacitaBorsa, int classeArmatura, int dado, int livello, int mana, int manaMax, int modCompetenza, int nDadi, int puntiEsperienza, int puntiFerita, int puntiStat, String altezza, String eta, String genere, String ideali, String iniziativa, String nomeCampagna, String noteAvventura, String sinossi, StringBuffer lingua, ValutaOld portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Equipaggiamento> borsa, List<Equipaggiamento> equipaggiato, List<Incantesimo> incantesimiGiocatore, List<Abilita> abilitaList) {
         super(nome, descrizione);
         this.capacitaBorsa = capacitaBorsa;
         this.classeArmatura = classeArmatura;
@@ -256,11 +256,11 @@ public class Giocatore extends Descrivibile {
         this.lingua = lingua;
     }
 
-    public Valuta getPortafoglio() {
+    public ValutaOld getPortafoglio() {
         return portafoglio;
     }
 
-    public void setPortafoglio(Valuta portafoglio) {
+    public void setPortafoglio(ValutaOld portafoglio) {
         this.portafoglio = portafoglio;
     }
 
@@ -457,7 +457,6 @@ public class Giocatore extends Descrivibile {
     /* serie di metodi necessari alla creazione di un nuovo PG */
 
     public void inizializzazionePG() {
-
         for (CaratteristicaBase elementoR : this.razza.getCaratteristicaBaseList()) {
             this.getCaratteristica(elementoR.getNome()).addValoreBase(elementoR.getValore());
         }
@@ -514,7 +513,6 @@ public class Giocatore extends Descrivibile {
         if (!obj.getClass().equals(this.getClass()))
             return false;
         Giocatore that = (Giocatore) obj;
-        boolean equal = false;
         if (this.getNomeCampagna().equals(that.getNomeCampagna()))
             return this.getNome().equals(that.getNome());
         else
