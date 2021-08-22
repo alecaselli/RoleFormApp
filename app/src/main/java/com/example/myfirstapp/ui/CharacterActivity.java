@@ -20,10 +20,13 @@ import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.domain.Caratteristica;
 import com.example.myfirstapp.domain.Equipaggiamento;
 import com.example.myfirstapp.domain.Giocatore;
+import com.example.myfirstapp.utilities.DBException;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class CharacterActivity extends AppCompatActivity {
@@ -63,7 +66,12 @@ public class CharacterActivity extends AppCompatActivity {
         assert nomeg != null;
         assert nomecamp != null;
         giocatore = dbManager.leggiGiocatore(nomecamp, nomeg);
-        valutaController=new ValutaController(giocatore.getPortafoglio(),nomecamp,nomeg,this);
+        try {
+            valutaController=new ValutaController(nomecamp,nomeg,this);
+        } catch (DBException e){
+            Toast.makeText(this, "lettura portafoglio fallita", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     /* SET */
@@ -144,12 +152,12 @@ public class CharacterActivity extends AppCompatActivity {
     }
 
     private void setPortafoglio() {
-        List<Integer> valoremonete = giocatore.getPortafoglio().getValoreInMonete();
-        txt = (TextView) findViewById(R.id.character_base_copper);
+        List<Integer> valoremonete = valutaController.getValoreInMonete();
+        txt = findViewById(R.id.character_base_copper);
         txt.setText(String.valueOf(valoremonete.get(0)));
-        txt = (TextView) findViewById(R.id.character_base_silver);
+        txt = findViewById(R.id.character_base_silver);
         txt.setText(String.valueOf(valoremonete.get(1)));
-        txt = (TextView) findViewById(R.id.character_base_gold);
+        txt = findViewById(R.id.character_base_gold);
         txt.setText(String.valueOf(valoremonete.get(2)));
     }
 
@@ -214,7 +222,7 @@ public class CharacterActivity extends AppCompatActivity {
         currencyButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                aggiornaValutaOnLongClick(val0,val1,val2);
+                aggiornaValuta(new ArrayList<>(Arrays.asList(val0,val1,val2)));
                 return true;
             }
         });
@@ -234,60 +242,44 @@ public class CharacterActivity extends AppCompatActivity {
     /* CURRENCY BUTTON */
     private void aggiornaValuta() {
         List<Integer> valore = new ArrayList<>();
-        boolean aggiorna = false;
+        final List<Integer> VIEW = new ArrayList<>(Arrays.asList(R.id.character_mod_copper, R.id.character_mod_silver, R.id.character_mod_gold));
 
-        EditText editText = (EditText) findViewById(R.id.character_mod_copper);
-        String temp = editText.getText().toString();
-        if (temp.equals(""))
-            valore.add(0);
-        else
-            valore.add(Integer.valueOf(temp));
+        EditText editText;
+        for(Integer view : VIEW){
+            editText = findViewById(view);
+            String temp = editText.getText().toString();
+            if (temp.equals(""))
+                valore.add(0);
+            else
+                valore.add(Integer.valueOf(temp));
+        }
 
-        editText = (EditText) findViewById(R.id.character_mod_silver);
-        temp = editText.getText().toString();
-        if (temp.equals(""))
-            valore.add(0);
-        else
-            valore.add(Integer.valueOf(temp));
-
-        editText = (EditText) findViewById(R.id.character_mod_gold);
-        temp = editText.getText().toString();
-        if (temp.equals(""))
-            valore.add(0);
-        else
-            valore.add(Integer.valueOf(temp));
-
-        for (int i : valore)
-            if (i != 0) {
-                aggiorna = true;
-                break;
-            }
-
-        if (aggiorna) {
-            valutaController.aggiornaValuta(valore.get(0),valore.get(1),valore.get(2));
-            this.setPortafoglio();
+        if (0!=(valore.get(0)+valore.get(1)+valore.get(2))) {
+            this.aggiornaValuta(valore);
         }
 
     }
 
-    public void aggiornaValutaOnLongClick(int val0,int val1,int val2){
-        valutaController.aggiornaValuta(val0, val1, val2);
+    public void aggiornaValuta(List<Integer> valore){
+        try {
+            valutaController.aggiornaValuta(valore);
+        }catch (DBException e){
+            Toast.makeText(this, "aggiornamento portafoglio fallito", Toast.LENGTH_LONG).show();
+        }
+
         this.setPortafoglio();
     }
 
     public void goldBaseButton(View view) {
-        valutaController.aggiornaValuta(0, 0, 1);
-        this.setPortafoglio();
+        this.aggiornaValuta(new ArrayList<>(Arrays.asList(0, 0, 1)));
     }
 
     public void silverBaseButton(View view) {
-        valutaController.aggiornaValuta(0, 1, 0);
-        this.setPortafoglio();
+        this.aggiornaValuta(new ArrayList<>(Arrays.asList(0, 1, 0)));
     }
 
     public void bronzeBaseButton(View view) {
-        valutaController.aggiornaValuta(1, 0, 0);
-        this.setPortafoglio();
+        this.aggiornaValuta(new ArrayList<>(Arrays.asList(1, 0, 0)));
     }
 
     /* CARATTERISTICHE BUTTON */

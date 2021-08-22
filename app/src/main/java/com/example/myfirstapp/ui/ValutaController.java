@@ -1,12 +1,19 @@
 package com.example.myfirstapp.ui;
 
 import android.content.Context;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.myfirstapp.R;
 import com.example.myfirstapp.database.InterfaceValutaDB;
 import com.example.myfirstapp.database.ValutaDBReader;
 import com.example.myfirstapp.database.ValutaDBWriter;
 import com.example.myfirstapp.domain.ValutaOld;
+import com.example.myfirstapp.utilities.DBException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,35 +25,28 @@ public class ValutaController {
     private ValutaOld portafoglio;
     private InterfaceValutaDB valutaDBWriter;
     private InterfaceValutaDB valutaDBReader;
-    private Context ctx;
 
-    public ValutaController(ValutaOld portafoglio, String nomecamp, String nomeg, Context ctx) {
-        this.portafoglio = portafoglio;
+    public ValutaController(String nomecamp, String nomeg, Context ctx) throws DBException{
         this.nomecamp = nomecamp;
         this.nomeg = nomeg;
-        this.ctx = ctx;
         this.valutaDBWriter = new ValutaDBWriter(ctx);
         this.valutaDBReader = new ValutaDBReader(ctx);
+        this.getPortafoglio();
     }
 
-    private void aggiornaValuta(List<Integer> valore){
-        // if(null==(this.portafoglio = valutaDBReader.leggiPortafoglio(nomecamp,nomeg)))
-        //    Toast.makeText(ctx, "lettura portafoglio fallita", Toast.LENGTH_LONG).show();
-        //else {
-            portafoglio.aggiornaValore(valore);
-            if (!valutaDBWriter.aggiornaPortafoglio(portafoglio, nomecamp, nomeg)) {
-                Toast.makeText(ctx, "aggiornamento portafoglio fallito", Toast.LENGTH_LONG).show();
-        //    }
-        }
-    }
-    public void aggiornaValuta(int val0, int val1, int val2){
-        List<Integer> valore = new ArrayList<>();
-        valore.add(val0);
-        valore.add(val1);
-        valore.add(val2);
-        this.aggiornaValuta(valore);
+    private void getPortafoglio() throws DBException {
+        portafoglio = valutaDBReader.leggiPortafoglio(nomecamp,nomeg);
+        if(null==portafoglio)
+            throw new DBException();
     }
 
+    public void aggiornaValuta(List<Integer> valore) throws DBException{
+        portafoglio.aggiornaValore(valore);
+        if (!valutaDBWriter.aggiornaPortafoglio(portafoglio, nomecamp, nomeg))
+            throw new DBException();
+    }
 
-
+    public List<Integer> getValoreInMonete(){
+        return portafoglio.getValoreInMonete();
+    }
 }
