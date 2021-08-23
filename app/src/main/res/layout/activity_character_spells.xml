@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:text="Incantesimi"
+            android:text="@string/incantesimi"
             android:textColor="@color/black"
             android:textSize="32sp"
             android:textStyle="bold|italic" />
@@ -60,7 +60,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:text="Inganni"
+                            android:text="@string/inganni"
                             android:textColor="@color/black"
                             android:textSize="17sp" />
 
@@ -70,14 +70,13 @@
                             android:layout_height="26dp"
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="15dp"
-                            android:background="@drawable/ic_arrow_down" />
+                            android:background="@drawable/ic_arrow_up" />
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/spells_deceptions_recyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone">
+                        android:layout_height="wrap_content">
 
                     </androidx.recyclerview.widget.RecyclerView>
 
@@ -89,8 +88,7 @@
                         android:background="@drawable/rounded_spinner"
                         android:gravity="center"
                         android:paddingHorizontal="15dp"
-                        android:spinnerMode="dialog"
-                        android:visibility="gone" />
+                        android:spinnerMode="dialog"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -126,7 +124,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:text="Livello 1"
+                            android:text="@string/livello_1"
                             android:textColor="@color/black"
                             android:textSize="17sp" />
 
@@ -136,15 +134,13 @@
                             android:layout_height="26dp"
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="15dp"
-                            android:background="@drawable/ic_arrow_down" />
+                            android:background="@drawable/ic_arrow_up" />
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/spells_level_one_recyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone">
-
+                        android:layout_height="wrap_content">
                     </androidx.recyclerview.widget.RecyclerView>
 
                     <Spinner
@@ -155,13 +151,12 @@
                         android:background="@drawable/rounded_spinner"
                         android:gravity="center"
                         android:paddingHorizontal="15dp"
-                        android:spinnerMode="dialog"
-                        android:visibility="gone" />
+                        android:spinnerMode="dialog"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#202020" />
+                        android:background="#202020"/>
 
                 </LinearLayout>
 
@@ -192,7 +187,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:text="Livello 2"
+                            android:text="@string/livello_2"
                             android:textColor="@color/black"
                             android:textSize="17sp" />
 
@@ -202,15 +197,13 @@
                             android:layout_height="26dp"
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="15dp"
-                            android:background="@drawable/ic_arrow_down" />
+                            android:background="@drawable/ic_arrow_up" />
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/spells_level_two_recyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone">
-
+                        android:layout_height="wrap_content">
                     </androidx.recyclerview.widget.RecyclerView>
 
                     <Spinner
@@ -221,13 +214,12 @@
                         android:background="@drawable/rounded_spinner"
                         android:gravity="center"
                         android:paddingHorizontal="15dp"
-                        android:spinnerMode="dialog"
-                        android:visibility="gone" />
+                        android:spinnerMode="dialog"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#202020" />
+                        android:background="#202020"/>
 
                 </LinearLayout>
 
@@ -258,7 +250,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:text="Livello 3"
+                            android:text="@string/livello_3"
                             android:textColor="@color/black"
                             android:textSize="17sp" />
 
@@ -268,15 +260,13 @@
                             android:layout_height="26dp"
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="15dp"
-                            android:background="@drawable/ic_arrow_down" />
+                            android:background="@drawable/ic_arrow_up" />
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/spells_level_three_recyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone">
-
+                        android:layout_height="wrap_content">
                     </androidx.recyclerview.widget.RecyclerView>
 
                     <Spinner
@@ -287,8 +277,7 @@
                         android:background="@drawable/rounded_spinner"
                         android:gravity="center"
                         android:paddingHorizontal="15dp"
-                        android:spinnerMode="dialog"
-                        android:visibility="gone" />
+                        android:spinnerMode="dialog"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -324,7 +313,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:text="Livello 4"
+                            android:text="@string/livello_4"
                             android:textColor="@color/black"
                             android:textSize="17sp" />
 
@@ -334,15 +323,13 @@
                             android:layout_height="26dp"
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="15dp"
-                            android:background="@drawable/ic_arrow_down" />
+                            android:background="@drawable/ic_arrow_up" />
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/spells_level_four_recyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone">
-
+                        android:layout_height="wrap_content">
                     </androidx.recyclerview.widget.RecyclerView>
 
                     <Spinner
@@ -353,8 +340,7 @@
                         android:background="@drawable/rounded_spinner"
                         android:gravity="center"
                         android:paddingHorizontal="15dp"
-                        android:spinnerMode="dialog"
-                        android:visibility="gone" />
+                        android:spinnerMode="dialog"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -390,7 +376,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:text="Livello 5"
+                            android:text="@string/livello_5"
                             android:textColor="@color/black"
                             android:textSize="17sp" />
 
@@ -400,15 +386,13 @@
                             android:layout_height="26dp"
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="15dp"
-                            android:background="@drawable/ic_arrow_down" />
+                            android:background="@drawable/ic_arrow_up" />
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/spells_level_five_recyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone">
-
+                        android:layout_height="wrap_content">
                     </androidx.recyclerview.widget.RecyclerView>
 
                     <Spinner
@@ -419,8 +403,7 @@
                         android:background="@drawable/rounded_spinner"
                         android:gravity="center"
                         android:paddingHorizontal="15dp"
-                        android:spinnerMode="dialog"
-                        android:visibility="gone" />
+                        android:spinnerMode="dialog"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -456,7 +439,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:text="Livello 6"
+                            android:text="@string/livello_6"
                             android:textColor="@color/black"
                             android:textSize="17sp" />
 
@@ -466,15 +449,13 @@
                             android:layout_height="26dp"
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="15dp"
-                            android:background="@drawable/ic_arrow_down" />
+                            android:background="@drawable/ic_arrow_up" />
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/spells_level_six_recyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone">
-
+                        android:layout_height="wrap_content">
                     </androidx.recyclerview.widget.RecyclerView>
 
                     <Spinner
@@ -485,8 +466,7 @@
                         android:background="@drawable/rounded_spinner"
                         android:gravity="center"
                         android:paddingHorizontal="15dp"
-                        android:spinnerMode="dialog"
-                        android:visibility="gone" />
+                        android:spinnerMode="dialog"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -522,7 +502,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:text="Livello 7"
+                            android:text="@string/livello_7"
                             android:textColor="@color/black"
                             android:textSize="17sp" />
 
@@ -532,15 +512,13 @@
                             android:layout_height="26dp"
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="15dp"
-                            android:background="@drawable/ic_arrow_down" />
+                            android:background="@drawable/ic_arrow_up" />
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/spells_level_seven_recyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone">
-
+                        android:layout_height="wrap_content">
                     </androidx.recyclerview.widget.RecyclerView>
 
                     <Spinner
@@ -551,8 +529,7 @@
                         android:background="@drawable/rounded_spinner"
                         android:gravity="center"
                         android:paddingHorizontal="15dp"
-                        android:spinnerMode="dialog"
-                        android:visibility="gone" />
+                        android:spinnerMode="dialog"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -588,7 +565,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:text="Livello 8"
+                            android:text="@string/livello_8"
                             android:textColor="@color/black"
                             android:textSize="17sp" />
 
@@ -598,15 +575,13 @@
                             android:layout_height="26dp"
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="15dp"
-                            android:background="@drawable/ic_arrow_down" />
+                            android:background="@drawable/ic_arrow_up" />
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/spells_level_eight_recyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone">
-
+                        android:layout_height="wrap_content">
                     </androidx.recyclerview.widget.RecyclerView>
 
                     <Spinner
@@ -617,8 +592,7 @@
                         android:background="@drawable/rounded_spinner"
                         android:gravity="center"
                         android:paddingHorizontal="15dp"
-                        android:spinnerMode="dialog"
-                        android:visibility="gone"/>
+                        android:spinnerMode="dialog"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -654,7 +628,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:text="Livello 9"
+                            android:text="@string/livello_9"
                             android:textColor="@color/black"
                             android:textSize="17sp" />
 
@@ -664,15 +638,13 @@
                             android:layout_height="26dp"
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="15dp"
-                            android:background="@drawable/ic_arrow_down" />
+                            android:background="@drawable/ic_arrow_up" />
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/spells_level_nine_recyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone">
-
+                        android:layout_height="wrap_content">
                     </androidx.recyclerview.widget.RecyclerView>
 
                     <Spinner
@@ -683,8 +655,7 @@
                         android:background="@drawable/rounded_spinner"
                         android:gravity="center"
                         android:paddingHorizontal="15dp"
-                        android:spinnerMode="dialog"
-                        android:visibility="gone"/>
+                        android:spinnerMode="dialog" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

@@ -89,5 +89,16 @@
     <string name="bronzo">Bronzo:</string>
     <string name="_0">0</string>
     <string name="Prova" />
+    <string name="inganni">Inganni</string>
+    <string name="livello_6">Livello 6</string>
+    <string name="livello_9">Livello 9</string>
+    <string name="livello_8">Livello 8</string>
+    <string name="livello_7">Livello 7</string>
+    <string name="livello_5">Livello 5</string>
+    <string name="livello_4">Livello 4</string>
+    <string name="livello_3">Livello 3</string>
+    <string name="livello_2">Livello 2</string>
+    <string name="livello_1">Livello 1</string>
+    <string name="incantesimi">Incantesimi</string>
 
 </resources>

@@ -26,6 +26,7 @@ import com.example.myfirstapp.domain.Armatura;
 import com.example.myfirstapp.domain.Equipaggiamento;
 import com.example.myfirstapp.domain.Giocatore;
 import com.example.myfirstapp.utilities.CardEquip;
+import com.example.myfirstapp.utilities.MyDBException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +74,7 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
             this.aggiornaBorsa();
             for (Equipaggiamento equipaggiamento : giocatore.getBorsa())
                 if (equipaggiamento != null)
-                    cardEquipList.add(new CardEquip(equipaggiamento.getNome(),equipaggiamento.getTipo(), false));
+                    cardEquipList.add(new CardEquip(equipaggiamento.getNome(),equipaggiamento.getTipo()));
             if (giocatore.getBorsa().size() != 0) {
                 this.aggiornaBorsa();
             }
@@ -82,9 +83,9 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
 
     public void aggiornaBorsa() {
         if (giocatore.getBorsa().size() != 0) {
-            ((View) findViewById(R.id.bag_empty)).setVisibility(View.GONE);
+            (findViewById(R.id.bag_empty)).setVisibility(View.GONE);
         } else {
-            ((View) findViewById(R.id.bag_empty)).setVisibility(View.VISIBLE);
+            (findViewById(R.id.bag_empty)).setVisibility(View.VISIBLE);
         }
     }
 
@@ -93,19 +94,19 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         String nome;
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
         else nome = NONEQUIP;
-        text = (TextView) findViewById(R.id.bag_armor);
+        text = findViewById(R.id.bag_armor);
         text.setText(nome);
 
         equipaggiamento = giocatore.getEquipaggiato("scudo");
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
         else nome = NONEQUIP;
-        text = (TextView) findViewById(R.id.bag_shield);
+        text = findViewById(R.id.bag_shield);
         text.setText(nome);
 
         equipaggiamento = giocatore.getEquipaggiato("arma");
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
         else nome = NONEQUIP;
-        text = (TextView) findViewById(R.id.bag_weapon);
+        text = findViewById(R.id.bag_weapon);
         text.setText(nome);
     }
 
@@ -168,35 +169,21 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         if (!equipaggiare.getTipo().equals(Equipaggiamento.getTipobase().get(3))) { // tipo==oggetto
             if (dbManager.aggiornaHage(nomecamp, nomeg, equipaggiare.getNome(), false)) {
 
-                Equipaggiamento disequipaggiare = giocatore.getEquipaggiato(equipaggiare.getTipo());
-                if (disequipaggiare != null) {
-                    if (dbManager.aggiornaHage(nomecamp, nomeg, disequipaggiare.getNome(), true)) {
-                        giocatore.eliminaEquipaggiato(disequipaggiare);
-                        giocatore.aggiungiBorsa(disequipaggiare);
-                        cardEquipList.add(new CardEquip(disequipaggiare.getNome(), disequipaggiare.getTipo(),false));
-                        mAdapter.notifyItemInserted(cardEquipList.size() - 1);
-                        if(disequipaggiare instanceof Armatura) {
-                            Armatura dis = (Armatura) disequipaggiare;
-                            giocatore.aggiornaClasseArmatura(-dis.getModificatoreCA());
-                            dbManager.aggiornaDettagliGiocatore(giocatore);
-                        }
-                    } else {
-                        Toast.makeText(this, "equipaggiamento fallito", Toast.LENGTH_LONG).show();
-                        dbManager.aggiornaHage(nomecamp, nomeg, equipaggiare.getNome(), true);
-                        return;
+                try {
+                    this.disequipaggia(equipaggiare.getTipo());
+                    giocatore.eliminaBorsa(equipaggiare);
+                    giocatore.aggiungiEquipaggiato(equipaggiare);
+                    cardEquipList.remove(position);
+                    mAdapter.notifyItemRemoved(position);
+                    if(equipaggiare instanceof Armatura) {
+                        Armatura equip = (Armatura) equipaggiare;
+                        giocatore.aggiornaClasseArmatura(equip.getModificatoreCA());
+                        dbManager.aggiornaDettagliGiocatore(giocatore);
                     }
+                    this.setView();
+                }catch (MyDBException e){
+                    dbManager.aggiornaHage(nomecamp, nomeg, equipaggiare.getNome(), true);
                 }
-
-                giocatore.eliminaBorsa(equipaggiare);
-                giocatore.aggiungiEquipaggiato(equipaggiare);
-                cardEquipList.remove(position);
-                mAdapter.notifyItemRemoved(position);
-                if(equipaggiare instanceof Armatura) {
-                    Armatura equip = (Armatura) equipaggiare;
-                    giocatore.aggiornaClasseArmatura(equip.getModificatoreCA());
-                    dbManager.aggiornaDettagliGiocatore(giocatore);
-                }
-                this.setView();
             } else Toast.makeText(this, "equipaggiamento fallito", Toast.LENGTH_LONG).show();
         } else Toast.makeText(this, "oggetto non equipaggiabile", Toast.LENGTH_LONG).show();
     }
@@ -235,45 +222,57 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
 
         if (dbManager.aggiungiHage(nomecamp, nomeg, nomee, true)) {
             giocatore.aggiungiBorsa(aggiunto);
-            CardEquip nuovo = new CardEquip(aggiunto.getNome(), aggiunto.getTipo(),false);
+            CardEquip nuovo = new CardEquip(aggiunto.getNome(), aggiunto.getTipo());
             cardEquipList.add(nuovo);
             mAdapter.notifyItemInserted(cardEquipList.size() - 1);
         } else Toast.makeText(this, "aggiunta fallita", Toast.LENGTH_LONG).show();
     }
 
     public void disequipaggiaArma(View view) {
-        this.disequipaggia(R.id.bag_weapon, Equipaggiamento.getTipobase().get(0));
+        try {
+            this.disequipaggia(Equipaggiamento.getTipobase().get(0));
+            this.disequipaggia(R.id.bag_weapon);
+        }catch (MyDBException ignored){}
     }
 
     public void disequipaggiaArmatura(View view) {
-        this.disequipaggia(R.id.bag_armor, Equipaggiamento.getTipobase().get(1));
+        try {
+            this.disequipaggia(Equipaggiamento.getTipobase().get(1));
+            this.disequipaggia(R.id.bag_armor);
+        }catch (MyDBException ignored){}
+
     }
 
     public void disequipaggiaScudo(View view) {
-        this.disequipaggia(R.id.bag_shield, Equipaggiamento.getTipobase().get(2));
+        try {
+            this.disequipaggia(Equipaggiamento.getTipobase().get(2));
+            this.disequipaggia(R.id.bag_shield);
+        }catch (MyDBException ignored){}
     }
 
-    public void disequipaggia(int id, String tipo) {
+    public void disequipaggia(int id){
+        text = findViewById(id);
+        text.setText(NONEQUIP);
+    }
+    public void disequipaggia(String tipo) throws MyDBException {
         Equipaggiamento disequipaggiare = giocatore.getEquipaggiato(tipo);
         if (disequipaggiare != null) {
             if (dbManager.aggiornaHage(nomecamp, nomeg, disequipaggiare.getNome(), true)) {
-                text = (TextView) findViewById(id);
-                text.setText(NONEQUIP);
                 giocatore.eliminaEquipaggiato(disequipaggiare);
                 giocatore.aggiungiBorsa(disequipaggiare);
-                cardEquipList.add(new CardEquip(disequipaggiare.getNome(), disequipaggiare.getTipo(),false));
+                cardEquipList.add(new CardEquip(disequipaggiare.getNome(), disequipaggiare.getTipo()));
                 mAdapter.notifyItemInserted(cardEquipList.size() - 1);
                 if(disequipaggiare instanceof Armatura){
                     Armatura dis = (Armatura) disequipaggiare;
                     giocatore.aggiornaClasseArmatura(-dis.getModificatoreCA());
                     dbManager.aggiornaDettagliGiocatore(giocatore);
                 }
-            } else Toast.makeText(this, "disequipaggiamento fallito", Toast.LENGTH_LONG).show();
-        }
-    }
+            } else{
+                Toast.makeText(this, "disequipaggiamento fallito", Toast.LENGTH_LONG).show();
+                throw (new MyDBException());
+            }
 
-    public void equipButton(View view){
-        return;
+        }
     }
 
     public void openCreateNewItem(View view) {

@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.utilities.CardEquip;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class CardEquipAdapter extends RecyclerView.Adapter<CardEquipAdapter.CardEquipViewHolder>{
@@ -99,7 +101,7 @@ public class CardEquipAdapter extends RecyclerView.Adapter<CardEquipAdapter.Card
     }
 
     @Override
-    public void onBindViewHolder(CardEquipAdapter.CardEquipViewHolder holder, int position) {
+    public void onBindViewHolder(@NotNull CardEquipAdapter.CardEquipViewHolder holder, int position) {
         CardEquip currentItem = mCardEquipList.get(position);
         if (currentItem != null) {
             holder.mNomeEquipView.setText(currentItem.getNome());

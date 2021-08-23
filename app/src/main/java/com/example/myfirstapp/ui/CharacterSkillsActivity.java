@@ -60,7 +60,7 @@ public class CharacterSkillsActivity extends AppCompatActivity {
 
     public void setView() {
         String mod = "[" + dbManager.leggiModComp(nomecamp, nomeg) + "]";
-        txt = (TextView) findViewById(R.id.skills_mod_value);
+        txt = findViewById(R.id.skills_mod_value);
         txt.setText(mod);
     }
 
@@ -91,14 +91,15 @@ public class CharacterSkillsActivity extends AppCompatActivity {
     }
 
     public void changeCompetenza(int position) {
-        if (dbManager.aggiornaHaga(nomecamp, nomeg, cardAbilityList.get(position).getNome(), cardAbilityList.get(position).getaBoolean())) {
+        if (dbManager.aggiornaHaga(nomecamp, nomeg, cardAbilityList.get(position).getNome(), !cardAbilityList.get(position).getaBoolean())) {
             cardAbilityList.get(position).swapBool();
             mAdapter.notifyItemChanged(position);
         } else Toast.makeText(this, "aggiornamento fallito", Toast.LENGTH_LONG).show();
     }
 
     public void openSkillActivity(int position) {
-        /*Intent intent = new Intent(this, SkillActivity.class);
+        /*TODO:
+        Intent intent = new Intent(this, SkillActivity.class);
         intent.putExtra("nomea", mCardAbilitaList.get(position).getNomeabilita());
         startActivity(intent);*/
     }

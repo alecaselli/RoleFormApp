@@ -17,10 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.adapter.CardIncantesimoAdapter;
+import com.example.myfirstapp.adapter.CardAbilityAdapter;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.domain.Incantesimo;
-import com.example.myfirstapp.utilities.CardIncantesimo;
+import com.example.myfirstapp.utilities.CardAbility;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,9 +37,9 @@ public class CharacterSpellsActivity extends AppCompatActivity implements Adapte
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private HashMap<Integer, CardIncantesimoAdapter> mAdapter;
-    private HashMap<Integer, ArrayList<CardIncantesimo>> mCardIncantesimoMap;
-    private ArrayList<CardIncantesimo> mcardIncantesimoList;
+    private HashMap<Integer, CardAbilityAdapter> mAdapter;
+    private HashMap<Integer, ArrayList<CardAbility>> mCardIncantesimoMap;
+    private ArrayList<CardAbility> mcardIncantesimoList;
 
     private final String AGGIUNGI = "Aggiungi incantesimo";
     private final List<Integer> RECYCLERVIEWIDS = new ArrayList<>(Arrays.asList(R.id.spells_deceptions_recyclerView, R.id.spells_level_one_recyclerView, R.id.spells_level_two_recyclerView, R.id.spells_level_three_recyclerView, R.id.spells_level_four_recyclerView, R.id.spells_level_five_recyclerView, R.id.spells_level_six_recyclerView, R.id.spells_level_seven_recyclerView, R.id.spells_level_eight_recyclerView, R.id.spells_level_nine_recyclerView));
@@ -82,7 +82,7 @@ public class CharacterSpellsActivity extends AppCompatActivity implements Adapte
             if ((inclist != null) && (inclist.size() != 0)) {
                 for (Incantesimo inc : inclist) {
                     if (inc != null) {
-                        mcardIncantesimoList.add(new CardIncantesimo(inc.getNome(), false));
+                        mcardIncantesimoList.add(new CardAbility(inc.getNome(), false));
                     }
                 }
                 int indice = inclist.get(0).getLivello();
@@ -96,12 +96,12 @@ public class CharacterSpellsActivity extends AppCompatActivity implements Adapte
         mRecyclerView = findViewById(RECYCLERVIEWIDS.get(indice));
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager((this));
-        mAdapter.put(indice, new CardIncantesimoAdapter(mCardIncantesimoMap.get(indice)));
+        mAdapter.put(indice, new CardAbilityAdapter(mCardIncantesimoMap.get(indice)));
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter.get(indice));
 
-        mAdapter.get(indice).setOnItemClickListener(new CardIncantesimoAdapter.OnItemClickListener() {
+        mAdapter.get(indice).setOnItemClickListener(new CardAbilityAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 openSpellActivity(position, indice);
@@ -109,7 +109,7 @@ public class CharacterSpellsActivity extends AppCompatActivity implements Adapte
 
             @Override
             public void onBoolClick(int position) {
-                changeCompetenza(position, indice);
+                changeUsato(position, indice);
             }
         });
     }
@@ -161,18 +161,21 @@ public class CharacterSpellsActivity extends AppCompatActivity implements Adapte
         }
     }
 
-    public void changeCompetenza(int position, int indice) {
-        mCardIncantesimoMap.get(indice).get(position).swapBool();
-        mAdapter.get(indice).notifyItemChanged(position);
+    public void changeUsato(int position, int indice) {
+        //TODO: aggiungere update in db
+            mCardIncantesimoMap.get(indice).get(position).swapBool();
+            mAdapter.get(indice).notifyItemChanged(position);
     }
 
     public void openSpellActivity(int position, int indice) {
-        /*Intent intent = new Intent(this, SkillActivity.class);
+        /*TODO:
+        Intent intent = new Intent(this, SkillActivity.class);
         intent.putExtra("nomei", mCardIncantesimoMap.get(indice).get(position).getNomeincantesimo());
         startActivity(intent);
         finish();*/
     }
 
+    //TODO: meglio 1 solo button per la creazione e poi la seleione del livell nella activity NewSpell
     public void addLevel0Spell(View view) {
         this.addSpell(0);
     }
@@ -214,7 +217,8 @@ public class CharacterSpellsActivity extends AppCompatActivity implements Adapte
     }
 
     public void addSpell(int livello) {
-        /*Intent intent = new Intent(this, AddNewSpell.class);
+        /*TODO:
+        Intent intent = new Intent(this, AddNewSpell.class);
         intent.putExtra("livello", livello);
         intent.putExtra("nomecamp", nomecamp);
         intent.putExtra("nomeg", nomeg);

@@ -82,26 +82,26 @@ public class CreateNewItemActivity extends AppCompatActivity implements AdapterV
     public void createNewItem(View view) {
         dbManager = new DBManager(this);
 
-        editText = (EditText) findViewById(R.id.create_item_name);
+        editText = findViewById(R.id.create_item_name);
         String nome = editText.getText().toString();
 
-        editText = (EditText) findViewById(R.id.create_item_desc);
+        editText = findViewById(R.id.create_item_desc);
         StringBuffer desc = new StringBuffer();
         desc.append(editText.getText().toString());
 
-        editText = (EditText) findViewById(R.id.create_item_price);
+        editText = findViewById(R.id.create_item_price);
         String temp = editText.getText().toString();
         int costo = 0;
         if (!temp.equals(""))
             costo = Integer.parseInt(temp);
 
-        editText = (EditText) findViewById(R.id.create_item_weight);
+        editText = findViewById(R.id.create_item_weight);
         temp = editText.getText().toString();
         int peso = 0;
         if (!temp.equals(""))
             peso = Integer.parseInt(temp);
 
-        editText = (EditText) findViewById(R.id.create_item_capacity);
+        editText = findViewById(R.id.create_item_capacity);
         temp = editText.getText().toString();
         int capacita = 0;
         if (!temp.equals(""))
@@ -142,10 +142,10 @@ public class CreateNewItemActivity extends AppCompatActivity implements AdapterV
     }
 
     public void createWeapon(String nome, StringBuffer desc, String tipo, int costo, int peso, int capacita, String subtipo) {
-        editText = (EditText) findViewById(R.id.create_item_weapon_damage);
+        editText = findViewById(R.id.create_item_weapon_damage);
         String danno = editText.getText().toString();
 
-        editText = (EditText) findViewById(R.id.create_item_weapon_property);
+        editText = findViewById(R.id.create_item_weapon_property);
         String proprieta = editText.getText().toString();
 
         Arma nuovaArma = new Arma(nome, desc, tipo, costo, capacita, peso, danno, proprieta, subtipo);
@@ -160,19 +160,19 @@ public class CreateNewItemActivity extends AppCompatActivity implements AdapterV
 
         boolean nonFurtiva = !((CheckBox) findViewById(R.id.create_item_armor_stealth)).isChecked();
 
-        editText = (EditText) findViewById(R.id.create_item_armor_CA);
+        editText = findViewById(R.id.create_item_armor_CA);
         String temp = editText.getText().toString();
         int modCA = 0;
         if (!temp.equals(""))
             modCA = Integer.parseInt(editText.getText().toString());
 
-        editText = (EditText) findViewById(R.id.create_item_armor_time_off);
+        editText = findViewById(R.id.create_item_armor_time_off);
         String tempoTogliere = editText.getText().toString();
 
-        editText = (EditText) findViewById(R.id.create_item_armor_time_on);
+        editText = findViewById(R.id.create_item_armor_time_on);
         String tempoIndossare = editText.getText().toString();
 
-        editText = (EditText) findViewById(R.id.create_item_armor_streight_needed);
+        editText = findViewById(R.id.create_item_armor_streight_needed);
         String forzaNecessaria = editText.getText().toString();
 
         Armatura nuovaArmatura = new Armatura(nome, desc, tipo, costo, peso, capacita, nonFurtiva, modCA, tempoTogliere, tempoIndossare, forzaNecessaria, subtipo);

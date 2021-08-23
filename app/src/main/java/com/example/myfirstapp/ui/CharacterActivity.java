@@ -136,12 +136,6 @@ public class CharacterActivity extends AppCompatActivity {
         txt.setText(String.valueOf(caratteristica.getModificatore()));
     }
 
-    private void setCaratteristica(String tipo, int idBase) {
-        Caratteristica caratteristica = giocatore.getCaratteristica(tipo);
-        txt =  findViewById(idBase);
-        txt.setText(String.valueOf(caratteristica.getBase()));
-    }
-
     private void setEquipaggiamento(String tipo, int id) {
         Equipaggiamento equipaggiamento = giocatore.getEquipaggiato(tipo);
         String nome;
@@ -226,10 +220,9 @@ public class CharacterActivity extends AppCompatActivity {
         });
     }
 
-    private void setCaratteristicaOnLongClick(@NotNull CardView CaratteristicaButton, final String tipo, final int idBase, final int idBonus) {
+    private void setCaratteristicaOnLongClick(@NotNull CardView CaratteristicaButton, final String tipo, final int idBase, final int idMod) {
         CaratteristicaButton.setOnLongClickListener(view -> {
-            aggiornaCaratteristica(tipo, idBase, -1);
-            aggiornaModificatore(tipo, idBonus);
+            aggiornaCaratteristica(tipo, idBase, idMod, -1);
             return true;
         });
     }
@@ -280,52 +273,40 @@ public class CharacterActivity extends AppCompatActivity {
     }
 
     /* CARATTERISTICHE BUTTON */
-    public void aggiornaCaratteristica(String tipo, int idBase, int valore) {
+    public void aggiornaCaratteristica(String tipo, int idBase, int idMod, int valore) {
         Caratteristica caratteristica = giocatore.getCaratteristica(tipo);
         caratteristica.addValoreBase(valore);
         if (dbManager.aggiornaCaratteristicaG(giocatore.getNomeCampagna(), giocatore.getNome(), caratteristica)) {
-            this.setCaratteristica(tipo, idBase);
+            setCaratteristica(tipo, idBase, idMod);
         } else {
             Toast.makeText(this, "aggiornamento caratteristica fallito", Toast.LENGTH_LONG).show();
             caratteristica.addValoreBase(-valore);
         }
-    }
 
-    public void aggiornaModificatore(String tipo, int idBonus){
-        Caratteristica caratteristica = giocatore.getCaratteristica(tipo);
-        caratteristica.setModificatore();
-        txt = findViewById(idBonus);
-        txt.setText(String.valueOf(caratteristica.getModificatore()));
     }
 
     public void strengthButton(View view) {
-        this.aggiornaCaratteristica("forza", R.id.character_total_strenght, 1);
-        this.aggiornaModificatore("forza", R.id.character_mod_strenght);
+        this.aggiornaCaratteristica("forza", R.id.character_total_strenght, R.id.character_mod_strenght, 1);
     }
 
     public void dexterityButton(View view) {
-        this.aggiornaCaratteristica("destrezza", R.id.character_total_dexterity, 1);
-        this.aggiornaModificatore("destrezza", R.id.character_mod_dexterity);
+        this.aggiornaCaratteristica("destrezza", R.id.character_total_dexterity, R.id.character_mod_dexterity, 1);
     }
 
     public void constitutionButton(View view) {
-        this.aggiornaCaratteristica("costituzione", R.id.character_total_constitution, 1);
-        this.aggiornaModificatore("costituzione", R.id.character_mod_constitution);
+        this.aggiornaCaratteristica("costituzione", R.id.character_total_constitution, R.id.character_mod_constitution, 1);
     }
 
     public void intelligenceButton(View view) {
-        this.aggiornaCaratteristica("intelligenza", R.id.character_total_intelligence, 1);
-        this.aggiornaModificatore("intelligenza", R.id.character_mod_intelligence);
+        this.aggiornaCaratteristica("intelligenza", R.id.character_total_intelligence, R.id.character_mod_intelligence,1);
     }
 
     public void wisdomButton(View view) {
-        this.aggiornaCaratteristica("saggezza", R.id.character_total_wisdom, 1);
-        this.aggiornaModificatore("saggezza", R.id.character_mod_wisdom);
+        this.aggiornaCaratteristica("saggezza", R.id.character_total_wisdom, R.id.character_mod_wisdom, 1);
     }
 
     public void charismaButton(View view) {
-        this.aggiornaCaratteristica("carisma", R.id.character_total_charisma, 1);
-        this.aggiornaModificatore("carisma", R.id.character_mod_charisma);
+        this.aggiornaCaratteristica("carisma", R.id.character_total_charisma, R.id.character_mod_charisma, 1);
     }
 
     /* START */

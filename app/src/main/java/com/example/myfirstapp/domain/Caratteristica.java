@@ -6,7 +6,6 @@ public class Caratteristica extends Descrivibile {
     private int valoreLivello = 0;
     private int valoreEquipaggiamento = 0;
     private int valoreBonus = 0;
-    private int modificatore = 0;
 
     public Caratteristica(String nome, StringBuffer descrizione) {
         super(nome, descrizione);
@@ -45,11 +44,7 @@ public class Caratteristica extends Descrivibile {
     }
 
     public int getModificatore() {
-        return modificatore;
-    }
-
-    public void setModificatore() {
-        this.modificatore = (int) ((valoreBase + valoreLivello + valoreBonus) - 10) / 2;
+        return (int) ((valoreBase + valoreLivello + valoreBonus) - 10) / 2;
     }
 
     public int getValoreEquipaggiamento() {

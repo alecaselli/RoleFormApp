@@ -74,16 +74,16 @@ public class CharacterNoteActivity extends AppCompatActivity {
         sinossiEditText = findViewById(R.id.note_synopsis);
         generaliEditText = findViewById(R.id.note_general);
 
-        idealiEditText = (EditText) findViewById(R.id.note_ideals);
+        idealiEditText = findViewById(R.id.note_ideals);
         idealiEditText.setText(notelist.get(0));
 
-        descrizioneEditText = (EditText) findViewById(R.id.note_description);
+        descrizioneEditText = findViewById(R.id.note_description);
         descrizioneEditText.setText(notelist.get(1));
 
-        sinossiEditText = (EditText) findViewById(R.id.note_synopsis);
+        sinossiEditText = findViewById(R.id.note_synopsis);
         sinossiEditText.setText(notelist.get(2));
 
-        generaliEditText = (EditText) findViewById(R.id.note_general);
+        generaliEditText = findViewById(R.id.note_general);
         generaliEditText.setText(notelist.get(3));
 
     }
@@ -107,19 +107,15 @@ public class CharacterNoteActivity extends AppCompatActivity {
         idealsView = findViewById(R.id.note_ideals_expandableView);
         idealsCardView = findViewById(R.id.note_ideals_cardView);
 
-        idealsButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (idealsView.getVisibility() == View.GONE) {
-                    TransitionManager.beginDelayedTransition((ViewGroup) idealsCardView.getParent().getParent(), new AutoTransition());
-                    idealsView.setVisibility(View.VISIBLE);
-                    idealsButton.setBackgroundResource(R.drawable.ic_arrow_up);
-                } else {
-                    TransitionManager.beginDelayedTransition((ViewGroup) idealsCardView.getParent().getParent(), new AutoTransition());
-                    idealsView.setVisibility(View.GONE);
-                    idealsButton.setBackgroundResource(R.drawable.ic_arrow_down);
-                }
+        idealsButton.setOnClickListener(view -> {
+            if (idealsView.getVisibility() == View.GONE) {
+                TransitionManager.beginDelayedTransition((ViewGroup) idealsCardView.getParent().getParent(), new AutoTransition());
+                idealsView.setVisibility(View.VISIBLE);
+                idealsButton.setBackgroundResource(R.drawable.ic_arrow_up);
+            } else {
+                TransitionManager.beginDelayedTransition((ViewGroup) idealsCardView.getParent().getParent(), new AutoTransition());
+                idealsView.setVisibility(View.GONE);
+                idealsButton.setBackgroundResource(R.drawable.ic_arrow_down);
             }
         });
 
@@ -127,19 +123,15 @@ public class CharacterNoteActivity extends AppCompatActivity {
         descriptionlView = findViewById(R.id.note_description_expandableView);
         descriptionCardView = findViewById(R.id.note_description_cardView);
 
-        descriptionButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (descriptionlView.getVisibility() == View.GONE) {
-                    TransitionManager.beginDelayedTransition((ViewGroup) descriptionCardView.getParent().getParent(), new AutoTransition());
-                    descriptionlView.setVisibility(View.VISIBLE);
-                    descriptionButton.setBackgroundResource(R.drawable.ic_arrow_up);
-                } else {
-                    TransitionManager.beginDelayedTransition((ViewGroup) descriptionCardView.getParent().getParent(), new AutoTransition());
-                    descriptionlView.setVisibility(View.GONE);
-                    descriptionButton.setBackgroundResource(R.drawable.ic_arrow_down);
-                }
+        descriptionButton.setOnClickListener(view -> {
+            if (descriptionlView.getVisibility() == View.GONE) {
+                TransitionManager.beginDelayedTransition((ViewGroup) descriptionCardView.getParent().getParent(), new AutoTransition());
+                descriptionlView.setVisibility(View.VISIBLE);
+                descriptionButton.setBackgroundResource(R.drawable.ic_arrow_up);
+            } else {
+                TransitionManager.beginDelayedTransition((ViewGroup) descriptionCardView.getParent().getParent(), new AutoTransition());
+                descriptionlView.setVisibility(View.GONE);
+                descriptionButton.setBackgroundResource(R.drawable.ic_arrow_down);
             }
         });
 
@@ -147,19 +139,15 @@ public class CharacterNoteActivity extends AppCompatActivity {
         synopsisView = findViewById(R.id.note_synopsis_expandableView);
         synopsisCardView = findViewById(R.id.note_synopsis_cardView);
 
-        synopsisButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (synopsisView.getVisibility() == View.GONE) {
-                    TransitionManager.beginDelayedTransition((ViewGroup) synopsisCardView.getParent().getParent(), new AutoTransition());
-                    synopsisView.setVisibility(View.VISIBLE);
-                    synopsisButton.setBackgroundResource(R.drawable.ic_arrow_up);
-                } else {
-                    TransitionManager.beginDelayedTransition((ViewGroup) synopsisCardView.getParent().getParent(), new AutoTransition());
-                    synopsisView.setVisibility(View.GONE);
-                    synopsisButton.setBackgroundResource(R.drawable.ic_arrow_down);
-                }
+        synopsisButton.setOnClickListener(view -> {
+            if (synopsisView.getVisibility() == View.GONE) {
+                TransitionManager.beginDelayedTransition((ViewGroup) synopsisCardView.getParent().getParent(), new AutoTransition());
+                synopsisView.setVisibility(View.VISIBLE);
+                synopsisButton.setBackgroundResource(R.drawable.ic_arrow_up);
+            } else {
+                TransitionManager.beginDelayedTransition((ViewGroup) synopsisCardView.getParent().getParent(), new AutoTransition());
+                synopsisView.setVisibility(View.GONE);
+                synopsisButton.setBackgroundResource(R.drawable.ic_arrow_down);
             }
         });
 
@@ -167,19 +155,15 @@ public class CharacterNoteActivity extends AppCompatActivity {
         generalView = findViewById(R.id.note_general_expandableView);
         generalCardView = findViewById(R.id.note_general_cardView);
 
-        generalButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (generalView.getVisibility() == View.GONE) {
-                    TransitionManager.beginDelayedTransition((ViewGroup) generalCardView.getParent().getParent(), new AutoTransition());
-                    generalView.setVisibility(View.VISIBLE);
-                    generalButton.setBackgroundResource(R.drawable.ic_arrow_up);
-                } else {
-                    TransitionManager.beginDelayedTransition((ViewGroup) generalCardView.getParent().getParent(), new AutoTransition());
-                    generalView.setVisibility(View.GONE);
-                    generalButton.setBackgroundResource(R.drawable.ic_arrow_down);
-                }
+        generalButton.setOnClickListener(view -> {
+            if (generalView.getVisibility() == View.GONE) {
+                TransitionManager.beginDelayedTransition((ViewGroup) generalCardView.getParent().getParent(), new AutoTransition());
+                generalView.setVisibility(View.VISIBLE);
+                generalButton.setBackgroundResource(R.drawable.ic_arrow_up);
+            } else {
+                TransitionManager.beginDelayedTransition((ViewGroup) generalCardView.getParent().getParent(), new AutoTransition());
+                generalView.setVisibility(View.GONE);
+                generalButton.setBackgroundResource(R.drawable.ic_arrow_down);
             }
         });
 

@@ -29,7 +29,9 @@ public class ValutaTemp{
     public void modNomiValori(HashMap<String, Integer> nomiValori) {
         if(null!=this.nomiValori && null!=nomiValori)
             for (String nome: nomiValori.keySet())
-                if(null!=this.nomiValori.get(nome) && null!=nomiValori.get(nome))
-                    this.nomiValori.put(nome,this.nomiValori.get(nome)+nomiValori.get(nome));
+                if((null != this.nomiValori.get(nome)) && ( nomiValori.get(nome)!= null)){
+                    int val=this.nomiValori.get(nome)+nomiValori.get(nome);
+                    this.nomiValori.put(nome,val);
+                }
     }
 }

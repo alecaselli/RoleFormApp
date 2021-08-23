@@ -52,8 +52,8 @@ public class Classe extends Descrivibile {
         return descrizionePrivilegiPoteri;
     }
 
-    public void setDescrizionePrivilegiPoteri(StringBuffer descrizioneElementiParticolari) {
-        this.descrizionePrivilegiPoteri = descrizioneElementiParticolari;
+    public void setDescrizionePrivilegiPoteri(StringBuffer descrizionePrivilegiPoteri) {
+        this.descrizionePrivilegiPoteri = descrizionePrivilegiPoteri;
     }
 
     public StringBuffer getCompetenza() {

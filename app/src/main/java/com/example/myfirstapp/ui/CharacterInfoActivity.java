@@ -25,7 +25,6 @@ public class CharacterInfoActivity extends AppCompatActivity {
 
     private String nomecamp;
     private String nomeg;
-    private DBManager dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,6 @@ public class CharacterInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         nomecamp = intent.getStringExtra("nomecamp");
         nomeg = intent.getStringExtra("nomeg");
-        dbManager = new DBManager(this);
     }
 
     public void readInfo() {
@@ -53,7 +51,7 @@ public class CharacterInfoActivity extends AppCompatActivity {
             }
             info.deleteCharAt(info.lastIndexOf("\n"));
 
-            txt = (TextView) findViewById(R.id.character_info);
+            txt = findViewById(R.id.character_info);
             txt.setText(info);
 
         } catch (IOException e) {

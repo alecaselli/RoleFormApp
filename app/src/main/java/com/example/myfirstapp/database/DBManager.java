@@ -1368,6 +1368,8 @@ public class DBManager {
         }
     }
 
+    //TODO: aggiungi aggiorna hagi e campo usato per incantesimi in db
+
     public boolean aggiornaNoteVarie(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String ideali, @NotNull String desc, @NotNull String sinossi, @NotNull String generali) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -2204,7 +2206,6 @@ public class DBManager {
                     caratteristica.setValoreLivello(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_VALORELIVELLO));
                     caratteristica.setValoreEquipaggiamento(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_VALOREEQUIPAGGAMENTO));
                     caratteristica.setValoreBonus(resultSet.getColumnIndex(TabellaCaratteristicaG.FIELD_VALOREBONUS));
-                    caratteristica.setModificatore();
                     caratteristicaList.add(caratteristica);
                 }
 

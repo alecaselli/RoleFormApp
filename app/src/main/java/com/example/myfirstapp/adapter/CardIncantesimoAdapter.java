@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.utilities.CardIncantesimo;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class CardIncantesimoAdapter extends RecyclerView.Adapter<CardIncantesimoAdapter.CardIncantesimoViewHolder> {
@@ -21,7 +23,6 @@ public class CardIncantesimoAdapter extends RecyclerView.Adapter<CardIncantesimo
 
     public interface OnItemClickListener {
         void onItemClick(int position);
-
         void onBoolClick(int position);
     }
 
@@ -42,7 +43,6 @@ public class CardIncantesimoAdapter extends RecyclerView.Adapter<CardIncantesimo
             mIncantesimoImage = itemView.findViewById(R.id.spell_ball);
 
             itemView.setOnClickListener(new View.OnClickListener() {
-
                 @Override
                 public void onClick(View view) {
                     if (listener != null) {
@@ -80,7 +80,7 @@ public class CardIncantesimoAdapter extends RecyclerView.Adapter<CardIncantesimo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardIncantesimoAdapter.CardIncantesimoViewHolder holder, int position) {
+    public void onBindViewHolder(@NotNull CardIncantesimoViewHolder holder, int position) {
         CardIncantesimo currentItem = mCardIncantesimoList.get(position);
         if (currentItem != null) {
             holder.mNomeIncantesimoView.setText(currentItem.getNomeincantesimo());

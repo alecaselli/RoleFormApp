@@ -1,6 +1,5 @@
 package com.example.myfirstapp.adapter;
 
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,18 +8,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.utilities.CardAbility;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 public class CardAbilityAdapter extends RecyclerView.Adapter<CardAbilityAdapter.CardAbilitaViewHolder> {
     private ArrayList<CardAbility> mCardAbilityList;
     private OnItemClickListener mListener;
-
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -76,12 +75,12 @@ public class CardAbilityAdapter extends RecyclerView.Adapter<CardAbilityAdapter.
     @NonNull
     @Override
     public CardAbilitaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_skill_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_ability_item, parent, false);
         return new CardAbilitaViewHolder(v, mListener);
     }
 
     @Override
-    public void onBindViewHolder(CardAbilitaViewHolder holder, int position) {
+    public void onBindViewHolder(@NotNull CardAbilitaViewHolder holder, int position) {
         CardAbility currentItem = mCardAbilityList.get(position);
         if (currentItem != null) {
             holder.mNomeAbilitaView.setText(currentItem.getNome());

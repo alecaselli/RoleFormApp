@@ -51,17 +51,17 @@ public class CharacterStatsActivity extends AppCompatActivity {
 
     public void setCaratteristica(String tipo, int idBase, int idBonus, int idDesc) {
         Caratteristica caratteristica = giocatore.getCaratteristica(tipo);
-        txt = (TextView) findViewById(idBase);
+        txt = findViewById(idBase);
         txt.setText(String.valueOf(caratteristica.getBase()));
 
         CaratteristicaBase caratteristicaRazza = giocatore.getRazza().getCaratteristicaBase(tipo);
         int valoreRazza = 0;
         if (caratteristicaRazza != null)
             valoreRazza = caratteristicaRazza.getValore();
-        txt = (TextView) findViewById(idBonus);
+        txt = findViewById(idBonus);
         txt.setText(String.valueOf(valoreRazza));
 
-        txt = (TextView) findViewById(idDesc);
+        txt = findViewById(idDesc);
         txt.setText(caratteristica.getDescrizione().toString());
     }
 
