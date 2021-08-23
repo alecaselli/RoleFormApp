@@ -1,21 +1,13 @@
-package com.example.myfirstapp.ui;
+package com.example.myfirstapp.controller;
 
 import android.content.Context;
-import android.transition.AutoTransition;
-import android.transition.TransitionManager;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.myfirstapp.R;
 import com.example.myfirstapp.database.InterfaceValutaDB;
 import com.example.myfirstapp.database.ValutaDBReader;
 import com.example.myfirstapp.database.ValutaDBWriter;
 import com.example.myfirstapp.domain.ValutaOld;
-import com.example.myfirstapp.utilities.DBException;
+import com.example.myfirstapp.utilities.MyDBException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ValutaController {
@@ -26,7 +18,7 @@ public class ValutaController {
     private InterfaceValutaDB valutaDBWriter;
     private InterfaceValutaDB valutaDBReader;
 
-    public ValutaController(String nomecamp, String nomeg, Context ctx) throws DBException{
+    public ValutaController(String nomecamp, String nomeg, Context ctx) throws MyDBException {
         this.nomecamp = nomecamp;
         this.nomeg = nomeg;
         this.valutaDBWriter = new ValutaDBWriter(ctx);
@@ -34,16 +26,16 @@ public class ValutaController {
         this.getPortafoglio();
     }
 
-    private void getPortafoglio() throws DBException {
-        portafoglio = valutaDBReader.leggiPortafoglio(nomecamp,nomeg);
+    private void getPortafoglio() throws MyDBException {
+        portafoglio = valutaDBReader.getPortafoglio(nomecamp,nomeg);
         if(null==portafoglio)
-            throw new DBException();
+            throw new MyDBException();
     }
 
-    public void aggiornaValuta(List<Integer> valore) throws DBException{
+    public void aggiornaValuta(List<Integer> valore) throws MyDBException {
         portafoglio.aggiornaValore(valore);
-        if (!valutaDBWriter.aggiornaPortafoglio(portafoglio, nomecamp, nomeg))
-            throw new DBException();
+        if (!valutaDBWriter.updatePortafoglio(portafoglio, nomecamp, nomeg))
+            throw new MyDBException();
     }
 
     public List<Integer> getValoreInMonete(){

@@ -76,11 +76,11 @@ public class CreateNewCharacterActivity extends AppCompatActivity implements Ada
     }
 
     public void createNewCharacter(View view) {
-        editText = (EditText) findViewById(R.id.create_campaign_name);
+        editText = findViewById(R.id.create_campaign_name);
         StringBuffer desc = new StringBuffer();
         String nomecamp = editText.getText().toString();
 
-        editText = (EditText) findViewById(R.id.create_character_name);
+        editText = findViewById(R.id.create_character_name);
         String nomeg = editText.getText().toString();
 
         editText = findViewById(R.id.create_character_age);

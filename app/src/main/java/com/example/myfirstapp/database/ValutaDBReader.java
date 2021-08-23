@@ -21,7 +21,7 @@ public class ValutaDBReader implements InterfaceValutaDB{
     }
 
     @Override
-    public boolean aggiornaPortafoglio(ValutaOld valuta, String nomecamp, String nomeg) {
+    public boolean updatePortafoglio(ValutaOld portafoglio, String nomecamp, String nomeg) {
         return false;
     }
 
@@ -78,7 +78,7 @@ public class ValutaDBReader implements InterfaceValutaDB{
     }
 
     @Override
-    public ValutaOld leggiPortafoglio(String nomecamp, String nomeg) {
+    public ValutaOld getPortafoglio(String nomecamp, String nomeg) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
         String[] whereArgs = new String[]{nomecamp, nomeg};
@@ -103,5 +103,15 @@ public class ValutaDBReader implements InterfaceValutaDB{
             Log.e("LEGGI PORTAFOGLIO", "leggi fallita", sqle);
             return null;
         }
+    }
+
+    @Override
+    public void deletePortafoglio(String nomecamp, String nomeg) {
+
+    }
+
+    @Override
+    public void insertPortafoglio(ValutaOld portafoglio, String nomecamp, String nomeg) {
+
     }
 }

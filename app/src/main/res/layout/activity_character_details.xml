@@ -7,7 +7,7 @@
     android:background="@color/whitesmoke"
     android:padding="12dp"
     android:scrollbars="none"
-    tools:context=".ui.CharacterCharacterActivity">
+    tools:context=".ui.CharacterDetailsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

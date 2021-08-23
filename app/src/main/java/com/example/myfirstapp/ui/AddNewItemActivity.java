@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.myfirstapp.R;
 
-public class AddNewItem extends AppCompatActivity {
+public class AddNewItemActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

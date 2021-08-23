@@ -1,5 +1,5 @@
 package com.example.myfirstapp.utilities;
 
-public class DBException  extends Exception{
+public class MyDBException extends Exception{
 
 }

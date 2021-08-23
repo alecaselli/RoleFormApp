@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.CharacterSkillsActivity" />
         <activity android:name=".ui.CharacterSpellsActivity" />
-        <activity android:name=".ui.CharacterCharacterActivity" />
+        <activity android:name=".ui.CharacterDetailsActivity" />
         <activity android:name=".ui.EditActivity" />
         <activity android:name=".ui.CharacterBagActivity" />
         <activity android:name=".ui.CreateNewItemActivity" />
@@ -20,9 +20,11 @@
         <activity android:name=".ui.CreateNewCharacterActivity" />
         <activity android:name=".ui.InfoCreditsActivity" />
         <activity android:name=".ui.CharacterNoteActivity" />
-        <activity android:name=".ui.AddNewItem" />
-        <activity android:name=".ui.AddNewSpell" />
+        <activity android:name=".ui.AddNewItemActivity" />
+        <activity android:name=".ui.AddNewSpellActivity" />
         <activity android:name=".ui.CharacterInfoActivity" />
+        <activity android:name=".ui.PortafoglioActivity" />
+        <activity android:name=".ui.CharacterActivity" />
         <activity
             android:name=".ui.MainActivity"
             android:label="Roleform"
@@ -33,7 +35,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.CharacterActivity" />
     </application>
 
 </manifest>

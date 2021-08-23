@@ -17,7 +17,7 @@ import com.example.myfirstapp.R;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.domain.Giocatore;
 
-public class CharacterCharacterActivity extends AppCompatActivity {
+public class CharacterDetailsActivity extends AppCompatActivity {
 
     private Giocatore giocatore;
     private TextView txt;
@@ -28,7 +28,7 @@ public class CharacterCharacterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_character_character);
+        setContentView(R.layout.activity_character_details);
 
         this.estraiGiocatore();
         this.setView();
@@ -94,7 +94,7 @@ public class CharacterCharacterActivity extends AppCompatActivity {
         txt = (TextView) findViewById(R.id.character_character_armorClass);
         txt.setText(String.valueOf(giocatore.getClasseArmatura()));
 
-        //implementare iniziativa
+        //TODO: implementare iniziativa
     }
 
     public void setEdit() {

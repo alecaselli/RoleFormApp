@@ -53,7 +53,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:onClick="openCharacterCharacter"
+                android:onClick="startCharacterDetails"
                 app:cardCornerRadius="15dp">
 
                 <RelativeLayout
@@ -294,7 +294,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:onClick="openCharacterStats"
+                android:onClick="startCharacterStats"
                 app:cardCornerRadius="15dp">
 
                 <LinearLayout
@@ -692,6 +692,10 @@
                 android:layout_marginStart="6dp"
                 android:layout_toEndOf="@id/activity_center"
                 app:cardCornerRadius="15dp">
+                <!-- tools:context=".ui.PortafoglioActivity" -->
+
+
+
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -856,7 +860,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/character_mod_gold_text"
+                                android:id="@+id/character_hidden_gold_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/oro"
@@ -864,7 +868,7 @@
                                 android:textSize="22sp" />
 
                             <EditText
-                                android:id="@+id/character_mod_gold"
+                                android:id="@+id/character_hidden_gold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
@@ -886,7 +890,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/character_mod_silver_text"
+                                android:id="@+id/character_hidden_silver_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/argento"
@@ -894,7 +898,7 @@
                                 android:textSize="22sp" />
 
                             <EditText
-                                android:id="@+id/character_mod_silver"
+                                android:id="@+id/character_hidden_silver"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
@@ -916,7 +920,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/character_mod_copper_text"
+                                android:id="@+id/character_hidden_copper_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/bronzo"
@@ -924,7 +928,7 @@
                                 android:textSize="22sp" />
 
                             <EditText
-                                android:id="@+id/character_mod_copper"
+                                android:id="@+id/character_hidden_copper"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
@@ -969,7 +973,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="?android:selectableItemBackground"
-                            android:onClick="openCharacterSpells"
+                            android:onClick="startCharacterSpells"
                             android:text="Incantesimi"
                             android:textColor="@color/black" />
 
@@ -987,7 +991,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:background="?android:selectableItemBackground"
-                            android:onClick="openCharacterSkills"
+                            android:onClick="startCharacterSkills"
                             android:text="Abilità"
                             android:textColor="@color/black" />
 
@@ -1131,7 +1135,7 @@
                                 android:layout_centerHorizontal="true"
                                 android:layout_centerVertical="true"
                                 android:background="?android:selectableItemBackground"
-                                android:onClick="openCharacterBag" />
+                                android:onClick="startCharacterBag" />
 
                         </RelativeLayout>
 
@@ -1160,7 +1164,7 @@
             android:layout_marginEnd="80dp"
             android:layout_toStartOf="@id/character_add"
             android:background="?android:selectableItemBackground"
-            android:onClick="openCharacterNote"
+            android:onClick="startCharacterNote"
             android:src="@drawable/ic_edit" />
 
         <ImageButton
@@ -1180,7 +1184,7 @@
             android:layout_marginStart="80dp"
             android:layout_toEndOf="@id/character_add"
             android:background="?android:selectableItemBackground"
-            android:onClick="openCharacterInfo"
+            android:onClick="startCharacterInfo"
             android:src="@drawable/ic_info" />
 
     </RelativeLayout>

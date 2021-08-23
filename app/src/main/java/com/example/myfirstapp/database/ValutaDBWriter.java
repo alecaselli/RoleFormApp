@@ -17,12 +17,12 @@ public class ValutaDBWriter implements InterfaceValutaDB{
     }
 
     @Override
-    public boolean aggiornaPortafoglio(ValutaOld valuta, String nomecamp, String nomeg) {
+    public boolean updatePortafoglio(ValutaOld portafoglio, String nomecamp, String nomeg) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? ";
         String[] whereArgs = new String[]{nomecamp,nomeg};
-        cv.put(TabellaGiocatore.FIELD_VALOREVAL, valuta.getValore());
+        cv.put(TabellaGiocatore.FIELD_VALOREVAL, portafoglio.getValore());
         try {
             return db.update(TabellaGiocatore.TBL_NOME, cv, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
@@ -32,7 +32,17 @@ public class ValutaDBWriter implements InterfaceValutaDB{
     }
 
     @Override
-    public ValutaOld leggiPortafoglio(String nomecamp, String nomeg) {
+    public ValutaOld getPortafoglio(String nomecamp, String nomeg) {
         return null;
+    }
+
+    @Override
+    public void deletePortafoglio(String nomecamp, String nomeg) {
+
+    }
+
+    @Override
+    public void insertPortafoglio(ValutaOld portafoglio, String nomecamp, String nomeg) {
+
     }
 }

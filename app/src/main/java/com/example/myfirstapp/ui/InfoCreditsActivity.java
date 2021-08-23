@@ -36,7 +36,7 @@ public class InfoCreditsActivity extends AppCompatActivity {
             }
             info_credit.deleteCharAt(info_credit.lastIndexOf("\n"));
 
-            txt = (TextView) findViewById(R.id.info);
+            txt = findViewById(R.id.info);
             txt.setText(info_credit);
 
             info_credit = new StringBuilder();
@@ -45,11 +45,11 @@ public class InfoCreditsActivity extends AppCompatActivity {
             }
             info_credit.deleteCharAt(info_credit.lastIndexOf("\n"));
 
-            txt = (TextView) findViewById(R.id.credits);
+            txt = findViewById(R.id.credits);
             txt.setText(info_credit);
 
         } catch (IOException e) {
-            Log.e("CREDITS", "fsiled asset read", e);
+            Log.e("CREDITS", "failed asset read", e);
 
         }
     }

@@ -16,17 +16,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.controller.ValutaController;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.domain.Caratteristica;
 import com.example.myfirstapp.domain.Equipaggiamento;
 import com.example.myfirstapp.domain.Giocatore;
-import com.example.myfirstapp.utilities.DBException;
+import com.example.myfirstapp.utilities.MyDBException;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 public class CharacterActivity extends AppCompatActivity {
@@ -68,7 +68,7 @@ public class CharacterActivity extends AppCompatActivity {
         giocatore = dbManager.leggiGiocatore(nomecamp, nomeg);
         try {
             valutaController=new ValutaController(nomecamp,nomeg,this);
-        } catch (DBException e){
+        } catch (MyDBException e){
             Toast.makeText(this, "lettura portafoglio fallita", Toast.LENGTH_LONG).show();
         }
 
@@ -128,17 +128,17 @@ public class CharacterActivity extends AppCompatActivity {
         this.setPortafoglio();
     }
 
-    private void setCaratteristica(String tipo, int idBase, int idBonus) {
+    private void setCaratteristica(String tipo, int idBase, int idMod) {
         Caratteristica caratteristica = giocatore.getCaratteristica(tipo);
-        txt = (TextView) findViewById(idBase);
+        txt =  findViewById(idBase);
         txt.setText(String.valueOf(caratteristica.getBase()));
-        txt = (TextView) findViewById(idBonus);
+        txt =  findViewById(idMod);
         txt.setText(String.valueOf(caratteristica.getModificatore()));
     }
 
     private void setCaratteristica(String tipo, int idBase) {
         Caratteristica caratteristica = giocatore.getCaratteristica(tipo);
-        txt = (TextView) findViewById(idBase);
+        txt =  findViewById(idBase);
         txt.setText(String.valueOf(caratteristica.getBase()));
     }
 
@@ -147,7 +147,7 @@ public class CharacterActivity extends AppCompatActivity {
         String nome;
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
         else nome = "Non equipaggiato";
-        txt = (TextView) findViewById(id);
+        txt = findViewById(id);
         txt.setText(nome);
     }
 
@@ -174,9 +174,9 @@ public class CharacterActivity extends AppCompatActivity {
                     TransitionManager.beginDelayedTransition((ViewGroup) currencyCard.getParent().getParent(), new AutoTransition());
                     currencyBaseView.setVisibility(View.GONE);
                     currencyModView.setVisibility(View.VISIBLE);
-                    ((EditText) findViewById(R.id.character_mod_copper)).setText("");
-                    ((EditText) findViewById(R.id.character_mod_silver)).setText("");
-                    ((EditText) findViewById(R.id.character_mod_gold)).setText("");
+                    ((EditText) findViewById(R.id.character_hidden_copper)).setText("");
+                    ((EditText) findViewById(R.id.character_hidden_silver)).setText("");
+                    ((EditText) findViewById(R.id.character_hidden_gold)).setText("");
                     currencyButton.setBackgroundResource(R.drawable.ic_round_done);
                 } else {
                     TransitionManager.beginDelayedTransition((ViewGroup) currencyCard.getParent().getParent(), new AutoTransition());
@@ -216,42 +216,39 @@ public class CharacterActivity extends AppCompatActivity {
 
         CardView charismaButton = findViewById(R.id.character_charisma);
         this.setCaratteristicaOnLongClick(charismaButton, "carisma", R.id.character_total_charisma, R.id.character_mod_charisma);
+        /* TODO: mettere il riempimento delle caratteristiche in  view prendendo i nomi delle car in modo dinamico da db */
     }
 
     private void setCurrencyOnLongClick(@NotNull CardView currencyButton, final int val0, final int val1, final int val2) {
-        currencyButton.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                aggiornaValuta(new ArrayList<>(Arrays.asList(val0,val1,val2)));
-                return true;
-            }
+        currencyButton.setOnLongClickListener(view -> {
+            aggiornaValuta(new ArrayList<>(Arrays.asList(val0,val1,val2)));
+            return true;
         });
     }
 
     private void setCaratteristicaOnLongClick(@NotNull CardView CaratteristicaButton, final String tipo, final int idBase, final int idBonus) {
-        CaratteristicaButton.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                aggiornaCaratteristica(tipo, idBase, -1);
-                aggiornaModificatore(tipo, idBonus);
-                return true;
-            }
+        CaratteristicaButton.setOnLongClickListener(view -> {
+            aggiornaCaratteristica(tipo, idBase, -1);
+            aggiornaModificatore(tipo, idBonus);
+            return true;
         });
     }
 
     /* CURRENCY BUTTON */
     private void aggiornaValuta() {
         List<Integer> valore = new ArrayList<>();
-        final List<Integer> VIEW = new ArrayList<>(Arrays.asList(R.id.character_mod_copper, R.id.character_mod_silver, R.id.character_mod_gold));
+        final List<Integer> VIEW = new ArrayList<>(Arrays.asList(R.id.character_hidden_copper, R.id.character_hidden_silver, R.id.character_hidden_gold));
 
         EditText editText;
         for(Integer view : VIEW){
             editText = findViewById(view);
-            String temp = editText.getText().toString();
-            if (temp.equals(""))
-                valore.add(0);
-            else
-                valore.add(Integer.valueOf(temp));
+            int val;
+            try {
+                val=Integer.parseInt(editText.getText().toString());
+            }catch (NumberFormatException e){
+                val=0;
+            }
+            valore.add(val);
         }
 
         if (0!=(valore.get(0)+valore.get(1)+valore.get(2))) {
@@ -263,7 +260,7 @@ public class CharacterActivity extends AppCompatActivity {
     public void aggiornaValuta(List<Integer> valore){
         try {
             valutaController.aggiornaValuta(valore);
-        }catch (DBException e){
+        }catch (MyDBException e){
             Toast.makeText(this, "aggiornamento portafoglio fallito", Toast.LENGTH_LONG).show();
         }
 
@@ -297,7 +294,7 @@ public class CharacterActivity extends AppCompatActivity {
     public void aggiornaModificatore(String tipo, int idBonus){
         Caratteristica caratteristica = giocatore.getCaratteristica(tipo);
         caratteristica.setModificatore();
-        txt = (TextView) findViewById(idBonus);
+        txt = findViewById(idBonus);
         txt.setText(String.valueOf(caratteristica.getModificatore()));
     }
 
@@ -331,8 +328,8 @@ public class CharacterActivity extends AppCompatActivity {
         this.aggiornaModificatore("carisma", R.id.character_mod_charisma);
     }
 
-    /* OPEN */
-    public void openCharacterNote(View view) {
+    /* START */
+    public void startCharacterNote(View view) {
         Intent intent = new Intent(this, CharacterNoteActivity.class);
         intent.putExtra("nomecamp", nomecamp);
         intent.putExtra("nomeg", nomeg);
@@ -340,15 +337,15 @@ public class CharacterActivity extends AppCompatActivity {
         finish();
     }
 
-    public void openCharacterCharacter(View view) {
-        Intent intent = new Intent(this, CharacterCharacterActivity.class);
+    public void startCharacterDetails(View view) {
+        Intent intent = new Intent(this, CharacterDetailsActivity.class);
         intent.putExtra("nomecamp", nomecamp);
         intent.putExtra("nomeg", nomeg);
         startActivity(intent);
         finish();
     }
 
-    public void openCharacterSkills(View view) {
+    public void startCharacterSkills(View view) {
         Intent intent = new Intent(this, CharacterSkillsActivity.class);
         intent.putExtra("nomecamp", nomecamp);
         intent.putExtra("nomeg", nomeg);
@@ -356,7 +353,7 @@ public class CharacterActivity extends AppCompatActivity {
         finish();
     }
 
-    public void openCharacterSpells(View view) {
+    public void startCharacterSpells(View view) {
         Intent intent = new Intent(this, CharacterSpellsActivity.class);
         intent.putExtra("nomecamp", nomecamp);
         intent.putExtra("nomeg", nomeg);
@@ -364,7 +361,7 @@ public class CharacterActivity extends AppCompatActivity {
         finish();
     }
 
-    public void openCharacterStats(View view) {
+    public void startCharacterStats(View view) {
         Intent intent = new Intent(this, CharacterStatsActivity.class);
         intent.putExtra("nomecamp", nomecamp);
         intent.putExtra("nomeg", nomeg);
@@ -372,7 +369,7 @@ public class CharacterActivity extends AppCompatActivity {
         finish();
     }
 
-    public void openCharacterBag(View view) {
+    public void startCharacterBag(View view) {
         Intent intent = new Intent(this, CharacterBagActivity.class);
         intent.putExtra("nomecamp", nomecamp);
         intent.putExtra("nomeg", nomeg);
@@ -380,7 +377,7 @@ public class CharacterActivity extends AppCompatActivity {
         finish();
     }
 
-    public void openCharacterInfo(View view) {
+    public void startCharacterInfo(View view) {
         Intent intent = new Intent(this, CharacterInfoActivity.class);
         intent.putExtra("nomecamp", nomecamp);
         intent.putExtra("nomeg", nomeg);

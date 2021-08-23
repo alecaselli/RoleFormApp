@@ -8,7 +8,7 @@ import android.os.Bundle;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.database.DBManager;
 
-public class AddNewSpell extends AppCompatActivity {
+public class AddNewSpellActivity extends AppCompatActivity {
 
     private String nomecamp;
     private String nomeg;
