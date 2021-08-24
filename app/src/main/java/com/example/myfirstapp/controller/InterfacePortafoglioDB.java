@@ -1,9 +1,9 @@
-package com.example.myfirstapp.database;
+package com.example.myfirstapp.controller;
 
 import com.example.myfirstapp.domain.ValutaOld;
-import com.example.myfirstapp.domain.ValutaTemp;
 
-public interface InterfaceValutaDB {
+
+public interface InterfacePortafoglioDB {
     boolean updatePortafoglio(ValutaOld portafoglio, String nomecamp, String nomeg);
     ValutaOld getPortafoglio(String nomecamp, String nomeg);
 

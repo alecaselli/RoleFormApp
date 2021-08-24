@@ -6,12 +6,13 @@ public class ValutaTemp{
 
     private final String nome;
     private final String descrizione;
-    private final HashMap<String, Integer> nomiValori;
+    private final HashMap<String, Integer> nomiRatio;
+    private HashMap<String, Integer> nomiValori;
 
-    public ValutaTemp(String nome, String descrizione, HashMap<String, Integer> nomiValori) {
+    public ValutaTemp(String nome, String descrizione, HashMap<String, Integer> nomiRatio) {
         this.nome = nome;
         this.descrizione = descrizione;
-        this.nomiValori = nomiValori;
+        this.nomiRatio=nomiRatio;
     }
 
     public String getNome() {
@@ -23,15 +24,15 @@ public class ValutaTemp{
     }
 
     public HashMap<String, Integer> getNomiValori() {
-        return nomiValori;
+        return nomiRatio;
     }
 
     public void modNomiValori(HashMap<String, Integer> nomiValori) {
-        if(null!=this.nomiValori && null!=nomiValori)
+        if(null!=this.nomiRatio && null!=nomiValori)
             for (String nome: nomiValori.keySet())
-                if((null != this.nomiValori.get(nome)) && ( nomiValori.get(nome)!= null)){
-                    int val=this.nomiValori.get(nome)+nomiValori.get(nome);
-                    this.nomiValori.put(nome,val);
+                if((null != this.nomiRatio.get(nome)) && ( nomiValori.get(nome)!= null)){
+                    int val=this.nomiRatio.get(nome)+nomiValori.get(nome);
+                    this.nomiRatio.put(nome,val);
                 }
     }
 }

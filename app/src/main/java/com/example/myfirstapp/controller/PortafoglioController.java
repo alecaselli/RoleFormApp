@@ -2,27 +2,26 @@ package com.example.myfirstapp.controller;
 
 import android.content.Context;
 
-import com.example.myfirstapp.database.InterfaceValutaDB;
-import com.example.myfirstapp.database.ValutaDBReader;
-import com.example.myfirstapp.database.ValutaDBWriter;
+import com.example.myfirstapp.database.PortafoglioDBReader;
+import com.example.myfirstapp.database.PortafoglioDBWriter;
 import com.example.myfirstapp.domain.ValutaOld;
 import com.example.myfirstapp.utilities.MyDBException;
 
 import java.util.List;
 
-public class ValutaController {
+public class PortafoglioController {
 
     private String nomecamp;
     private String nomeg;
     private ValutaOld portafoglio;
-    private InterfaceValutaDB valutaDBWriter;
-    private InterfaceValutaDB valutaDBReader;
+    private InterfacePortafoglioDB valutaDBWriter;
+    private InterfacePortafoglioDB valutaDBReader;
 
-    public ValutaController(String nomecamp, String nomeg, Context ctx) throws MyDBException {
+    public PortafoglioController(String nomecamp, String nomeg, Context ctx) throws MyDBException {
         this.nomecamp = nomecamp;
         this.nomeg = nomeg;
-        this.valutaDBWriter = new ValutaDBWriter(ctx);
-        this.valutaDBReader = new ValutaDBReader(ctx);
+        this.valutaDBWriter = new PortafoglioDBWriter(ctx);
+        this.valutaDBReader = new PortafoglioDBReader(ctx);
         this.getPortafoglio();
     }
 

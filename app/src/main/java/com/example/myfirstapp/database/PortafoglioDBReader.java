@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
+import com.example.myfirstapp.controller.InterfacePortafoglioDB;
 import com.example.myfirstapp.domain.ValutaOld;
 
 import org.jetbrains.annotations.NotNull;
@@ -13,10 +14,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ValutaDBReader implements InterfaceValutaDB{
+public class PortafoglioDBReader implements InterfacePortafoglioDB {
     private DBHelper dbhelper;
 
-    public ValutaDBReader(Context ctx) {
+    public PortafoglioDBReader(Context ctx) {
         dbhelper = new DBHelper(ctx);
     }
 

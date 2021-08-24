@@ -6,13 +6,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
+import com.example.myfirstapp.controller.InterfacePortafoglioDB;
 import com.example.myfirstapp.domain.ValutaOld;
-import com.example.myfirstapp.domain.ValutaTemp;
 
-public class ValutaDBWriter implements InterfaceValutaDB{
+public class PortafoglioDBWriter implements InterfacePortafoglioDB {
     private DBHelper dbhelper;
 
-    public ValutaDBWriter(Context ctx) {
+    public PortafoglioDBWriter(Context ctx) {
         dbhelper = new DBHelper(ctx);
     }
 

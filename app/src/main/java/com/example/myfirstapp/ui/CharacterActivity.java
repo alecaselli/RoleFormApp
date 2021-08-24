@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.controller.ValutaController;
+import com.example.myfirstapp.controller.PortafoglioController;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.domain.Caratteristica;
 import com.example.myfirstapp.domain.Equipaggiamento;
@@ -31,7 +31,7 @@ import java.util.List;
 
 public class CharacterActivity extends AppCompatActivity {
 
-    private ValutaController valutaController;
+    private PortafoglioController portafoglioController;
     private DBManager dbManager;
     private String nomecamp;
     private String nomeg;
@@ -67,7 +67,7 @@ public class CharacterActivity extends AppCompatActivity {
         assert nomecamp != null;
         giocatore = dbManager.leggiGiocatore(nomecamp, nomeg);
         try {
-            valutaController=new ValutaController(nomecamp,nomeg,this);
+            portafoglioController =new PortafoglioController(nomecamp,nomeg,this);
         } catch (MyDBException e){
             Toast.makeText(this, "lettura portafoglio fallita", Toast.LENGTH_LONG).show();
         }
@@ -146,7 +146,7 @@ public class CharacterActivity extends AppCompatActivity {
     }
 
     private void setPortafoglio() {
-        List<Integer> valoremonete = valutaController.getValoreInMonete();
+        List<Integer> valoremonete = portafoglioController.getValoreInMonete();
         txt = findViewById(R.id.character_base_copper);
         txt.setText(String.valueOf(valoremonete.get(0)));
         txt = findViewById(R.id.character_base_silver);
@@ -252,7 +252,7 @@ public class CharacterActivity extends AppCompatActivity {
 
     public void aggiornaValuta(List<Integer> valore){
         try {
-            valutaController.aggiornaValuta(valore);
+            portafoglioController.aggiornaValuta(valore);
         }catch (MyDBException e){
             Toast.makeText(this, "aggiornamento portafoglio fallito", Toast.LENGTH_LONG).show();
         }

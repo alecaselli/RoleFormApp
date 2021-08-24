@@ -97,7 +97,7 @@ public class DBManager {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(TabellaValuta.FIELD_NOMEV, nuovo.getRatio());
+        cv.put(TabellaValuta.FIELD_NOMEV, nuovo.getNome());
         cv.put(CampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
         cv.put(TabellaValuta.FIELD_RATIO, nuovo.getRatio());
 
@@ -1645,11 +1645,8 @@ public class DBManager {
             }
             resultSet.moveToFirst();
 
-            StringBuffer descrizione = new StringBuffer();
-            descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
-
             resultSet.close();
-            return new Abilita(nomea, descrizione);
+            return new Abilita(nomea, resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
         } catch (SQLiteException sqle) {
             Log.e("LEGGI ABILITA", "leggi fallita", sqle);
             return null;
@@ -1667,10 +1664,8 @@ public class DBManager {
 
             List<Abilita> abilitaList = new ArrayList<Abilita>();
             while (!resultSet.isAfterLast()) {
-                StringBuffer desc = new StringBuffer();
-                desc.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
                 String nome = resultSet.getString(resultSet.getColumnIndex(TabellaAbilita.FIELD_NOMEA));
-                abilitaList.add(new Abilita(nome, desc));
+                abilitaList.add(new Abilita(nome, resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC))));
 
                 resultSet.moveToNext();
             }
