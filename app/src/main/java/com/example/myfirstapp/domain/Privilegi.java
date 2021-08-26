@@ -3,11 +3,11 @@ package com.example.myfirstapp.domain;
 
 import java.util.List;
 
-public class Descrivibile { // i privilegi sono oggetti di descrivibile
+public class Privilegi {
     private String nome;
     private StringBuffer descrizione;
 
-    public Descrivibile(String nome, StringBuffer descrizione) {
+    public Privilegi(String nome, StringBuffer descrizione) {
         this.nome = nome;
         this.descrizione = descrizione;
     }

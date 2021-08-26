@@ -15,7 +15,7 @@ import com.example.myfirstapp.domain.Armatura;
 import com.example.myfirstapp.domain.Caratteristica;
 import com.example.myfirstapp.domain.CaratteristicaBase;
 import com.example.myfirstapp.domain.Classe;
-import com.example.myfirstapp.domain.Descrivibile;
+import com.example.myfirstapp.domain.Privilegi;
 import com.example.myfirstapp.domain.Equipaggiamento;
 import com.example.myfirstapp.domain.Giocatore;
 import com.example.myfirstapp.domain.Incantesimo;
@@ -129,7 +129,7 @@ public class DBManager {
         try {
             if (db.insert(TabellaRazza.TBL_NOME, null, cv) > 0) {
                 boolean error = false;
-                for (Descrivibile nuovoP : nuovo.getPrivilegiRazza()) {
+                for (Privilegi nuovoP : nuovo.getPrivilegiRazza()) {
                     if (!this.aggiungiHarp(nuovo.getNome(), nuovoP.getNome())) {
                         error = true;
                         break;
@@ -155,7 +155,7 @@ public class DBManager {
         }
     }
 
-    public boolean aggiungiPrivivlegi(@NotNull Descrivibile nuovo) {
+    public boolean aggiungiPrivivlegi(@NotNull Privilegi nuovo) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -184,7 +184,7 @@ public class DBManager {
         try {
             if (db.insert(TabellaClasse.TBL_NOME, null, cv) > 0) {
                 boolean error = false;
-                for (Descrivibile nuovoP : nuovo.getPrivilegiClasse()) {
+                for (Privilegi nuovoP : nuovo.getPrivilegiClasse()) {
                     if (!this.aggiungiHacp(nuovo.getNome(), nuovoP.getNome()))
                         error = true;
                 }
@@ -336,7 +336,7 @@ public class DBManager {
                         error = true;
                 }
                 for (Abilita nuovaa : nuovo.getAbilitaList()) {
-                    if (!this.aggiungiHaga(nuovo.getNomeCampagna(), nuovo.getNome(), nuovaa.getNome(), nuovaa.isCompetenza()))
+                    if (!this.aggiungiHaga(nuovo.getNomeCampagna(), nuovo.getNome(), nuovaa.getNome(), nuovaa.isCompetente()))
                         error = true;
                 }
                 for (Equipaggiamento nuovoe : nuovo.getEquipaggiato()) {
@@ -1044,7 +1044,7 @@ public class DBManager {
 
                 boolean error = false;
                 this.eliminaHarp(aggiornato.getNome(), "razza");
-                for (Descrivibile nuovoP : aggiornato.getPrivilegiRazza()) {
+                for (Privilegi nuovoP : aggiornato.getPrivilegiRazza()) {
                     if (!this.aggiungiHarp(aggiornato.getNome(), nuovoP.getNome()))
                         error = true;
                 }
@@ -1062,7 +1062,7 @@ public class DBManager {
         }
     }
 
-    public boolean aggiornaPrivivlegi(@NotNull Descrivibile aggiornato) {
+    public boolean aggiornaPrivivlegi(@NotNull Privilegi aggiornato) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaPrivilegi.FIELD_NOMEP + " = ? ";
@@ -1109,7 +1109,7 @@ public class DBManager {
                 }
 
                 this.eliminaHacp(aggiornato.getNome(), "classe");
-                for (Descrivibile nuovoP : aggiornato.getPrivilegiClasse()) {
+                for (Privilegi nuovoP : aggiornato.getPrivilegiClasse()) {
                     if (!this.aggiungiHacp(aggiornato.getNome(), nuovoP.getNome()))
                         error = true;
                 }
@@ -1238,7 +1238,7 @@ public class DBManager {
                 }
 
                 for (Abilita nuovaa : aggiornato.getAbilitaList()) {
-                    if (this.aggiornaHaga(aggiornato.getNomeCampagna(), aggiornato.getNome(), nuovaa.getNome(), nuovaa.isCompetenza()))
+                    if (this.aggiornaHaga(aggiornato.getNomeCampagna(), aggiornato.getNome(), nuovaa.getNome(), nuovaa.isCompetente()))
                         error = true;
                 }
 
@@ -1645,8 +1645,9 @@ public class DBManager {
             }
             resultSet.moveToFirst();
 
+            String desc = resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC));
             resultSet.close();
-            return new Abilita(nomea, resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+            return new Abilita(nomea, desc);
         } catch (SQLiteException sqle) {
             Log.e("LEGGI ABILITA", "leggi fallita", sqle);
             return null;
@@ -1678,6 +1679,32 @@ public class DBManager {
         }
     }
 
+    public Abilita leggiAbilita(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String nomea) {
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?" + " AND " + TabellaAbilita.FIELD_NOMEA + "=?";
+        String[] whereArgs = new String[]{nomecamp, nomeg, nomea};
+
+        try {
+            Cursor resultSet = db.query(TabelleHA.TBL_HAGA, null, whereClause, whereArgs, null, null, null);
+            if (resultSet == null || resultSet.getCount() == 0) {
+                return null;
+            }
+            resultSet.moveToFirst();
+
+            Abilita abilita = leggiAbilita(resultSet.getString(resultSet.getColumnIndex(TabellaAbilita.FIELD_NOMEA)));
+            if (abilita != null) {
+                boolean comp = (resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_COMPETENZA)) == 1);
+                abilita.setCompetenza(comp);
+            }
+
+            resultSet.close();
+            return abilita;
+        } catch (SQLiteException sqle) {
+            Log.e("LEGGI ABILITALIST", "fallita lettura", sqle);
+            return null;
+        }
+    }
+
     public List<Abilita> leggiAbilita(@NotNull String nomecamp, @NotNull String nomeg) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
@@ -1692,10 +1719,8 @@ public class DBManager {
 
             List<Abilita> abilitaList = new ArrayList<Abilita>();
             while (!resultSet.isAfterLast()) {
-                Abilita abilita = leggiAbilita(resultSet.getString(resultSet.getColumnIndex(TabellaAbilita.FIELD_NOMEA)));
+                Abilita abilita = leggiAbilita(nomecamp, nomeg, resultSet.getString(resultSet.getColumnIndex(TabellaAbilita.FIELD_NOMEA)));
                 if (abilita != null) {
-                    boolean comp = (resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_COMPETENZA)) == 1);
-                    abilita.setCompetenza(comp);
                     abilitaList.add(abilita);
                 }
                 resultSet.moveToNext();
@@ -1763,7 +1788,7 @@ public class DBManager {
         }
     }
 
-    public Descrivibile leggiPrivilegio(@NotNull String nomep) {
+    public Privilegi leggiPrivilegio(@NotNull String nomep) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaPrivilegi.FIELD_NOMEP + " = ? ";
         String[] whereArgs = new String[]{nomep};
@@ -1779,14 +1804,14 @@ public class DBManager {
             descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
 
             resultSet.close();
-            return new Descrivibile(nomep, descrizione);
+            return new Privilegi(nomep, descrizione);
         } catch (SQLiteException sqle) {
             Log.e("LEGGI PRIVI", "leggi fallita", sqle);
             return null;
         }
     }
 
-    public List<Descrivibile> leggiPrivilegi(@NotNull String... arg) {
+    public List<Privilegi> leggiPrivilegi(@NotNull String... arg) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String table;
         String whereClause;
@@ -1812,9 +1837,9 @@ public class DBManager {
             }
             resultSet.moveToFirst();
 
-            List<Descrivibile> privilegi = new ArrayList<Descrivibile>();
+            List<Privilegi> privilegi = new ArrayList<Privilegi>();
             while (!resultSet.isAfterLast()) {
-                Descrivibile privilegio = leggiPrivilegio(resultSet.getString(resultSet.getColumnIndex(TabellaPrivilegi.FIELD_NOMEP)));
+                Privilegi privilegio = leggiPrivilegio(resultSet.getString(resultSet.getColumnIndex(TabellaPrivilegi.FIELD_NOMEP)));
                 if (privilegio != null)
                     privilegi.add(privilegio);
 
@@ -1876,7 +1901,7 @@ public class DBManager {
             String velocita = resultSet.getString(resultSet.getColumnIndex(TabellaRazza.FIELD_VELOCITA));
             StringBuffer lingua = new StringBuffer();
             lingua.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_LINGUA)));
-            List<Descrivibile> privilegiRazza = this.leggiPrivilegi(nomer, "razza");
+            List<Privilegi> privilegiRazza = this.leggiPrivilegi(nomer, "razza");
             List<CaratteristicaBase> caratteristicaBaseList = this.leggiCarBase(nomer);
 
             resultSet.close();
@@ -2114,7 +2139,7 @@ public class DBManager {
             StringBuffer competenza = new StringBuffer();
             descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_COMPETENZA)));
             List<Equipaggiamento> equipaggiamentoList = this.leggiEquipaggiamenti(nomecla);
-            List<Descrivibile> privilegiClasse = this.leggiPrivilegi(nomecla, "classe");
+            List<Privilegi> privilegiClasse = this.leggiPrivilegi(nomecla, "classe");
             List<Incantesimo> incantesimiClasse = this.leggiIncantesimi(nomecla);
 
             resultSet.close();

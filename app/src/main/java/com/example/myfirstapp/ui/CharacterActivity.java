@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.controller.PortafoglioController;
 import com.example.myfirstapp.database.DBManager;
+import com.example.myfirstapp.database.PortafoglioDBReader;
+import com.example.myfirstapp.database.PortafoglioDBWriter;
 import com.example.myfirstapp.domain.Caratteristica;
 import com.example.myfirstapp.domain.Equipaggiamento;
 import com.example.myfirstapp.domain.Giocatore;
@@ -67,7 +69,7 @@ public class CharacterActivity extends AppCompatActivity {
         assert nomecamp != null;
         giocatore = dbManager.leggiGiocatore(nomecamp, nomeg);
         try {
-            portafoglioController =new PortafoglioController(nomecamp,nomeg,this);
+            portafoglioController =new PortafoglioController(nomecamp, nomeg, new PortafoglioDBWriter(this), new PortafoglioDBReader(this));
         } catch (MyDBException e){
             Toast.makeText(this, "lettura portafoglio fallita", Toast.LENGTH_LONG).show();
         }
@@ -236,11 +238,8 @@ public class CharacterActivity extends AppCompatActivity {
         for(Integer view : VIEW){
             editText = findViewById(view);
             int val;
-            try {
-                val=Integer.parseInt(editText.getText().toString());
-            }catch (NumberFormatException e){
-                val=0;
-            }
+            String text=editText.getText().toString();
+            val=(text.isEmpty())? 0:Integer.parseInt(text);
             valore.add(val);
         }
 
@@ -252,7 +251,7 @@ public class CharacterActivity extends AppCompatActivity {
 
     public void aggiornaValuta(List<Integer> valore){
         try {
-            portafoglioController.aggiornaValuta(valore);
+            portafoglioController.aggiornaPortafoglio(valore);
         }catch (MyDBException e){
             Toast.makeText(this, "aggiornamento portafoglio fallito", Toast.LENGTH_LONG).show();
         }

@@ -13,6 +13,12 @@ public class Abilita{
         this.descrizione = descrizione;
         this.competenza = false;
     }
+    public Abilita(String nome, String descrizione, boolean competenza) {
+        this.nome = nome;
+        this.descrizione = descrizione;
+        this.competenza = competenza;
+    }
+
 
     public Abilita(String nome, StringBuffer descrizione, boolean competenza, String nameMod) {
         this.nome = nome;
@@ -21,16 +27,20 @@ public class Abilita{
         this.nameMod=nameMod;
     }
 
-    public boolean isCompetenza() {
-        return competenza;
+    public void swapCompetenza() {
+        this.competenza= !competenza;
     }
 
     public void setCompetenza(boolean competenza) {
         this.competenza = competenza;
     }
 
+    public boolean isCompetente() {
+        return this.competenza;
+    }
+
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
     public void setNome(String nome) {
@@ -38,7 +48,7 @@ public class Abilita{
     }
 
     public String getDescrizione() {
-        return descrizione;
+        return this.descrizione;
     }
 
     public void setDescrizione(String descrizione) {

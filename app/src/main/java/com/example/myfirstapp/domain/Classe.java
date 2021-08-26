@@ -3,14 +3,16 @@ package com.example.myfirstapp.domain;
 
 import java.util.List;
 
-public class Classe extends Descrivibile {
+public class Classe{
+    private String nome;
+    private StringBuffer descrizione;
     private int nDadi;
     private int dado;
     private StringBuffer descrizionePrivilegiPoteri; // in alternativa imagine con tab del manuale
     private StringBuffer competenza;
     /*  private Competenza competenzaClasse;*/
     private List<Equipaggiamento> equipaggiamentoList;
-    private List<Descrivibile> privilegiClasse;
+    private List<Privilegi> privilegiClasse;
     private List<Incantesimo> incantesimiClasse;
 
     public Classe(String nome,
@@ -18,9 +20,10 @@ public class Classe extends Descrivibile {
                   StringBuffer descrizionePrivilegiPoteri,
             /*Competenza competenzaClasse,*/
                   int nDadi, int dado, StringBuffer competenza, List<Equipaggiamento> equipaggiamentoList,
-                  List<Descrivibile> privilegiClasse,
+                  List<Privilegi> privilegiClasse,
                   List<Incantesimo> incantesimiClasse) {
-        super(nome, descrizione);
+        this.nome = nome;
+        this.descrizione = descrizione;
         this.descrizionePrivilegiPoteri = descrizionePrivilegiPoteri;
         this.nDadi = nDadi;
         this.dado = dado;
@@ -30,6 +33,22 @@ public class Classe extends Descrivibile {
         this.equipaggiamentoList = equipaggiamentoList;
         this.privilegiClasse = privilegiClasse;
         this.incantesimiClasse = incantesimiClasse;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public StringBuffer getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(StringBuffer descrizione) {
+        this.descrizione = descrizione;
     }
 
     public int getnDadi() {
@@ -81,11 +100,11 @@ public class Classe extends Descrivibile {
         this.equipaggiamentoList = equipaggiamentoList;
     }
 
-    public List<Descrivibile> getPrivilegiClasse() {
+    public List<Privilegi> getPrivilegiClasse() {
         return privilegiClasse;
     }
 
-    public void setPrivilegiClasse(List<Descrivibile> privilegiClasse) {
+    public void setPrivilegiClasse(List<Privilegi> privilegiClasse) {
         this.privilegiClasse = privilegiClasse;
     }
 

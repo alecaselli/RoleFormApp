@@ -2,23 +2,18 @@ package com.example.myfirstapp.domain;
 
 import java.util.List;
 
-public class Razza extends Descrivibile {
+public class Razza {
     private String nome;
+    private StringBuffer descrizione;
     private String taglia;
     private String velocita;
     private StringBuffer lingua;
-    private List<Descrivibile> privilegiRazza;
+    private List<Privilegi> privilegiRazza;
     private List<CaratteristicaBase> caratteristicaBaseList;
 
-    public Razza(String nome,
-                 StringBuffer descrizione,
-                 String taglia,
-                 String velocita,
-                 StringBuffer linguaggio,
-                 List<Descrivibile> privilegiRazza,
-                 List<CaratteristicaBase> caratteristicaBaseList) {
-        super(nome, descrizione);
+    public Razza(String nome, StringBuffer descrizione, String taglia, String velocita, StringBuffer linguaggio, List<Privilegi> privilegiRazza, List<CaratteristicaBase> caratteristicaBaseList) {
         this.nome = nome;
+        this.descrizione = descrizione;
         this.taglia = taglia;
         this.velocita = velocita;
         this.lingua = linguaggio;
@@ -27,7 +22,21 @@ public class Razza extends Descrivibile {
     }
 
 
-    public String getNome() {return nome; }
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public StringBuffer getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(StringBuffer descrizione) {
+        this.descrizione = descrizione;
+    }
 
     public String getTaglia() {
         return taglia;
@@ -53,11 +62,11 @@ public class Razza extends Descrivibile {
         this.lingua = lingua;
     }
 
-    public List<Descrivibile> getPrivilegiRazza() {
+    public List<Privilegi> getPrivilegiRazza() {
         return privilegiRazza;
     }
 
-    public void setPrivilegiRazza(List<Descrivibile> privilegiRazza) {
+    public void setPrivilegiRazza(List<Privilegi> privilegiRazza) {
         this.privilegiRazza = privilegiRazza;
     }
 

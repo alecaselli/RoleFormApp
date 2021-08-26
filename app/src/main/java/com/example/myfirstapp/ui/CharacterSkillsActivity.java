@@ -14,6 +14,7 @@ import com.example.myfirstapp.R;
 import com.example.myfirstapp.adapter.CardAbilityAdapter;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.domain.Abilita;
+import com.example.myfirstapp.domain.InterfaceListAbilita;
 import com.example.myfirstapp.utilities.CardAbility;
 
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class CharacterSkillsActivity extends AppCompatActivity {
         cardAbilityList = new ArrayList<>();
         if (abilitaList != null)
             for (Abilita abilita : abilitaList)
-                cardAbilityList.add(new CardAbility(abilita.getNome(), abilita.isCompetenza()));
+                cardAbilityList.add(new CardAbility(abilita.getNome(), abilita.isCompetente()));
     }
 
     public void setView() {
@@ -91,7 +92,9 @@ public class CharacterSkillsActivity extends AppCompatActivity {
     }
 
     public void changeCompetenza(int position) {
-        if (dbManager.aggiornaHaga(nomecamp, nomeg, cardAbilityList.get(position).getNome(), !cardAbilityList.get(position).getaBoolean())) {
+        Abilita abilita = dbManager.leggiAbilita(nomecamp, nomeg, cardAbilityList.get(position).getNome());
+        abilita.swapCompetenza();
+        if (dbManager.aggiornaHaga(nomecamp, nomeg, abilita.getNome(), abilita.isCompetente())) {
             cardAbilityList.get(position).swapBool();
             mAdapter.notifyItemChanged(position);
         } else Toast.makeText(this, "aggiornamento fallito", Toast.LENGTH_LONG).show();

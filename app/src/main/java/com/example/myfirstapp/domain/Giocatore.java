@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Giocatore extends Descrivibile {
+public class Giocatore {
     private int capacitaBorsa;
     private int classeArmatura;
     private int dado;
@@ -23,6 +23,8 @@ public class Giocatore extends Descrivibile {
     private int puntiFerita;
     private int puntiFeritaMax;
     private int puntiStat;
+    private String nome;
+    private StringBuffer descrizione;
     private String altezza;
     private String eta;
     private String genere;
@@ -42,7 +44,8 @@ public class Giocatore extends Descrivibile {
     private List<Abilita> abilitaList;
 
     public Giocatore(String nome, StringBuffer descrizione, String nomeCampagna, String eta, String altezza, String genere, ValutaOld portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Abilita> abilitaList) {
-        super(nome, descrizione);
+        this.nome = nome;
+        this.descrizione = descrizione;
         this.classe = classe;
         this.nomeCampagna = nomeCampagna;
         this.eta = eta;
@@ -56,7 +59,8 @@ public class Giocatore extends Descrivibile {
     }
 
     public Giocatore(String nome, StringBuffer descrizione, int capacitaBorsa, int classeArmatura, int dado, int livello, int mana, int manaMax, int modCompetenza, int nDadi, int puntiEsperienza, int puntiFerita, int puntiStat, String altezza, String eta, String genere, String ideali, String iniziativa, String nomeCampagna, String noteAvventura, String sinossi, StringBuffer lingua, ValutaOld portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Equipaggiamento> borsa, List<Equipaggiamento> equipaggiato, List<Incantesimo> incantesimiGiocatore, List<Abilita> abilitaList) {
-        super(nome, descrizione);
+        this.nome = nome;
+        this.descrizione = descrizione;
         this.capacitaBorsa = capacitaBorsa;
         this.classeArmatura = classeArmatura;
         this.dado = dado;
@@ -86,6 +90,22 @@ public class Giocatore extends Descrivibile {
         this.equipaggiato = equipaggiato;
         this.incantesimiGiocatore = incantesimiGiocatore;
         this.abilitaList = abilitaList;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public StringBuffer getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(StringBuffer descrizione) {
+        this.descrizione = descrizione;
     }
 
     public int getCapacitaBorsa() {
@@ -321,6 +341,11 @@ public class Giocatore extends Descrivibile {
     }
 
     /* metodi non base*/
+
+    public void aggiungiDescrizione(String nuova) {
+        this.descrizione.append(nuova);
+    }
+
     public void inizPuntiFeritaMax() {
         this.setPuntiFeritaMax(this.getnDadi() * this.getDado());
     }

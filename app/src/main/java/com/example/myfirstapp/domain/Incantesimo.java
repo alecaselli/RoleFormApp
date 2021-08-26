@@ -2,7 +2,9 @@ package com.example.myfirstapp.domain;
 
 import java.util.List;
 
-public class Incantesimo extends Descrivibile {
+public class Incantesimo{
+    private String nome;
+    private StringBuffer descrizione;
     private int livello;
     private String tempoInvocazione;
     private String raggioAzione;
@@ -10,14 +12,9 @@ public class Incantesimo extends Descrivibile {
     private String durata;
     //private String elemento;
 
-    public Incantesimo(String nome,
-                       StringBuffer descrizione,
-                       String tempoInvocazione,
-                       String raggioAzione,
-                       String componenti,
-                       String durata,
-                       int livello) {
-        super(nome, descrizione);
+    public Incantesimo(String nome, StringBuffer descrizione, String tempoInvocazione, String raggioAzione, String componenti, String durata, int livello) {
+        this.nome = nome;
+        this.descrizione = descrizione;
         this.tempoInvocazione = tempoInvocazione;
         this.raggioAzione = raggioAzione;
         this.componenti = componenti;
@@ -25,6 +22,21 @@ public class Incantesimo extends Descrivibile {
         this.livello = livello;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public StringBuffer getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(StringBuffer descrizione) {
+        this.descrizione = descrizione;
+    }
 
     public String getTempoInvocazione() {
         return tempoInvocazione;
