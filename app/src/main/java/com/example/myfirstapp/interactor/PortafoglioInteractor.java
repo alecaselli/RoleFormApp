@@ -1,11 +1,11 @@
-package com.example.myfirstapp.controller;
+package com.example.myfirstapp.interactor;
 
 import com.example.myfirstapp.domain.ValutaOld;
 import com.example.myfirstapp.utilities.MyDBException;
 
 import java.util.List;
 
-public class PortafoglioController {
+public class PortafoglioInteractor {
 
     private String nomecamp;
     private String nomeg;
@@ -13,7 +13,7 @@ public class PortafoglioController {
     private InterfacePortafoglioDB portafoglioDBReader;
     private InterfacePortafoglioDB portafoglioDBWriter;
 
-    public PortafoglioController(String nomecamp, String nomeg, InterfacePortafoglioDB portafoglioDBWriter, InterfacePortafoglioDB portafoglioDBReader) throws MyDBException {
+    public PortafoglioInteractor(String nomecamp, String nomeg, InterfacePortafoglioDB portafoglioDBWriter, InterfacePortafoglioDB portafoglioDBReader) throws MyDBException {
         this.nomecamp = nomecamp;
         this.nomeg = nomeg;
         this.portafoglioDBWriter = portafoglioDBWriter;
@@ -22,7 +22,7 @@ public class PortafoglioController {
     }
 
     private void getPortafoglio() throws MyDBException {
-        this.portafoglio = portafoglioDBReader.getPortafoglio(nomecamp,nomeg);
+        this.portafoglio = portafoglioDBReader.readPortafoglio(nomecamp,nomeg);
         if(null==portafoglio)
             throw new MyDBException();
     }

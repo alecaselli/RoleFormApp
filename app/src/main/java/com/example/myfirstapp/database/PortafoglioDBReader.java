@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
-import com.example.myfirstapp.controller.InterfacePortafoglioDB;
+import com.example.myfirstapp.interactor.InterfacePortafoglioDB;
 import com.example.myfirstapp.domain.ValutaOld;
 
 import org.jetbrains.annotations.NotNull;
@@ -79,7 +79,7 @@ public class PortafoglioDBReader implements InterfacePortafoglioDB {
     }
 
     @Override
-    public ValutaOld getPortafoglio(String nomecamp, String nomeg) {
+    public ValutaOld readPortafoglio(String nomecamp, String nomeg) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
         String[] whereArgs = new String[]{nomecamp, nomeg};
@@ -112,7 +112,7 @@ public class PortafoglioDBReader implements InterfacePortafoglioDB {
     }
 
     @Override
-    public void insertPortafoglio(ValutaOld portafoglio, String nomecamp, String nomeg) {
+    public void createPortafoglio(ValutaOld portafoglio, String nomecamp, String nomeg) {
 
     }
 }

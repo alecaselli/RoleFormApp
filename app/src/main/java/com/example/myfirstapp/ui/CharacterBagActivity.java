@@ -33,8 +33,6 @@ import java.util.List;
 
 public class CharacterBagActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private final String NONEQUIP = "Non equipaggiata";
-    private final String AGGIUNGI = "AGGIUNGI";
     private TextView text;
     private RecyclerView mRecyclerView;
     private GridLayoutManager mGridLayoutManager;
@@ -93,19 +91,19 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         Equipaggiamento equipaggiamento = giocatore.getEquipaggiato("armatura");
         String nome;
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
-        else nome = NONEQUIP;
+        else nome = getString(R.string.non_equip);
         text = findViewById(R.id.bag_armor);
         text.setText(nome);
 
         equipaggiamento = giocatore.getEquipaggiato("scudo");
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
-        else nome = NONEQUIP;
+        else nome = getString(R.string.non_equip);
         text = findViewById(R.id.bag_shield);
         text.setText(nome);
 
         equipaggiamento = giocatore.getEquipaggiato("arma");
         if (equipaggiamento != null) nome = equipaggiamento.getNome();
-        else nome = NONEQUIP;
+        else nome = getString(R.string.non_equip);
         text = findViewById(R.id.bag_weapon);
         text.setText(nome);
     }
@@ -141,11 +139,11 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
 
     public void setSpinner() {
         itemSpinner = findViewById(R.id.bag_add_item_spinner);
-        itemSpinner.setPrompt("Proviamo");
+        itemSpinner.setPrompt("Selezione l'oggetto da aggiungere");
 
         List<String> equipaggiamentoList = dbManager.leggiPK(TabellaEquipaggiamento.TBL_NOME, TabellaEquipaggiamento.FIELD_NOMEE);
         ArrayAdapter<String> ItemSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_item);
-        ItemSpinnerAdapter.add(AGGIUNGI);
+        ItemSpinnerAdapter.add(getString(R.string.aggiungi));
         ItemSpinnerAdapter.addAll(equipaggiamentoList);
         ItemSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_custom_item);
         itemSpinner = findViewById(R.id.bag_add_item_spinner);
@@ -201,12 +199,11 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
         intent.putExtra("nomee", cardBoolList.get(position).getNome());
         startActivity(intent);
         finish();*/
-        return;
     }
 
     public void addItem() {
         String nomee = itemSpinner.getSelectedItem().toString();
-        if (nomee.equals(AGGIUNGI)) return;
+        if (nomee.equals(getString(R.string.aggiungi))) return;
         Equipaggiamento aggiunto = dbManager.leggiEquipaggiamento(nomee);
         switch (aggiunto.getTipo()) {
             case "arma":
@@ -252,7 +249,7 @@ public class CharacterBagActivity extends AppCompatActivity implements AdapterVi
 
     public void disequipaggia(int id){
         text = findViewById(id);
-        text.setText(NONEQUIP);
+        text.setText(getString(R.string.non_equip));
     }
     public void disequipaggia(String tipo) throws MyDBException {
         Equipaggiamento disequipaggiare = giocatore.getEquipaggiato(tipo);

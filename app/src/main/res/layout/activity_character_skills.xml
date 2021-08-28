@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +7,7 @@
     android:background="@color/whitesmoke"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".ui.CharacterNoteActivity">
+    tools:context=".ui.CharacterSkillsActivity">
 
 
     <RelativeLayout
@@ -58,9 +58,53 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/skills_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/skills_add_items_layout"
+        android:layout_below="@+id/skills_header_relativeview">
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <RelativeLayout
+        android:id="@+id/skills_add_items_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/whitesmoke">
 
-</LinearLayout>
+        <Spinner
+            android:id="@+id/skills_add_item_spinner"
+            android:layout_width="235dp"
+            android:layout_height="41dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="12dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/rounded_spinner"
+            android:gravity="center" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/skills_create_button_cardview"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="12dp"
+            app:cardCornerRadius="15dp">
+
+            <Button
+                android:id="@+id/skills_create_button"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="sans-serif"
+                android:onClick="openCreateNewAbilita"
+                android:text="@string/crea"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

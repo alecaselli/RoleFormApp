@@ -111,6 +111,11 @@ public class CharacterSpellsActivity extends AppCompatActivity implements Adapte
             public void onBoolClick(int position) {
                 changeUsato(position, indice);
             }
+
+            @Override
+            public void onDeleteClick(int position) {
+
+            }
         });
     }
 

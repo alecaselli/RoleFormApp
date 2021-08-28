@@ -805,6 +805,10 @@ public class DBManager {
                 whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
                 whereArgs = new String[]{arg[0], arg[1]};
                 break;
+            case 3:
+                whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?" + " AND " + TabellaAbilita.FIELD_NOMEA + "=?";
+                whereArgs = new String[]{arg[0], arg[1], arg[2]};
+                break;
             default:
                 return false;
         }
@@ -1666,39 +1670,14 @@ public class DBManager {
             List<Abilita> abilitaList = new ArrayList<Abilita>();
             while (!resultSet.isAfterLast()) {
                 String nome = resultSet.getString(resultSet.getColumnIndex(TabellaAbilita.FIELD_NOMEA));
-                abilitaList.add(new Abilita(nome, resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC))));
+                String desc = resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC));
+                abilitaList.add(new Abilita(nome, desc));
 
                 resultSet.moveToNext();
             }
 
             resultSet.close();
             return abilitaList;
-        } catch (SQLiteException sqle) {
-            Log.e("LEGGI ABILITALIST", "fallita lettura", sqle);
-            return null;
-        }
-    }
-
-    public Abilita leggiAbilita(@NotNull String nomecamp, @NotNull String nomeg, @NotNull String nomea) {
-        SQLiteDatabase db = dbhelper.getReadableDatabase();
-        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?" + " AND " + TabellaAbilita.FIELD_NOMEA + "=?";
-        String[] whereArgs = new String[]{nomecamp, nomeg, nomea};
-
-        try {
-            Cursor resultSet = db.query(TabelleHA.TBL_HAGA, null, whereClause, whereArgs, null, null, null);
-            if (resultSet == null || resultSet.getCount() == 0) {
-                return null;
-            }
-            resultSet.moveToFirst();
-
-            Abilita abilita = leggiAbilita(resultSet.getString(resultSet.getColumnIndex(TabellaAbilita.FIELD_NOMEA)));
-            if (abilita != null) {
-                boolean comp = (resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_COMPETENZA)) == 1);
-                abilita.setCompetenza(comp);
-            }
-
-            resultSet.close();
-            return abilita;
         } catch (SQLiteException sqle) {
             Log.e("LEGGI ABILITALIST", "fallita lettura", sqle);
             return null;
@@ -1719,8 +1698,10 @@ public class DBManager {
 
             List<Abilita> abilitaList = new ArrayList<Abilita>();
             while (!resultSet.isAfterLast()) {
-                Abilita abilita = leggiAbilita(nomecamp, nomeg, resultSet.getString(resultSet.getColumnIndex(TabellaAbilita.FIELD_NOMEA)));
+                Abilita abilita = leggiAbilita(resultSet.getString(resultSet.getColumnIndex(TabellaAbilita.FIELD_NOMEA)));
                 if (abilita != null) {
+                    boolean comp = resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_COMPETENZA)) == 1;
+                    abilita.setCompetenza(comp);
                     abilitaList.add(abilita);
                 }
                 resultSet.moveToNext();

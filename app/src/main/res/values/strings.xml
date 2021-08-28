@@ -58,6 +58,7 @@
         <item>Warlock</item>
 
     </string-array>
+
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="back_slash">/</string>
@@ -100,5 +101,10 @@
     <string name="livello_2">Livello 2</string>
     <string name="livello_1">Livello 1</string>
     <string name="incantesimi">Incantesimi</string>
+    <string name="db_error">Fallito accesso al database</string>
+    <string name="operation_error">Fallita operazione interna</string>
+    <string name="abilita_assente_error">Abilità non presente nella lista del giocatore</string>
+    <string name="aggiungi"> AGGIUNGI </string>
+    <string name="non_equip">Non equipaggiata</string>
 
 </resources>

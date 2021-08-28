@@ -24,6 +24,7 @@ public class CardAbilityAdapter extends RecyclerView.Adapter<CardAbilityAdapter.
     public interface OnItemClickListener {
         void onItemClick(int position);
         void onBoolClick(int position);
+        void onDeleteClick(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -34,6 +35,7 @@ public class CardAbilityAdapter extends RecyclerView.Adapter<CardAbilityAdapter.
         public TextView mNomeAbilitaView;
         public RelativeLayout mPallinoButton;
         public ImageView mPallinoImage;
+        public ImageView mDeleteImage;
 
 
         public CardAbilitaViewHolder(View itemView, final OnItemClickListener listener) {
@@ -41,6 +43,7 @@ public class CardAbilityAdapter extends RecyclerView.Adapter<CardAbilityAdapter.
             mNomeAbilitaView = itemView.findViewById(R.id.skill_name);
             mPallinoButton = itemView.findViewById(R.id.skill_ball_button);
             mPallinoImage = itemView.findViewById(R.id.skill_ball);
+            mDeleteImage = itemView.findViewById(R.id.skill_delete);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -65,6 +68,18 @@ public class CardAbilityAdapter extends RecyclerView.Adapter<CardAbilityAdapter.
                     }
                 }
             });
+
+            mDeleteImage.setOnClickListener((new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onDeleteClick(position);
+                        }
+                    }
+                }
+            }));
         }
     }
 

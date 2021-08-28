@@ -12,10 +12,19 @@
         android:layout_height="44dp"
         android:background="?android:attr/selectableItemBackground">
 
+        <ImageView
+            android:id="@+id/skill_delete"
+            android:layout_width="44dp"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_icons8_delete_mod"/>
+
         <TextView
             android:id="@+id/skill_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/skill_delete"
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"
             android:text="@string/skill_name"

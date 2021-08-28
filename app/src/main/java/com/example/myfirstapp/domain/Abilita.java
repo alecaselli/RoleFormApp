@@ -28,7 +28,7 @@ public class Abilita{
     }
 
     public void swapCompetenza() {
-        this.competenza= !competenza;
+        this.setCompetenza(!this.competenza);
     }
 
     public void setCompetenza(boolean competenza) {

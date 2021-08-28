@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
-import com.example.myfirstapp.controller.InterfacePortafoglioDB;
+import com.example.myfirstapp.interactor.InterfacePortafoglioDB;
 import com.example.myfirstapp.domain.ValutaOld;
 
 public class PortafoglioDBWriter implements InterfacePortafoglioDB {
@@ -32,7 +32,7 @@ public class PortafoglioDBWriter implements InterfacePortafoglioDB {
     }
 
     @Override
-    public ValutaOld getPortafoglio(String nomecamp, String nomeg) {
+    public ValutaOld readPortafoglio(String nomecamp, String nomeg) {
         return null;
     }
 
@@ -42,7 +42,7 @@ public class PortafoglioDBWriter implements InterfacePortafoglioDB {
     }
 
     @Override
-    public void insertPortafoglio(ValutaOld portafoglio, String nomecamp, String nomeg) {
+    public void createPortafoglio(ValutaOld portafoglio, String nomecamp, String nomeg) {
 
     }
 }

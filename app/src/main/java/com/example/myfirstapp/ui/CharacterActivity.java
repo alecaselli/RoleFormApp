@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.controller.PortafoglioController;
+import com.example.myfirstapp.interactor.PortafoglioInteractor;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.database.PortafoglioDBReader;
 import com.example.myfirstapp.database.PortafoglioDBWriter;
@@ -33,7 +33,7 @@ import java.util.List;
 
 public class CharacterActivity extends AppCompatActivity {
 
-    private PortafoglioController portafoglioController;
+    private PortafoglioInteractor portafoglioInteractor;
     private DBManager dbManager;
     private String nomecamp;
     private String nomeg;
@@ -69,7 +69,7 @@ public class CharacterActivity extends AppCompatActivity {
         assert nomecamp != null;
         giocatore = dbManager.leggiGiocatore(nomecamp, nomeg);
         try {
-            portafoglioController =new PortafoglioController(nomecamp, nomeg, new PortafoglioDBWriter(this), new PortafoglioDBReader(this));
+            portafoglioInteractor =new PortafoglioInteractor(nomecamp, nomeg, new PortafoglioDBWriter(this), new PortafoglioDBReader(this));
         } catch (MyDBException e){
             Toast.makeText(this, "lettura portafoglio fallita", Toast.LENGTH_LONG).show();
         }
@@ -148,7 +148,7 @@ public class CharacterActivity extends AppCompatActivity {
     }
 
     private void setPortafoglio() {
-        List<Integer> valoremonete = portafoglioController.getValoreInMonete();
+        List<Integer> valoremonete = portafoglioInteractor.getValoreInMonete();
         txt = findViewById(R.id.character_base_copper);
         txt.setText(String.valueOf(valoremonete.get(0)));
         txt = findViewById(R.id.character_base_silver);
@@ -251,7 +251,7 @@ public class CharacterActivity extends AppCompatActivity {
 
     public void aggiornaValuta(List<Integer> valore){
         try {
-            portafoglioController.aggiornaPortafoglio(valore);
+            portafoglioInteractor.aggiornaPortafoglio(valore);
         }catch (MyDBException e){
             Toast.makeText(this, "aggiornamento portafoglio fallito", Toast.LENGTH_LONG).show();
         }
