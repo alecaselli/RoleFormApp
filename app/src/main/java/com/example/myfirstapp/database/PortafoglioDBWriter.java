@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
+import com.example.myfirstapp.databasetabelle.TabellaGiocatore;
 import com.example.myfirstapp.interactor.InterfacePortafoglioDB;
 import com.example.myfirstapp.domain.ValutaOld;
 

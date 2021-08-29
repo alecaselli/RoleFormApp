@@ -1,7 +1,7 @@
-package com.example.myfirstapp.domain;
+package com.example.myfirstapp.interactor;
 
 
-public interface InterfacePortafoglioController {
+public interface InterfacePortafoglioInteractor {
 
     void modificaMonete();
     void modificaMoneta();

@@ -17,10 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.adapter.CardAbilityAdapter;
 import com.example.myfirstapp.database.AbilitaGiocatoreDB;
-import com.example.myfirstapp.database.TabellaEquipaggiamento;
 import com.example.myfirstapp.interactor.AbilitaGiocatoreInteractor;
-import com.example.myfirstapp.domain.InterfaceAbilitaGiocatoreInteractor;
-import com.example.myfirstapp.domain.InterfaceAbilitaGiocatoreView;
+import com.example.myfirstapp.interactor.InterfaceAbilitaGiocatoreInteractor;
+import com.example.myfirstapp.interactor.InterfaceAbilitaGiocatoreView;
 import com.example.myfirstapp.utilities.CardAbility;
 import com.example.myfirstapp.utilities.MyOperationFaildException;
 

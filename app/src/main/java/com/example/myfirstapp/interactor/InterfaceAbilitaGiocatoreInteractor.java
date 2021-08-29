@@ -1,4 +1,4 @@
-package com.example.myfirstapp.domain;
+package com.example.myfirstapp.interactor;
 
 import java.util.HashMap;
 import java.util.List;

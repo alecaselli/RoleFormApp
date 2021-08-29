@@ -13,9 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.database.CampiComuni;
 import com.example.myfirstapp.database.DBManager;
-import com.example.myfirstapp.database.TabellaRazza;
 import com.example.myfirstapp.domain.Arma;
 import com.example.myfirstapp.domain.Armatura;
 import com.example.myfirstapp.domain.Equipaggiamento;

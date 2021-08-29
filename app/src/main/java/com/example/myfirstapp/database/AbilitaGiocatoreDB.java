@@ -7,6 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
+import com.example.myfirstapp.databasetabelle.TabellaCampiComuni;
+import com.example.myfirstapp.databasetabelle.TabellaAbilita;
+import com.example.myfirstapp.databasetabelle.TabellaGiocatore;
+import com.example.myfirstapp.databasetabelle.TabelleHA;
 import com.example.myfirstapp.domain.Abilita;
 import com.example.myfirstapp.interactor.InterfaceAbilitaGiocatoreDB;
 
@@ -64,7 +68,7 @@ public class AbilitaGiocatoreDB implements InterfaceAbilitaGiocatoreDB {
             while (!resultSet.isAfterLast()) {
                 Abilita abilita = readAbilitaByName(resultSet.getString(resultSet.getColumnIndex(TabellaAbilita.FIELD_NOMEA)));
                 if (abilita != null) {
-                    boolean comp = resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_COMPETENZA)) == 1;
+                    boolean comp = resultSet.getInt(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_COMPETENZA)) == 1;
                     abilita.setCompetenza(comp);
                     abilitaList.add(abilita);
                 }
@@ -84,7 +88,7 @@ public class AbilitaGiocatoreDB implements InterfaceAbilitaGiocatoreDB {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(CampiComuni.FIELD_COMPETENZA, 0);
+        cv.put(TabellaCampiComuni.FIELD_COMPETENZA, 0);
         cv.put(TabellaGiocatore.FIELD_NOMECAMPAGNA, nomecamp);
         cv.put(TabellaGiocatore.FIELD_NOMEG, nomeg);
         cv.put(TabellaAbilita.FIELD_NOMEA, nomea);
@@ -124,7 +128,7 @@ public class AbilitaGiocatoreDB implements InterfaceAbilitaGiocatoreDB {
             }
             resultSet.moveToFirst();
 
-            String desc = resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC));
+            String desc = resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DESC));
             resultSet.close();
             return new Abilita(nomea, desc);
         } catch (SQLiteException sqle) {
@@ -141,7 +145,7 @@ public class AbilitaGiocatoreDB implements InterfaceAbilitaGiocatoreDB {
         String[] whereArgs = new String[]{nomecamp, nomeg, nomea};
 
         int flag = (competenza) ? 1 : 0;
-        cv.put(CampiComuni.FIELD_COMPETENZA, flag);
+        cv.put(TabellaCampiComuni.FIELD_COMPETENZA, flag);
 
         try {
             return db.update(TabelleHA.TBL_HAGA, cv, whereClause, whereArgs) > 0;
@@ -164,7 +168,7 @@ public class AbilitaGiocatoreDB implements InterfaceAbilitaGiocatoreDB {
             List<Abilita> abilitaList = new ArrayList<Abilita>();
             while (!resultSet.isAfterLast()) {
                 String nome = resultSet.getString(resultSet.getColumnIndex(TabellaAbilita.FIELD_NOMEA));
-                String desc = resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC));
+                String desc = resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DESC));
                 abilitaList.add(new Abilita(nome, desc));
 
                 resultSet.moveToNext();

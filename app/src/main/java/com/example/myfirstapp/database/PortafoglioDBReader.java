@@ -6,6 +6,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
+import com.example.myfirstapp.databasetabelle.TabellaCampiComuni;
+import com.example.myfirstapp.databasetabelle.TabellaGiocatore;
+import com.example.myfirstapp.databasetabelle.TabellaNomeVal;
+import com.example.myfirstapp.databasetabelle.TabellaValuta;
 import com.example.myfirstapp.interactor.InterfacePortafoglioDB;
 import com.example.myfirstapp.domain.ValutaOld;
 
@@ -67,7 +71,7 @@ public class PortafoglioDBReader implements InterfacePortafoglioDB {
             resultSet.moveToFirst();
 
             StringBuffer descrizione = new StringBuffer();
-            descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+            descrizione.append(resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DESC)));
             int ratio = resultSet.getInt(resultSet.getColumnIndex(TabellaValuta.FIELD_RATIO));
 
             resultSet.close();

@@ -9,6 +9,22 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.myfirstapp.databasetabelle.TabellaCampiComuni;
+import com.example.myfirstapp.databasetabelle.TabellaAbilita;
+import com.example.myfirstapp.databasetabelle.TabellaArma;
+import com.example.myfirstapp.databasetabelle.TabellaArmatura;
+import com.example.myfirstapp.databasetabelle.TabellaCarBase;
+import com.example.myfirstapp.databasetabelle.TabellaCaratteristica;
+import com.example.myfirstapp.databasetabelle.TabellaCaratteristicaG;
+import com.example.myfirstapp.databasetabelle.TabellaClasse;
+import com.example.myfirstapp.databasetabelle.TabellaEquipaggiamento;
+import com.example.myfirstapp.databasetabelle.TabellaGiocatore;
+import com.example.myfirstapp.databasetabelle.TabellaIncantesimi;
+import com.example.myfirstapp.databasetabelle.TabellaNomeVal;
+import com.example.myfirstapp.databasetabelle.TabellaPrivilegi;
+import com.example.myfirstapp.databasetabelle.TabellaRazza;
+import com.example.myfirstapp.databasetabelle.TabellaValuta;
+import com.example.myfirstapp.databasetabelle.TabelleHA;
 import com.example.myfirstapp.domain.Abilita;
 import com.example.myfirstapp.domain.Arma;
 import com.example.myfirstapp.domain.Armatura;
@@ -63,8 +79,8 @@ public class DBManager {
         ContentValues cv = new ContentValues();
 
         cv.put(TabellaIncantesimi.FIELD_NOMEI, nuovo.getNome());
-        cv.put(CampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
-        cv.put(CampiComuni.FIELD_LIVELLO, nuovo.getLivello());
+        cv.put(TabellaCampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_LIVELLO, nuovo.getLivello());
         cv.put(TabellaIncantesimi.FIELD_TEMPOINVOCAZIONE, nuovo.getTempoInvocazione());
         cv.put(TabellaIncantesimi.FIELD_RAGGIOAZIONE, nuovo.getRaggioAzione());
         cv.put(TabellaIncantesimi.FIELD_COMPONENTI, nuovo.getComponenti());
@@ -83,7 +99,7 @@ public class DBManager {
         ContentValues cv = new ContentValues();
 
         cv.put(TabellaAbilita.FIELD_NOMEA, nuovo.getNome());
-        cv.put(CampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
 
         try {
             return db.insert(TabellaAbilita.TBL_NOME, null, cv) > 0;
@@ -98,7 +114,7 @@ public class DBManager {
         ContentValues cv = new ContentValues();
 
         cv.put(TabellaValuta.FIELD_NOMEV, nuovo.getNome());
-        cv.put(CampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
         cv.put(TabellaValuta.FIELD_RATIO, nuovo.getRatio());
 
         try {
@@ -121,10 +137,10 @@ public class DBManager {
         ContentValues cv = new ContentValues();
 
         cv.put(TabellaRazza.FIELD_NOMER, nuovo.getNome());
-        cv.put(CampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
         cv.put(TabellaRazza.FIELD_TAGLIA, nuovo.getTaglia());
         cv.put(TabellaRazza.FIELD_VELOCITA, nuovo.getVelocita());
-        cv.put(CampiComuni.FIELD_LINGUA, nuovo.getLingua().toString());
+        cv.put(TabellaCampiComuni.FIELD_LINGUA, nuovo.getLingua().toString());
 
         try {
             if (db.insert(TabellaRazza.TBL_NOME, null, cv) > 0) {
@@ -160,7 +176,7 @@ public class DBManager {
         ContentValues cv = new ContentValues();
 
         cv.put(TabellaPrivilegi.FIELD_NOMEP, nuovo.getNome());
-        cv.put(CampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
 
         try {
             return db.insert(TabellaPrivilegi.TBL_NOME, null, cv) > 0;
@@ -175,11 +191,11 @@ public class DBManager {
         ContentValues cv = new ContentValues();
 
         cv.put(TabellaClasse.FIELD_NOMECLA, nuovo.getNome());
-        cv.put(CampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
-        cv.put(CampiComuni.FIELD_NDADI, nuovo.getnDadi());
-        cv.put(CampiComuni.FIELD_DADO, nuovo.getDado());
+        cv.put(TabellaCampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_NDADI, nuovo.getnDadi());
+        cv.put(TabellaCampiComuni.FIELD_DADO, nuovo.getDado());
         cv.put(TabellaClasse.FIELD_DESCPRIVILEGI, nuovo.getDescrizionePrivilegiPoteri().toString());
-        cv.put(CampiComuni.FIELD_COMPETENZA, nuovo.getCompetenza().toString());
+        cv.put(TabellaCampiComuni.FIELD_COMPETENZA, nuovo.getCompetenza().toString());
 
         try {
             if (db.insert(TabellaClasse.TBL_NOME, null, cv) > 0) {
@@ -217,7 +233,7 @@ public class DBManager {
         ContentValues cv = new ContentValues();
 
         cv.put(TabellaCaratteristica.FIELD_NOMECAR, nuovo.getNome());
-        cv.put(CampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
 
 
         try {
@@ -233,7 +249,7 @@ public class DBManager {
         ContentValues cv = new ContentValues();
 
         cv.put(TabellaEquipaggiamento.FIELD_NOMEE, nuovo.getNome());
-        cv.put(CampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
         cv.put(TabellaEquipaggiamento.FIELD_COSTO, nuovo.getCosto());
         cv.put(TabellaEquipaggiamento.FIELD_PESO, nuovo.getPeso());
         cv.put(TabellaEquipaggiamento.FIELD_CAPACITA, nuovo.getCapacita());
@@ -302,18 +318,18 @@ public class DBManager {
 
         cv.put(TabellaGiocatore.FIELD_NOMECAMPAGNA, nuovo.getNomeCampagna());
         cv.put(TabellaGiocatore.FIELD_NOMEG, nuovo.getNome());
-        cv.put(CampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_DESC, nuovo.getDescrizione().toString());
         cv.put(TabellaGiocatore.FIELD_MANA, nuovo.getMana());
         cv.put(TabellaGiocatore.FIELD_MANAMAX, nuovo.getManaMax());
-        cv.put(CampiComuni.FIELD_LIVELLO, nuovo.getLivello());
+        cv.put(TabellaCampiComuni.FIELD_LIVELLO, nuovo.getLivello());
         cv.put(TabellaGiocatore.FIELD_PUNTIXP, nuovo.getPuntiEsperienza());
         cv.put(TabellaGiocatore.FIELD_MODCOMPETENZA, nuovo.getModCompetenza());
         cv.put(TabellaGiocatore.FIELD_CAPACITABORSA, nuovo.getCapacitaBorsa());
         cv.put(TabellaGiocatore.FIELD_PUNTIFERITA, nuovo.getPuntiFerita());
         cv.put(TabellaGiocatore.FIELD_CLASSEARMATURA, nuovo.getClasseArmatura());
         cv.put(TabellaGiocatore.FIELD_PUNTISTAT, nuovo.getPuntiStat());
-        cv.put(CampiComuni.FIELD_NDADI, nuovo.getnDadi());
-        cv.put(CampiComuni.FIELD_DADO, nuovo.getDado());
+        cv.put(TabellaCampiComuni.FIELD_NDADI, nuovo.getnDadi());
+        cv.put(TabellaCampiComuni.FIELD_DADO, nuovo.getDado());
         cv.put(TabellaGiocatore.FIELD_INIZIATIVA, nuovo.getIniziativa());
         cv.put(TabellaGiocatore.FIELD_ETA, nuovo.getEta());
         cv.put(TabellaGiocatore.FIELD_ALTEZZA, nuovo.getAltezza());
@@ -321,7 +337,7 @@ public class DBManager {
         cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, nuovo.getNoteAvventura());
         cv.put(TabellaGiocatore.FIELD_IDEALI, nuovo.getIdeali());
         cv.put(TabellaGiocatore.FIELD_SINOSSI, nuovo.getSinossi());
-        cv.put(CampiComuni.FIELD_LINGUA, nuovo.getLingua().toString());
+        cv.put(TabellaCampiComuni.FIELD_LINGUA, nuovo.getLingua().toString());
         cv.put(TabellaClasse.FIELD_NOMECLA, nuovo.getClasse().getNome());
         cv.put(TabellaRazza.FIELD_NOMER, nuovo.getRazza().getNome());
         cv.put(TabellaValuta.FIELD_NOMEV, nuovo.getPortafoglio().getNome());
@@ -428,7 +444,7 @@ public class DBManager {
         ContentValues cv = new ContentValues();
 
         int flag = (competenza) ? 1 : 0;
-        cv.put(CampiComuni.FIELD_COMPETENZA, flag);
+        cv.put(TabellaCampiComuni.FIELD_COMPETENZA, flag);
         cv.put(TabellaGiocatore.FIELD_NOMECAMPAGNA, nomecamp);
         cv.put(TabellaGiocatore.FIELD_NOMEG, nomeg);
         cv.put(TabellaAbilita.FIELD_NOMEA, nomea);
@@ -974,8 +990,8 @@ public class DBManager {
         String whereClause = TabellaIncantesimi.FIELD_NOMEI + " = ? ";
         String[] whereArgs = new String[]{aggiornato.getNome()};
 
-        cv.put(CampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
-        cv.put(CampiComuni.FIELD_LIVELLO, aggiornato.getLivello());
+        cv.put(TabellaCampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_LIVELLO, aggiornato.getLivello());
         cv.put(TabellaIncantesimi.FIELD_TEMPOINVOCAZIONE, aggiornato.getTempoInvocazione());
         cv.put(TabellaIncantesimi.FIELD_RAGGIOAZIONE, aggiornato.getRaggioAzione());
         cv.put(TabellaIncantesimi.FIELD_COMPONENTI, aggiornato.getComponenti());
@@ -995,7 +1011,7 @@ public class DBManager {
         String whereClause = TabellaAbilita.FIELD_NOMEA + " = ? ";
         String[] whereArgs = new String[]{aggiornato.getNome()};
 
-        cv.put(CampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
 
         try {
             return db.update(TabellaAbilita.TBL_NOME, cv, whereClause, whereArgs) > 0;
@@ -1012,7 +1028,7 @@ public class DBManager {
         String[] whereArgs = new String[]{aggiornato.getNome()};
 
 
-        cv.put(CampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
         cv.put(TabellaValuta.FIELD_RATIO, aggiornato.getRatio());
 
         try {
@@ -1038,10 +1054,10 @@ public class DBManager {
         String whereClause = TabellaRazza.FIELD_NOMER + " = ? ";
         String[] whereArgs = new String[]{aggiornato.getNome()};
 
-        cv.put(CampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
         cv.put(TabellaRazza.FIELD_TAGLIA, aggiornato.getTaglia());
         cv.put(TabellaRazza.FIELD_VELOCITA, aggiornato.getVelocita());
-        cv.put(CampiComuni.FIELD_LINGUA, aggiornato.getLingua().toString());
+        cv.put(TabellaCampiComuni.FIELD_LINGUA, aggiornato.getLingua().toString());
 
         try {
             if (db.update(TabellaRazza.TBL_NOME, cv, whereClause, whereArgs) > 0) {
@@ -1072,7 +1088,7 @@ public class DBManager {
         String whereClause = TabellaPrivilegi.FIELD_NOMEP + " = ? ";
         String[] whereArgs = new String[]{aggiornato.getNome()};
 
-        cv.put(CampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
 
         try {
             return db.update(TabellaPrivilegi.TBL_NOME, cv, whereClause, whereArgs) > 0;
@@ -1088,11 +1104,11 @@ public class DBManager {
         String whereClause = TabellaClasse.FIELD_NOMECLA + " = ? ";
         String[] whereArgs = new String[]{aggiornato.getNome()};
 
-        cv.put(CampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
-        cv.put(CampiComuni.FIELD_NDADI, aggiornato.getnDadi());
-        cv.put(CampiComuni.FIELD_DADO, aggiornato.getDado());
+        cv.put(TabellaCampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_NDADI, aggiornato.getnDadi());
+        cv.put(TabellaCampiComuni.FIELD_DADO, aggiornato.getDado());
         cv.put(TabellaClasse.FIELD_DESCPRIVILEGI, aggiornato.getDescrizionePrivilegiPoteri().toString());
-        cv.put(CampiComuni.FIELD_COMPETENZA, aggiornato.getCompetenza().toString());
+        cv.put(TabellaCampiComuni.FIELD_COMPETENZA, aggiornato.getCompetenza().toString());
 
         try {
             if (db.update(TabellaClasse.TBL_NOME, cv, whereClause, whereArgs) > 0) {
@@ -1132,7 +1148,7 @@ public class DBManager {
         String whereClause = TabellaCaratteristica.FIELD_NOMECAR + " = ? ";
         String[] whereArgs = new String[]{nomecar};
 
-        cv.put(CampiComuni.FIELD_DESC, desc.toString());
+        cv.put(TabellaCampiComuni.FIELD_DESC, desc.toString());
 
         try {
             return db.update(TabellaCaratteristica.TBL_NOME, cv, whereClause, whereArgs) > 0;
@@ -1148,7 +1164,7 @@ public class DBManager {
         String whereClause = TabellaEquipaggiamento.FIELD_NOMEE + " = ? ";
         String[] whereArgs = new String[]{aggiornato.getNome()};
 
-        cv.put(CampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
         cv.put(TabellaEquipaggiamento.FIELD_COSTO, aggiornato.getCosto());
         cv.put(TabellaEquipaggiamento.FIELD_PESO, aggiornato.getPeso());
         cv.put(TabellaEquipaggiamento.FIELD_CAPACITA, aggiornato.getCapacita());
@@ -1207,18 +1223,18 @@ public class DBManager {
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? ";
         String[] whereArgs = new String[]{aggiornato.getNomeCampagna(), aggiornato.getNome()};
 
-        cv.put(CampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
         cv.put(TabellaGiocatore.FIELD_MANA, aggiornato.getMana());
         cv.put(TabellaGiocatore.FIELD_MANAMAX, aggiornato.getManaMax());
-        cv.put(CampiComuni.FIELD_LIVELLO, aggiornato.getLivello());
+        cv.put(TabellaCampiComuni.FIELD_LIVELLO, aggiornato.getLivello());
         cv.put(TabellaGiocatore.FIELD_PUNTIXP, aggiornato.getPuntiEsperienza());
         cv.put(TabellaGiocatore.FIELD_MODCOMPETENZA, aggiornato.getModCompetenza());
         cv.put(TabellaGiocatore.FIELD_CAPACITABORSA, aggiornato.getCapacitaBorsa());
         cv.put(TabellaGiocatore.FIELD_PUNTIFERITA, aggiornato.getPuntiFerita());
         cv.put(TabellaGiocatore.FIELD_CLASSEARMATURA, aggiornato.getClasseArmatura());
         cv.put(TabellaGiocatore.FIELD_PUNTISTAT, aggiornato.getPuntiStat());
-        cv.put(CampiComuni.FIELD_NDADI, aggiornato.getnDadi());
-        cv.put(CampiComuni.FIELD_DADO, aggiornato.getDado());
+        cv.put(TabellaCampiComuni.FIELD_NDADI, aggiornato.getnDadi());
+        cv.put(TabellaCampiComuni.FIELD_DADO, aggiornato.getDado());
         cv.put(TabellaGiocatore.FIELD_INIZIATIVA, aggiornato.getIniziativa());
         cv.put(TabellaGiocatore.FIELD_ETA, aggiornato.getEta());
         cv.put(TabellaGiocatore.FIELD_ALTEZZA, aggiornato.getAltezza());
@@ -1226,7 +1242,7 @@ public class DBManager {
         cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, aggiornato.getNoteAvventura());
         cv.put(TabellaGiocatore.FIELD_IDEALI, aggiornato.getIdeali());
         cv.put(TabellaGiocatore.FIELD_SINOSSI, aggiornato.getSinossi());
-        cv.put(CampiComuni.FIELD_LINGUA, aggiornato.getLingua().toString());
+        cv.put(TabellaCampiComuni.FIELD_LINGUA, aggiornato.getLingua().toString());
         cv.put(TabellaClasse.FIELD_NOMECLA, aggiornato.getClasse().getNome());
         cv.put(TabellaRazza.FIELD_NOMER, aggiornato.getRazza().getNome());
         cv.put(TabellaValuta.FIELD_NOMEV, aggiornato.getPortafoglio().getNome());
@@ -1276,9 +1292,9 @@ public class DBManager {
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? ";
         String[] whereArgs = new String[]{aggiornato.getNomeCampagna(), aggiornato.getNome()};
 
-        cv.put(CampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
+        cv.put(TabellaCampiComuni.FIELD_DESC, aggiornato.getDescrizione().toString());
         cv.put(TabellaGiocatore.FIELD_MANA, aggiornato.getMana());
-        cv.put(CampiComuni.FIELD_LIVELLO, aggiornato.getLivello());
+        cv.put(TabellaCampiComuni.FIELD_LIVELLO, aggiornato.getLivello());
         cv.put(TabellaGiocatore.FIELD_PUNTIXP, aggiornato.getPuntiEsperienza());
         cv.put(TabellaGiocatore.FIELD_MODCOMPETENZA, aggiornato.getModCompetenza());
         cv.put(TabellaGiocatore.FIELD_CAPACITABORSA, aggiornato.getCapacitaBorsa());
@@ -1289,7 +1305,7 @@ public class DBManager {
         cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, aggiornato.getNoteAvventura());
         cv.put(TabellaGiocatore.FIELD_IDEALI, aggiornato.getIdeali());
         cv.put(TabellaGiocatore.FIELD_SINOSSI, aggiornato.getSinossi());
-        cv.put(CampiComuni.FIELD_LINGUA, aggiornato.getLingua().toString());
+        cv.put(TabellaCampiComuni.FIELD_LINGUA, aggiornato.getLingua().toString());
         cv.put(TabellaGiocatore.FIELD_VALOREVAL, aggiornato.getPortafoglio().getValore());
 
         try {
@@ -1345,7 +1361,7 @@ public class DBManager {
         String[] whereArgs = new String[]{nomecamp, nomeg, nomea};
 
         int flag = (competenza) ? 1 : 0;
-        cv.put(CampiComuni.FIELD_COMPETENZA, flag);
+        cv.put(TabellaCampiComuni.FIELD_COMPETENZA, flag);
 
         try {
             return db.update(TabelleHA.TBL_HAGA, cv, whereClause, whereArgs) > 0;
@@ -1380,7 +1396,7 @@ public class DBManager {
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? ";
         String[] whereArgs = new String[]{nomecamp, nomeg};
 
-        cv.put(CampiComuni.FIELD_DESC, desc);
+        cv.put(TabellaCampiComuni.FIELD_DESC, desc);
         cv.put(TabellaGiocatore.FIELD_NOTEAVVENTURA, generali);
         cv.put(TabellaGiocatore.FIELD_IDEALI, ideali);
         cv.put(TabellaGiocatore.FIELD_SINOSSI, sinossi);
@@ -1506,8 +1522,8 @@ public class DBManager {
             resultSet.moveToFirst();
 
             StringBuffer descrizione = new StringBuffer();
-            descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
-            int livello = resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_LIVELLO));
+            descrizione.append(resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DESC)));
+            int livello = resultSet.getInt(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_LIVELLO));
             String tempoInvocazione = resultSet.getString(resultSet.getColumnIndex(TabellaIncantesimi.FIELD_TEMPOINVOCAZIONE));
             String raggioAzione = resultSet.getString(resultSet.getColumnIndex(TabellaIncantesimi.FIELD_RAGGIOAZIONE));
             String componenti = resultSet.getString(resultSet.getColumnIndex(TabellaIncantesimi.FIELD_COMPONENTI));
@@ -1582,7 +1598,7 @@ public class DBManager {
             }
 
             while (!resultSet.isAfterLast()) {
-                supincantesimi.get(resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_LIVELLO))).add(resultSet.getString(resultSet.getColumnIndex(TabellaIncantesimi.FIELD_NOMEI)));
+                supincantesimi.get(resultSet.getInt(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_LIVELLO))).add(resultSet.getString(resultSet.getColumnIndex(TabellaIncantesimi.FIELD_NOMEI)));
                 resultSet.moveToNext();
             }
 
@@ -1649,7 +1665,7 @@ public class DBManager {
             }
             resultSet.moveToFirst();
 
-            String desc = resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC));
+            String desc = resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DESC));
             resultSet.close();
             return new Abilita(nomea, desc);
         } catch (SQLiteException sqle) {
@@ -1670,7 +1686,7 @@ public class DBManager {
             List<Abilita> abilitaList = new ArrayList<Abilita>();
             while (!resultSet.isAfterLast()) {
                 String nome = resultSet.getString(resultSet.getColumnIndex(TabellaAbilita.FIELD_NOMEA));
-                String desc = resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC));
+                String desc = resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DESC));
                 abilitaList.add(new Abilita(nome, desc));
 
                 resultSet.moveToNext();
@@ -1700,7 +1716,7 @@ public class DBManager {
             while (!resultSet.isAfterLast()) {
                 Abilita abilita = leggiAbilita(resultSet.getString(resultSet.getColumnIndex(TabellaAbilita.FIELD_NOMEA)));
                 if (abilita != null) {
-                    boolean comp = resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_COMPETENZA)) == 1;
+                    boolean comp = resultSet.getInt(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_COMPETENZA)) == 1;
                     abilita.setCompetenza(comp);
                     abilitaList.add(abilita);
                 }
@@ -1758,7 +1774,7 @@ public class DBManager {
             resultSet.moveToFirst();
 
             StringBuffer descrizione = new StringBuffer();
-            descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+            descrizione.append(resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DESC)));
             int ratio = resultSet.getInt(resultSet.getColumnIndex(TabellaValuta.FIELD_RATIO));
 
             resultSet.close();
@@ -1782,7 +1798,7 @@ public class DBManager {
             resultSet.moveToFirst();
 
             StringBuffer descrizione = new StringBuffer();
-            descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+            descrizione.append(resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DESC)));
 
             resultSet.close();
             return new Privilegi(nomep, descrizione);
@@ -1877,11 +1893,11 @@ public class DBManager {
             resultSet.moveToFirst();
 
             StringBuffer descrizione = new StringBuffer();
-            descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+            descrizione.append(resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DESC)));
             String taglia = resultSet.getString(resultSet.getColumnIndex(TabellaRazza.FIELD_TAGLIA));
             String velocita = resultSet.getString(resultSet.getColumnIndex(TabellaRazza.FIELD_VELOCITA));
             StringBuffer lingua = new StringBuffer();
-            lingua.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_LINGUA)));
+            lingua.append(resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_LINGUA)));
             List<Privilegi> privilegiRazza = this.leggiPrivilegi(nomer, "razza");
             List<CaratteristicaBase> caratteristicaBaseList = this.leggiCarBase(nomer);
 
@@ -1906,7 +1922,7 @@ public class DBManager {
             resultSet.moveToFirst();
 
             StringBuffer descrizione = new StringBuffer();
-            descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+            descrizione.append(resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DESC)));
             String subtipo = resultSet.getString(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_SUBTIPO));
             String tipo = resultSet.getString(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_TIPO));
             int costo = resultSet.getInt(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_COSTO));
@@ -2112,13 +2128,13 @@ public class DBManager {
             resultSet.moveToFirst();
 
             StringBuffer descrizione = new StringBuffer();
-            descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
-            int nDadi = resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_NDADI));
-            int dado = resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_DADO));
+            descrizione.append(resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DESC)));
+            int nDadi = resultSet.getInt(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_NDADI));
+            int dado = resultSet.getInt(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DADO));
             StringBuffer descrizionePrivilegiPoteri = new StringBuffer();
             descrizione.append(resultSet.getString(resultSet.getColumnIndex(TabellaClasse.FIELD_DESCPRIVILEGI)));
             StringBuffer competenza = new StringBuffer();
-            descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_COMPETENZA)));
+            descrizione.append(resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_COMPETENZA)));
             List<Equipaggiamento> equipaggiamentoList = this.leggiEquipaggiamenti(nomecla);
             List<Privilegi> privilegiClasse = this.leggiPrivilegi(nomecla, "classe");
             List<Incantesimo> incantesimiClasse = this.leggiIncantesimi(nomecla);
@@ -2145,7 +2161,7 @@ public class DBManager {
             List<Caratteristica> caratteristicaList = new ArrayList<Caratteristica>();
             while (!resultSet.isAfterLast()) {
                 StringBuffer desc = new StringBuffer();
-                desc.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+                desc.append(resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DESC)));
                 String nome = resultSet.getString(resultSet.getColumnIndex(TabellaCaratteristica.FIELD_NOMECAR));
                 caratteristicaList.add(new Caratteristica(nome, desc));
 
@@ -2175,7 +2191,7 @@ public class DBManager {
             resultSet.moveToFirst();
 
             StringBuffer descrizione = new StringBuffer();
-            descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+            descrizione.append(resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DESC)));
 
             resultSet.close();
             return new Caratteristica(nomecar, descrizione);
@@ -2235,18 +2251,18 @@ public class DBManager {
             resultSet.moveToFirst();
 
             StringBuffer descrizione = new StringBuffer();
-            descrizione.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC)));
+            descrizione.append(resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DESC)));
             int mana = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_MANA));
             int manaMax = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_MANAMAX));
-            int livello = resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_LIVELLO));
+            int livello = resultSet.getInt(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_LIVELLO));
             int puntiEsperienza = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_PUNTIXP));
             int modCompetenza = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_MODCOMPETENZA));
             int capacitaBorsa = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_CAPACITABORSA));
             int puntiFerita = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_PUNTIFERITA));
             int classeArmatura = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_CLASSEARMATURA));
             int puntiStat = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_PUNTISTAT));
-            int nDadi = resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_NDADI));
-            int dado = resultSet.getInt(resultSet.getColumnIndex(CampiComuni.FIELD_DADO));
+            int nDadi = resultSet.getInt(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_NDADI));
+            int dado = resultSet.getInt(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DADO));
             String iniziativa = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_INIZIATIVA));
             String eta = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_ETA));
             String altezza = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_ALTEZZA));
@@ -2255,7 +2271,7 @@ public class DBManager {
             String ideali = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_IDEALI));
             String sinossi = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_SINOSSI));
             StringBuffer lingua = new StringBuffer();
-            lingua.append(resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_LINGUA)));
+            lingua.append(resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_LINGUA)));
             ValutaOld portafoglio = this.leggiValuta(resultSet.getString(resultSet.getColumnIndex(TabellaValuta.FIELD_NOMEV)));
             portafoglio.setValore(resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_VALOREVAL)));
             String nomecla = resultSet.getString(resultSet.getColumnIndex(TabellaClasse.FIELD_NOMECLA));
@@ -2305,7 +2321,7 @@ public class DBManager {
             List<String> notelist = new ArrayList<String>();
             String note = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_IDEALI));
             notelist.add(note);
-            note = resultSet.getString(resultSet.getColumnIndex(CampiComuni.FIELD_DESC));
+            note = resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_DESC));
             notelist.add(note);
             note = resultSet.getString(resultSet.getColumnIndex(TabellaGiocatore.FIELD_SINOSSI));
             notelist.add(note);

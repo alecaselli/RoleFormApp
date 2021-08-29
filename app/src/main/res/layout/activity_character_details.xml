@@ -112,7 +112,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:onClick="levelButton"
+                    android:onClick="levelUp"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="0dp">
 
@@ -129,8 +129,8 @@
                     android:id="@+id/character_character_level"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginEnd="10dp"
                     android:text="10"
                     android:textColor="@color/black"

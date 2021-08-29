@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myfirstapp.utilities.CardGiocatore;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.adapter.CardGiocatoreAdapter;
-import com.example.myfirstapp.database.CampiComuni;
+import com.example.myfirstapp.databasetabelle.TabellaCampiComuni;
 import com.example.myfirstapp.database.DBManager;
-import com.example.myfirstapp.database.TabellaGiocatore;
+import com.example.myfirstapp.databasetabelle.TabellaGiocatore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     public void createListCardGiocatore() {
 
         dbManager = new DBManager(this);
-        List<List<String>> datilist = dbManager.leggiDatiMenu(TabellaGiocatore.TBL_NOME, CampiComuni.FIELD_LIVELLO, TabellaGiocatore.FIELD_NOMECAMPAGNA, TabellaGiocatore.FIELD_NOMEG);
+        List<List<String>> datilist = dbManager.leggiDatiMenu(TabellaGiocatore.TBL_NOME, TabellaCampiComuni.FIELD_LIVELLO, TabellaGiocatore.FIELD_NOMECAMPAGNA, TabellaGiocatore.FIELD_NOMEG);
 
         mCardGiocatoreList = new ArrayList<>();
         if (datilist != null)

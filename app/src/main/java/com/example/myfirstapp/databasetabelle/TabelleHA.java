@@ -1,4 +1,4 @@
-package com.example.myfirstapp.database;
+package com.example.myfirstapp.databasetabelle;
 
 public class TabelleHA {
     public static final String TBL_HARP = "harp";

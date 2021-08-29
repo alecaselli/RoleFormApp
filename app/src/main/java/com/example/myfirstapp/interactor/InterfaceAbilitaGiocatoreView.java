@@ -1,4 +1,4 @@
-package com.example.myfirstapp.domain;
+package com.example.myfirstapp.interactor;
 
 public interface InterfaceAbilitaGiocatoreView {
     void displayError(int indexError);

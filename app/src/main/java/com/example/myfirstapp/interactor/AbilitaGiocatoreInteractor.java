@@ -2,10 +2,6 @@ package com.example.myfirstapp.interactor;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.domain.Abilita;
-import com.example.myfirstapp.domain.InterfaceAbilitaGiocatoreInteractor;
-import com.example.myfirstapp.domain.InterfaceAbilitaGiocatoreView;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;

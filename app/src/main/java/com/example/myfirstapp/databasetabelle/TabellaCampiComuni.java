@@ -1,6 +1,6 @@
-package com.example.myfirstapp.database;
+package com.example.myfirstapp.databasetabelle;
 
-public class CampiComuni {
+public class TabellaCampiComuni {
 
     public static final String FIELD_DESC = "desc";
     public static final String FIELD_COMPETENZA = "competenza";
