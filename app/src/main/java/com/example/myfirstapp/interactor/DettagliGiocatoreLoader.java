@@ -23,27 +23,27 @@ public class DettagliGiocatoreLoader implements InterfaceDettagliGiocatoreLoader
         if(null != fisionomia)
             view.setFisionomia(fisionomia.get(NOME), fisionomia.get(GENERE), fisionomia.get(ALTEZZA), fisionomia.get(ETA));
         else
-            view.displayError(R.string.db_error);
+            view.displayError(R.string.db_access_error);
     }
 
     @Override
     public void setRazza() {
-        HashMap<String, String> razza = dbReader.readDettagliRazzaGiocatore();
-        if(null != razza && razza.size() == 1)
-            for(String nome : razza.keySet())
-                view.setRazza(nome, razza.get(nome));
+        HashMap<String, String> descRazza = dbReader.readDettagliRazzaGiocatore();
+        if(null != descRazza && descRazza.size() == 1)
+            for(String nomeRazza : descRazza.keySet())
+                view.setRazza(nomeRazza, descRazza.get(nomeRazza));
         else
-            view.displayError(R.string.db_error);
+            view.displayError(R.string.db_access_error);
     }
 
     @Override
     public void setClasse() {
-        HashMap<String, String> classe = dbReader.readDettagliClasseGiocatore();
-        if(null != classe)
-            for(String nome : classe.keySet())
-                view.setRazza(nome, classe.get(nome));
+        HashMap<String, String> descClasse = dbReader.readDettagliClasseGiocatore();
+        if(null != descClasse)
+            for(String nomeClasse : descClasse.keySet())
+                view.setClasse(nomeClasse, descClasse.get(nomeClasse));
         else
-            view.displayError(R.string.db_error);
+            view.displayError(R.string.db_access_error);
 
     }
 

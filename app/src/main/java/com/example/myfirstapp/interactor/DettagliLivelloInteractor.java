@@ -30,7 +30,7 @@ public class DettagliLivelloInteractor implements InterfaceDettagliLivelloIntera
         if(dbLivello.updateLivello(livello + change))
             view.setLivello(livello + change);
         else
-            view.displayError(R.string.db_error);
+            view.displayError(R.string.db_access_error);
     }
     //TODO: implementazione funzionalita livello con punti xp
 }

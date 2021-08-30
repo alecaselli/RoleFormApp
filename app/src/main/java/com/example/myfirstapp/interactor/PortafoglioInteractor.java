@@ -1,39 +1,42 @@
 package com.example.myfirstapp.interactor;
 
+import com.example.myfirstapp.R;
 import com.example.myfirstapp.domain.ValutaOld;
-import com.example.myfirstapp.utilities.MyDBException;
 
 import java.util.List;
 
-public class PortafoglioInteractor {
+public class PortafoglioInteractor implements InterfacePortafoglioInteractor{
 
-    private String nomecamp;
-    private String nomeg;
     private ValutaOld portafoglio;
     private InterfacePortafoglioDB portafoglioDBReader;
     private InterfacePortafoglioDB portafoglioDBWriter;
+    private InterfacePortafoglioView view;
 
-    public PortafoglioInteractor(String nomecamp, String nomeg, InterfacePortafoglioDB portafoglioDBWriter, InterfacePortafoglioDB portafoglioDBReader) throws MyDBException {
-        this.nomecamp = nomecamp;
-        this.nomeg = nomeg;
+    public PortafoglioInteractor(InterfacePortafoglioDB portafoglioDBWriter, InterfacePortafoglioDB portafoglioDBReader, InterfacePortafoglioView view){
         this.portafoglioDBWriter = portafoglioDBWriter;
         this.portafoglioDBReader = portafoglioDBReader;
+        this.view = view;
         this.getPortafoglio();
     }
 
-    private void getPortafoglio() throws MyDBException {
-        this.portafoglio = portafoglioDBReader.readPortafoglio(nomecamp,nomeg);
+    private void getPortafoglio(){
+        this.portafoglio = portafoglioDBReader.readPortafoglio();
         if(null==portafoglio)
-            throw new MyDBException();
+            view.displayError(R.string.db_access_error);
     }
 
-    public void aggiornaPortafoglio(List<Integer> valore) throws MyDBException {
-        portafoglio.aggiornaValore(valore);
-        if (!portafoglioDBWriter.updatePortafoglio(portafoglio, nomecamp, nomeg))
-            throw new MyDBException();
+    @Override
+    public void changeValorePortafoglio(List<Integer> valoriOrdineCrescente) {
+        if (portafoglioDBWriter.updatePortafoglio(portafoglio.getValore())){
+            portafoglio.aggiornaValore(valoriOrdineCrescente);
+            view.setPortafoglio(portafoglio.getValoreInMonete());
+        }
+        else
+            view.displayError(R.string.db_access_error);
     }
 
-    public List<Integer> getValoreInMonete(){
-        return portafoglio.getValoreInMonete();
+    @Override
+    public void setPortafoglio() {
+        view.setPortafoglio(portafoglio.getValoreInMonete());
     }
 }

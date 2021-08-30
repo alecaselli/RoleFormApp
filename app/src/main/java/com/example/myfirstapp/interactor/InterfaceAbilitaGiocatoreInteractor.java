@@ -7,7 +7,8 @@ public interface InterfaceAbilitaGiocatoreInteractor {
     boolean addAbilitaGiocatore(String nome);
     boolean removeAbilitaGiocatore(String nome);
     boolean swapAbilitaGiocatore(String nome);
-    HashMap<String, Boolean> getNomiCompetenza();
-    int getModCompetenza();
-    List<String> getNomiAbilitaNonInGiocatore();
+    void setAbilita();
+    void setAddAbilita();
+    void setModCompetenza();
+
 }

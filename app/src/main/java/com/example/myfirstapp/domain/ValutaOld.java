@@ -60,18 +60,15 @@ public class ValutaOld {
         this.valore = valore;
     }
 
-    /* ritorna valora come lista di unità in cui il valore è suddiviso
-     in ordine crescente di valore;
-    */
     public List<Integer> getValoreInMonete() {
         int val = valore;
-        List<Integer> valoreInMonete = new ArrayList<Integer>();
-        for (String i : nomelistOrdineCrescente.subList(0, nomelistOrdineCrescente.size() - 1)) {
-            valoreInMonete.add(val % ratio);
+        List<Integer> valoreInMoneteOrdineCrescente = new ArrayList<Integer>();
+        for (String i : nomelistOrdineCrescente) {
+            valoreInMoneteOrdineCrescente.add(val % ratio);
             val /= ratio;
         }
-        valoreInMonete.add(val);
-        return valoreInMonete;
+        valoreInMoneteOrdineCrescente.add(val);
+        return valoreInMoneteOrdineCrescente;
     }
 
     /* prendo una lista di monete contenenti ciascuno il numero di monete di quel tipo da aggiungere al portafoglio

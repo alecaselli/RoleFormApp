@@ -1,11 +1,11 @@
 package com.example.myfirstapp.interactor;
 
 
+import java.util.List;
+
 public interface InterfacePortafoglioInteractor {
 
-    void modificaMonete();
-    void modificaMoneta();
-    void getValoreMonete();
-    void getValoreMoneta(String nomeMoneta);
-    void getNomiMonete();
+    void changeValorePortafoglio(List<Integer> valoriOrdineCrescente);
+    void setPortafoglio();
+
 }

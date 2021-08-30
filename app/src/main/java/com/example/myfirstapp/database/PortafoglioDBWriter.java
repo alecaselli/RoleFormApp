@@ -11,19 +11,25 @@ import com.example.myfirstapp.interactor.InterfacePortafoglioDB;
 import com.example.myfirstapp.domain.ValutaOld;
 
 public class PortafoglioDBWriter implements InterfacePortafoglioDB {
-    private DBHelper dbhelper;
+    private final String nomecamp;
+    private final String nomeg;
+    private final DBHelper dbhelper;
 
-    public PortafoglioDBWriter(Context ctx) {
+    public PortafoglioDBWriter(String nomecamp, String nomeg, Context ctx) {
+        this.nomecamp = nomecamp;
+        this.nomeg = nomeg;
         dbhelper = new DBHelper(ctx);
     }
 
     @Override
-    public boolean updatePortafoglio(ValutaOld portafoglio, String nomecamp, String nomeg) {
+    public boolean updatePortafoglio(int valore) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? ";
         String[] whereArgs = new String[]{nomecamp,nomeg};
-        cv.put(TabellaGiocatore.FIELD_VALOREVAL, portafoglio.getValore());
+
+        cv.put(TabellaGiocatore.FIELD_VALOREVAL, valore);
+
         try {
             return db.update(TabellaGiocatore.TBL_NOME, cv, whereClause, whereArgs) > 0;
         } catch (SQLiteException sqle) {
@@ -33,17 +39,17 @@ public class PortafoglioDBWriter implements InterfacePortafoglioDB {
     }
 
     @Override
-    public ValutaOld readPortafoglio(String nomecamp, String nomeg) {
+    public ValutaOld readPortafoglio() {
         return null;
     }
 
     @Override
-    public void deletePortafoglio(String nomecamp, String nomeg) {
+    public void deletePortafoglio() {
 
     }
 
     @Override
-    public void createPortafoglio(ValutaOld portafoglio, String nomecamp, String nomeg) {
+    public void createPortafoglio(ValutaOld portafoglio) {
 
     }
 }

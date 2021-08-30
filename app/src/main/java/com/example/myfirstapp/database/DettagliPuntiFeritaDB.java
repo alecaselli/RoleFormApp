@@ -37,10 +37,10 @@ public class DettagliPuntiFeritaDB implements InterfaceDettagliPuntiFeritaDB {
             }
             resultSet.moveToFirst();
 
-            int mana = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_PUNTIFERITA));
+            int puntiFerita = resultSet.getInt(resultSet.getColumnIndex(TabellaGiocatore.FIELD_PUNTIFERITA));
 
             resultSet.close();
-            return mana;
+            return puntiFerita;
         } catch (SQLiteException sqle) {
             Log.e("LEGGI PUNTI FERITA", "leggi fallita", sqle);
             return 0;

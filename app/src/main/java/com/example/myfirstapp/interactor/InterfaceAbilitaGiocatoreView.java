@@ -1,8 +1,13 @@
 package com.example.myfirstapp.interactor;
 
-public interface InterfaceAbilitaGiocatoreView {
-    void displayError(int indexError);
+import java.util.HashMap;
+import java.util.List;
+
+public interface InterfaceAbilitaGiocatoreView extends InterfaceErrorView{
     void addAbilita(String nomea, boolean competenza);
     void removeAbilita(String nomea);
     void swapAbilita(String nomea);
+    void setAbilita(HashMap<String, Boolean> nomiCompetenze);
+    void setSpinnerAddAbilita(List<String> nomiAbilita);
+    void setModCompetenza(int modCompetenza);
 }

@@ -1,6 +1,5 @@
 package com.example.myfirstapp.interactor;
 
-public interface InterfaceDettagliLivelloview {
+public interface InterfaceDettagliLivelloview extends InterfaceErrorView{
     void setLivello(int livello);
-    void displayError(int indexError);
 }

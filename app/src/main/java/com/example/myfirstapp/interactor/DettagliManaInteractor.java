@@ -2,8 +2,6 @@ package com.example.myfirstapp.interactor;
 
 import com.example.myfirstapp.R;
 
-import java.util.HashMap;
-
 public class DettagliManaInteractor implements InterfaceDettagliManaInteractor{
     InterfaceDettagliManaDB dbMana;
     InterfaceDettagliManaView view;
@@ -26,6 +24,6 @@ public class DettagliManaInteractor implements InterfaceDettagliManaInteractor{
         if(dbMana.updateMana(mana))
             view.setMana(mana);
         else
-            view.displayError(R.string.db_error);
+            view.displayError(R.string.db_access_error);
     }
 }

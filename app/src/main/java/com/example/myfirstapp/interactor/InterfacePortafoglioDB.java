@@ -2,12 +2,13 @@ package com.example.myfirstapp.interactor;
 
 import com.example.myfirstapp.domain.ValutaOld;
 
+import java.util.List;
+
 
 public interface InterfacePortafoglioDB {
-    boolean updatePortafoglio(ValutaOld portafoglio, String nomecamp, String nomeg);
-    ValutaOld readPortafoglio(String nomecamp, String nomeg);
-
-    void deletePortafoglio( String nomecamp, String nomeg);
-    void createPortafoglio(ValutaOld portafoglio, String nomecamp, String nomeg);
+    void createPortafoglio(ValutaOld portafoglio);
+    ValutaOld readPortafoglio();
+    boolean updatePortafoglio(int valore);
+    void deletePortafoglio();
 
 }

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.interactor.InterfacePortafoglioView;
 import com.example.myfirstapp.interactor.PortafoglioInteractor;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.database.PortafoglioDBReader;
@@ -23,15 +24,15 @@ import com.example.myfirstapp.database.PortafoglioDBWriter;
 import com.example.myfirstapp.domain.Caratteristica;
 import com.example.myfirstapp.domain.Equipaggiamento;
 import com.example.myfirstapp.domain.Giocatore;
-import com.example.myfirstapp.utilities.MyDBException;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
-public class CharacterActivity extends AppCompatActivity {
+public class CharacterActivity extends AppCompatActivity implements InterfacePortafoglioView {
 
     private PortafoglioInteractor portafoglioInteractor;
     private DBManager dbManager;
@@ -68,12 +69,7 @@ public class CharacterActivity extends AppCompatActivity {
         assert nomeg != null;
         assert nomecamp != null;
         giocatore = dbManager.leggiGiocatore(nomecamp, nomeg);
-        try {
-            portafoglioInteractor =new PortafoglioInteractor(nomecamp, nomeg, new PortafoglioDBWriter(this), new PortafoglioDBReader(this));
-        } catch (MyDBException e){
-            Toast.makeText(this, "lettura portafoglio fallita", Toast.LENGTH_LONG).show();
-        }
-
+        portafoglioInteractor =new PortafoglioInteractor(new PortafoglioDBWriter(nomecamp, nomeg, this), new PortafoglioDBReader(nomecamp, nomeg, this), this);
     }
 
     /* SET */
@@ -127,7 +123,7 @@ public class CharacterActivity extends AppCompatActivity {
         this.setEquipaggiamento("scudo", R.id.shield_name);
         this.setEquipaggiamento("arma", R.id.weapon_name);
 
-        this.setPortafoglio();
+        portafoglioInteractor.setPortafoglio();
     }
 
     private void setCaratteristica(String tipo, int idBase, int idMod) {
@@ -147,40 +143,27 @@ public class CharacterActivity extends AppCompatActivity {
         txt.setText(nome);
     }
 
-    private void setPortafoglio() {
-        List<Integer> valoremonete = portafoglioInteractor.getValoreInMonete();
-        txt = findViewById(R.id.character_base_copper);
-        txt.setText(String.valueOf(valoremonete.get(0)));
-        txt = findViewById(R.id.character_base_silver);
-        txt.setText(String.valueOf(valoremonete.get(1)));
-        txt = findViewById(R.id.character_base_gold);
-        txt.setText(String.valueOf(valoremonete.get(2)));
-    }
-
     private void setButton() {
         currencyButton = findViewById(R.id.character_currency_button);
         currencyBaseView = findViewById(R.id.character_currency_base);
         currencyModView = findViewById(R.id.character_currency_mod);
         currencyCard = findViewById(R.id.character_currency);
 
-        currencyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (currencyBaseView.getVisibility() == View.VISIBLE) {
-                    TransitionManager.beginDelayedTransition((ViewGroup) currencyCard.getParent().getParent(), new AutoTransition());
-                    currencyBaseView.setVisibility(View.GONE);
-                    currencyModView.setVisibility(View.VISIBLE);
-                    ((EditText) findViewById(R.id.character_hidden_copper)).setText("");
-                    ((EditText) findViewById(R.id.character_hidden_silver)).setText("");
-                    ((EditText) findViewById(R.id.character_hidden_gold)).setText("");
-                    currencyButton.setBackgroundResource(R.drawable.ic_round_done);
-                } else {
-                    TransitionManager.beginDelayedTransition((ViewGroup) currencyCard.getParent().getParent(), new AutoTransition());
-                    currencyBaseView.setVisibility(View.VISIBLE);
-                    currencyModView.setVisibility(View.GONE);
-                    currencyButton.setBackgroundResource(R.drawable.ic_add);
-                    aggiornaValuta();
-                }
+        currencyButton.setOnClickListener(view -> {
+            if (currencyBaseView.getVisibility() == View.VISIBLE) {
+                TransitionManager.beginDelayedTransition((ViewGroup) currencyCard.getParent().getParent(), new AutoTransition());
+                currencyBaseView.setVisibility(View.GONE);
+                currencyModView.setVisibility(View.VISIBLE);
+                ((EditText) findViewById(R.id.character_hidden_copper)).setText("");
+                ((EditText) findViewById(R.id.character_hidden_silver)).setText("");
+                ((EditText) findViewById(R.id.character_hidden_gold)).setText("");
+                currencyButton.setBackgroundResource(R.drawable.ic_round_done);
+            } else {
+                TransitionManager.beginDelayedTransition((ViewGroup) currencyCard.getParent().getParent(), new AutoTransition());
+                currencyBaseView.setVisibility(View.VISIBLE);
+                currencyModView.setVisibility(View.GONE);
+                currencyButton.setBackgroundResource(R.drawable.ic_add);
+                aggiornaValuta();
             }
         });
     }
@@ -230,6 +213,10 @@ public class CharacterActivity extends AppCompatActivity {
     }
 
     /* CURRENCY BUTTON */
+    public void aggiornaValuta(List<Integer> valore){
+        portafoglioInteractor.changeValorePortafoglio(valore);
+    }
+
     private void aggiornaValuta() {
         List<Integer> valore = new ArrayList<>();
         final List<Integer> VIEW = new ArrayList<>(Arrays.asList(R.id.character_hidden_copper, R.id.character_hidden_silver, R.id.character_hidden_gold));
@@ -242,21 +229,7 @@ public class CharacterActivity extends AppCompatActivity {
             val=(text.isEmpty())? 0:Integer.parseInt(text);
             valore.add(val);
         }
-
-        if (0!=(valore.get(0)+valore.get(1)+valore.get(2))) {
-            this.aggiornaValuta(valore);
-        }
-
-    }
-
-    public void aggiornaValuta(List<Integer> valore){
-        try {
-            portafoglioInteractor.aggiornaPortafoglio(valore);
-        }catch (MyDBException e){
-            Toast.makeText(this, "aggiornamento portafoglio fallito", Toast.LENGTH_LONG).show();
-        }
-
-        this.setPortafoglio();
+        this.aggiornaValuta(valore);
     }
 
     public void goldBaseButton(View view) {
@@ -363,6 +336,21 @@ public class CharacterActivity extends AppCompatActivity {
         intent.putExtra("nomeg", nomeg);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void setPortafoglio(List<Integer> valoriOrdineCrescente) {
+        txt = findViewById(R.id.character_base_copper);
+        txt.setText(String.valueOf(valoriOrdineCrescente.get(0)));
+        txt = findViewById(R.id.character_base_silver);
+        txt.setText(String.valueOf(valoriOrdineCrescente.get(1)));
+        txt = findViewById(R.id.character_base_gold);
+        txt.setText(String.valueOf(valoriOrdineCrescente.get(2)));
+    }
+
+    @Override
+    public void displayError(int indexError) {
+        Toast.makeText(this, this.getString(indexError), Toast.LENGTH_LONG).show();
     }
 
     @Override

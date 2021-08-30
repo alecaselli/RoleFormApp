@@ -3,7 +3,7 @@ package com.example.myfirstapp.domain;
 import java.util.HashMap;
 
 public class ValutaTemp{
-
+    //TODO: crea questa classe in modo che permatta di accedere dinamicamente alle varie monete senza e con vincolo di ordine basato sul valore
     private final String nome;
     private final String descrizione;
     private final HashMap<String, Integer> nomiRatio;

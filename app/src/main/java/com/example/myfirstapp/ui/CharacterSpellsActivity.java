@@ -131,22 +131,18 @@ public class CharacterSpellsActivity extends AppCompatActivity implements Adapte
             spellsAddButtons.add((Spinner) findViewById(ADDBUTTONIDS.get(i)));
             spellsCardViews.add((CardView) findViewById(CARDVIEWIDS.get(i)));
 
-            spellsExpandButtons.get(i).setOnClickListener(new View.OnClickListener() {
+            spellsExpandButtons.get(i).setOnClickListener(view -> {
 
-                @Override
-                public void onClick(View v) {
-
-                    if (spellsRecyclerViews.get(i).getVisibility() == View.GONE) {
-                        TransitionManager.beginDelayedTransition((ViewGroup) spellsCardViews.get(i).getParent().getParent(), new AutoTransition());
-                        spellsRecyclerViews.get(i).setVisibility(View.VISIBLE);
-                        spellsAddButtons.get(i).setVisibility(View.VISIBLE);
-                        spellsExpandButtons.get(i).setBackgroundResource(R.drawable.ic_arrow_up);
-                    } else {
-                        TransitionManager.beginDelayedTransition((ViewGroup) spellsCardViews.get(i).getParent().getParent(), new AutoTransition());
-                        spellsRecyclerViews.get(i).setVisibility(View.GONE);
-                        spellsAddButtons.get(i).setVisibility(View.GONE);
-                        spellsExpandButtons.get(i).setBackgroundResource(R.drawable.ic_arrow_down);
-                    }
+                if (spellsRecyclerViews.get(i).getVisibility() == View.GONE) {
+                    TransitionManager.beginDelayedTransition((ViewGroup) spellsCardViews.get(i).getParent().getParent(), new AutoTransition());
+                    spellsRecyclerViews.get(i).setVisibility(View.VISIBLE);
+                    spellsAddButtons.get(i).setVisibility(View.VISIBLE);
+                    spellsExpandButtons.get(i).setBackgroundResource(R.drawable.ic_arrow_up);
+                } else {
+                    TransitionManager.beginDelayedTransition((ViewGroup) spellsCardViews.get(i).getParent().getParent(), new AutoTransition());
+                    spellsRecyclerViews.get(i).setVisibility(View.GONE);
+                    spellsAddButtons.get(i).setVisibility(View.GONE);
+                    spellsExpandButtons.get(i).setBackgroundResource(R.drawable.ic_arrow_down);
                 }
             });
         }
@@ -157,7 +153,7 @@ public class CharacterSpellsActivity extends AppCompatActivity implements Adapte
         List<List<String>> suplist = dbManager.leggiIncantesimilist();
 
         for (int i : INDICI) {
-            itemSpinnerAdapter.add(new ArrayAdapter<String>(this, R.layout.spinner_custom_item));
+            itemSpinnerAdapter.add(new ArrayAdapter<>(this, R.layout.spinner_custom_item));
             itemSpinnerAdapter.get(i).add(AGGIUNGI);
             itemSpinnerAdapter.get(i).addAll(suplist.get(i));
             itemSpinnerAdapter.get(i).setDropDownViewResource(R.layout.spinner_dropdown_custom_item);

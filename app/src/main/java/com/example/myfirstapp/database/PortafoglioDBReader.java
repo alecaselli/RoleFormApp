@@ -19,14 +19,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PortafoglioDBReader implements InterfacePortafoglioDB {
-    private DBHelper dbhelper;
+    private final String nomecamp;
+    private final String nomeg;
+    private final DBHelper dbhelper;
 
-    public PortafoglioDBReader(Context ctx) {
+    public PortafoglioDBReader(String nomecamp, String nomeg, Context ctx) {
+        this.nomecamp = nomecamp;
+        this.nomeg = nomeg;
         dbhelper = new DBHelper(ctx);
     }
 
     @Override
-    public boolean updatePortafoglio(ValutaOld portafoglio, String nomecamp, String nomeg) {
+    public boolean updatePortafoglio(int valore) {
         return false;
     }
 
@@ -83,7 +87,7 @@ public class PortafoglioDBReader implements InterfacePortafoglioDB {
     }
 
     @Override
-    public ValutaOld readPortafoglio(String nomecamp, String nomeg) {
+    public ValutaOld readPortafoglio() {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?";
         String[] whereArgs = new String[]{nomecamp, nomeg};
@@ -111,12 +115,12 @@ public class PortafoglioDBReader implements InterfacePortafoglioDB {
     }
 
     @Override
-    public void deletePortafoglio(String nomecamp, String nomeg) {
+    public void deletePortafoglio() {
 
     }
 
     @Override
-    public void createPortafoglio(ValutaOld portafoglio, String nomecamp, String nomeg) {
+    public void createPortafoglio(ValutaOld portafoglio) {
 
     }
 }

@@ -24,6 +24,6 @@ public class DettagliPuntiFeritaInteractor implements InterfaceDettagliPuntiFeri
         if(dbPuntiFerita.updatePuntiFerita(puntiFerita))
             view.setPuntiFerita(puntiFerita);
         else
-            view.displayError(R.string.db_error);
+            view.displayError(R.string.db_access_error);
     }
 }

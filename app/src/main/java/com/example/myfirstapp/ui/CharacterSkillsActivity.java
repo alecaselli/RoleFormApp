@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class CharacterSkillsActivity extends AppCompatActivity implements InterfaceAbilitaGiocatoreView, AdapterView.OnItemSelectedListener {
+public class CharacterSkillsActivity extends AppCompatActivity implements InterfaceAbilitaGiocatoreView{
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -45,13 +45,11 @@ public class CharacterSkillsActivity extends AppCompatActivity implements Interf
         setContentView(R.layout.activity_character_skills);
 
         this.estraiIntent();
-        this.createCardAbilitaList();
         this.setView();
-        this.setRecyclerView();
-        this.setSpinner();
+
     }
 
-    public void estraiIntent() {
+    private void estraiIntent() {
         Intent intent = getIntent();
         nomecamp = intent.getStringExtra("nomecamp");
         nomeg = intent.getStringExtra("nomeg");
@@ -60,18 +58,10 @@ public class CharacterSkillsActivity extends AppCompatActivity implements Interf
 
     }
 
-    public void createCardAbilitaList() {
-
-        HashMap<String,Boolean> nomiCompetenze = abilitaGiocatoreInteractor.getNomiCompetenza();
-        cardAbilityList = new ArrayList<>();
-        for(String nome : nomiCompetenze.keySet())
-            cardAbilityList.add(new CardAbility(nome, nomiCompetenze.get(nome)));
-    }
-
-    public void setView() {
-        String mod = "[" + abilitaGiocatoreInteractor.getModCompetenza() + "]";
-        TextView txt = findViewById(R.id.skills_mod_value);
-        txt.setText(mod);
+    private void setView() {
+        abilitaGiocatoreInteractor.setAbilita();
+        abilitaGiocatoreInteractor.setAddAbilita();
+        abilitaGiocatoreInteractor.setModCompetenza();
     }
 
     public void setRecyclerView() {
@@ -103,32 +93,6 @@ public class CharacterSkillsActivity extends AppCompatActivity implements Interf
                 deleteAbilita(position);
             }
         });
-
-    }
-
-    public void setSpinner() {
-        itemSpinner = findViewById(R.id.skills_add_item_spinner);
-        itemSpinner.setPrompt("Seleziona l'abilita da aggiungere");
-
-        List<String> nomiAbilita = abilitaGiocatoreInteractor.getNomiAbilitaNonInGiocatore();
-        ArrayAdapter<String> ItemSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_item);
-        ItemSpinnerAdapter.add(getString(R.string.aggiungi));
-        ItemSpinnerAdapter.addAll(nomiAbilita);
-        ItemSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_custom_item);
-        itemSpinner = findViewById(R.id.skills_add_item_spinner);
-        itemSpinner.setAdapter(ItemSpinnerAdapter);
-        itemSpinner.setOnItemSelectedListener(this);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String nome = itemSpinner.getSelectedItem().toString();
-        if(!getString(R.string.aggiungi).equals(nome))
-            abilitaGiocatoreInteractor.addAbilitaGiocatore(nome);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
@@ -195,5 +159,45 @@ public class CharacterSkillsActivity extends AppCompatActivity implements Interf
             cardAbilityList.get(position).swapBool();
             mAdapter.notifyItemChanged(position);
         }catch (MyOperationFaildException ignored){}
+    }
+
+    @Override
+    public void setAbilita(HashMap<String, Boolean> nomiCompetenze) {
+        cardAbilityList = new ArrayList<>();
+        for(String nome : nomiCompetenze.keySet())
+            cardAbilityList.add(new CardAbility(nome, nomiCompetenze.get(nome)));
+        this.setRecyclerView();
+    }
+
+    @Override
+    public void setSpinnerAddAbilita(List<String> nomiAbilita) {
+        itemSpinner = findViewById(R.id.skills_add_item_spinner);
+        itemSpinner.setPrompt(getString(R.string.spinner_prompt_abilita));
+        ArrayAdapter<String> ItemSpinnerAdapter = new ArrayAdapter<>(this, R.layout.spinner_custom_item);
+        ItemSpinnerAdapter.add(getString(R.string.aggiungi));
+        ItemSpinnerAdapter.addAll(nomiAbilita);
+        ItemSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_custom_item);
+        itemSpinner = findViewById(R.id.skills_add_item_spinner);
+        itemSpinner.setAdapter(ItemSpinnerAdapter);
+        itemSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String nome = itemSpinner.getSelectedItem().toString();
+                if(!getString(R.string.aggiungi).equals(nome))
+                    abilitaGiocatoreInteractor.addAbilitaGiocatore(nome);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    @Override
+    public void setModCompetenza(int modCompetenza) {
+        String mod = "[" + modCompetenza + "]";
+        TextView txt = findViewById(R.id.skills_mod_value);
+        txt.setText(mod);
     }
 }

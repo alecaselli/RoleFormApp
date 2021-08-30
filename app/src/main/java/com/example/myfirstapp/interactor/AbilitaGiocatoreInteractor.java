@@ -23,7 +23,7 @@ public class AbilitaGiocatoreInteractor implements InterfaceAbilitaGiocatoreInte
     private void getAbilitalist(){
         abilitaList = DBReader.readAbilitaGiocatore();
         if(null == abilitaList)
-            view.displayError(R.string.db_error);
+            view.displayError(R.string.db_access_error);
     }
 
     private int getIdByName(String nome){
@@ -38,11 +38,11 @@ public class AbilitaGiocatoreInteractor implements InterfaceAbilitaGiocatoreInte
     public boolean addAbilitaGiocatore(String nome){
         Abilita aggiungere = DBReader.readAbilitaByName(nome);
         if (null == aggiungere){
-            view.displayError(R.string.db_error);
+            view.displayError(R.string.db_access_error);
             return false;
         }
         if(!DBWriter.createAbilitaGiocatore(aggiungere.getNome())){
-            view.displayError(R.string.db_error);
+            view.displayError(R.string.db_insert_error);
             return false;
         }
         abilitaList.add(aggiungere);
@@ -54,11 +54,11 @@ public class AbilitaGiocatoreInteractor implements InterfaceAbilitaGiocatoreInte
     public boolean removeAbilitaGiocatore(String nome){
         Abilita rimuovere = DBReader.readAbilitaByName(nome);
         if (null == rimuovere){
-            view.displayError(R.string.db_error);
+            view.displayError(R.string.db_access_error);
             return false;
         }
         if(!DBWriter.deleteAbilitaGiocatore(rimuovere.getNome())){
-            view.displayError(R.string.db_error);
+            view.displayError(R.string.db_access_error);
             return false;
         }
         abilitaList.remove(rimuovere);
@@ -75,7 +75,7 @@ public class AbilitaGiocatoreInteractor implements InterfaceAbilitaGiocatoreInte
         }
         abilitaList.get(id).swapCompetenza();
         if(!DBWriter.updateAbilitaGiocatore(nome, abilitaList.get(id).isCompetente())){
-            view.displayError(R.string.db_error);
+            view.displayError(R.string.db_access_error);
             return false;
         }
         view.swapAbilita(nome);
@@ -83,27 +83,28 @@ public class AbilitaGiocatoreInteractor implements InterfaceAbilitaGiocatoreInte
     }
 
     @Override
-    public HashMap<String, Boolean> getNomiCompetenza() {
+    public void setAbilita() {
         HashMap<String, Boolean> nomiCompetenze = new HashMap<>();
         for (Abilita abilita : abilitaList){
             nomiCompetenze.put(abilita.getNome(),abilita.isCompetente());
         }
-        return nomiCompetenze;
+        view.setAbilita(nomiCompetenze);
     }
 
     @Override
-    public int getModCompetenza() {
-        return DBReader.readModCompetenza();
-    }
-
-    @Override
-    public List<String> getNomiAbilitaNonInGiocatore() {
+    public void setAddAbilita() {
         List<Abilita> allAbilita = DBReader.readAllAbilita();
         List<String> nomi = new ArrayList<>();
+
         allAbilita.removeAll(abilitaList);
         for(Abilita abilita : allAbilita){
             nomi.add(abilita.getNome());
         }
-        return nomi;
+        view.setSpinnerAddAbilita(nomi);
+    }
+
+    @Override
+    public void setModCompetenza() {
+        view.setModCompetenza(DBReader.readModCompetenza());
     }
 }
