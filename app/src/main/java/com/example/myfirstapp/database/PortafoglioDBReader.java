@@ -6,10 +6,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
-import com.example.myfirstapp.databasetabelle.TabellaCampiComuni;
-import com.example.myfirstapp.databasetabelle.TabellaGiocatore;
-import com.example.myfirstapp.databasetabelle.TabellaNomeVal;
-import com.example.myfirstapp.databasetabelle.TabellaValuta;
+import com.example.myfirstapp.databaseTabelle.TabellaCampiComuni;
+import com.example.myfirstapp.databaseTabelle.TabellaGiocatore;
+import com.example.myfirstapp.databaseTabelle.TabellaNomeVal;
+import com.example.myfirstapp.databaseTabelle.TabellaValuta;
 import com.example.myfirstapp.interactor.InterfacePortafoglioDB;
 import com.example.myfirstapp.domain.ValutaOld;
 

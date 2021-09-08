@@ -16,13 +16,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.domain.EquipaggiamentoOld;
 import com.example.myfirstapp.interactor.InterfacePortafoglioView;
 import com.example.myfirstapp.interactor.PortafoglioInteractor;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.database.PortafoglioDBReader;
 import com.example.myfirstapp.database.PortafoglioDBWriter;
 import com.example.myfirstapp.domain.Caratteristica;
-import com.example.myfirstapp.domain.Equipaggiamento;
 import com.example.myfirstapp.domain.Giocatore;
 
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +30,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class CharacterActivity extends AppCompatActivity implements InterfacePortafoglioView {
 
@@ -135,9 +134,9 @@ public class CharacterActivity extends AppCompatActivity implements InterfacePor
     }
 
     private void setEquipaggiamento(String tipo, int id) {
-        Equipaggiamento equipaggiamento = giocatore.getEquipaggiato(tipo);
+        EquipaggiamentoOld equipaggiamentoOld = giocatore.getEquipaggiato(tipo);
         String nome;
-        if (equipaggiamento != null) nome = equipaggiamento.getNome();
+        if (equipaggiamentoOld != null) nome = equipaggiamentoOld.getNome();
         else nome = "Non equipaggiato";
         txt = findViewById(id);
         txt.setText(nome);

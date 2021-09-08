@@ -17,10 +17,10 @@ public class AbilitaGiocatoreInteractor implements InterfaceAbilitaGiocatoreInte
         this.view = view;
         this.DBWriter = DBWriter;
         this.DBReader = DBReader;
-        this.getAbilitalist();
+        this.inizializzaAbilitaList();
     }
 
-    private void getAbilitalist(){
+    private void inizializzaAbilitaList(){
         abilitaList = DBReader.readAbilitaGiocatore();
         if(null == abilitaList)
             view.displayError(R.string.db_access_error);
@@ -94,12 +94,16 @@ public class AbilitaGiocatoreInteractor implements InterfaceAbilitaGiocatoreInte
     @Override
     public void setAddAbilita() {
         List<Abilita> allAbilita = DBReader.readAllAbilita();
+        List<String> remove = new ArrayList<>();
         List<String> nomi = new ArrayList<>();
 
-        allAbilita.removeAll(abilitaList);
-        for(Abilita abilita : allAbilita){
-            nomi.add(abilita.getNome());
+        for(Abilita abilita : abilitaList){
+            remove.add(abilita.getNome());
         }
+        for(Abilita abilitaNomi : allAbilita){
+            nomi.add(abilitaNomi.getNome());
+        }
+        nomi.removeAll(remove);
         view.setSpinnerAddAbilita(nomi);
     }
 

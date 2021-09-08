@@ -9,30 +9,30 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.myfirstapp.databasetabelle.TabellaCampiComuni;
-import com.example.myfirstapp.databasetabelle.TabellaAbilita;
-import com.example.myfirstapp.databasetabelle.TabellaArma;
-import com.example.myfirstapp.databasetabelle.TabellaArmatura;
-import com.example.myfirstapp.databasetabelle.TabellaCarBase;
-import com.example.myfirstapp.databasetabelle.TabellaCaratteristica;
-import com.example.myfirstapp.databasetabelle.TabellaCaratteristicaG;
-import com.example.myfirstapp.databasetabelle.TabellaClasse;
-import com.example.myfirstapp.databasetabelle.TabellaEquipaggiamento;
-import com.example.myfirstapp.databasetabelle.TabellaGiocatore;
-import com.example.myfirstapp.databasetabelle.TabellaIncantesimi;
-import com.example.myfirstapp.databasetabelle.TabellaNomeVal;
-import com.example.myfirstapp.databasetabelle.TabellaPrivilegi;
-import com.example.myfirstapp.databasetabelle.TabellaRazza;
-import com.example.myfirstapp.databasetabelle.TabellaValuta;
-import com.example.myfirstapp.databasetabelle.TabelleHA;
+import com.example.myfirstapp.databaseTabelle.TabellaCampiComuni;
+import com.example.myfirstapp.databaseTabelle.TabellaAbilita;
+import com.example.myfirstapp.databaseTabelle.TabellaArma;
+import com.example.myfirstapp.databaseTabelle.TabellaArmatura;
+import com.example.myfirstapp.databaseTabelle.TabellaCarBase;
+import com.example.myfirstapp.databaseTabelle.TabellaCaratteristica;
+import com.example.myfirstapp.databaseTabelle.TabellaCaratteristicaG;
+import com.example.myfirstapp.databaseTabelle.TabellaClasse;
+import com.example.myfirstapp.databaseTabelle.TabellaEquipaggiamento;
+import com.example.myfirstapp.databaseTabelle.TabellaGiocatore;
+import com.example.myfirstapp.databaseTabelle.TabellaIncantesimi;
+import com.example.myfirstapp.databaseTabelle.TabellaNomeVal;
+import com.example.myfirstapp.databaseTabelle.TabellaPrivilegi;
+import com.example.myfirstapp.databaseTabelle.TabellaRazza;
+import com.example.myfirstapp.databaseTabelle.TabellaValuta;
+import com.example.myfirstapp.databaseTabelle.TabelleHA;
 import com.example.myfirstapp.domain.Abilita;
 import com.example.myfirstapp.domain.Arma;
 import com.example.myfirstapp.domain.Armatura;
 import com.example.myfirstapp.domain.Caratteristica;
 import com.example.myfirstapp.domain.CaratteristicaBase;
 import com.example.myfirstapp.domain.Classe;
+import com.example.myfirstapp.domain.EquipaggiamentoOld;
 import com.example.myfirstapp.domain.Privilegi;
-import com.example.myfirstapp.domain.Equipaggiamento;
 import com.example.myfirstapp.domain.Giocatore;
 import com.example.myfirstapp.domain.Incantesimo;
 import com.example.myfirstapp.domain.Razza;
@@ -208,7 +208,7 @@ public class DBManager {
                     if (!this.aggiungiHaci(nuovo.getNome(), nuovoi.getNome()))
                         error = true;
                 }
-                for (Equipaggiamento nuovoe : nuovo.getEquipaggiamentoList()) {
+                for (EquipaggiamentoOld nuovoe : nuovo.getEquipaggiamentoList()) {
                     if (!this.aggiungiHace(nuovo.getNome(), nuovoe.getNome()))
                         error = true;
                 }
@@ -244,7 +244,7 @@ public class DBManager {
         }
     }
 
-    public boolean aggiungiEquipaggiamento(@NotNull Equipaggiamento nuovo) {
+    public boolean aggiungiEquipaggiamento(@NotNull EquipaggiamentoOld nuovo) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -355,12 +355,12 @@ public class DBManager {
                     if (!this.aggiungiHaga(nuovo.getNomeCampagna(), nuovo.getNome(), nuovaa.getNome(), nuovaa.isCompetente()))
                         error = true;
                 }
-                for (Equipaggiamento nuovoe : nuovo.getEquipaggiato()) {
+                for (EquipaggiamentoOld nuovoe : nuovo.getEquipaggiato()) {
                     if (!this.aggiungiHage(nuovo.getNomeCampagna(), nuovo.getNome(), nuovoe.getNome(), false)) {
                         error = true;
                     }
                 }
-                for (Equipaggiamento nuovoe : nuovo.getBorsa()) {
+                for (EquipaggiamentoOld nuovoe : nuovo.getBorsa()) {
                     if (!this.aggiungiHage(nuovo.getNomeCampagna(), nuovo.getNome(), nuovoe.getNome(), true)) {
                         error = true;
                     }
@@ -1115,7 +1115,7 @@ public class DBManager {
 
                 boolean error = false;
                 this.eliminaHace(aggiornato.getNome(), "classe");
-                for (Equipaggiamento nuovoe : aggiornato.getEquipaggiamentoList()) {
+                for (EquipaggiamentoOld nuovoe : aggiornato.getEquipaggiamentoList()) {
                     if (!this.aggiungiHace(aggiornato.getNome(), nuovoe.getNome())) {
                         error = true;
                     }
@@ -1158,7 +1158,7 @@ public class DBManager {
         }
     }
 
-    public boolean aggiornaEquipaggiamento(@NotNull Equipaggiamento aggiornato) {
+    public boolean aggiornaEquipaggiamento(@NotNull EquipaggiamentoOld aggiornato) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String whereClause = TabellaEquipaggiamento.FIELD_NOMEE + " = ? ";
@@ -1262,12 +1262,12 @@ public class DBManager {
                         error = true;
                 }
 
-                for (Equipaggiamento nuovoe : aggiornato.getEquipaggiato()) {
+                for (EquipaggiamentoOld nuovoe : aggiornato.getEquipaggiato()) {
                     if (this.aggiornaHage(aggiornato.getNomeCampagna(), aggiornato.getNome(), nuovoe.getNome(), false))
                         error = true;
                 }
 
-                for (Equipaggiamento nuovoe : aggiornato.getBorsa()) {
+                for (EquipaggiamentoOld nuovoe : aggiornato.getBorsa()) {
                     if (this.aggiornaHage(aggiornato.getNomeCampagna(), aggiornato.getNome(), nuovoe.getNome(), true))
                         error = true;
                 }
@@ -1909,7 +1909,7 @@ public class DBManager {
         }
     }
 
-    public Equipaggiamento leggiEquipaggiamento(@NotNull String nomee) {
+    public EquipaggiamentoOld leggiEquipaggiamento(@NotNull String nomee) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaEquipaggiamento.FIELD_NOMEE + " = ? ";
         String[] whereArgs = new String[]{nomee};
@@ -1930,7 +1930,7 @@ public class DBManager {
             int capacita = resultSet.getInt(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_CAPACITA));
 
             resultSet.close();
-            return new Equipaggiamento(nomee, descrizione, tipo, costo, peso, capacita, subtipo);
+            return new EquipaggiamentoOld(nomee, descrizione, tipo, costo, peso, capacita, subtipo);
         } catch (SQLiteException sqle) {
             Log.e("LEGGI EQUI", "leggi fallita", sqle);
             return null;
@@ -1951,7 +1951,7 @@ public class DBManager {
 
             String danno = resultSet.getString(resultSet.getColumnIndex(TabellaArma.FIELD_DANNO));
             String proprieta = resultSet.getString(resultSet.getColumnIndex(TabellaArma.FIELD_PROPRIETA));
-            Equipaggiamento equi = this.leggiEquipaggiamento(nomee);
+            EquipaggiamentoOld equi = this.leggiEquipaggiamento(nomee);
             if (equi == null)
                 return null;
 
@@ -1980,7 +1980,7 @@ public class DBManager {
             String tempoTogliere = resultSet.getString(resultSet.getColumnIndex(TabellaArmatura.FIELD_TEMPOTOGLIERE));
             String tempoIndossare = resultSet.getString(resultSet.getColumnIndex(TabellaArmatura.FIELD_TEMPOINDOSSARE));
             String forzaNecessaria = resultSet.getString(resultSet.getColumnIndex(TabellaArmatura.FIELD_FORZANECESSARIA));
-            Equipaggiamento equi = this.leggiEquipaggiamento(nomee);
+            EquipaggiamentoOld equi = this.leggiEquipaggiamento(nomee);
             if (equi == null)
                 return null;
 
@@ -1992,7 +1992,7 @@ public class DBManager {
         }
     }
 
-    public List<Equipaggiamento> leggiEquipaggiamenti() {
+    public List<EquipaggiamentoOld> leggiEquipaggiamenti() {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
 
         try {
@@ -2002,20 +2002,20 @@ public class DBManager {
             }
             resultSet.moveToFirst();
 
-            List<Equipaggiamento> equipaggiamentoList = new ArrayList<Equipaggiamento>();
+            List<EquipaggiamentoOld> equipaggiamentoOldList = new ArrayList<EquipaggiamentoOld>();
             while (!resultSet.isAfterLast()) {
                 String nome = resultSet.getString(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_NOMEE));
                 Arma arma = this.leggiArma(nome);
                 if (arma != null)
-                    equipaggiamentoList.add(arma);
+                    equipaggiamentoOldList.add(arma);
                 else {
                     Armatura armatura = this.leggiArmatura(nome);
                     if (armatura != null)
-                        equipaggiamentoList.add(armatura);
+                        equipaggiamentoOldList.add(armatura);
                     else {
-                        Equipaggiamento equi = this.leggiEquipaggiamento(nome);
+                        EquipaggiamentoOld equi = this.leggiEquipaggiamento(nome);
                         if (equi != null)
-                            equipaggiamentoList.add(equi);
+                            equipaggiamentoOldList.add(equi);
                     }
                 }
 
@@ -2023,7 +2023,7 @@ public class DBManager {
             }
 
             resultSet.close();
-            return equipaggiamentoList;
+            return equipaggiamentoOldList;
         } catch (
                 SQLiteException sqle) {
             Log.e("LEGGI EQUILIST", "leggi fallita", sqle);
@@ -2032,7 +2032,7 @@ public class DBManager {
 
     }
 
-    public List<Equipaggiamento> leggiEquipaggiamenti(boolean borsa, @NotNull String nomecamp, @NotNull String nomeg) {
+    public List<EquipaggiamentoOld> leggiEquipaggiamenti(@NotNull String nomecamp, @NotNull String nomeg, boolean borsa) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         int flag = (borsa) ? 1 : 0;
         String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + "=?" + " AND " + TabellaGiocatore.FIELD_NOMEG + "=?" + " AND " + TabelleHA.FIELD_BORSA + "=?";
@@ -2045,20 +2045,20 @@ public class DBManager {
             }
             resultSet.moveToFirst();
 
-            List<Equipaggiamento> equipaggiamentoList = new ArrayList<Equipaggiamento>();
+            List<EquipaggiamentoOld> equipaggiamentoOldList = new ArrayList<EquipaggiamentoOld>();
             while (!resultSet.isAfterLast()) {
                 String nome = resultSet.getString(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_NOMEE));
                 Arma arma = this.leggiArma(nome);
                 if (arma != null)
-                    equipaggiamentoList.add(arma);
+                    equipaggiamentoOldList.add(arma);
                 else {
                     Armatura armatura = this.leggiArmatura(nome);
                     if (armatura != null)
-                        equipaggiamentoList.add(armatura);
+                        equipaggiamentoOldList.add(armatura);
                     else {
-                        Equipaggiamento equi = this.leggiEquipaggiamento(nome);
+                        EquipaggiamentoOld equi = this.leggiEquipaggiamento(nome);
                         if (equi != null)
-                            equipaggiamentoList.add(equi);
+                            equipaggiamentoOldList.add(equi);
                     }
                 }
 
@@ -2066,7 +2066,7 @@ public class DBManager {
             }
 
             resultSet.close();
-            return equipaggiamentoList;
+            return equipaggiamentoOldList;
         } catch (
                 SQLiteException sqle) {
             Log.e("LEGGI EQUILIST", "leggi fallita", sqle);
@@ -2075,7 +2075,7 @@ public class DBManager {
 
     }
 
-    public List<Equipaggiamento> leggiEquipaggiamenti(@NotNull String nomecla) {
+    public List<EquipaggiamentoOld> leggiEquipaggiamenti(@NotNull String nomecla) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String whereClause = TabellaClasse.FIELD_NOMECLA + "=?";
         String[] whereArgs = new String[]{nomecla};
@@ -2087,20 +2087,20 @@ public class DBManager {
             }
             resultSet.moveToFirst();
 
-            List<Equipaggiamento> equipaggiamentoList = new ArrayList<Equipaggiamento>();
+            List<EquipaggiamentoOld> equipaggiamentoOldList = new ArrayList<EquipaggiamentoOld>();
             while (!resultSet.isAfterLast()) {
                 String nome = resultSet.getString(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_NOMEE));
                 Arma arma = this.leggiArma(nome);
                 if (arma != null)
-                    equipaggiamentoList.add(arma);
+                    equipaggiamentoOldList.add(arma);
                 else {
                     Armatura armatura = this.leggiArmatura(nome);
                     if (armatura != null)
-                        equipaggiamentoList.add(armatura);
+                        equipaggiamentoOldList.add(armatura);
                     else {
-                        Equipaggiamento equi = this.leggiEquipaggiamento(nome);
+                        EquipaggiamentoOld equi = this.leggiEquipaggiamento(nome);
                         if (equi != null)
-                            equipaggiamentoList.add(equi);
+                            equipaggiamentoOldList.add(equi);
                     }
                 }
 
@@ -2108,7 +2108,7 @@ public class DBManager {
             }
 
             resultSet.close();
-            return equipaggiamentoList;
+            return equipaggiamentoOldList;
         } catch (SQLiteException sqle) {
             Log.e("LEGGI EQUILIST", "leggi fallita", sqle);
             return null;
@@ -2135,12 +2135,12 @@ public class DBManager {
             descrizione.append(resultSet.getString(resultSet.getColumnIndex(TabellaClasse.FIELD_DESCPRIVILEGI)));
             StringBuffer competenza = new StringBuffer();
             descrizione.append(resultSet.getString(resultSet.getColumnIndex(TabellaCampiComuni.FIELD_COMPETENZA)));
-            List<Equipaggiamento> equipaggiamentoList = this.leggiEquipaggiamenti(nomecla);
+            List<EquipaggiamentoOld> equipaggiamentoOldList = this.leggiEquipaggiamenti(nomecla);
             List<Privilegi> privilegiClasse = this.leggiPrivilegi(nomecla, "classe");
             List<Incantesimo> incantesimiClasse = this.leggiIncantesimi(nomecla);
 
             resultSet.close();
-            return new Classe(nomecla, descrizione, descrizionePrivilegiPoteri, nDadi, dado, competenza, equipaggiamentoList, privilegiClasse, incantesimiClasse);
+            return new Classe(nomecla, descrizione, descrizionePrivilegiPoteri, nDadi, dado, competenza, equipaggiamentoOldList, privilegiClasse, incantesimiClasse);
 
         } catch (SQLiteException sqle) {
             Log.e("LEGGI CLASSE", "leggi fallita", sqle);
@@ -2281,11 +2281,11 @@ public class DBManager {
             if (caratteristicaList == null)
                 caratteristicaList = new ArrayList<>();
 
-            List<Equipaggiamento> borsa = this.leggiEquipaggiamenti(true, nomecamp, nomeg);
+            List<EquipaggiamentoOld> borsa = this.leggiEquipaggiamenti(nomecamp, nomeg, true);
             if (borsa == null)
                 borsa = new ArrayList<>();
 
-            List<Equipaggiamento> equipaggiato = this.leggiEquipaggiamenti(false, nomecamp, nomeg);
+            List<EquipaggiamentoOld> equipaggiato = this.leggiEquipaggiamenti(nomecamp, nomeg, false);
             if (equipaggiato == null)
                 equipaggiato = new ArrayList<>();
 

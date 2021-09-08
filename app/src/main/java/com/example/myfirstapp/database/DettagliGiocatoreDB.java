@@ -1,15 +1,16 @@
 package com.example.myfirstapp.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
-import com.example.myfirstapp.databasetabelle.TabellaCampiComuni;
-import com.example.myfirstapp.databasetabelle.TabellaClasse;
-import com.example.myfirstapp.databasetabelle.TabellaGiocatore;
-import com.example.myfirstapp.databasetabelle.TabellaRazza;
+import com.example.myfirstapp.databaseTabelle.TabellaCampiComuni;
+import com.example.myfirstapp.databaseTabelle.TabellaClasse;
+import com.example.myfirstapp.databaseTabelle.TabellaGiocatore;
+import com.example.myfirstapp.databaseTabelle.TabellaRazza;
 import com.example.myfirstapp.interactor.InterfaceDettagliGiocatoreDB;
 
 import java.util.HashMap;
@@ -89,6 +90,23 @@ public class DettagliGiocatoreDB implements InterfaceDettagliGiocatoreDB {
         } catch (SQLiteException sqle) {
             Log.e("LEGGI CLASSEARMATURA", "leggi fallita", sqle);
             return 0;
+        }
+    }
+
+    @Override
+    public boolean updateClasseArmatura(int classeArmatura) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        String whereClause = TabellaGiocatore.FIELD_NOMECAMPAGNA + " = ? " + " AND " + TabellaGiocatore.FIELD_NOMEG + " = ? ";
+        String[] whereArgs = new String[]{nomecamp, nomeg};
+
+        cv.put(TabellaGiocatore.FIELD_CLASSEARMATURA, classeArmatura);
+
+        try {
+            return db.update(TabellaGiocatore.TBL_NOME, cv, whereClause, whereArgs) > 0;
+        } catch (SQLiteException sqle) {
+            Log.e("AGGIORNA CLASSEARMATURA", "aggiorna fallita", sqle);
+            return false;
         }
     }
 

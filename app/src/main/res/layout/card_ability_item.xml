@@ -24,6 +24,8 @@
             android:id="@+id/skill_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="191dp"
+            android:layout_toStartOf="@+id/skill_ball_button"
             android:layout_toEndOf="@+id/skill_delete"
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"
@@ -50,14 +52,14 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
-            android:paddingRight="10dp">
+            android:paddingEnd="10dp">
 
             <ImageView
                 android:id="@+id/skill_ball"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_round_radio_button_unchecked"/>
+                android:src="@drawable/ic_round_radio_button_unchecked" />
 
         </RelativeLayout>
 

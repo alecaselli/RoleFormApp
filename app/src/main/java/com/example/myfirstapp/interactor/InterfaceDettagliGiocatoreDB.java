@@ -7,4 +7,5 @@ public interface InterfaceDettagliGiocatoreDB {
     HashMap<String, String> readDettagliRazzaGiocatore();
     HashMap<String, String> readDettagliClasseGiocatore();
     int readClasseArmatura();
+    boolean updateClasseArmatura(int classeArmatura);
 }

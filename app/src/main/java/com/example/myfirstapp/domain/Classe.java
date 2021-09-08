@@ -11,7 +11,7 @@ public class Classe{
     private StringBuffer descrizionePrivilegiPoteri; // in alternativa imagine con tab del manuale
     private StringBuffer competenza;
     /*  private Competenza competenzaClasse;*/
-    private List<Equipaggiamento> equipaggiamentoList;
+    private List<EquipaggiamentoOld> equipaggiamentoOldList;
     private List<Privilegi> privilegiClasse;
     private List<Incantesimo> incantesimiClasse;
 
@@ -19,7 +19,7 @@ public class Classe{
                   StringBuffer descrizione,
                   StringBuffer descrizionePrivilegiPoteri,
             /*Competenza competenzaClasse,*/
-                  int nDadi, int dado, StringBuffer competenza, List<Equipaggiamento> equipaggiamentoList,
+                  int nDadi, int dado, StringBuffer competenza, List<EquipaggiamentoOld> equipaggiamentoOldList,
                   List<Privilegi> privilegiClasse,
                   List<Incantesimo> incantesimiClasse) {
         this.nome = nome;
@@ -30,7 +30,7 @@ public class Classe{
 
         this.competenza = competenza;
         /*this.competenzaClasse = competenzaClasse;*/
-        this.equipaggiamentoList = equipaggiamentoList;
+        this.equipaggiamentoOldList = equipaggiamentoOldList;
         this.privilegiClasse = privilegiClasse;
         this.incantesimiClasse = incantesimiClasse;
     }
@@ -92,12 +92,12 @@ public class Classe{
         this.competenzaClasse = competenzaClasse;
     }*/
 
-    public List<Equipaggiamento> getEquipaggiamentoList() {
-        return equipaggiamentoList;
+    public List<EquipaggiamentoOld> getEquipaggiamentoList() {
+        return equipaggiamentoOldList;
     }
 
-    public void setEquipaggiamentoList(List<Equipaggiamento> equipaggiamentoList) {
-        this.equipaggiamentoList = equipaggiamentoList;
+    public void setEquipaggiamentoList(List<EquipaggiamentoOld> equipaggiamentoOldList) {
+        this.equipaggiamentoOldList = equipaggiamentoOldList;
     }
 
     public List<Privilegi> getPrivilegiClasse() {

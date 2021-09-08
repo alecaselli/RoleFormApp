@@ -1,6 +1,6 @@
 package com.example.myfirstapp.domain;
 
-public class Arma extends Equipaggiamento {
+public class Arma extends EquipaggiamentoOld {
     private String danno;
     private String proprieta;
 

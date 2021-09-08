@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.database.DBManager;
-import com.example.myfirstapp.databasetabelle.TabellaClasse;
-import com.example.myfirstapp.databasetabelle.TabellaRazza;
+import com.example.myfirstapp.databaseTabelle.TabellaClasse;
+import com.example.myfirstapp.databaseTabelle.TabellaRazza;
 import com.example.myfirstapp.domain.Abilita;
 import com.example.myfirstapp.domain.Caratteristica;
 import com.example.myfirstapp.domain.Classe;

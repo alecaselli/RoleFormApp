@@ -62,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="Armatura di prova"
+                    android:text="@string/non_equip"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/bag_armor"
                     android:layout_marginStart="12dp"
-                    android:text="Scudo di prova"
+                    android:text="@string/non_equip"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -136,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/bag_armor"
                     android:layout_marginStart="12dp"
-                    android:text="Arma di prova"
+                    android:text="@string/non_equip"
                     android:textSize="20sp" />
 
             </LinearLayout>

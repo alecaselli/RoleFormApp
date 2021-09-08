@@ -16,7 +16,7 @@ import com.example.myfirstapp.R;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.domain.Arma;
 import com.example.myfirstapp.domain.Armatura;
-import com.example.myfirstapp.domain.Equipaggiamento;
+import com.example.myfirstapp.domain.EquipaggiamentoOld;
 
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class CreateNewItemActivity extends AppCompatActivity implements AdapterV
     }
 
     public void setSpinner() {
-        List<String> typelist = Equipaggiamento.getTipobase();
+        List<String> typelist = EquipaggiamentoOld.getTipobase();
         ArrayAdapter<String> typeSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_item);
         typeSpinnerAdapter.add(SELEZIONAT);
         typeSpinnerAdapter.addAll(typelist);
@@ -57,7 +57,7 @@ public class CreateNewItemActivity extends AppCompatActivity implements AdapterV
         typeSpinner.setAdapter(typeSpinnerAdapter);
         typeSpinner.setOnItemSelectedListener(this);
 
-        List<String> subtypelist = Equipaggiamento.getSubtipobase();
+        List<String> subtypelist = EquipaggiamentoOld.getSubtipobase();
         ArrayAdapter<String> subtypeSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_item);
         subtypeSpinnerAdapter.add(SELEZIONAST);
         subtypeSpinnerAdapter.addAll(subtypelist);
@@ -131,9 +131,9 @@ public class CreateNewItemActivity extends AppCompatActivity implements AdapterV
     }
 
     public void createEquipment(String nome, StringBuffer desc, String tipo, int costo, int peso, int capacita, String subtipo) {
-        Equipaggiamento nuovoEquipaggiamento = new Equipaggiamento(nome, desc, tipo, costo, peso, capacita, subtipo);
+        EquipaggiamentoOld nuovoEquipaggiamentoOld = new EquipaggiamentoOld(nome, desc, tipo, costo, peso, capacita, subtipo);
 
-        if (!dbManager.aggiungiEquipaggiamento(nuovoEquipaggiamento))
+        if (!dbManager.aggiungiEquipaggiamento(nuovoEquipaggiamentoOld))
             Toast.makeText(this, "inserimeto fallito", Toast.LENGTH_LONG).show();
         else
             onBackPressed();

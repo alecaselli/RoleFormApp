@@ -633,7 +633,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/equipaggiamento"
+                            android:id="@+id/equipaggiamentoOld"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
@@ -652,7 +652,7 @@
                         <LinearLayout
                             android:layout_width="250dp"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/equipaggiamento"
+                            android:layout_below="@id/equipaggiamentoOld"
                             android:orientation="vertical">
 
                             <RelativeLayout

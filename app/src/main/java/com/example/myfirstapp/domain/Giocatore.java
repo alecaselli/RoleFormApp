@@ -38,8 +38,8 @@ public class Giocatore {
     private Classe classe;
     private Razza razza;
     private List<Caratteristica> caratteristicaList;
-    private List<Equipaggiamento> borsa;
-    private List<Equipaggiamento> equipaggiato;
+    private List<EquipaggiamentoOld> borsa;
+    private List<EquipaggiamentoOld> equipaggiato;
     private List<Incantesimo> incantesimiGiocatore;
     private List<Abilita> abilitaList;
 
@@ -58,7 +58,7 @@ public class Giocatore {
         this.inizializzazionePG();
     }
 
-    public Giocatore(String nome, StringBuffer descrizione, int capacitaBorsa, int classeArmatura, int dado, int livello, int mana, int manaMax, int modCompetenza, int nDadi, int puntiEsperienza, int puntiFerita, int puntiStat, String altezza, String eta, String genere, String ideali, String iniziativa, String nomeCampagna, String noteAvventura, String sinossi, StringBuffer lingua, ValutaOld portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<Equipaggiamento> borsa, List<Equipaggiamento> equipaggiato, List<Incantesimo> incantesimiGiocatore, List<Abilita> abilitaList) {
+    public Giocatore(String nome, StringBuffer descrizione, int capacitaBorsa, int classeArmatura, int dado, int livello, int mana, int manaMax, int modCompetenza, int nDadi, int puntiEsperienza, int puntiFerita, int puntiStat, String altezza, String eta, String genere, String ideali, String iniziativa, String nomeCampagna, String noteAvventura, String sinossi, StringBuffer lingua, ValutaOld portafoglio, Classe classe, Razza razza, List<Caratteristica> caratteristicaList, List<EquipaggiamentoOld> borsa, List<EquipaggiamentoOld> equipaggiato, List<Incantesimo> incantesimiGiocatore, List<Abilita> abilitaList) {
         this.nome = nome;
         this.descrizione = descrizione;
         this.capacitaBorsa = capacitaBorsa;
@@ -308,19 +308,19 @@ public class Giocatore {
         this.caratteristicaList = caratteristicaList;
     }
 
-    public List<Equipaggiamento> getBorsa() {
+    public List<EquipaggiamentoOld> getBorsa() {
         return borsa;
     }
 
-    public void setBorsa(List<Equipaggiamento> borsa) {
+    public void setBorsa(List<EquipaggiamentoOld> borsa) {
         this.borsa = borsa;
     }
 
-    public List<Equipaggiamento> getEquipaggiato() {
+    public List<EquipaggiamentoOld> getEquipaggiato() {
         return equipaggiato;
     }
 
-    public void setEquipaggiato(List<Equipaggiamento> equipaggiato) {
+    public void setEquipaggiato(List<EquipaggiamentoOld> equipaggiato) {
         this.equipaggiato = equipaggiato;
     }
 
@@ -358,21 +358,21 @@ public class Giocatore {
         return null;
     }
 
-    public Equipaggiamento getEquipaggiato(String tipo) {
+    public EquipaggiamentoOld getEquipaggiato(String tipo) {
         if (this.equipaggiato != null) {
-            for (Equipaggiamento equipaggiamento : this.equipaggiato) {
-                if (equipaggiamento.getTipo().equals(tipo))
-                    return equipaggiamento;
+            for (EquipaggiamentoOld equipaggiamentoOld : this.equipaggiato) {
+                if (equipaggiamentoOld.getTipo().equals(tipo))
+                    return equipaggiamentoOld;
             }
         }
         return null;
     }
 
-    public Equipaggiamento getBorsa(String nomeo) {
+    public EquipaggiamentoOld getBorsa(String nomeo) {
         if (this.borsa != null) {
-            for (Equipaggiamento equipaggiamento : this.borsa) {
-                if (equipaggiamento.getNome().equals(nomeo))
-                    return equipaggiamento;
+            for (EquipaggiamentoOld equipaggiamentoOld : this.borsa) {
+                if (equipaggiamentoOld.getNome().equals(nomeo))
+                    return equipaggiamentoOld;
             }
         }
         return null;
@@ -432,35 +432,35 @@ public class Giocatore {
     }
 
     /* serie di metodi per aggiungere/eliminare elementi da liste */
-    public void aggiungiBorsa(List<Equipaggiamento> nuovo) {
+    public void aggiungiBorsa(List<EquipaggiamentoOld> nuovo) {
         this.borsa.addAll(nuovo);
     }
 
-    public void aggiungiBorsa(Equipaggiamento nuovo) {
+    public void aggiungiBorsa(EquipaggiamentoOld nuovo) {
         this.borsa.add(nuovo);
     }
 
-    public void eliminaBorsa(@NotNull List<Equipaggiamento> togli) {
+    public void eliminaBorsa(@NotNull List<EquipaggiamentoOld> togli) {
         this.borsa.removeAll(togli);
     }
 
-    public void eliminaBorsa(@NotNull Equipaggiamento togli) {
+    public void eliminaBorsa(@NotNull EquipaggiamentoOld togli) {
         this.borsa.remove(togli);
     }
 
-    public void aggiungiEquipaggiato(List<Equipaggiamento> nuovo) {
+    public void aggiungiEquipaggiato(List<EquipaggiamentoOld> nuovo) {
         this.equipaggiato.addAll(nuovo);
     }
 
-    public void aggiungiEquipaggiato(Equipaggiamento nuovo) {
+    public void aggiungiEquipaggiato(EquipaggiamentoOld nuovo) {
         this.equipaggiato.add(nuovo);
     }
 
-    public void eliminaEquipaggiato(@NotNull List<Equipaggiamento> togli) {
+    public void eliminaEquipaggiato(@NotNull List<EquipaggiamentoOld> togli) {
         this.equipaggiato.removeAll(togli);
     }
 
-    public void eliminaEquipaggiato(@NotNull Equipaggiamento togli) {
+    public void eliminaEquipaggiato(@NotNull EquipaggiamentoOld togli) {
         this.equipaggiato.remove(togli);
     }
 
@@ -500,12 +500,12 @@ public class Giocatore {
         this.sinossi = "";
         this.setLingua(this.razza.getLingua());
 
-        List<Equipaggiamento> equitemp = this.classe.getEquipaggiamentoList();
+        List<EquipaggiamentoOld> equitemp = this.classe.getEquipaggiamentoList();
         if (equitemp != null)
             this.setBorsa(equitemp);
         else
-            this.setBorsa(new ArrayList<Equipaggiamento>());
-        this.setEquipaggiato(new ArrayList<Equipaggiamento>());
+            this.setBorsa(new ArrayList<EquipaggiamentoOld>());
+        this.setEquipaggiato(new ArrayList<EquipaggiamentoOld>());
 
         List<Incantesimo> inctemp = this.classe.getIncantesimiClasse();
         if (inctemp != null)

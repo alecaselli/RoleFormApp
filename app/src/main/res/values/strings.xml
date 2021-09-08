@@ -107,6 +107,11 @@
     <string name="abilita_assente_error">Abilità non presente nella lista del giocatore</string>
     <string name="aggiungi"> AGGIUNGI </string>
     <string name="non_equip">Non equipaggiata</string>
-    <string name="spinner_prompt_abilita">Seleziona l'abilita da aggiungere</string>
+    <string name="spinner_prompt_abilita">Seleziona abilita da aggiungere</string>
+    <string name="borsa_rimuovi_fallita">Aggiunta dell\'oggetto fallita</string>
+    <string name="non_equipaggiabile">Equipaggiamento non equipaggiabile</string>
+    <string name="arma">arma</string>
+    <string name="armatura">armatura</string>
+    <string name="scudo">scudo</string>
 
 </resources>

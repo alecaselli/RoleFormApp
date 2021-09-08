@@ -21,7 +21,7 @@ import com.example.myfirstapp.interactor.AbilitaGiocatoreInteractor;
 import com.example.myfirstapp.interactor.InterfaceAbilitaGiocatoreInteractor;
 import com.example.myfirstapp.interactor.InterfaceAbilitaGiocatoreView;
 import com.example.myfirstapp.utilities.CardAbility;
-import com.example.myfirstapp.utilities.MyOperationFaildException;
+import com.example.myfirstapp.utilities.MyExceptionOperationFaild;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -122,13 +122,13 @@ public class CharacterSkillsActivity extends AppCompatActivity implements Interf
         finish();
     }
 
-    private int getPosition(String nome) throws MyOperationFaildException {
+    private int getPosition(String nome) throws MyExceptionOperationFaild {
         for( CardAbility card : cardAbilityList){
             if(card.getNome().equals(nome)){
                 return cardAbilityList.indexOf(card);
             }
         }
-        throw new MyOperationFaildException();
+        throw new MyExceptionOperationFaild();
     }
 
     @Override
@@ -149,7 +149,7 @@ public class CharacterSkillsActivity extends AppCompatActivity implements Interf
             int position = getPosition(nomea);
             cardAbilityList.remove(position);
             mAdapter.notifyItemRemoved(position);
-        }catch (MyOperationFaildException ignored){}
+        }catch (MyExceptionOperationFaild ignored){}
     }
 
     @Override
@@ -158,7 +158,7 @@ public class CharacterSkillsActivity extends AppCompatActivity implements Interf
             int position = getPosition(nomea);
             cardAbilityList.get(position).swapBool();
             mAdapter.notifyItemChanged(position);
-        }catch (MyOperationFaildException ignored){}
+        }catch (MyExceptionOperationFaild ignored){}
     }
 
     @Override
