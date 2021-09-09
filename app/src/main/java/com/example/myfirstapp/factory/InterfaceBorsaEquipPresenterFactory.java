@@ -1,0 +1,17 @@
+package com.example.myfirstapp.factory;
+
+import com.example.myfirstapp.interactorbosa.InterfaceBorsaGiocatoreDB;
+import com.example.myfirstapp.interactorbosa.InterfaceBorsaGiocatoreInteractor;
+import com.example.myfirstapp.interactorbosa.InterfaceEquipaggiatoGiocatoreDB;
+import com.example.myfirstapp.interactorbosa.InterfaceEquipaggiatoGiocatoreInteractor;
+import com.example.myfirstapp.interactorbosa.InterfaceOggettoDB;
+import com.example.myfirstapp.presenter.BorsaGiocatorePresenter;
+import com.example.myfirstapp.presenter.EquipaggiatoGiocatorePresenter;
+import com.example.myfirstapp.presenter.InterfaceBorsaGiocatoreView;
+import com.example.myfirstapp.presenter.InterfaceEquipaggiatoGiocatoreView;
+import com.example.myfirstapp.utilities.MyExceptionDB;
+
+public interface InterfaceBorsaEquipPresenterFactory {
+    BorsaGiocatorePresenter createBorsaGiocatorePresenter(InterfaceBorsaGiocatoreView viewBorsa) throws MyExceptionDB;
+    EquipaggiatoGiocatorePresenter createEquipaggiatoGiocatorePresenter(InterfaceEquipaggiatoGiocatoreView viewEquipaggiato, InterfaceBorsaGiocatoreView viewBorsa) throws MyExceptionDB;
+}

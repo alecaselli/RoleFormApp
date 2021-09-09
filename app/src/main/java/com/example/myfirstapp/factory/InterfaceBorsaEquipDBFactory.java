@@ -9,7 +9,7 @@ import com.example.myfirstapp.interactorbosa.InterfaceOggettoDB;
 
 public interface InterfaceBorsaEquipDBFactory {
 
-    InterfaceBorsaGiocatoreDB createBorsaDB(String nomecamp, String nomeg, Context ctx);
-    InterfaceEquipaggiatoGiocatoreDB createEquipaggiatoDB(String nomecamp, String nomeg, Context ctx);
-    InterfaceOggettoDB createOggettoDB(Context ctx);
+    InterfaceBorsaGiocatoreDB createBorsaDB();
+    InterfaceEquipaggiatoGiocatoreDB createEquipaggiatoDB();
+    InterfaceOggettoDB createOggettoDB();
 }

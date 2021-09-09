@@ -17,14 +17,13 @@ import android.widget.Toast;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.adapter.CardEquipAdapter;
 import com.example.myfirstapp.factory.BorsaEquipDBFactory;
-import com.example.myfirstapp.factory.BorsaEquipFactory;
+import com.example.myfirstapp.factory.BorsaEquipInteractorFactory;
+import com.example.myfirstapp.factory.BorsaEquipPresenterFactory;
 import com.example.myfirstapp.factory.InterfaceBorsaEquipDBFactory;
-import com.example.myfirstapp.factory.InterfaceBorsaEquipFactory;
+import com.example.myfirstapp.factory.InterfaceBorsaEquipInteractorFactory;
+import com.example.myfirstapp.factory.InterfaceBorsaEquipPresenterFactory;
 import com.example.myfirstapp.interactorbosa.BorsaDataStruct;
 import com.example.myfirstapp.interactorbosa.EquipDataStruct;
-import com.example.myfirstapp.interactorbosa.InterfaceBorsaGiocatoreInteractor;
-import com.example.myfirstapp.interactorbosa.InterfaceEquipaggiatoGiocatoreInteractor;
-import com.example.myfirstapp.interactorbosa.InterfaceOggettoDB;
 import com.example.myfirstapp.presenter.BorsaGiocatorePresenter;
 import com.example.myfirstapp.presenter.EquipViewStruct;
 import com.example.myfirstapp.presenter.EquipaggiatoGiocatorePresenter;
@@ -56,35 +55,47 @@ public class CharacterBagActivity extends AppCompatActivity implements Interface
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_bag_temporaneo);
 
-        this.estraiPresenter();
+        this.estraiIntent();
+        this.setPresenter();
         this.setView();
     }
 
-    public void estraiPresenter() {
+    public void estraiIntent() {
         Intent intent = getIntent();
         nomecamp = intent.getStringExtra("nomecamp");
         nomeg = intent.getStringExtra("nomeg");
-        InterfaceBorsaEquipFactory factory = new BorsaEquipFactory();
-        InterfaceBorsaEquipDBFactory dbFactory = new BorsaEquipDBFactory();
+    }
+
+    private void setPresenter(){
+        InterfaceBorsaEquipDBFactory dbFactory = new BorsaEquipDBFactory(nomecamp, nomeg, this);
+        InterfaceBorsaEquipInteractorFactory interactorFactory = new BorsaEquipInteractorFactory(dbFactory);
+        InterfaceBorsaEquipPresenterFactory presenterFactory = new BorsaEquipPresenterFactory(interactorFactory);
         try {
-            InterfaceOggettoDB dbOggetto = dbFactory.createOggettoDB(this);
-            InterfaceBorsaGiocatoreInteractor borsaInteractor = factory.createBorsaGiocatoreInteractor(dbOggetto, dbFactory.createBorsaDB(nomecamp, nomeg,this));
-            InterfaceEquipaggiatoGiocatoreInteractor equipaggiatoInteractor = factory.createEquipaggiatoGiocatoreInteractor(borsaInteractor, dbOggetto, dbFactory.createEquipaggiatoDB(nomecamp, nomeg, this));
-            borsaPresenter = factory.createBorsaGiocatorePresenter(borsaInteractor, this);
-            equipaggiatoPresenter = factory.createEquipaggiatoGiocatorePresenter(equipaggiatoInteractor, this, this);
+            borsaPresenter = presenterFactory.createBorsaGiocatorePresenter(this);
+            equipaggiatoPresenter = presenterFactory.createEquipaggiatoGiocatorePresenter(this, this);
         } catch (MyExceptionDB exceptionDB) {
             Toast.makeText(this, this.getString(R.string.db_access_error), Toast.LENGTH_LONG).show();
             onBackPressed();
         }
     }
 
-    public void setView() {
+    private void setView() {
         borsaPresenter.setborsa();
         borsaPresenter.setOggettiNonInBorsa();
         equipaggiatoPresenter.setEquipaggiato();
     }
 
-    public void setRecyclerView() {
+    private void aggiungiABorsa(@NonNull String nome) {
+        if (nome.equals(getString(R.string.aggiungi))) return;
+        borsaPresenter.aggiungiOggetto(nome);
+    }
+
+    private void setBorsaEmptyView() {
+        int visibility = cardEquipList.isEmpty() ? View.VISIBLE : View.GONE;
+        (findViewById(R.id.bag_empty)).setVisibility(visibility);
+    }
+
+    private void setRecyclerView() {
         mRecyclerView = findViewById(R.id.bag_recyclerView);
         mRecyclerView.setHasFixedSize(true);
 
@@ -113,8 +124,17 @@ public class CharacterBagActivity extends AppCompatActivity implements Interface
 
     }
 
-    public void equipaggia(int position) {
+    private void rimuoviDaBorsa(int position) {
+        borsaPresenter.rimuoviOggetto(cardEquipList.get(position).getNome(), position);
+    }
+
+    private void equipaggia(int position) {
         equipaggiatoPresenter.equipaggia(cardEquipList.get(position).getNome(), position);
+    }
+
+    private void disequipaggia(int viewId){
+        text = findViewById(viewId);
+        equipaggiatoPresenter.disequipaggia(text.getText().toString(), viewId);
     }
 
     public void disequipaggiaArma(View view) {
@@ -129,51 +149,7 @@ public class CharacterBagActivity extends AppCompatActivity implements Interface
         this.disequipaggia(R.id.bag_shield);
     }
 
-    public void disequipaggia(int viewId){
-        text = findViewById(viewId);
-        equipaggiatoPresenter.disequipaggia(text.getText().toString(), viewId);
-    }
-
-    public void setBorsaEmptyView() {
-        int visibility = cardEquipList.isEmpty() ? View.VISIBLE : View.GONE;
-        (findViewById(R.id.bag_empty)).setVisibility(visibility);
-    }
-
-    public void aggiungiABorsa() {
-        String nomee = itemSpinner.getSelectedItem().toString();
-        if (nomee.equals(getString(R.string.aggiungi))) return;
-
-        borsaPresenter.aggiungiOggetto(nomee);
-    }
-
-    public void rimuoviDaBorsa(int position) {
-        borsaPresenter.rimuoviOggetto(cardEquipList.get(position).getNome(), position);
-    }
-
-    public void openEquipment(int position) {
-        /*Intent intent = new Intent(this, EquipmentActivity.class);
-        intent.putExtra("nomee", cardBoolList.get(position).getNome());
-        startActivity(intent);
-        finish();*/
-    }
-
-    public void openCreateNewItem(View view) {
-        Intent intent = new Intent(this, CreateNewItemActivity.class);
-        intent.putExtra("nomecamp", nomecamp);
-        intent.putExtra("nomeg", nomeg);
-        startActivity(intent);
-        finish();
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, CharacterActivity.class);
-        intent.putExtra("nomecamp", nomecamp);
-        intent.putExtra("nomeg", nomeg);
-        startActivity(intent);
-        finish();
-    }
-
+    /* METODI BORSA VIEW */
     @Override
     public void displayError(int indexError) {
         Toast.makeText(this, this.getString(indexError), Toast.LENGTH_LONG).show();
@@ -221,7 +197,8 @@ public class CharacterBagActivity extends AppCompatActivity implements Interface
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                aggiungiABorsa();
+                String nome = itemSpinner.getSelectedItem().toString();
+                aggiungiABorsa(nome);
                 setBorsaEmptyView();
             }
 
@@ -232,6 +209,7 @@ public class CharacterBagActivity extends AppCompatActivity implements Interface
         });
     }
 
+    /* METODI EQUIPAGGIATO VIEW */
     @Override
     public void equipaggia(@NonNull EquipDataStruct equip, int viewId) {
         text = findViewById(viewId);
@@ -251,5 +229,30 @@ public class CharacterBagActivity extends AppCompatActivity implements Interface
             text = findViewById(equip.getViewId());
             text.setText(equip.getNome());
         }
+    }
+
+    /* METODI DI ATTIVAZIONE ACTIVITY */
+    private void openEquipment(int position) {
+        /*Intent intent = new Intent(this, EquipmentActivity.class);
+        intent.putExtra("nomee", cardBoolList.get(position).getNome());
+        startActivity(intent);
+        finish();*/
+    }
+
+    public void openCreateNewItem(View view) {
+        Intent intent = new Intent(this, CreateNewItemActivity.class);
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, CharacterActivity.class);
+        intent.putExtra("nomecamp", nomecamp);
+        intent.putExtra("nomeg", nomeg);
+        startActivity(intent);
+        finish();
     }
 }
