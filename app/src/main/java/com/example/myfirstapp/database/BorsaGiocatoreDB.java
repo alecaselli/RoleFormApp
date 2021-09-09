@@ -6,7 +6,6 @@ import androidx.annotation.Nullable;
 
 import com.example.myfirstapp.domain.EquipaggiamentoOld;
 import com.example.myfirstapp.interactorbosa.InterfaceBorsaGiocatoreDB;
-import com.example.myfirstapp.interactorbosa.InterfaceOggettoDB;
 
 import java.util.List;
 

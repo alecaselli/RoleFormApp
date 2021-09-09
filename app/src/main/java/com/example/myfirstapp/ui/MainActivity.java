@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myfirstapp.utilities.CardGiocatore;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.adapter.CardGiocatoreAdapter;
-import com.example.myfirstapp.databaseTabelle.TabellaCampiComuni;
+import com.example.myfirstapp.databasetabelle.TabellaCampiComuni;
 import com.example.myfirstapp.database.DBManager;
-import com.example.myfirstapp.databaseTabelle.TabellaGiocatore;
+import com.example.myfirstapp.databasetabelle.TabellaGiocatore;
 
 import java.util.ArrayList;
 import java.util.List;

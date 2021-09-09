@@ -1,4 +1,4 @@
-package com.example.myfirstapp.databaseTabelle;
+package com.example.myfirstapp.databasetabelle;
 
 public class TabellaEquipaggiamento {
     public static final String FIELD_NOMEE = "nomee";

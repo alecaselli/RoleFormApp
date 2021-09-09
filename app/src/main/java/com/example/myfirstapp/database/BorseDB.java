@@ -9,19 +9,11 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.example.myfirstapp.databaseTabelle.TabellaArma;
-import com.example.myfirstapp.databaseTabelle.TabellaArmatura;
-import com.example.myfirstapp.databaseTabelle.TabellaCampiComuni;
-import com.example.myfirstapp.databaseTabelle.TabellaEquipaggiamento;
-import com.example.myfirstapp.databaseTabelle.TabellaGiocatore;
-import com.example.myfirstapp.databaseTabelle.TabellaIncantesimi;
-import com.example.myfirstapp.databaseTabelle.TabelleHA;
-import com.example.myfirstapp.domain.Arma;
-import com.example.myfirstapp.domain.Armatura;
+import com.example.myfirstapp.databasetabelle.TabellaEquipaggiamento;
+import com.example.myfirstapp.databasetabelle.TabellaGiocatore;
+import com.example.myfirstapp.databasetabelle.TabelleHA;
 import com.example.myfirstapp.domain.EquipaggiamentoOld;
 import com.example.myfirstapp.interactorbosa.InterfaceOggettoDB;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -161,7 +153,7 @@ public class BorseDB {
             List<EquipaggiamentoOld> equipaggiamentoOldList = new ArrayList<EquipaggiamentoOld>();
             while (!resultSet.isAfterLast()) {
                 String nome = resultSet.getString(resultSet.getColumnIndex(TabellaEquipaggiamento.FIELD_NOMEE));
-                EquipaggiamentoOld equipaggiamento= dbOggetto.readOggetto(nome);
+                EquipaggiamentoOld equipaggiamento = dbOggetto.readOggetto(nome);
                 if(equipaggiamento != null)
                     equipaggiamentoOldList.add(equipaggiamento);
 

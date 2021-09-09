@@ -1,4 +1,4 @@
-package com.example.myfirstapp.databaseTabelle;
+package com.example.myfirstapp.databasetabelle;
 
 public class TabellaIncantesimi {
     public static final String FIELD_NOMEI = "nomei";

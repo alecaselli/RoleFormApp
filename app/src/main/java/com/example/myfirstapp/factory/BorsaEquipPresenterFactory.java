@@ -1,15 +1,11 @@
 package com.example.myfirstapp.factory;
 
-import androidx.annotation.Nullable;
-
-import com.example.myfirstapp.interactorbosa.BorsaGiocatoreInteractor;
-import com.example.myfirstapp.interactorbosa.EquipaggiatoGiocatoreInteractor;
 import com.example.myfirstapp.interactorbosa.InterfaceBorsaGiocatoreInteractor;
 import com.example.myfirstapp.interactorbosa.InterfaceEquipaggiatoGiocatoreInteractor;
-import com.example.myfirstapp.presenter.BorsaGiocatorePresenter;
-import com.example.myfirstapp.presenter.EquipaggiatoGiocatorePresenter;
-import com.example.myfirstapp.presenter.InterfaceBorsaGiocatoreView;
-import com.example.myfirstapp.presenter.InterfaceEquipaggiatoGiocatoreView;
+import com.example.myfirstapp.presenterborsa.BorsaGiocatorePresenter;
+import com.example.myfirstapp.presenterborsa.EquipaggiatoGiocatorePresenter;
+import com.example.myfirstapp.presenterborsa.InterfaceBorsaGiocatoreView;
+import com.example.myfirstapp.presenterborsa.InterfaceEquipaggiatoGiocatoreView;
 import com.example.myfirstapp.utilities.MyExceptionDB;
 
 public class BorsaEquipPresenterFactory implements InterfaceBorsaEquipPresenterFactory {

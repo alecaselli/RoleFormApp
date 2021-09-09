@@ -1,4 +1,4 @@
-package com.example.myfirstapp.presenter;
+package com.example.myfirstapp.presenterborsa;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.interactorbosa.BorsaDataStruct;
@@ -37,12 +37,7 @@ public class BorsaGiocatorePresenter {
 
     public void setborsa(){
         Iterator<BorsaDataStruct> borsaDataIterator = borsa.getborsaIterator();
-        ArrayList<CardEquip> cardEquipList = new ArrayList<>();
-        while(borsaDataIterator.hasNext()){
-            BorsaDataStruct equip = borsaDataIterator.next();
-            cardEquipList.add(new CardEquip(equip.getNome(), equip.getTipo()));
-        }
-        viewBorsa.setBorsa(cardEquipList.iterator());
+        viewBorsa.setBorsa(borsaDataIterator);
     }
 
     public void setOggettiNonInBorsa(){

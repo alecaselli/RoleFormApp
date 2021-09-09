@@ -1,7 +1,5 @@
 package com.example.myfirstapp.interactorbosa;
 
-import androidx.annotation.Nullable;
-
 import com.example.myfirstapp.domain.EquipaggiamentoOld;
 import com.example.myfirstapp.utilities.MyExceptionDB;
 import com.example.myfirstapp.utilities.MyExeptionOggettoNonTrovato;
@@ -12,9 +10,9 @@ import java.util.List;
 
 public class BorsaGiocatoreInteractor implements InterfaceBorsaGiocatoreInteractor {
 
+    private List<EquipaggiamentoOld> borsa;
     private final InterfaceOggettoDB dbOggetto;
     private final InterfaceBorsaGiocatoreDB dbBorsa;
-    private List<EquipaggiamentoOld> borsa;
 
     public BorsaGiocatoreInteractor(InterfaceOggettoDB dbOggetto, InterfaceBorsaGiocatoreDB dbBorsa) throws MyExceptionDB {
         this.dbOggetto = dbOggetto;

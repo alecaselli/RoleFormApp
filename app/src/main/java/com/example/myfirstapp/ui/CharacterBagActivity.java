@@ -24,29 +24,30 @@ import com.example.myfirstapp.factory.InterfaceBorsaEquipInteractorFactory;
 import com.example.myfirstapp.factory.InterfaceBorsaEquipPresenterFactory;
 import com.example.myfirstapp.interactorbosa.BorsaDataStruct;
 import com.example.myfirstapp.interactorbosa.EquipDataStruct;
-import com.example.myfirstapp.presenter.BorsaGiocatorePresenter;
-import com.example.myfirstapp.presenter.EquipViewStruct;
-import com.example.myfirstapp.presenter.EquipaggiatoGiocatorePresenter;
-import com.example.myfirstapp.presenter.InterfaceBorsaGiocatoreView;
-import com.example.myfirstapp.presenter.InterfaceEquipaggiatoGiocatoreView;
+import com.example.myfirstapp.presenterborsa.BorsaGiocatorePresenter;
+import com.example.myfirstapp.presenterborsa.EquipaggiatoGiocatorePresenter;
+import com.example.myfirstapp.presenterborsa.InterfaceBorsaGiocatoreView;
+import com.example.myfirstapp.presenterborsa.InterfaceEquipaggiatoGiocatoreView;
 import com.example.myfirstapp.utilities.CardEquip;
 import com.example.myfirstapp.utilities.MyExceptionDB;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class CharacterBagActivity extends AppCompatActivity implements InterfaceBorsaGiocatoreView, InterfaceEquipaggiatoGiocatoreView {
 
     private TextView text;
     private RecyclerView mRecyclerView;
     private GridLayoutManager mGridLayoutManager;
-    private CardEquipAdapter mAdapter;
+    private ArrayList<CardEquip> cardEquipList;
+    private CardEquipAdapter cardEquipAdapter;
     private Spinner itemSpinner;
 
     private BorsaGiocatorePresenter borsaPresenter;
     private EquipaggiatoGiocatorePresenter equipaggiatoPresenter;
-    private ArrayList<CardEquip> cardEquipList;
+    private final Map<String, Integer> tipiId = IdEquipaggiato.getTipiId();
     private String nomecamp;
     private String nomeg;
 
@@ -100,12 +101,12 @@ public class CharacterBagActivity extends AppCompatActivity implements Interface
         mRecyclerView.setHasFixedSize(true);
 
         mGridLayoutManager = new GridLayoutManager(this,3);
-        mAdapter = new CardEquipAdapter(cardEquipList);
+        cardEquipAdapter = new CardEquipAdapter(cardEquipList);
 
         mRecyclerView.setLayoutManager(mGridLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(cardEquipAdapter);
 
-        mAdapter.setOnItemClickListener(new CardEquipAdapter.OnItemClickListener() {
+        cardEquipAdapter.setOnItemClickListener(new CardEquipAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 openEquipment(position);
@@ -134,7 +135,7 @@ public class CharacterBagActivity extends AppCompatActivity implements Interface
 
     private void disequipaggia(int viewId){
         text = findViewById(viewId);
-        equipaggiatoPresenter.disequipaggia(text.getText().toString(), viewId);
+        equipaggiatoPresenter.disequipaggia(text.getText().toString());
     }
 
     public void disequipaggiaArma(View view) {
@@ -156,10 +157,11 @@ public class CharacterBagActivity extends AppCompatActivity implements Interface
     }
 
     @Override
-    public void setBorsa(@NonNull Iterator<CardEquip> cardEquipIterator) {
+    public void setBorsa(@NonNull Iterator<BorsaDataStruct> borsaDataIterator) {
         cardEquipList = new ArrayList<>();
-        while(cardEquipIterator.hasNext()){
-            cardEquipList.add(cardEquipIterator.next());
+        while(borsaDataIterator.hasNext()){
+            BorsaDataStruct borsaData = borsaDataIterator.next();
+            cardEquipList.add(new CardEquip(borsaData.getNome(), borsaData.getTipo()));
         }
         this.setBorsaEmptyView();
         this.setRecyclerView();
@@ -168,13 +170,13 @@ public class CharacterBagActivity extends AppCompatActivity implements Interface
     @Override
     public void addOggetto(@NonNull BorsaDataStruct borsaDataStruct) {
         cardEquipList.add(new CardEquip(borsaDataStruct.getNome(), borsaDataStruct.getTipo()));
-        mAdapter.notifyItemInserted(cardEquipList.size() - 1);
+        cardEquipAdapter.notifyItemInserted(cardEquipList.size() - 1);
     }
 
     @Override
     public void removeOggetto(int position) {
         cardEquipList.remove(position);
-        mAdapter.notifyItemRemoved(position);
+        cardEquipAdapter.notifyItemRemoved(position);
         this.setBorsaEmptyView();
     }
 
@@ -187,7 +189,7 @@ public class CharacterBagActivity extends AppCompatActivity implements Interface
         while(nomiIterator.hasNext()){
             equipaggiamentoList.add(nomiIterator.next());
         }
-        ArrayAdapter<String> ItemSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_item);
+        ArrayAdapter<String> ItemSpinnerAdapter = new ArrayAdapter<>(this, R.layout.spinner_custom_item);
         ItemSpinnerAdapter.add(getString(R.string.aggiungi));
         ItemSpinnerAdapter.addAll(equipaggiamentoList);
         ItemSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_custom_item);
@@ -211,23 +213,26 @@ public class CharacterBagActivity extends AppCompatActivity implements Interface
 
     /* METODI EQUIPAGGIATO VIEW */
     @Override
-    public void equipaggia(@NonNull EquipDataStruct equip, int viewId) {
+    public void equipaggia(@NonNull EquipDataStruct equipData) {
+        int viewId = tipiId.get(equipData.getTipo());
         text = findViewById(viewId);
-        text.setText(equip.getNome());
+        text.setText(equipData.getNome());
     }
 
     @Override
-    public void disequipaggia(EquipDataStruct equip, int viewId) {
+    public void disequipaggia(@NonNull EquipDataStruct equipData) {
+        int viewId = tipiId.get(equipData.getTipo());
         text = findViewById(viewId);
         text.setText(getString(R.string.non_equip));
     }
 
     @Override
-    public void setEquipaggiato(@NonNull Iterator<EquipViewStruct> iterator) {
+    public void setEquipaggiato(@NonNull Iterator<EquipDataStruct> iterator) {
         while(iterator.hasNext()){
-            EquipViewStruct equip = iterator.next();
-            text = findViewById(equip.getViewId());
-            text.setText(equip.getNome());
+            EquipDataStruct equipData = iterator.next();
+            int viewId = tipiId.get(equipData.getTipo());
+            text = findViewById(viewId);
+            text.setText(equipData.getNome());
         }
     }
 

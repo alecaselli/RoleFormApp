@@ -1,9 +1,8 @@
-package com.example.myfirstapp.presenter;
+package com.example.myfirstapp.presenterborsa;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.interactorbosa.BorsaDataStruct;
 import com.example.myfirstapp.interactorbosa.EquipDataStruct;
-import com.example.myfirstapp.interactorbosa.EquipaggiatoGiocatoreInteractor;
 import com.example.myfirstapp.interactorbosa.InterfaceEquipaggiatoGiocatoreInteractor;
 import com.example.myfirstapp.utilities.MyExceptionDB;
 import com.example.myfirstapp.utilities.MyExceptionNonEquipaggiabile;
@@ -18,7 +17,7 @@ public class EquipaggiatoGiocatorePresenter {
     private final InterfaceEquipaggiatoGiocatoreInteractor equipaggiato;
     private final InterfaceEquipaggiatoGiocatoreView viewEquipaggiato;
     private final InterfaceBorsaGiocatoreView viewBorsa;
-    private final Map<String, Integer> tipiId = Idequipaggiato.getTipiId();
+
 
     public EquipaggiatoGiocatorePresenter(InterfaceEquipaggiatoGiocatoreInteractor equipaggiato, InterfaceEquipaggiatoGiocatoreView viewEquipaggiato, InterfaceBorsaGiocatoreView viewBorsa) {
         this.equipaggiato = equipaggiato;
@@ -33,7 +32,7 @@ public class EquipaggiatoGiocatorePresenter {
             if(daDisequipaggiare != null){
                 viewBorsa.addOggetto(new BorsaDataStruct(daDisequipaggiare.getNome(),daDisequipaggiare.getTipo()));
             }
-            viewEquipaggiato.equipaggia(daEquipaggiare, tipiId.get(daEquipaggiare.getTipo()));
+            viewEquipaggiato.equipaggia(daEquipaggiare);
             viewBorsa.removeOggetto(position);
         }
         catch (MyExceptionDB e){
@@ -46,10 +45,10 @@ public class EquipaggiatoGiocatorePresenter {
         }
     }
 
-    public void disequipaggia(String nomeOggetto, int viewId){
+    public void disequipaggia(String nomeOggetto){
         try {
             EquipDataStruct disequipaggiato = equipaggiato.disequipaggia(nomeOggetto);
-            viewEquipaggiato.disequipaggia(disequipaggiato, viewId);
+            viewEquipaggiato.disequipaggia(disequipaggiato);
             viewBorsa.addOggetto(new BorsaDataStruct(disequipaggiato.getNome(), disequipaggiato.getTipo()));
         }
         catch (MyExceptionNonEquipaggiato ignore){}
@@ -59,13 +58,7 @@ public class EquipaggiatoGiocatorePresenter {
     }
 
     public void setEquipaggiato(){
-        List<EquipViewStruct> equipViewStructs = new ArrayList<>();
-        Iterator<EquipDataStruct> iterator = equipaggiato.equipaggiatoIterator();
-        while(iterator.hasNext()){
-            EquipDataStruct equipData = iterator.next();
-            equipViewStructs.add(new EquipViewStruct(equipData,tipiId.get(equipData.getTipo())));
-        }
-        viewEquipaggiato.setEquipaggiato(equipViewStructs.iterator());
+        viewEquipaggiato.setEquipaggiato(equipaggiato.equipaggiatoIterator());
     }
 
 }

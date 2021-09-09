@@ -7,10 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
-import com.example.myfirstapp.databaseTabelle.TabellaCampiComuni;
-import com.example.myfirstapp.databaseTabelle.TabellaAbilita;
-import com.example.myfirstapp.databaseTabelle.TabellaGiocatore;
-import com.example.myfirstapp.databaseTabelle.TabelleHA;
+import com.example.myfirstapp.databasetabelle.TabellaCampiComuni;
+import com.example.myfirstapp.databasetabelle.TabellaAbilita;
+import com.example.myfirstapp.databasetabelle.TabellaGiocatore;
+import com.example.myfirstapp.databasetabelle.TabelleHA;
 import com.example.myfirstapp.domain.Abilita;
 import com.example.myfirstapp.interactor.InterfaceAbilitaGiocatoreDB;
 

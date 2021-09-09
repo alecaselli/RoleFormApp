@@ -8,10 +8,10 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.example.myfirstapp.databaseTabelle.TabellaArma;
-import com.example.myfirstapp.databaseTabelle.TabellaArmatura;
-import com.example.myfirstapp.databaseTabelle.TabellaCampiComuni;
-import com.example.myfirstapp.databaseTabelle.TabellaEquipaggiamento;
+import com.example.myfirstapp.databasetabelle.TabellaArma;
+import com.example.myfirstapp.databasetabelle.TabellaArmatura;
+import com.example.myfirstapp.databasetabelle.TabellaCampiComuni;
+import com.example.myfirstapp.databasetabelle.TabellaEquipaggiamento;
 import com.example.myfirstapp.domain.Arma;
 import com.example.myfirstapp.domain.Armatura;
 import com.example.myfirstapp.domain.EquipaggiamentoOld;

@@ -102,7 +102,7 @@ public class EquipaggiatoGiocatoreInteractor implements InterfaceEquipaggiatoGio
         EquipaggiamentoOld equipaggiamento = this.getEquipaggiatoByTipo(tipo);
         return new EquipDataStruct(equipaggiamento.getNome(), equipaggiamento.getTipo());
     }
-    //Mai usato
+
     @Override
     public EquipDataStruct getEquipaggiatoDataByNome(String nomeOggetto) throws MyExceptionNonEquipaggiato {
         EquipaggiamentoOld equipaggiamento = this.getEquipaggiatoByNome(nomeOggetto);

@@ -1,7 +1,5 @@
 package com.example.myfirstapp.interactorbosa;
 
-import androidx.annotation.NonNull;
-
 public class EquipDataStruct {
     private String nome;
     private String tipo;

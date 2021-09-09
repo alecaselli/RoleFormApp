@@ -1,4 +1,4 @@
-package com.example.myfirstapp.presenter;
+package com.example.myfirstapp.presenterborsa;
 
 import com.example.myfirstapp.interactorbosa.EquipDataStruct;
 

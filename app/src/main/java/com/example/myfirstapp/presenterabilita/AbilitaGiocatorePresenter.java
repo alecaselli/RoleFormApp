@@ -1,4 +1,4 @@
-package com.example.myfirstapp.presenter;
+package com.example.myfirstapp.presenterabilita;
 
 import com.example.myfirstapp.interactor.InterfaceAbilitaGiocatoreInteractor;
 import com.example.myfirstapp.interactor.InterfaceAbilitaGiocatoreView;
