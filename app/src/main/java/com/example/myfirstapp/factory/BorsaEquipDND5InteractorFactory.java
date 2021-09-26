@@ -1,15 +1,15 @@
 package com.example.myfirstapp.factory;
 
-import com.example.myfirstapp.interactorbosa.BorsaGiocatoreInteractor;
-import com.example.myfirstapp.interactorbosa.EquipaggiatoGiocatoreInteractor;
-import com.example.myfirstapp.interactorbosa.InterfaceBorsaGiocatoreInteractor;
-import com.example.myfirstapp.interactorbosa.InterfaceEquipaggiatoGiocatoreInteractor;
+import com.example.myfirstapp.borsa.interactorbosa.BorsaGiocatoreInteractor;
+import com.example.myfirstapp.borsa.interactorbosa.EquipaggiatoGiocatoreInteractor;
+import com.example.myfirstapp.borsa.interactorbosa.InterfaceBorsaGiocatoreInteractor;
+import com.example.myfirstapp.borsa.interactorbosa.InterfaceEquipaggiatoGiocatoreInteractor;
 import com.example.myfirstapp.utilities.MyExceptionDB;
 
-public class BorsaEquipInteractorFactory implements InterfaceBorsaEquipInteractorFactory{
+public class BorsaEquipDND5InteractorFactory implements InterfaceBorsaEquipInteractorFactory{
     private final InterfaceBorsaEquipDBFactory dbFactory;
 
-    public BorsaEquipInteractorFactory(InterfaceBorsaEquipDBFactory dbFactory) {
+    public BorsaEquipDND5InteractorFactory(InterfaceBorsaEquipDBFactory dbFactory) {
         this.dbFactory = dbFactory;
     }
 

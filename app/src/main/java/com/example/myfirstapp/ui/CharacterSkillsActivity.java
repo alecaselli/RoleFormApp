@@ -1,5 +1,6 @@
 package com.example.myfirstapp.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -64,7 +65,7 @@ public class CharacterSkillsActivity extends AppCompatActivity implements Interf
         abilitaGiocatoreInteractor.setModCompetenza();
     }
 
-    public void setRecyclerView() {
+    private void setRecyclerView() {
         mRecyclerView = findViewById(R.id.skills_recyclerView);
         mRecyclerView.setHasFixedSize(true);
 
@@ -96,15 +97,15 @@ public class CharacterSkillsActivity extends AppCompatActivity implements Interf
 
     }
 
-    public void changeCompetenza(int position) {
+    private void changeCompetenza(int position) {
         abilitaGiocatoreInteractor.swapAbilitaGiocatore(cardAbilityList.get(position).getNome());
     }
 
-    public void deleteAbilita(int position){
+    private void deleteAbilita(int position){
         abilitaGiocatoreInteractor.removeAbilitaGiocatore(cardAbilityList.get(position).getNome());
     }
 
-    public void openSkillActivity(int position) {
+    private void openSkillActivity(int position) {
         /*TODO:
         Intent intent = new Intent(this, SkillActivity.class);
         intent.putExtra("nomea", mCardAbilitaList.get(position).getNomeabilita());
@@ -162,7 +163,7 @@ public class CharacterSkillsActivity extends AppCompatActivity implements Interf
     }
 
     @Override
-    public void setAbilita(HashMap<String, Boolean> nomiCompetenze) {
+    public void setAbilita(@NonNull HashMap<String, Boolean> nomiCompetenze) {
         cardAbilityList = new ArrayList<>();
         for(String nome : nomiCompetenze.keySet())
             cardAbilityList.add(new CardAbility(nome, nomiCompetenze.get(nome)));
@@ -170,7 +171,7 @@ public class CharacterSkillsActivity extends AppCompatActivity implements Interf
     }
 
     @Override
-    public void setSpinnerAddAbilita(List<String> nomiAbilita) {
+    public void setSpinnerAddAbilita(List<String> nomiAbilita){
         itemSpinner = findViewById(R.id.skills_add_item_spinner);
         itemSpinner.setPrompt(getString(R.string.spinner_prompt_abilita));
         ArrayAdapter<String> ItemSpinnerAdapter = new ArrayAdapter<>(this, R.layout.spinner_custom_item);

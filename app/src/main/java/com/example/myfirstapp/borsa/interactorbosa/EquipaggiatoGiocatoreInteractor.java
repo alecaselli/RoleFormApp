@@ -1,4 +1,4 @@
-package com.example.myfirstapp.interactorbosa;
+package com.example.myfirstapp.borsa.interactorbosa;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,9 +19,9 @@ public class EquipaggiatoGiocatoreInteractor implements InterfaceEquipaggiatoGio
     private List<EquipaggiamentoOld> equipaggiato;
     private final InterfaceBorsaGiocatoreInteractor borsaIterator;
     private final InterfaceOggettoDB dbOggetto;
-    private final InterfaceEquipaggiatoGiocatoreDB dbEquipaggiato;
+    private final InterfaceContenitoriEquipaggiamentoDB dbEquipaggiato;
 
-    public EquipaggiatoGiocatoreInteractor(InterfaceBorsaGiocatoreInteractor borsaIterator, InterfaceOggettoDB dbOggetto, InterfaceEquipaggiatoGiocatoreDB dbEquipaggiato) throws MyExceptionDB{
+    public EquipaggiatoGiocatoreInteractor(InterfaceBorsaGiocatoreInteractor borsaIterator, InterfaceOggettoDB dbOggetto, InterfaceContenitoriEquipaggiamentoDB dbEquipaggiato) throws MyExceptionDB{
         this.borsaIterator = borsaIterator;
         this.dbOggetto = dbOggetto;
         this.dbEquipaggiato = dbEquipaggiato;
@@ -29,7 +29,7 @@ public class EquipaggiatoGiocatoreInteractor implements InterfaceEquipaggiatoGio
     }
 
     private void inizzializzaEquipaggiato() throws MyExceptionDB {
-        equipaggiato = dbEquipaggiato.readEquipaggiato();
+        equipaggiato = dbEquipaggiato.readBorsa();
         if(equipaggiato == null)
             throw new MyExceptionDB();
     }

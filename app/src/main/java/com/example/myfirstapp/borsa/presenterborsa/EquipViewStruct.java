@@ -1,6 +1,6 @@
-package com.example.myfirstapp.presenterborsa;
+package com.example.myfirstapp.borsa.presenterborsa;
 
-import com.example.myfirstapp.interactorbosa.EquipDataStruct;
+import com.example.myfirstapp.borsa.interactorbosa.EquipDataStruct;
 
 public class EquipViewStruct {
     EquipDataStruct equipData;

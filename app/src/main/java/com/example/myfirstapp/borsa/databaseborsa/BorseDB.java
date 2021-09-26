@@ -1,4 +1,4 @@
-package com.example.myfirstapp.database;
+package com.example.myfirstapp.borsa.databaseborsa;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,11 +9,12 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.example.myfirstapp.database.DBHelper;
 import com.example.myfirstapp.databasetabelle.TabellaEquipaggiamento;
 import com.example.myfirstapp.databasetabelle.TabellaGiocatore;
 import com.example.myfirstapp.databasetabelle.TabelleHA;
 import com.example.myfirstapp.domain.EquipaggiamentoOld;
-import com.example.myfirstapp.interactorbosa.InterfaceOggettoDB;
+import com.example.myfirstapp.borsa.interactorbosa.InterfaceOggettoDB;
 
 import java.util.ArrayList;
 import java.util.List;

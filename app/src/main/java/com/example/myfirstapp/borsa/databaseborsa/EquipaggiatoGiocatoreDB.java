@@ -1,15 +1,16 @@
-package com.example.myfirstapp.database;
+package com.example.myfirstapp.borsa.databaseborsa;
 
 import android.content.Context;
 
 import androidx.annotation.Nullable;
 
+import com.example.myfirstapp.borsa.databaseborsa.BorseDB;
 import com.example.myfirstapp.domain.EquipaggiamentoOld;
-import com.example.myfirstapp.interactorbosa.InterfaceEquipaggiatoGiocatoreDB;
+import com.example.myfirstapp.borsa.interactorbosa.InterfaceContenitoriEquipaggiamentoDB;
 
 import java.util.List;
 
-public class EquipaggiatoGiocatoreDB implements InterfaceEquipaggiatoGiocatoreDB {
+public class EquipaggiatoGiocatoreDB implements InterfaceContenitoriEquipaggiamentoDB {
     private final BorseDB dbBorse;
 
     public EquipaggiatoGiocatoreDB(String nomecamp, String nomeg, Context ctx) {
@@ -31,7 +32,7 @@ public class EquipaggiatoGiocatoreDB implements InterfaceEquipaggiatoGiocatoreDB
 
     @Nullable
     @Override
-    public List<EquipaggiamentoOld> readEquipaggiato() {
+    public List<EquipaggiamentoOld> readBorsa() {
         return dbBorse.readEquipaggiamenti(false);
     }
 

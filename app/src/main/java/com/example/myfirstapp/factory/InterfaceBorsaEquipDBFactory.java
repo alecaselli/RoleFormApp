@@ -1,12 +1,11 @@
 package com.example.myfirstapp.factory;
 
-import com.example.myfirstapp.interactorbosa.InterfaceBorsaGiocatoreDB;
-import com.example.myfirstapp.interactorbosa.InterfaceEquipaggiatoGiocatoreDB;
-import com.example.myfirstapp.interactorbosa.InterfaceOggettoDB;
+import com.example.myfirstapp.borsa.interactorbosa.InterfaceContenitoriEquipaggiamentoDB;
+import com.example.myfirstapp.borsa.interactorbosa.InterfaceOggettoDB;
 
 public interface InterfaceBorsaEquipDBFactory {
 
-    InterfaceBorsaGiocatoreDB createBorsaDB();
-    InterfaceEquipaggiatoGiocatoreDB createEquipaggiatoDB();
+    InterfaceContenitoriEquipaggiamentoDB createBorsaDB();
+    InterfaceContenitoriEquipaggiamentoDB createEquipaggiatoDB();
     InterfaceOggettoDB createOggettoDB();
 }

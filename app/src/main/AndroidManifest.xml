@@ -13,8 +13,8 @@
         <activity android:name=".ui.CharacterSpellsActivity" />
         <activity android:name=".ui.CharacterDetailsActivity" />
         <activity android:name=".ui.EditActivity" />
-        <activity android:name=".ui.CharacterBagActivity" />
-        <activity android:name=".ui.CreateNewItemActivity" />
+        <activity android:name=".borsa.uiborsa.CharacterBagActivity" />
+        <activity android:name=".borsa.uiborsa.CreateNewItemActivity" />
         <activity android:name=".ui.CreateNewSpell" />
         <activity android:name=".ui.CharacterStatsActivity" />
         <activity android:name=".ui.CreateNewCharacterActivity" />

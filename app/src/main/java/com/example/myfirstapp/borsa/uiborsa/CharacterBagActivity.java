@@ -1,4 +1,4 @@
-package com.example.myfirstapp.ui;
+package com.example.myfirstapp.borsa.uiborsa;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,20 +15,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.adapter.CardEquipAdapter;
-import com.example.myfirstapp.factory.BorsaEquipDBFactory;
-import com.example.myfirstapp.factory.BorsaEquipInteractorFactory;
-import com.example.myfirstapp.factory.BorsaEquipPresenterFactory;
+import com.example.myfirstapp.factory.BorsaEquipDND5DBFactory;
+import com.example.myfirstapp.factory.BorsaEquipDND5InteractorFactory;
+import com.example.myfirstapp.factory.BorsaEquipDND5PresenterFactory;
 import com.example.myfirstapp.factory.InterfaceBorsaEquipDBFactory;
 import com.example.myfirstapp.factory.InterfaceBorsaEquipInteractorFactory;
 import com.example.myfirstapp.factory.InterfaceBorsaEquipPresenterFactory;
-import com.example.myfirstapp.interactorbosa.BorsaDataStruct;
-import com.example.myfirstapp.interactorbosa.EquipDataStruct;
-import com.example.myfirstapp.presenterborsa.BorsaGiocatorePresenter;
-import com.example.myfirstapp.presenterborsa.EquipaggiatoGiocatorePresenter;
-import com.example.myfirstapp.presenterborsa.InterfaceBorsaGiocatoreView;
-import com.example.myfirstapp.presenterborsa.InterfaceEquipaggiatoGiocatoreView;
-import com.example.myfirstapp.utilities.CardEquip;
+import com.example.myfirstapp.borsa.interactorbosa.BorsaDataStruct;
+import com.example.myfirstapp.borsa.interactorbosa.EquipDataStruct;
+import com.example.myfirstapp.borsa.presenterborsa.BorsaGiocatorePresenter;
+import com.example.myfirstapp.borsa.presenterborsa.EquipaggiatoGiocatorePresenter;
+import com.example.myfirstapp.borsa.presenterborsa.InterfaceBorsaGiocatoreView;
+import com.example.myfirstapp.borsa.presenterborsa.InterfaceEquipaggiatoGiocatoreView;
+import com.example.myfirstapp.ui.CharacterActivity;
+import com.example.myfirstapp.ui.IdEquipaggiato;
 import com.example.myfirstapp.utilities.MyExceptionDB;
 
 import java.util.ArrayList;
@@ -68,9 +68,9 @@ public class CharacterBagActivity extends AppCompatActivity implements Interface
     }
 
     private void setPresenter(){
-        InterfaceBorsaEquipDBFactory dbFactory = new BorsaEquipDBFactory(nomecamp, nomeg, this);
-        InterfaceBorsaEquipInteractorFactory interactorFactory = new BorsaEquipInteractorFactory(dbFactory);
-        InterfaceBorsaEquipPresenterFactory presenterFactory = new BorsaEquipPresenterFactory(interactorFactory);
+        InterfaceBorsaEquipDBFactory dbFactory = new BorsaEquipDND5DBFactory(nomecamp, nomeg, this);
+        InterfaceBorsaEquipInteractorFactory interactorFactory = new BorsaEquipDND5InteractorFactory(dbFactory);
+        InterfaceBorsaEquipPresenterFactory presenterFactory = new BorsaEquipDND5PresenterFactory(interactorFactory);
         try {
             borsaPresenter = presenterFactory.createBorsaGiocatorePresenter(this);
             equipaggiatoPresenter = presenterFactory.createEquipaggiatoGiocatorePresenter(this, this);
@@ -81,7 +81,7 @@ public class CharacterBagActivity extends AppCompatActivity implements Interface
     }
 
     private void setView() {
-        borsaPresenter.setborsa();
+        borsaPresenter.setBorsa();
         borsaPresenter.setOggettiNonInBorsa();
         equipaggiatoPresenter.setEquipaggiato();
     }
@@ -176,6 +176,7 @@ public class CharacterBagActivity extends AppCompatActivity implements Interface
     @Override
     public void removeOggetto(int position) {
         cardEquipList.remove(position);
+        //cardEquipList.indexOf();
         cardEquipAdapter.notifyItemRemoved(position);
         this.setBorsaEmptyView();
     }

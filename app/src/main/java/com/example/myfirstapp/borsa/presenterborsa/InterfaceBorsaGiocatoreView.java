@@ -1,8 +1,7 @@
-package com.example.myfirstapp.presenterborsa;
+package com.example.myfirstapp.borsa.presenterborsa;
 
 import com.example.myfirstapp.interactor.InterfaceErrorView;
-import com.example.myfirstapp.interactorbosa.BorsaDataStruct;
-import com.example.myfirstapp.utilities.CardEquip;
+import com.example.myfirstapp.borsa.interactorbosa.BorsaDataStruct;
 
 import java.util.Iterator;
 

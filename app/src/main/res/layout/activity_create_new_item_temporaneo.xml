@@ -7,7 +7,7 @@
     android:background="@color/whitesmoke"
     android:paddingHorizontal="20dp"
     android:paddingTop="15dp"
-    tools:context=".ui.CreateNewItemActivity">
+    tools:context=".borsa.uiborsa.CreateNewItemActivity">
 
     <LinearLayout
         android:id="@+id/create_item_header"

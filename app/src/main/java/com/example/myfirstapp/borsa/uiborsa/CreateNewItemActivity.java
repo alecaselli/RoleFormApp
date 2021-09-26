@@ -1,4 +1,4 @@
-package com.example.myfirstapp.ui;
+package com.example.myfirstapp.borsa.uiborsa;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.borsa.uiborsa.CharacterBagActivity;
 import com.example.myfirstapp.database.DBManager;
 import com.example.myfirstapp.domain.Arma;
 import com.example.myfirstapp.domain.Armatura;

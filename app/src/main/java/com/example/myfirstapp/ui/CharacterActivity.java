@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.borsa.uiborsa.CharacterBagActivity;
 import com.example.myfirstapp.domain.EquipaggiamentoOld;
 import com.example.myfirstapp.interactor.InterfacePortafoglioView;
 import com.example.myfirstapp.interactor.PortafoglioInteractor;

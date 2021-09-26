@@ -1,10 +1,10 @@
-package com.example.myfirstapp.utilities;
+package com.example.myfirstapp.borsa.interactorbosa;
 
-public class CardEquip {
+public class BorsaDataStruct {
     private String nome;
     private String tipo;
 
-    public CardEquip(String nome, String tipo) {
+    public BorsaDataStruct(String nome, String tipo) {
         this.nome = nome;
         this.tipo = tipo;
     }

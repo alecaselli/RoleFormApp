@@ -1,17 +1,12 @@
-package com.example.myfirstapp.presenterborsa;
+package com.example.myfirstapp.borsa.presenterborsa;
 
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.interactorbosa.BorsaDataStruct;
-import com.example.myfirstapp.interactorbosa.EquipDataStruct;
-import com.example.myfirstapp.interactorbosa.InterfaceEquipaggiatoGiocatoreInteractor;
+import com.example.myfirstapp.borsa.interactorbosa.BorsaDataStruct;
+import com.example.myfirstapp.borsa.interactorbosa.EquipDataStruct;
+import com.example.myfirstapp.borsa.interactorbosa.InterfaceEquipaggiatoGiocatoreInteractor;
 import com.example.myfirstapp.utilities.MyExceptionDB;
 import com.example.myfirstapp.utilities.MyExceptionNonEquipaggiabile;
 import com.example.myfirstapp.utilities.MyExceptionNonEquipaggiato;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 public class EquipaggiatoGiocatorePresenter {
     private final InterfaceEquipaggiatoGiocatoreInteractor equipaggiato;

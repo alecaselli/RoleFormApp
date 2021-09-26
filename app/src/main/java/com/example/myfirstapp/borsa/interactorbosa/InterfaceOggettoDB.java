@@ -1,4 +1,4 @@
-package com.example.myfirstapp.interactorbosa;
+package com.example.myfirstapp.borsa.interactorbosa;
 
 import com.example.myfirstapp.domain.EquipaggiamentoOld;
 

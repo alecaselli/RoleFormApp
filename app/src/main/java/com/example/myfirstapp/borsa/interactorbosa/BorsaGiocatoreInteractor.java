@@ -1,4 +1,4 @@
-package com.example.myfirstapp.interactorbosa;
+package com.example.myfirstapp.borsa.interactorbosa;
 
 import com.example.myfirstapp.domain.EquipaggiamentoOld;
 import com.example.myfirstapp.utilities.MyExceptionDB;
@@ -12,9 +12,9 @@ public class BorsaGiocatoreInteractor implements InterfaceBorsaGiocatoreInteract
 
     private List<EquipaggiamentoOld> borsa;
     private final InterfaceOggettoDB dbOggetto;
-    private final InterfaceBorsaGiocatoreDB dbBorsa;
+    private final InterfaceContenitoriEquipaggiamentoDB dbBorsa;
 
-    public BorsaGiocatoreInteractor(InterfaceOggettoDB dbOggetto, InterfaceBorsaGiocatoreDB dbBorsa) throws MyExceptionDB {
+    public BorsaGiocatoreInteractor(InterfaceOggettoDB dbOggetto, InterfaceContenitoriEquipaggiamentoDB dbBorsa) throws MyExceptionDB {
         this.dbOggetto = dbOggetto;
         this.dbBorsa = dbBorsa;
         this.inizializzaBorsa();

@@ -1,4 +1,4 @@
-package com.example.myfirstapp.database;
+package com.example.myfirstapp.borsa.databaseborsa;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -8,6 +8,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.example.myfirstapp.database.DBHelper;
 import com.example.myfirstapp.databasetabelle.TabellaArma;
 import com.example.myfirstapp.databasetabelle.TabellaArmatura;
 import com.example.myfirstapp.databasetabelle.TabellaCampiComuni;
@@ -15,7 +16,7 @@ import com.example.myfirstapp.databasetabelle.TabellaEquipaggiamento;
 import com.example.myfirstapp.domain.Arma;
 import com.example.myfirstapp.domain.Armatura;
 import com.example.myfirstapp.domain.EquipaggiamentoOld;
-import com.example.myfirstapp.interactorbosa.InterfaceOggettoDB;
+import com.example.myfirstapp.borsa.interactorbosa.InterfaceOggettoDB;
 
 import org.jetbrains.annotations.NotNull;
 

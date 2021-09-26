@@ -1,15 +1,15 @@
-package com.example.myfirstapp.database;
+package com.example.myfirstapp.borsa.databaseborsa;
 
 import android.content.Context;
 
 import androidx.annotation.Nullable;
 
 import com.example.myfirstapp.domain.EquipaggiamentoOld;
-import com.example.myfirstapp.interactorbosa.InterfaceBorsaGiocatoreDB;
+import com.example.myfirstapp.borsa.interactorbosa.InterfaceContenitoriEquipaggiamentoDB;
 
 import java.util.List;
 
-public class BorsaGiocatoreDB implements InterfaceBorsaGiocatoreDB {
+public class BorsaGiocatoreDB implements InterfaceContenitoriEquipaggiamentoDB {
     private final BorseDB dbBorse;
 
     public BorsaGiocatoreDB(String nomecamp, String nomeg, Context ctx) {

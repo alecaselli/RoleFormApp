@@ -7,7 +7,7 @@
     android:background="@color/whitesmoke"
     android:paddingHorizontal="20dp"
     android:paddingTop="15dp"
-    tools:context=".ui.CharacterBagActivity">
+    tools:context=".borsa.uiborsa.CharacterBagActivity">
 
     <RelativeLayout
         android:id="@+id/bag_header"
