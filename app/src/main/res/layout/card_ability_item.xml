@@ -24,7 +24,7 @@
             android:id="@+id/skill_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="191dp"
+            android:layout_marginEnd="0dp"
             android:layout_toStartOf="@+id/skill_ball_button"
             android:layout_toEndOf="@+id/skill_delete"
             android:paddingHorizontal="20dp"
